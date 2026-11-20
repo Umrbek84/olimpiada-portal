@@ -1,5 +1,5 @@
 /**
- * "Ixtirochilikka qadam" tanlovi - Google Sheets Jonli Backend Tizimi
+ * "Ixtirochilikka qadam" tanlovi - Google Sheets Jonli Backend Tizimi (Yangilangan)
  * Google Spreadsheet: "Ixtirochilikka qadam - Tuman bosqichi (2026)"
  * ID: 1JwODktbH7i_jEPqeLLtHSgzf_ZiW0wGgih6WjFOjFUw
  */
@@ -8,17 +8,15 @@ function doGet(e) {
   var action = (e && e.parameter && e.parameter.action) ? e.parameter.action : "get_data";
   var ss = SpreadsheetApp.getActiveSpreadsheet();
 
-  // 1. PIN-kodni tekshirish (PIN Google Sheetdan tekshiriladi)
+  // 1. Hakam PIN-kodini tekshirish (Kabinetga kirish uchun)
   if (action === "verify_pin") {
     var pin = e.parameter.pin;
     var hakamSheet = ss.getSheetByName("Hakamlar");
     var hakamData = hakamSheet.getDataRange().getValues();
     
-    // Qatorlar: 1-qator header, 2-qatordan ma'lumotlar
-    // Ustunlar: [0]: Hakam №, [1]: Lavozimi, [2]: F.I.SH., [3]: PIN-kod
     for (var r = 1; r < hakamData.length; r++) {
-      var rowPin = String(hakamData[r][3]).trim();
-      if (rowPin === String(pin).trim()) {
+      if (String(hakamData[r][0]).toUpperCase() === "ADMIN") continue;
+      if (String(hakamData[r][3]).trim() === String(pin).trim()) {
         return jsonResponse({
           valid: true,
           judge: {
@@ -32,12 +30,31 @@ function doGet(e) {
     return jsonResponse({ valid: false, message: "PIN-kod topilmadi" });
   }
 
-  // 2. Barcha ma'lumotlarni olish (Jonli svod va baholash uchun)
+  // 2. Mas'ul (Admin) PIN-kodini tekshirish (Baholangan loyiha qulfini ochish uchun)
+  if (action === "verify_admin_pin") {
+    var adminPin = e.parameter.pin;
+    var hakamSheet = ss.getSheetByName("Hakamlar");
+    var hakamData = hakamSheet.getDataRange().getValues();
+    var realAdminPin = "7788";
+
+    for (var r = 1; r < hakamData.length; r++) {
+      if (String(hakamData[r][0]).toUpperCase() === "ADMIN") {
+        realAdminPin = String(hakamData[r][3]).trim();
+        break;
+      }
+    }
+
+    if (String(adminPin).trim() === String(realAdminPin).trim()) {
+      return jsonResponse({ valid: true, message: "Admin ruxsati tasdiqlandi" });
+    }
+    return jsonResponse({ valid: false, message: "Admin PIN-kodi noto‘g‘ri" });
+  }
+
+  // 3. Barcha baholarni olish (Svod uchun)
   if (action === "get_data") {
     var baholarSheet = ss.getSheetByName("Baholar");
     var baholarData = baholarSheet.getDataRange().getValues();
     
-    // evaluations: { [projId]: { [judgeId]: { c1, c2, c3, c4, c5, total } } }
     var evaluations = {};
     for (var i = 1; i < baholarData.length; i++) {
       var pId = Number(baholarData[i][0]);
@@ -79,44 +96,28 @@ function doPost(e) {
     var postData = JSON.parse(e.postData.contents);
     var action = postData.action || "save_score";
 
-    if (action === "save_score" || action === "save_batch") {
+    if (action === "save_score") {
       var baholarSheet = ss.getSheetByName("Baholar");
       var baholarData = baholarSheet.getDataRange().getValues();
 
-      var itemsToSave = postData.items || [];
-      if (action === "save_score" && postData.projectId && postData.judgeId) {
-        itemsToSave = [{
-          projectId: postData.projectId,
-          judgeId: postData.judgeId,
-          scores: postData.scores
-        }];
-      }
+      var pId = Number(postData.projectId);
+      var jId = Number(postData.judgeId);
+      var sc = postData.scores || {};
 
-      // Har bir baho uchun tegishli qatorni topib yozish
-      for (var k = 0; k < itemsToSave.length; k++) {
-        var item = itemsToSave[k];
-        var pId = Number(item.projectId);
-        var jId = Number(item.judgeId);
-        var sc = item.scores || {};
-
-        for (var r = 1; r < baholarData.length; r++) {
-          if (Number(baholarData[r][0]) === pId && Number(baholarData[r][2]) === jId) {
-            // Ustun D (4) dan H (8) gacha yozish (Row: r+1)
-            var rowNum = r + 1;
-            var range = baholarSheet.getRange(rowNum, 4, 1, 5);
-            range.setValues([[
-              sc.c1 !== null && sc.c1 !== undefined && sc.c1 !== "" ? Number(sc.c1) : "",
-              sc.c2 !== null && sc.c2 !== undefined && sc.c2 !== "" ? Number(sc.c2) : "",
-              sc.c3 !== null && sc.c3 !== undefined && sc.c3 !== "" ? Number(sc.c3) : "",
-              sc.c4 !== null && sc.c4 !== undefined && sc.c4 !== "" ? Number(sc.c4) : "",
-              sc.c5 !== null && sc.c5 !== undefined && sc.c5 !== "" ? Number(sc.c5) : ""
-            ]]);
-            break;
-          }
+      for (var r = 1; r < baholarData.length; r++) {
+        if (Number(baholarData[r][0]) === pId && Number(baholarData[r][2]) === jId) {
+          baholarSheet.getRange(r + 1, 4, 1, 5).setValues([[
+            sc.c1 !== null && sc.c1 !== undefined && sc.c1 !== "" ? Number(sc.c1) : "",
+            sc.c2 !== null && sc.c2 !== undefined && sc.c2 !== "" ? Number(sc.c2) : "",
+            sc.c3 !== null && sc.c3 !== undefined && sc.c3 !== "" ? Number(sc.c3) : "",
+            sc.c4 !== null && sc.c4 !== undefined && sc.c4 !== "" ? Number(sc.c4) : "",
+            sc.c5 !== null && sc.c5 !== undefined && sc.c5 !== "" ? Number(sc.c5) : ""
+          ]]);
+          break;
         }
       }
 
-      return jsonResponse({ status: "success", savedCount: itemsToSave.length });
+      return jsonResponse({ status: "success" });
     }
 
     return jsonResponse({ status: "error", message: "Noma'lum amaliyot" });

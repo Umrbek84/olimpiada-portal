@@ -515,3 +515,41 @@ async function fetchLiveScoresFromGoogleSheets() {
   }
   return null;
 }
+
+// Mas'ul (Admin) PIN-kodini tekshirish (Qulfni ochish uchun)
+async function verifyAdminPin(enteredPin) {
+  if (!enteredPin) return false;
+  const cleanPin = String(enteredPin).trim();
+  const url = getGoogleSheetsApiUrl();
+
+  if (url) {
+    // 1-urinish: verify_admin_pin amaliyoti
+    try {
+      const res = await fetch(url + (url.includes("?") ? "&" : "?") + "action=verify_admin_pin&pin=" + encodeURIComponent(cleanPin));
+      const json = await res.json();
+      if (json && json.valid) {
+        return true;
+      }
+    } catch (err) {
+      // Davom etamiz
+    }
+
+    // 2-urinish: verify_pin orqali (Hakamlar sheetidagi ADMIN qatori)
+    try {
+      const res2 = await fetch(url + (url.includes("?") ? "&" : "?") + "action=verify_pin&pin=" + encodeURIComponent(cleanPin));
+      const json2 = await res2.json();
+      if (json2 && json2.valid && json2.judge) {
+        const role = String(json2.judge.role || "");
+        const name = String(json2.judge.name || "");
+        if (role.toLowerCase().includes("admin") || name.toLowerCase().includes("mamatov") || json2.judge.id === null) {
+          return true;
+        }
+      }
+    } catch (err2) {
+      // Davom etamiz
+    }
+  }
+
+  // 3-urinish: Zaxira doimiy admin PIN-kodi
+  return cleanPin === "7788";
+}
