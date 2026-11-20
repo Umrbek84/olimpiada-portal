@@ -81,13 +81,12 @@ const IXTIROCHILIK_CONFIG = {
     { id: 7, name: "Mansurov Bekzod Shuhratovich", role: "Innovatsion ishlanmalar mutaxassisi", pin: "2007" }
   ],
 
-  // 2-ILOVA: Tashkiliy qo'mita tarkibi
+  // 2-ILOVA: Tashkiliy qõmita tarkibi
   committee: [
-    { role: "Tashkiliy qo‘mita raisi", name: "Tuman maktabgacha va maktab ta’limi bo‘limi boshlig‘i" },
-    { role: "A'zo", name: "Tuman Barkamol avlod bolalar maktabi direktori" },
-    { role: "A'zo", name: "Tuman ishlab chiqarish / xizmat ko‘rsatish sohasi vakili" },
-    { role: "A'zo", name: "IT sohasi mutaxassisi" },
-    { role: "Mas'ul kotib", name: "Tarbiyaviy ishlarni muvofiqlashtirish bo‘limi bosh mutaxassisi" }
+    { role: "Tashkiliy qõmita raisi", name: "Jumaniyazov Şokir Rõzmetoviç", post: "Qõşkõpir tuman maktabgaça va maktab taʼlimi bõlimi başliğõ" },
+    { role: "Tashkiliy qõmita aʼzosi", name: "«Kelajak markazi» direktori", post: "«Kelajak markazi» direktori" },
+    { role: "Tashkiliy qõmita aʼzosi", name: "Avezov Jasurbek Ravşanbekoviç", post: "Raqamli taʼlim va sunʼiy intellektni rivojlantiriş şõbasi baş mutaxassisi" },
+    { role: "Tashkiliy qõmita masʼul kotibi", name: "Mamatov Umrbek Oliquliyeviç", post: "Tashkiliy qõmita masʼul kotibi" }
   ],
 
   // 5 ta rasmiy yo'nalish
@@ -354,6 +353,7 @@ function loadIxtirochilikData() {
     try {
       const parsed = JSON.parse(saved);
       parsed.judges = IXTIROCHILIK_CONFIG.judges;
+      parsed.committee = IXTIROCHILIK_CONFIG.committee;
       return parsed;
     } catch (e) {
       console.error(e);

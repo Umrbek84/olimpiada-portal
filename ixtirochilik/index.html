@@ -253,16 +253,16 @@
         let rankBadge = `<span class="badge" style="background: #f1f5f9; color: #64748b;">${p.rank}</span>`;
 
         if (p.rank === 1) {
-          rankBadge = `<span class="badge" style="background: #fef08a; color: #854d0e;">🥇 1-o‘rin</span>`;
+          rankBadge = `<span class="badge" style="background: #fef08a; color: #854d0e;">🥇 1-õrin</span>`;
           statusBadge = `<span class="badge badge-winner"><i class="fa-solid fa-share"></i> Viloyatga tavsiya</span>`;
         } else if (p.rank === 2) {
-          rankBadge = `<span class="badge" style="background: #e2e8f0; color: #334155;">🥈 2-o‘rin</span>`;
+          rankBadge = `<span class="badge" style="background: #e2e8f0; color: #334155;">🥈 2-õrin</span>`;
           statusBadge = `<span class="badge badge-winner"><i class="fa-solid fa-share"></i> Viloyatga tavsiya</span>`;
         } else if (p.rank === 3) {
-          rankBadge = `<span class="badge" style="background: #fed7aa; color: #9a3412;">🥉 3-o‘rin</span>`;
+          rankBadge = `<span class="badge" style="background: #fed7aa; color: #9a3412;">🥉 3-õrin</span>`;
           statusBadge = `<span class="badge badge-winner"><i class="fa-solid fa-share"></i> Viloyatga tavsiya</span>`;
         } else {
-          statusBadge = `<span style="font-size: 12px; color: #94a3b8;">Ishtirokchi</span>`;
+          statusBadge = `<span style="font-size: 12px; color: #94a3b8;">Iştirokçi</span>`;
         }
 
         tr.innerHTML = `
@@ -292,12 +292,12 @@
 
     function exportToCsv() {
       const ranked = calculateIxtirochilikRanking(currentData.projects);
-      let csv = "T/r,Loyiha nomi,Maktab,Yonalish,Mualliflar,1-Hakam,2-Hakam,3-Hakam,4-Hakam,5-Hakam,6-Hakam,7-Hakam,Ortacha ball,Orni,Viloyatga tavsiya\n";
+      let csv = "T/r,Loyiha nomi,Maktab,Yõnaliş,Mualliflar,1-Hakam,2-Hakam,3-Hakam,4-Hakam,5-Hakam,6-Hakam,7-Hakam,Õrtaça ball,Õrni,Viloyatga tavsiya\n";
       
       ranked.forEach((p, idx) => {
         const authors = p.members.map(m => m.name).join("; ");
         const j = p.judgeTotalScores.map(v => v || "");
-        const status = p.recommendedToRegion ? "Tavsiya etildi" : "Ishtirokchi";
+        const status = p.recommendedToRegion ? "Viloyatga tavsiya etildi" : "Iştirokçi";
         csv += `"${idx+1}","${p.projectName}","${p.school}","${p.direction}","${authors}","${j[0]}","${j[1]}","${j[2]}","${j[3]}","${j[4]}","${j[5]}","${j[6]}","${p.finalAverage}","${p.rank}","${status}"\n`;
       });
 
