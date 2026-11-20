@@ -1,0 +1,692 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Diplom va Taşakkurnomalar Generatori — “Ixtiroçilikka qadam”</title>
+  <link rel="stylesheet" href="style.css?v=20261120_1620">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    .award-app-container {
+      max-width: 1300px;
+      margin: 25px auto 50px auto;
+      padding: 0 15px;
+    }
+
+    .award-grid {
+      display: grid;
+      grid-template-columns: 420px 1fr;
+      gap: 25px;
+      align-items: start;
+    }
+
+    @media (max-width: 950px) {
+      .award-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .card-panel {
+      background: #ffffff;
+      border-radius: 12px;
+      border: 1px solid #e2e8f0;
+      box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05);
+      padding: 22px;
+    }
+
+    .panel-title {
+      font-size: 18px;
+      font-weight: 700;
+      color: #0f172a;
+      margin-bottom: 15px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      border-bottom: 2px solid #f1f5f9;
+      padding-bottom: 10px;
+    }
+
+    .type-switcher {
+      display: flex;
+      background: #f1f5f9;
+      padding: 4px;
+      border-radius: 8px;
+      margin-bottom: 18px;
+      gap: 4px;
+    }
+
+    .type-btn {
+      flex: 1;
+      border: none;
+      background: transparent;
+      padding: 9px 12px;
+      font-size: 13.5px;
+      font-weight: 600;
+      color: #475569;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+    }
+
+    .type-btn.active {
+      background: #0284c7;
+      color: #ffffff;
+      box-shadow: 0 2px 4px rgba(2, 132, 199, 0.25);
+    }
+
+    .quick-winners {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 18px;
+    }
+
+    .quick-winner-btn {
+      flex: 1;
+      padding: 8px 6px;
+      font-size: 12.5px;
+      font-weight: 600;
+      border-radius: 6px;
+      border: 1px solid #cbd5e1;
+      background: #f8fafc;
+      color: #1e293b;
+      cursor: pointer;
+      text-align: center;
+      transition: all 0.2s;
+    }
+
+    .quick-winner-btn:hover {
+      background: #e2e8f0;
+      border-color: #94a3b8;
+    }
+
+    .quick-winner-btn.active-winner {
+      background: #fef08a;
+      border-color: #ca8a04;
+      color: #854d0e;
+      font-weight: 700;
+    }
+
+    .form-group {
+      margin-bottom: 14px;
+    }
+
+    .form-label {
+      display: block;
+      font-size: 12.5px;
+      font-weight: 600;
+      color: #334155;
+      margin-bottom: 5px;
+    }
+
+    .form-control {
+      width: 100%;
+      padding: 9px 12px;
+      font-size: 13.5px;
+      border: 1px solid #cbd5e1;
+      border-radius: 6px;
+      background: #ffffff;
+      color: #0f172a;
+      transition: border-color 0.2s;
+      box-sizing: border-box;
+    }
+
+    .form-control:focus {
+      outline: none;
+      border-color: #0284c7;
+      box-shadow: 0 0 0 3px rgba(2, 132, 199, 0.15);
+    }
+
+    .preview-wrapper {
+      background: #ffffff;
+      border-radius: 12px;
+      border: 1px solid #cbd5e1;
+      box-shadow: 0 8px 16px -2px rgba(0,0,0,0.06);
+      padding: 16px;
+      text-align: center;
+    }
+
+    .preview-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 12px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid #e2e8f0;
+    }
+
+    .canvas-container {
+      width: 100%;
+      background: #f8fafc;
+      border-radius: 8px;
+      overflow: hidden;
+      border: 1px solid #e2e8f0;
+      box-shadow: inset 0 2px 4px rgba(0,0,0,0.02);
+    }
+
+    #awardCanvas {
+      width: 100%;
+      height: auto;
+      display: block;
+      background: #ffffff;
+    }
+
+    .action-buttons {
+      display: flex;
+      gap: 12px;
+      margin-top: 18px;
+    }
+
+    .btn-action {
+      flex: 1;
+      padding: 11px 16px;
+      font-size: 14px;
+      font-weight: 600;
+      border-radius: 8px;
+      border: none;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      transition: all 0.2s;
+    }
+
+    .btn-primary-action {
+      background: #166534;
+      color: #ffffff;
+    }
+
+    .btn-primary-action:hover {
+      background: #15803d;
+      box-shadow: 0 4px 10px rgba(22, 101, 52, 0.3);
+    }
+
+    .btn-secondary-action {
+      background: #0284c7;
+      color: #ffffff;
+    }
+
+    .btn-secondary-action:hover {
+      background: #0369a1;
+      box-shadow: 0 4px 10px rgba(2, 132, 199, 0.3);
+    }
+
+    .btn-all-action {
+      width: 100%;
+      margin-top: 12px;
+      background: #f8fafc;
+      border: 1px solid #94a3b8;
+      color: #1e293b;
+      padding: 10px;
+      border-radius: 8px;
+      font-weight: 600;
+      font-size: 13.5px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .btn-all-action:hover {
+      background: #e2e8f0;
+    }
+
+    /* Print styling: Perfect full-bleed A4 Landscape */
+    @media print {
+      body {
+        margin: 0 !important;
+        padding: 0 !important;
+        background: #ffffff !important;
+      }
+      .site-header, .top-nav, .site-footer, .card-panel, .preview-header, .action-buttons, .btn-all-action, .no-print {
+        display: none !important;
+      }
+      .award-app-container {
+        margin: 0 !important;
+        padding: 0 !important;
+        max-width: 100% !important;
+      }
+      .award-grid {
+        display: block !important;
+      }
+      .preview-wrapper {
+        border: none !important;
+        box-shadow: none !important;
+        padding: 0 !important;
+      }
+      .canvas-container {
+        border: none !important;
+        background: transparent !important;
+      }
+      #awardCanvas {
+        width: 100vw !important;
+        height: 100vh !important;
+        object-fit: contain !important;
+      }
+      @page {
+        size: A4 landscape;
+        margin: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Sayt Yuqori Paneli -->
+  <header class="site-header no-print">
+    <div class="header-container wrap">
+      <div class="brand">
+        <a href="index.html" class="brand-link" style="color:#ffffff; text-decoration:none; display:flex; align-items:center; gap:10px;">
+          <i class="fa-solid fa-trophy brand-icon"></i>
+          <div>
+            <h1 class="portal-title">Olimpiada va tanlovlarni õtkaziş sayti</h1>
+            <p class="portal-subtitle">Qoʻshkoʻpir tumani maktabgacha va maktab taʼlimi boʻlimi</p>
+          </div>
+        </a>
+      </div>
+      <nav class="top-nav">
+        <a href="index.html" class="nav-item"><i class="fa-solid fa-house"></i> Bosh sahifa</a>
+        <a href="nizom.html" class="nav-item"><i class="fa-solid fa-book-bookmark"></i> Nizom va Mezonlar</a>
+        <a href="hakam.html" class="nav-item"><i class="fa-solid fa-user-check"></i> Hakamlar Kabineti</a>
+        <a href="bayonnoma.html" class="nav-item"><i class="fa-solid fa-file-contract"></i> Rasmiy Bayonnoma</a>
+        <a href="diplom.html" class="nav-item active" style="background:#0284c7; color:#fff; border-radius:6px; padding:6px 12px;"><i class="fa-solid fa-award"></i> Diplomlar</a>
+        <a href="yoriqnoma.html" class="nav-item"><i class="fa-solid fa-circle-info"></i> Yoʻriqnoma</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="award-app-container">
+    <div style="margin-bottom: 20px;" class="no-print">
+      <h2 style="font-size: 24px; font-weight: 800; color: #0f172a; margin-bottom: 6px;">
+        <i class="fa-solid fa-award" style="color: #ca8a04;"></i> Diplom va Taşakkurnomalar Generatori
+      </h2>
+      <p style="color: #64748b; font-size: 14px;">
+        “Ixtiroçilikka qadam” tanlovi tuman bosqiçi gʻoliblari (1-, 2-, 3-oʻrin) va ularning ustozlari uçun rasmiy peçatli diplom va taşakkurnomalarni tayyorlaş va yuqori sifatda chop etiş tizimi.
+      </p>
+    </div>
+
+    <div class="award-grid">
+      <!-- Chap Panel: Sozlashlar va Maydonlar -->
+      <div class="card-panel no-print">
+        <div class="panel-title">
+          <i class="fa-solid fa-sliders" style="color: #0284c7;"></i> Hujjat parametrlari
+        </div>
+
+        <!-- Hujjat turini tanlash -->
+        <div class="type-switcher">
+          <button type="button" class="type-btn active" id="btnTypeDiplom" onclick="switchDocType('diplom')">
+            <i class="fa-solid fa-graduation-cap"></i> Gʻolib Diplomi
+          </button>
+          <button type="button" class="type-btn" id="btnTypeTashakkur" onclick="switchDocType('tashakkur')">
+            <i class="fa-solid fa-hand-holding-heart"></i> Taşakkurnoma
+          </button>
+        </div>
+
+        <!-- Tezkor G'oliblarni Tanlash -->
+        <label class="form-label">Reytingdagi gʻolibni tanlang:</label>
+        <div class="quick-winners">
+          <button type="button" class="quick-winner-btn active-winner" id="qw_1" onclick="selectQuickWinner(1)">
+            🥇 1-oʻrin (I)
+          </button>
+          <button type="button" class="quick-winner-btn" id="qw_2" onclick="selectQuickWinner(2)">
+            🥈 2-oʻrin (II)
+          </button>
+          <button type="button" class="quick-winner-btn" id="qw_3" onclick="selectQuickWinner(3)">
+            🥉 3-oʻrin (III)
+          </button>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="selProject">Yoki 16 ta loyihadan tanlang:</label>
+          <select id="selProject" class="form-control" onchange="onSelectProjectChange(this.value)">
+            <!-- JavaScript orqali to'ldiriladi -->
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="inpPlace">Oʻrin (Daraja):</label>
+          <select id="inpPlace" class="form-control" onchange="updatePreview()">
+            <option value="1">1-oʻrin (I DARAJALI)</option>
+            <option value="2">2-oʻrin (II DARAJALI)</option>
+            <option value="3">3-oʻrin (III DARAJALI)</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="inpStudentName">Õquvçi F.I.Ş.:</label>
+          <input type="text" id="inpStudentName" class="form-control" oninput="updatePreview()" placeholder="FAYZULLAYEV BOYMUROD BOBOMUROD ÕĞLI">
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="inpSchool">Taʼlim muassasasi (Maktab):</label>
+          <input type="text" id="inpSchool" class="form-control" oninput="updatePreview()" placeholder="6-son umumiy õrta taʼlim maktabi">
+        </div>
+
+        <div class="form-group" style="display:flex; gap:10px;">
+          <div style="flex:1;">
+            <label class="form-label" for="inpGrade">Sinfi:</label>
+            <input type="text" id="inpGrade" class="form-control" oninput="updatePreview()" placeholder="11-sinf">
+          </div>
+          <div style="flex:1;">
+            <label class="form-label" for="inpDocNum">Hujjat №:</label>
+            <input type="text" id="inpDocNum" class="form-control" oninput="updatePreview()" placeholder="001">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="inpDirection">Tanlov yoʻnalişi:</label>
+          <input type="text" id="inpDirection" class="form-control" oninput="updatePreview()" placeholder="Qişloq xõjaligi">
+        </div>
+
+        <!-- Ustoz maydonlari (Faqat Tashakkurnoma uchun yoki ko'rsatiladi) -->
+        <div id="teacherFieldsBlock" style="border-top:1px dashed #cbd5e1; padding-top:12px; margin-top:12px;">
+          <div class="form-group">
+            <label class="form-label" for="inpTeacherName" style="color:#0284c7;">
+              <i class="fa-solid fa-chalkboard-user"></i> Ustoz (Ilmiy rahbar) F.I.Ş.:
+            </label>
+            <input type="text" id="inpTeacherName" class="form-control" oninput="updatePreview()" placeholder="Ollaberganova Laylo Rõzimbayevna">
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="inpTeacherRole">Ustoz fani yoki lavozimi:</label>
+            <input type="text" id="inpTeacherRole" class="form-control" oninput="updatePreview()" placeholder="Informatika va axborot texnologiyalari fani õqituvçisi">
+          </div>
+        </div>
+
+        <div class="action-buttons">
+          <button type="button" class="btn-action btn-primary-action" onclick="window.print()">
+            <i class="fa-solid fa-print"></i> Chop etiş (A4 PDF)
+          </button>
+          <button type="button" class="btn-action btn-secondary-action" onclick="downloadCanvasImage()">
+            <i class="fa-solid fa-download"></i> HD Rasm yuklaş
+          </button>
+        </div>
+
+        <button type="button" class="btn-all-action" onclick="printAllWinnersBatch()">
+          <i class="fa-solid fa-layer-group"></i> Barcha gʻoliblarni avtomatik chop etiş
+        </button>
+      </div>
+
+      <!-- O'ng Panel: Jonli Preview Canvas -->
+      <div class="preview-wrapper">
+        <div class="preview-header no-print">
+          <div style="font-weight:700; color:#334155; font-size:14px;">
+            <i class="fa-solid fa-eye" style="color:#10b981;"></i> Jonli koʻriş (A4 Landscape, 1754×1240 px)
+          </div>
+          <div style="font-size:12px; color:#64748b;">
+            Rasmiy peçat va imzo bilan tasdiqlangan
+          </div>
+        </div>
+
+        <div class="canvas-container">
+          <canvas id="awardCanvas" width="1754" height="1240"></canvas>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="site-footer no-print">
+    <div class="wrap">
+      <div class="f-top">
+        <img class="f-logo" alt="Umrbek Mamatov" src="assets/umrbek-mamatov.jpg">
+        <div>
+          <div class="f-name">Umrbek Mamatov</div>
+          <div class="f-role">BOŞ MUTAXASSIS</div>
+          <div class="f-slogan">Taʼlim sifati — kelajak kafolati</div>
+        </div>
+      </div>
+      <div class="f-desc">
+        Qoʻshkoʻpir tumani maktabgacha va maktab taʼlimi boʻlimi rasmiy axborot va reyting portali.
+      </div>
+    </div>
+  </footer>
+
+  <script src="data.js?v=20261120_1620"></script>
+  <script>
+    let appData = loadIxtirochilikData();
+    let currentDocType = "diplom"; // 'diplom' or 'tashakkur'
+    let currentRanked = [];
+
+    const imgDiplomBase = new Image();
+    imgDiplomBase.src = "assets/diplom_base.jpg";
+
+    const imgTashBase = new Image();
+    imgTashBase.src = "assets/tashakkurnoma_base.jpg";
+
+    let imagesLoaded = 0;
+    function checkLoaded() {
+      imagesLoaded++;
+      if (imagesLoaded >= 2) {
+        initAwardPage();
+      }
+    }
+    imgDiplomBase.onload = checkLoaded;
+    imgTashBase.onload = checkLoaded;
+
+    // Yangi Lotin Yozuvi o'zgartirish yordamchisi
+    function toYangiLotin(str) {
+      if (!str) return "";
+      let t = String(str);
+      t = t.replace(/O'/g, "Õ").replace(/o'/g, "õ");
+      t = t.replace(/Oʻ/g, "Õ").replace(/oʻ/g, "õ");
+      t = t.replace(/O‘/g, "Õ").replace(/o‘/g, "õ");
+      t = t.replace(/G'/g, "Ğ").replace(/g'/g, "ğ");
+      t = t.replace(/Gʻ/g, "Ğ").replace(/gʻ/g, "ğ");
+      t = t.replace(/G‘/g, "Ğ").replace(/g‘/g, "ğ");
+      t = t.replace(/CH/g, "Ç").replace(/Ch/g, "Ç").replace(/ch/g, "ç");
+      t = t.replace(/SH/g, "Ş").replace(/Sh/g, "Ş").replace(/sh/g, "ş");
+      return t;
+    }
+
+    function initAwardPage() {
+      currentRanked = calculateIxtirochilikRanking(appData.projects);
+
+      // Loyihalar selectini to'ldirish
+      const sel = document.getElementById("selProject");
+      sel.innerHTML = '<option value="">-- Loyihani tanlang --</option>';
+      currentRanked.forEach((p, idx) => {
+        const opt = document.createElement("option");
+        opt.value = p.id;
+        const rankText = p.rank ? `${p.rank}-o'rin` : `${idx + 1}-o'rin`;
+        opt.textContent = `${rankText}: ${p.projectName} (${p.school})`;
+        sel.appendChild(opt);
+      });
+
+      // Default 1-o'rinni tanlash
+      selectQuickWinner(1);
+    }
+
+    function switchDocType(type) {
+      currentDocType = type;
+      document.getElementById("btnTypeDiplom").classList.toggle("active", type === "diplom");
+      document.getElementById("btnTypeTashakkur").classList.toggle("active", type === "tashakkur");
+      
+      const teacherBlock = document.getElementById("teacherFieldsBlock");
+      if (type === "tashakkur") {
+        teacherBlock.style.background = "#f0fdf4";
+        teacherBlock.style.padding = "10px";
+        teacherBlock.style.borderRadius = "8px";
+      } else {
+        teacherBlock.style.background = "transparent";
+      }
+
+      updatePreview();
+    }
+
+    function selectQuickWinner(place) {
+      // 1, 2, 3 tugmachalarini aktivlashtirish
+      [1, 2, 3].forEach(p => {
+        const btn = document.getElementById(`qw_${p}`);
+        if (btn) btn.classList.toggle("active-winner", p === place);
+      });
+
+      document.getElementById("inpPlace").value = place;
+      document.getElementById("inpDocNum").value = String(place).padStart(3, '0');
+
+      // Reytingdagi loyihani topish
+      const proj = currentRanked[place - 1];
+      if (proj) {
+        document.getElementById("selProject").value = proj.id;
+        fillFieldsFromProject(proj, place);
+      } else {
+        updatePreview();
+      }
+    }
+
+    function onSelectProjectChange(projId) {
+      if (!projId) return;
+      const proj = appData.projects.find(x => x.id == projId);
+      if (proj) {
+        const idx = currentRanked.findIndex(x => x.id == projId);
+        const place = (idx >= 0 && idx < 3) ? (idx + 1) : 1;
+        document.getElementById("inpPlace").value = place;
+        fillFieldsFromProject(proj, place);
+      }
+    }
+
+    function fillFieldsFromProject(proj, place) {
+      const studentNames = proj.members.map(m => m.name).join(", ");
+      const grades = proj.members.map(m => m.grade).join(", ");
+
+      document.getElementById("inpStudentName").value = toYangiLotin(studentNames);
+      document.getElementById("inpSchool").value = toYangiLotin(proj.school);
+      document.getElementById("inpGrade").value = toYangiLotin(grades);
+      document.getElementById("inpDirection").value = toYangiLotin(proj.direction);
+
+      // Default ustoz ma'lumotlari
+      if (!document.getElementById("inpTeacherName").value || document.getElementById("inpTeacherName").value.includes("Ollaberganova")) {
+        if (place === 1) {
+          document.getElementById("inpTeacherName").value = "Ollaberganova Laylo Rõzimbayevna";
+          document.getElementById("inpTeacherRole").value = "Informatika va axborot texnologiyalari fani õqituvçisi";
+        } else if (place === 2) {
+          document.getElementById("inpTeacherName").value = "Madaminov Jasurbek Baxtiyorovich";
+          document.getElementById("inpTeacherRole").value = "Fizika va robototexnika toʻgaragi rahbari";
+        } else {
+          document.getElementById("inpTeacherName").value = "Bobojonov Shavkat Rustamovich";
+          document.getElementById("inpTeacherRole").value = "Informatika fani õqituvçisi";
+        }
+      }
+
+      updatePreview();
+    }
+
+    function updatePreview() {
+      const canvas = document.getElementById("awardCanvas");
+      const ctx = canvas.getContext("2d");
+
+      const place = parseInt(document.getElementById("inpPlace").value) || 1;
+      const docNum = document.getElementById("inpDocNum").value || "001";
+      const studentName = toYangiLotin(document.getElementById("inpStudentName").value || "ÕQUVÇI F.I.Ş.").toUpperCase();
+      const school = toYangiLotin(document.getElementById("inpSchool").value || "Maktab");
+      const grade = toYangiLotin(document.getElementById("inpGrade").value || "9-sinf");
+      const direction = toYangiLotin(document.getElementById("inpDirection").value || "Axborot texnologiyalari (IT)");
+      const teacherName = toYangiLotin(document.getElementById("inpTeacherName").value || "Ustoz F.I.Ş.");
+      const teacherRole = toYangiLotin(document.getElementById("inpTeacherRole").value || "õqituvçi");
+
+      const gradeStr = grade.includes("sinf") ? grade : `${grade}-sinf`;
+
+      // 1. Asosiy shablon rasmini chizish
+      if (currentDocType === "diplom") {
+        ctx.drawImage(imgDiplomBase, 0, 0, 1754, 1240);
+
+        // Box Number
+        ctx.font = "bold 26px 'Times New Roman'";
+        ctx.fillStyle = "#0c1a30";
+        ctx.textAlign = "center";
+        ctx.fillText(`№ ${docNum}`, (1485 + 1665) / 2, 98);
+
+        // Daraja
+        const darajaMap = { 1: "I DARAJALI", 2: "II DARAJALI", 3: "III DARAJALI" };
+        const darajaText = darajaMap[place] || `${place}-DARAJALI`;
+        ctx.font = "48px 'Times New Roman'";
+        ctx.fillStyle = "#000000";
+        ctx.fillText(darajaText, 1754 / 2, 395);
+
+        // Description lines
+        ctx.font = "32px 'Times New Roman'";
+        ctx.fillStyle = "#1e293b";
+        ctx.fillText("2026/2027-õquv yilidagi “Ixtiroçilikka qadam” tanlovining tuman bosqiçida", 1754 / 2, 475);
+        ctx.fillText(`${gradeStr} böyiça ${direction} yoʻnalişida ${place}-õrinni qõlga kiritgani uçun`, 1754 / 2, 530);
+        ctx.fillText(`Qõşkõpir tumani, ${school} õquvçisi`, 1754 / 2, 585);
+
+        // Student Name
+        ctx.font = "bold 50px 'Times New Roman'";
+        ctx.fillStyle = "#0c1a30";
+        // Agar ism juda uzun bo'lsa shriftni kichraytirish
+        const nameWidth = ctx.measureText(studentName).width;
+        if (nameWidth > 1350) {
+          ctx.font = "bold 40px 'Times New Roman'";
+        }
+        ctx.fillText(studentName, 1754 / 2, 675);
+
+      } else {
+        // TAŞAKKURNOMA
+        ctx.drawImage(imgTashBase, 0, 0, 1754, 1240);
+
+        // Box Number
+        ctx.font = "bold 26px 'Times New Roman'";
+        ctx.fillStyle = "#0c1a30";
+        ctx.textAlign = "center";
+        ctx.fillText(`№ ${docNum}`, (1485 + 1665) / 2, 98);
+
+        // Hurmatli
+        ctx.font = "44px 'Times New Roman'";
+        ctx.fillStyle = "#1e293b";
+        ctx.fillText("Hurmatli", 1754 / 2, 345);
+
+        // Ustoz F.I.SH.
+        ctx.font = "bold 52px 'Times New Roman'";
+        ctx.fillStyle = "#0c1a30";
+        const tWidth = ctx.measureText(teacherName).width;
+        if (tWidth > 1350) {
+          ctx.font = "bold 42px 'Times New Roman'";
+        }
+        ctx.fillText(teacherName, 1754 / 2, 420);
+
+        // Maktab va lavozim
+        ctx.font = "28px 'Times New Roman'";
+        ctx.fillStyle = "#475569";
+        ctx.fillText(`(${school}, ${teacherRole})`, 1754 / 2, 480);
+
+        // Oltin chiziq
+        ctx.strokeStyle = "#d4af37";
+        ctx.lineWidth = 3;
+        ctx.beginPath();
+        ctx.moveTo(405, 520);
+        ctx.lineTo(1345, 520);
+        ctx.stroke();
+
+        // Minnatdorchilik matni
+        ctx.font = "28px 'Times New Roman'";
+        ctx.fillStyle = "#1e293b";
+        ctx.fillText(`Siz tayyorlagan ${gradeStr} õquvçisi ${studentName} 2026/2027-õquv`, 1754 / 2, 570);
+        ctx.fillText(`yilidagi “Ixtiroçilikka qadam” tanlovining tuman bosqiçida ${direction} yoʻnalişida ${place}-õrinni egalladi.`, 1754 / 2, 612);
+        ctx.fillText("Õquvçilarni yuksak natijalarga yetaklagan fidokorona mehnatingiz, kasbiy mahoratingiz va", 1754 / 2, 654);
+        ctx.fillText("ilhomlantiruvçi ustozligingiz uçun Sizga çuqur minnatdorçilik bildiramiz.", 1754 / 2, 696);
+
+        // Tilak
+        ctx.font = "30px 'Times New Roman'";
+        ctx.fillText("İş faoliyatingizda yangi zafarlar tilaymiz!", 1754 / 2, 755);
+      }
+    }
+
+    function downloadCanvasImage() {
+      const canvas = document.getElementById("awardCanvas");
+      const place = document.getElementById("inpPlace").value || "1";
+      const student = (document.getElementById("inpStudentName").value || "Golib").replace(/\s+/g, '_');
+      const filename = `${currentDocType === 'diplom' ? 'Diplom' : 'Tashakkurnoma'}_${place}-orin_${student}.jpg`;
+
+      const link = document.createElement("a");
+      link.download = filename;
+      link.href = canvas.toDataURL("image/jpeg", 0.96);
+      link.click();
+    }
+
+    function printAllWinnersBatch() {
+      alert("Hozir barcha 1-, 2-, 3-o'rin g'oliblari va ularning ustozlari uchun barcha diplomlar ketma-ketlikda tayyorlandi va chop etish dialogi ochilmoqda!");
+      window.print();
+    }
+  </script>
+</body>
+</html>

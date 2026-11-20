@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hakamlar Hayʼati Uçun Yoʻriqnoma va Eslatma — “Ixtiroçilikka qadam”</title>
+  <link rel="stylesheet" href="style.css?v=20261120_1620">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    body {
+      background: #f1f5f9;
+      font-family: 'Times New Roman', Times, serif;
+      color: #0f172a;
+    }
+
+    .memo-wrap {
+      max-width: 900px;
+      margin: 25px auto 50px auto;
+      padding: 0 15px;
+    }
+
+    .memo-sheet {
+      background: #ffffff;
+      border: 1px solid #cbd5e1;
+      border-radius: 8px;
+      padding: 40px 50px;
+      box-shadow: 0 4px 6px -1px rgba(0,0,0,0.06);
+    }
+
+    .memo-header {
+      text-align: center;
+      border-bottom: 2px solid #0f172a;
+      padding-bottom: 18px;
+      margin-bottom: 25px;
+    }
+
+    .memo-header h2 {
+      font-size: 15pt;
+      font-weight: bold;
+      text-transform: uppercase;
+      margin: 0 0 6px 0;
+      line-height: 1.3;
+    }
+
+    .memo-header h3 {
+      font-size: 13pt;
+      font-weight: normal;
+      margin: 0 0 12px 0;
+      color: #334155;
+    }
+
+    .memo-header .doc-title {
+      font-size: 16pt;
+      font-weight: bold;
+      color: #0284c7;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-top: 10px;
+    }
+
+    .memo-sec {
+      margin-bottom: 24px;
+    }
+
+    .memo-sec-title {
+      font-size: 12.5pt;
+      font-weight: bold;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+      color: #0f172a;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      border-bottom: 1px solid #e2e8f0;
+      padding-bottom: 5px;
+    }
+
+    .memo-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 15px;
+      font-size: 11pt;
+    }
+
+    .memo-table th, .memo-table td {
+      border: 1px solid #334155;
+      padding: 7px 10px;
+      text-align: left;
+    }
+
+    .memo-table th {
+      background: #f1f5f9;
+      font-weight: bold;
+      text-align: center;
+    }
+
+    .memo-table td.center {
+      text-align: center;
+    }
+
+    .pin-badge {
+      display: inline-block;
+      background: #e0f2fe;
+      color: #0369a1;
+      font-family: monospace;
+      font-weight: bold;
+      font-size: 12pt;
+      padding: 2px 8px;
+      border-radius: 4px;
+      border: 1px solid #bae6fd;
+    }
+
+    .alert-box {
+      background: #fffbeb;
+      border-left: 4px solid #f59e0b;
+      padding: 12px 16px;
+      border-radius: 4px;
+      margin-bottom: 18px;
+      font-size: 11pt;
+      line-height: 1.5;
+    }
+
+    .steps-list {
+      margin: 0;
+      padding-left: 20px;
+      font-size: 11.5pt;
+      line-height: 1.6;
+    }
+
+    .print-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 15px;
+    }
+
+    .btn-print {
+      background: #166534;
+      color: #ffffff;
+      border: none;
+      padding: 9px 18px;
+      border-radius: 6px;
+      font-size: 13pt;
+      font-weight: bold;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .btn-print:hover {
+      background: #15803d;
+    }
+
+    @media print {
+      body {
+        background: #ffffff !important;
+        margin: 0 !important;
+        padding: 0 !important;
+      }
+      .site-header, .top-nav, .site-footer, .print-bar, .no-print {
+        display: none !important;
+      }
+      .memo-wrap {
+        max-width: 100% !important;
+        margin: 0 !important;
+        padding: 0 !important;
+      }
+      .memo-sheet {
+        border: none !important;
+        box-shadow: none !important;
+        padding: 0 !important;
+      }
+      @page {
+        size: A4 portrait;
+        margin: 15mm 15mm 15mm 15mm;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Sayt Yuqori Paneli -->
+  <header class="site-header no-print">
+    <div class="header-container wrap">
+      <div class="brand">
+        <a href="index.html" class="brand-link" style="color:#ffffff; text-decoration:none; display:flex; align-items:center; gap:10px;">
+          <i class="fa-solid fa-trophy brand-icon"></i>
+          <div>
+            <h1 class="portal-title">Olimpiada va tanlovlarni õtkaziş sayti</h1>
+            <p class="portal-subtitle">Qoʻshkoʻpir tumani maktabgacha va maktab taʼlimi boʻlimi</p>
+          </div>
+        </a>
+      </div>
+      <nav class="top-nav">
+        <a href="index.html" class="nav-item"><i class="fa-solid fa-house"></i> Bosh sahifa</a>
+        <a href="nizom.html" class="nav-item"><i class="fa-solid fa-book-bookmark"></i> Nizom va Mezonlar</a>
+        <a href="hakam.html" class="nav-item"><i class="fa-solid fa-user-check"></i> Hakamlar Kabineti</a>
+        <a href="bayonnoma.html" class="nav-item"><i class="fa-solid fa-file-contract"></i> Rasmiy Bayonnoma</a>
+        <a href="diplom.html" class="nav-item"><i class="fa-solid fa-award"></i> Diplomlar</a>
+        <a href="yoriqnoma.html" class="nav-item active" style="background:#0284c7; color:#fff; border-radius:6px; padding:6px 12px;"><i class="fa-solid fa-circle-info"></i> Yoʻriqnoma</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="memo-wrap">
+    <div class="print-bar no-print">
+      <a href="index.html" style="color:#0284c7; text-decoration:none; font-weight:bold; font-size:11pt;">
+        <i class="fa-solid fa-arrow-left"></i> Bosh sahifaga qaytish
+      </a>
+      <button type="button" class="btn-print" onclick="window.print()">
+        <i class="fa-solid fa-print"></i> Yoʻriqnomani chop etiş (A4)
+      </button>
+    </div>
+
+    <div class="memo-sheet">
+      <div class="memo-header">
+        <h2>ÕZBEKISTON RESPUBLIKASI MAKTABGAÇA VA MAKTAB TAʼLIMI VAZIRLIGI</h2>
+        <h3>QÕŞKÕPIR TUMANI MAKTABGAÇA VA MAKTAB TAʼLIMI BÕLIMI</h3>
+        <div class="doc-title">“IXTIROÇILIKKA QADAM” TANLOVI TUMAN BOSQIÇI<br>HAKAMLAR HAYʼATI UÇUN ESLATMA VA YOʻRIQNOMA</div>
+      </div>
+
+      <!-- 1. Hakamlar tarkibi va PIN kodlar -->
+      <div class="memo-sec">
+        <div class="memo-sec-title">1. Hakamlar hayʼati tarkibi va shaxsiy PIN-kodlari</div>
+        <p style="font-size:11pt; margin-bottom:8px;">
+          Hakamlar onlayn tizimga (<strong>https://olimpiada.umamatov.uz/ixtirochilik/hakam.html</strong>) kirib, oʻzlariga biriktirilgan maxfiy 4 xonali PIN-kod orqali baholashni amalga oshiradilar:
+        </p>
+        <table class="memo-table">
+          <thead>
+            <tr>
+              <th style="width: 40px;">T/r</th>
+              <th>Hakam F.I.Ş.</th>
+              <th>Mutaxassisligi / Biriktirilgan sohasi</th>
+              <th style="width: 100px;">PIN-kodi</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="center">1</td>
+              <td><strong>Xudayberganov Bahodir Xolmuratovich</strong></td>
+              <td>Axborot texnologiyalari (IT) va dasturlash</td>
+              <td class="center"><span class="pin-badge">2001</span></td>
+            </tr>
+            <tr>
+              <td class="center">2</td>
+              <td><strong>Maşaripov Dilşod Davronbekoviç</strong></td>
+              <td>Fizika va texnik konstruksiyalar</td>
+              <td class="center"><span class="pin-badge">2002</span></td>
+            </tr>
+            <tr>
+              <td class="center">3</td>
+              <td><strong>Matyaqubov Oybek Maxsudoviç</strong></td>
+              <td>Biologiya va biotexnologiyalar</td>
+              <td class="center"><span class="pin-badge">2003</span></td>
+            </tr>
+            <tr>
+              <td class="center">4</td>
+              <td><strong>Saparov Furqat Sobiroviç</strong></td>
+              <td>Kimyo va yangi materiallar</td>
+              <td class="center"><span class="pin-badge">2004</span></td>
+            </tr>
+            <tr>
+              <td class="center">5</td>
+              <td><strong>Raximov Jamoliddin Odilbekoviç</strong></td>
+              <td>Amaliy muhandislik va agrotexnologiya</td>
+              <td class="center"><span class="pin-badge">2005</span></td>
+            </tr>
+            <tr>
+              <td class="center">6</td>
+              <td><strong>Abdullayev Uluğbek Raximoviç</strong></td>
+              <td>Ekologiya va qayta tiklanuvçi energiya</td>
+              <td class="center"><span class="pin-badge">2006</span></td>
+            </tr>
+            <tr>
+              <td class="center">7</td>
+              <td><strong>Bekçanov Farhod Madaminoviç</strong></td>
+              <td>Innovatsion işlanmalar va metodika</td>
+              <td class="center"><span class="pin-badge">2007</span></td>
+            </tr>
+            <tr style="background:#f8fafc;">
+              <td class="center">★</td>
+              <td><strong>Umrbek Mamatov</strong></td>
+              <td>Tuman masʼul koordinatori (Admin qulfni oçiş)</td>
+              <td class="center"><span class="pin-badge" style="background:#fef08a; color:#854d0e; border-color:#eab308;">7788</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- 2. Baholash mezonlari -->
+      <div class="memo-sec">
+        <div class="memo-sec-title">2. Baholaş mezonlari (Vazirlik Nizomi bõyiça — Jami 100 ball)</div>
+        <table class="memo-table">
+          <thead>
+            <tr>
+              <th style="width: 50px;">Mezon</th>
+              <th>Mezon tavsifi va baholash talabi</th>
+              <th style="width: 110px;">Maksimal ball</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="center"><strong>1-mezon</strong></td>
+              <td><strong>Tanlov yoʻnalişlariga moslik:</strong> Yoʻnaliş chuqur oʻrganilganligi, mavzuning dolzarbligi va muammoning aniq koʻrsatilganligi.</td>
+              <td class="center bold">10 ball</td>
+            </tr>
+            <tr>
+              <td class="center"><strong>2-mezon</strong></td>
+              <td><strong>Loyiha taqdimoti (prezentatsiya):</strong> Vaqt reglamentiga rioya qilinishi, slaydlarning sifati, koʻrgazmaliligi va savollarga toʻliq javob berilishi.</td>
+              <td class="center bold">25 ball</td>
+            </tr>
+            <tr>
+              <td class="center"><strong>3-mezon</strong></td>
+              <td><strong>Texnik sifat va amaliy işlanma:</strong> Tayyor ishchi model, maket yoki dasturiy yechimning puxtaligi va ish holatida koʻrsatib berilishi.</td>
+              <td class="center bold">25 ball</td>
+            </tr>
+            <tr>
+              <td class="center"><strong>4-mezon</strong></td>
+              <td><strong>Innovatsionlik va ijodiy yondaşuv:</strong> Yangi gʻoya, patentga layoqatlilik va yangicha texnologiyalar qoʻllanilganligi.</td>
+              <td class="center bold">20 ball</td>
+            </tr>
+            <tr>
+              <td class="center"><strong>5-mezon</strong></td>
+              <td><strong>Kutilayotgan natijalar va analoglardan afzallik:</strong> Real muammoni hal qilishi, iqtisodiy asoslanganligi va mavjud analoglardan ustunligi.</td>
+              <td class="center bold">20 ball</td>
+            </tr>
+            <tr style="background:#f1f5f9; font-weight:bold;">
+              <td colspan="2" style="text-align:right;">JAMI MAKSIMAL BALL:</td>
+              <td class="center" style="font-size:12pt; color:#166534;">100 ball</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- 3. Shaffoflik va Qulf tizimi -->
+      <div class="memo-sec">
+        <div class="memo-sec-title">3. Shaffoflik va Antikorrupsiya xavfsizlik qoidasi</div>
+        <div class="alert-box">
+          <strong>DIQQAT — XAVFSIZLIK VA QATʼIY TARTIB:</strong><br>
+          1. Hakam har bir loyihaga ball qoʻyib <strong>“Saqlash va tasdiqlash”</strong> tugmasini bosishi bilanoq, baholar avtomatik ravishda <strong>Google Sheet</strong> va tizim bazasiga yoziladi hamda <strong>qulflanadi</strong>.<br>
+          2. Qulflangan loyihaning ballarini qayta oʻzgartirish yoki tahrirlashga hakamning oʻzida ruxsat boʻlmaydi. Bu baholashning xolisligi va shaffofligini taʼminlaydi.<br>
+          3. Agar texnik xatolik tufayli ballni qayta koʻrib chiqish zaruriyati tugʻilsa, qulf faqat tuman masʼul koordinatori <strong>Umrbek Mamatov</strong>ning maxsus Admin PIN-kodi (<code>7788</code>) kiritilgandan keyingina ochiladi.
+        </div>
+      </div>
+
+      <!-- 4. Baholash tartibi -->
+      <div class="memo-sec">
+        <div class="memo-sec-title">4. Baholaş boʻyiça qadamlar ketma-ketligi</div>
+        <ol class="steps-list">
+          <li>Internet brauzer orqali <strong>https://olimpiada.umamatov.uz/ixtirochilik/hakam.html</strong> manziliga kiring.</li>
+          <li>Oʻz ism-sharifingiz qarshisidagi <strong>4 xonali PIN-kod</strong>ingizni kiriting va “Kabinetga kirish” tugmasini bosing.</li>
+          <li>Jami <strong>16 ta loyiha</strong> ishtirokchilari taqdimotini tinglab, har biriga 5 ta mezon boʻyicha haqqoniy ball qoʻying.</li>
+          <li>Har bir loyiha yakunida <strong>“Saqlash va tasdiqlash”</strong> tugmasini bosing. Natijalar darhol umumiy reytingda aks etadi.</li>
+        </ol>
+      </div>
+
+      <!-- Imzo bo'limi -->
+      <div style="margin-top: 35px; border-top: 1px solid #334155; padding-top: 15px; display: flex; justify-content: space-between; font-size: 11pt;">
+        <div>
+          <strong>Qõşkõpir tuman Maktabgaça va maktab taʼlimi bõlimi masʼul koordinatori:</strong>
+        </div>
+        <div style="text-align: right;">
+          <strong>Umrbek Mamatov</strong>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="site-footer no-print">
+    <div class="wrap">
+      <div class="f-top">
+        <img class="f-logo" alt="Umrbek Mamatov" src="assets/umrbek-mamatov.jpg">
+        <div>
+          <div class="f-name">Umrbek Mamatov</div>
+          <div class="f-role">BOŞ MUTAXASSIS</div>
+          <div class="f-slogan">Taʼlim sifati — kelajak kafolati</div>
+        </div>
+      </div>
+      <div class="f-desc">
+        Qoʻshkoʻpir tumani maktabgacha va maktab taʼlimi boʻlimi rasmiy axborot va reyting portali.
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>

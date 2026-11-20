@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Rasmiy Qaydnomasi (Bayonnoma) - "Ixtirochilikka qadam"</title>
-  <link rel="stylesheet" href="style.css?v=20261120_1620">
+  <link rel="stylesheet" href="style.css?v=20261120_1710">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
   <style>
     .print-bar {
@@ -120,45 +120,70 @@
     </div>
   </div>
 
-  <script src="data.js?v=20261120_1620"></script>
+  <script src="data.js?v=20261120_1710"></script>
   <script>
     let currentData = loadIxtirochilikData();
     if (!currentData.projects || currentData.projects.length < 16) {
       currentData = JSON.parse(JSON.stringify(IXTIROCHILIK_CONFIG));
       saveIxtirochilikData(currentData);
     }
-    const ranked = calculateIxtirochilikRanking(currentData.projects);
-    const tbody = document.getElementById("tableBodyOfficial");
 
-    ranked.forEach((p, idx) => {
-      const tr = document.createElement("tr");
+    function renderBayonnomaTable() {
+      const ranked = calculateIxtirochilikRanking(currentData.projects);
+      const tbody = document.getElementById("tableBodyOfficial");
+      tbody.innerHTML = "";
 
-      // 7 ta hakam ballari (0 yoki yo'q bo'lsa bo'sh - jadval standartlari)
-      let judgeCols = "";
-      for (let j = 0; j < 7; j++) {
-        const score = p.judgeTotalScores[j];
-        const val = (score === null || score === 0 || score === undefined) ? "" : score;
-        judgeCols += `<td class="center bold">${val}</td>`;
+      ranked.forEach((p, idx) => {
+        const tr = document.createElement("tr");
+
+        // 7 ta hakam ballari (0 yoki yo'q bo'lsa bo'sh - jadval standartlari)
+        let judgeCols = "";
+        for (let j = 0; j < 7; j++) {
+          const score = p.judgeTotalScores[j];
+          const val = (score === null || score === 0 || score === undefined) ? "" : score;
+          judgeCols += `<td class="center bold">${val}</td>`;
+        }
+
+        const authors = p.members.map(m => m.name).join("<br>");
+        const decision = p.recommendedToRegion 
+          ? "<strong style='color:#166534;'>Viloyatga tavsiya</strong>" 
+          : "Iştirokçi";
+
+        tr.innerHTML = `
+          <td class="center bold">${idx + 1}</td>
+          <td>${p.school}</td>
+          <td class="bold">${p.projectName}</td>
+          <td>${p.direction}</td>
+          <td style="font-size: 9pt;">${authors}</td>
+          ${judgeCols}
+          <td class="center bold" style="font-size: 10.5pt;">${p.finalAverage || ""}</td>
+          <td class="center bold">${p.rank || ""}</td>
+          <td class="center" style="font-size: 8.5pt;">${decision}</td>
+        `;
+        tbody.appendChild(tr);
+      });
+    }
+
+    renderBayonnomaTable();
+
+    // Google Sheets'dan jonli eng so'nggi baholarni avtomatik yuklab olish
+    async function syncLiveBayonnoma() {
+      try {
+        const liveEvals = await fetchLiveScoresFromGoogleSheets();
+        if (liveEvals) {
+          currentData.projects.forEach(p => {
+            if (liveEvals[p.id]) {
+              p.evaluations = liveEvals[p.id];
+            }
+          });
+          saveIxtirochilikData(currentData);
+          renderBayonnomaTable();
+        }
+      } catch (err) {
+        console.warn("Live bayonnoma xatolik:", err);
       }
-
-      const authors = p.members.map(m => m.name).join("<br>");
-      const decision = p.recommendedToRegion 
-        ? "<strong style='color:#166534;'>Viloyatga tavsiya</strong>" 
-        : "Iştirokçi";
-
-      tr.innerHTML = `
-        <td class="center bold">${idx + 1}</td>
-        <td>${p.school}</td>
-        <td class="bold">${p.projectName}</td>
-        <td>${p.direction}</td>
-        <td style="font-size: 9pt;">${authors}</td>
-        ${judgeCols}
-        <td class="center bold" style="font-size: 10.5pt;">${p.finalAverage || ""}</td>
-        <td class="center bold">${p.rank || ""}</td>
-        <td class="center" style="font-size: 8.5pt;">${decision}</td>
-      `;
-      tbody.appendChild(tr);
-    });
+    }
+    syncLiveBayonnoma();
   </script>
 </body>
 </html>
