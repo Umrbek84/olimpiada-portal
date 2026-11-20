@@ -50,22 +50,33 @@
 
     <!-- Hakam Baholash Kabineti -->
     <div id="judgeCabinet" style="display: none;">
-      <div style="background: white; border-radius: 16px; border: 1px solid var(--border); padding: 20px 28px; margin-bottom: 24px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; box-shadow: var(--shadow);">
-        <div>
-          <div style="display:flex; align-items:center; gap:10px; margin-bottom:4px;">
-            <h2 id="activeJudgeName" style="font-size: 20px; font-weight: 800; color: var(--dark); margin:0;"></h2>
-            <span id="judgeProgressBadge" style="background:#e0e7ff; color:#3730a3; padding:4px 10px; border-radius:12px; font-size:12px; font-weight:700;"></span>
+      <!-- Hakam Profili va Boshqaruv Paneli -->
+      <div style="background: white; border-radius: 20px; border: 1px solid var(--border); padding: 18px 24px; margin-bottom: 20px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; box-shadow: var(--shadow);">
+        
+        <!-- Hakam F.I.SH. va Lavozimi burchakdagi maxsus karta -->
+        <div class="judge-profile-card">
+          <div class="judge-avatar-circle">
+            <i class="fa-solid fa-user-check"></i>
           </div>
-          <p id="activeJudgeRole" style="font-size: 14px; color: #64748b; margin: 0;"></p>
+          <div class="judge-profile-info">
+            <span class="judge-role-tag">Hakamlar hay'ati a'zosi</span>
+            <div class="judge-fish-title" id="activeJudgeName">Abdullayev Rustam Alisherovich</div>
+            <div class="judge-detail-sub" id="activeJudgeRole">1-Hakam · Informatika fani o‘qituvchisi</div>
+          </div>
         </div>
-        <div style="display: flex; gap: 10px; flex-wrap: wrap;">
-          <button onclick="openCriteriaModal()" class="btn btn-outline" style="background: #eef2ff; color: #4338ca; border-color: #c7d2fe; font-weight: 700;">
+
+        <!-- Boshqaruv tugmalari -->
+        <div style="display: flex; gap: 10px; flex-wrap: wrap; align-items: center;">
+          <span id="judgeProgressBadge" style="background: #e0e7ff; color: #3730a3; padding: 10px 16px; border-radius: 12px; font-size: 13.5px; font-weight: 800;">
+            <i class="fa-solid fa-list-check"></i> 0 / 13 ta baholandi
+          </span>
+          <button onclick="openCriteriaModal()" class="btn btn-outline" style="background: #eef2ff; color: #4338ca; border-color: #c7d2fe; font-weight: 700; padding: 10px 18px;">
             <i class="fa-solid fa-book-bookmark"></i> Baholash mezonlari (1-Ilova)
           </button>
-          <a href="index.html" class="btn btn-outline">
+          <a href="index.html" class="btn btn-outline" style="padding: 10px 18px;">
             <i class="fa-solid fa-chart-line"></i> Natijalar (Svod)
           </a>
-          <button onclick="logoutJudge()" class="btn btn-outline" style="color: #dc2626; border-color: #fca5a5;">
+          <button onclick="logoutJudge()" class="btn btn-outline" style="color: #dc2626; border-color: #fca5a5; padding: 10px 18px;">
             <i class="fa-solid fa-arrow-right-from-bracket"></i> Chiqish
           </button>
         </div>
@@ -115,6 +126,19 @@
     </div>
   </div>
 
+  <!-- Markaziy Chiroyli Dialog Oynasi (alert, confirm, prompt o'rniga) -->
+  <div id="centerModalOverlay" class="center-modal-overlay" style="display: none;" onclick="if(event.target===this) closeCenterModal()">
+    <div class="center-modal-box">
+      <div id="centerModalIcon" class="center-modal-icon info"><i class="fa-solid fa-circle-info"></i></div>
+      <h3 id="centerModalTitle" class="center-modal-title">Sarlavha</h3>
+      <p id="centerModalDesc" class="center-modal-desc">Xabarnoma matni</p>
+      <input type="password" id="centerModalInput" class="center-modal-input" placeholder="••••" style="display: none;" maxlength="10" onkeyup="if(event.key==='Enter') submitCenterPrompt()">
+      <div class="center-modal-actions" id="centerModalActions">
+        <!-- Dinamik tugmalar -->
+      </div>
+    </div>
+  </div>
+
   <script src="data.js"></script>
   <script>
     let appData = loadIxtirochilikData();
@@ -122,6 +146,156 @@
     let unlockedProjects = {}; // Mas'ul PIN orqali vaqtincha ochilgan loyihalar
     let cabinetFilter = "ALL"; // ALL, UNRATED, RATED
 
+    // =========================================================================
+    // MARKAZIY MODAL MULOQOT TIZIMI (alert, confirm, prompt o'rniga)
+    // =========================================================================
+    let centerPromptCallback = null;
+
+    function openCenterAlert({ title, desc, type = "info", buttonText = "Tushundim", onOk = null }) {
+      const overlay = document.getElementById("centerModalOverlay");
+      const icon = document.getElementById("centerModalIcon");
+      const titleEl = document.getElementById("centerModalTitle");
+      const descEl = document.getElementById("centerModalDesc");
+      const inputEl = document.getElementById("centerModalInput");
+      const actionsEl = document.getElementById("centerModalActions");
+
+      if (inputEl) {
+        inputEl.style.display = "none";
+        inputEl.value = "";
+      }
+      centerPromptCallback = null;
+
+      if (icon) {
+        icon.className = `center-modal-icon ${type}`;
+        let iconHtml = '<i class="fa-solid fa-circle-info"></i>';
+        if (type === "success") iconHtml = '<i class="fa-solid fa-circle-check"></i>';
+        else if (type === "warning") iconHtml = '<i class="fa-solid fa-triangle-exclamation"></i>';
+        else if (type === "danger") iconHtml = '<i class="fa-solid fa-circle-xmark"></i>';
+        icon.innerHTML = iconHtml;
+      }
+
+      if (titleEl) titleEl.innerText = title;
+      if (descEl) descEl.innerText = desc;
+
+      window._modalOkCb = onOk;
+      if (actionsEl) {
+        actionsEl.innerHTML = `
+          <button class="btn btn-primary" style="padding: 12px 28px; font-size: 15px; font-weight: 700;" onclick="closeCenterModal(); if(typeof window._modalOkCb==='function'){const fn=window._modalOkCb; window._modalOkCb=null; fn();}">
+            <i class="fa-solid fa-check"></i> ${buttonText}
+          </button>
+        `;
+      }
+      if (overlay) overlay.style.display = "flex";
+      document.body.style.overflow = "hidden";
+    }
+
+    function openCenterConfirm({ title, desc, type = "warning", confirmText = "Ha, tasdiqlayman", cancelText = "Bekor qilish", onConfirm, onCancel }) {
+      const overlay = document.getElementById("centerModalOverlay");
+      const icon = document.getElementById("centerModalIcon");
+      const titleEl = document.getElementById("centerModalTitle");
+      const descEl = document.getElementById("centerModalDesc");
+      const inputEl = document.getElementById("centerModalInput");
+      const actionsEl = document.getElementById("centerModalActions");
+
+      if (inputEl) {
+        inputEl.style.display = "none";
+        inputEl.value = "";
+      }
+      centerPromptCallback = null;
+
+      if (icon) {
+        icon.className = `center-modal-icon ${type}`;
+        let iconHtml = '<i class="fa-solid fa-triangle-exclamation"></i>';
+        if (type === "danger") iconHtml = '<i class="fa-solid fa-circle-exclamation"></i>';
+        else if (type === "info") iconHtml = '<i class="fa-solid fa-circle-question"></i>';
+        icon.innerHTML = iconHtml;
+      }
+
+      if (titleEl) titleEl.innerText = title;
+      if (descEl) descEl.innerText = desc;
+
+      window._modalConfirmCb = onConfirm;
+      window._modalCancelCb = onCancel;
+
+      if (actionsEl) {
+        actionsEl.innerHTML = `
+          <button class="btn btn-outline" style="padding: 12px 22px; font-size: 14.5px; font-weight: 700;" onclick="closeCenterModal(); if(typeof window._modalCancelCb==='function'){window._modalCancelCb();}">
+            ${cancelText}
+          </button>
+          <button class="btn ${type === 'danger' ? 'btn-danger' : 'btn-primary'}" style="padding: 12px 22px; font-size: 14.5px; font-weight: 700; background: ${type==='danger'?'#dc2626':'#0284c7'}; color:white;" onclick="closeCenterModal(); if(typeof window._modalConfirmCb==='function'){window._modalConfirmCb();}">
+            ${confirmText}
+          </button>
+        `;
+      }
+
+      if (overlay) overlay.style.display = "flex";
+      document.body.style.overflow = "hidden";
+    }
+
+    function openCenterPromptPin({ title, desc, onConfirm, onCancel }) {
+      const overlay = document.getElementById("centerModalOverlay");
+      const icon = document.getElementById("centerModalIcon");
+      const titleEl = document.getElementById("centerModalTitle");
+      const descEl = document.getElementById("centerModalDesc");
+      const inputEl = document.getElementById("centerModalInput");
+      const actionsEl = document.getElementById("centerModalActions");
+
+      if (icon) {
+        icon.className = `center-modal-icon info`;
+        icon.innerHTML = '<i class="fa-solid fa-shield-halved"></i>';
+      }
+
+      if (titleEl) titleEl.innerText = title;
+      if (descEl) descEl.innerText = desc;
+
+      if (inputEl) {
+        inputEl.style.display = "block";
+        inputEl.value = "";
+        inputEl.placeholder = "••••";
+      }
+
+      centerPromptCallback = onConfirm;
+      window._modalCancelCb = onCancel;
+
+      if (actionsEl) {
+        actionsEl.innerHTML = `
+          <button class="btn btn-outline" style="padding: 12px 22px; font-size: 14.5px; font-weight: 700;" onclick="closeCenterModal(); if(typeof window._modalCancelCb==='function'){window._modalCancelCb();}">
+            Bekor qilish
+          </button>
+          <button class="btn btn-primary" style="padding: 12px 24px; font-size: 14.5px; font-weight: 700;" onclick="submitCenterPrompt()">
+            <i class="fa-solid fa-key"></i> Qulfni ochish
+          </button>
+        `;
+      }
+
+      if (overlay) overlay.style.display = "flex";
+      document.body.style.overflow = "hidden";
+      if (inputEl) setTimeout(() => inputEl.focus(), 150);
+    }
+
+    function submitCenterPrompt() {
+      const inputEl = document.getElementById("centerModalInput");
+      const val = inputEl ? inputEl.value.trim() : "";
+      if (!val) {
+        if (inputEl) inputEl.focus();
+        return;
+      }
+      const cb = centerPromptCallback;
+      closeCenterModal();
+      if (typeof cb === "function") {
+        cb(val);
+      }
+    }
+
+    function closeCenterModal() {
+      const overlay = document.getElementById("centerModalOverlay");
+      if (overlay) overlay.style.display = "none";
+      document.body.style.overflow = "auto";
+    }
+
+    // =========================================================================
+    // HAKAM TIZIMIGA KIRISH VA IDENTIFIKATSIYA
+    // =========================================================================
     async function loginJudge() {
       const pin = document.getElementById("pinInput").value.trim();
       if (!pin) return;
@@ -142,15 +316,22 @@
             // Agar Admin PIN kiritilgan bo'lsa
             const role = String(json.judge.role || "");
             if (role.toLowerCase().includes("admin") || json.judge.id === null) {
-              alert("Ushbu PIN-kod Tuman koordinatori (Admin) uchun ajratilgan bo‘lib, baholangan loyihalar qulfini ochish uchun xizmat qiladi.\n\nHakamlar hay'ati a'zolari o‘zlariga berilgan 4 xonali shaxsiy PIN-kodi bilan kirishlari shart.");
+              openCenterAlert({
+                title: "Diqqat! Admin PIN-kod",
+                desc: "Ushbu PIN-kod Tuman koordinatori (Admin) uchun ajratilgan bo‘lib, baholangan loyihalar qulfini ochish uchun xizmat qiladi.\n\nHakamlar hay'ati a'zolari o‘zlariga berilgan 4 xonali shaxsiy PIN-kodi bilan kirishlari shart.",
+                type: "warning"
+              });
               document.getElementById("pinInput").value = "";
               return;
             }
 
+            const fallbackJudge = appData.judges.find(j => j.id === json.judge.id);
+            const judgeName = (json.judge.name && !json.judge.name.includes("Hakam")) ? json.judge.name : (fallbackJudge ? fallbackJudge.name : json.judge.name);
+
             currentJudge = {
               id: json.judge.id,
-              name: `${json.judge.id}-Hakam: ${json.judge.name}`,
-              role: json.judge.role,
+              name: judgeName,
+              role: json.judge.role || (fallbackJudge ? fallbackJudge.role : "Hakam"),
               pin: pin
             };
             showWelcome(currentJudge);
@@ -164,7 +345,11 @@
       // 2. Mahalliy zaxira tekshiruv
       btn.innerHTML = origText;
       if (pin === "7788") {
-        alert("Ushbu PIN-kod Tuman koordinatori (Admin) uchun ajratilgan bo‘lib, baholangan loyihalar qulfini ochish uchun xizmat qiladi.\n\nHakamlar hay'ati a'zolari o‘zlariga berilgan 4 xonali shaxsiy PIN-kodi bilan kirishlari shart.");
+        openCenterAlert({
+          title: "Diqqat! Admin PIN-kod",
+          desc: "Ushbu PIN-kod Tuman koordinatori (Admin) uchun ajratilgan bo‘lib, baholangan loyihalar qulfini ochish uchun xizmat qiladi.\n\nHakamlar hay'ati a'zolari o‘zlariga berilgan 4 xonali shaxsiy PIN-kodi bilan kirishlari shart.",
+          type: "warning"
+        });
         document.getElementById("pinInput").value = "";
         return;
       }
@@ -176,15 +361,19 @@
         return;
       }
 
-      alert("Noto‘g‘ri PIN-kod kiritildi! Iltimos, qaytadan tekshirib ko‘ring.");
+      openCenterAlert({
+        title: "Noto‘g‘ri PIN-kod!",
+        desc: "Kiritilgan PIN-kod bo‘yicha hakam topilmadi. Iltimos, PIN-kodni qaytadan tekshirib ko‘ring.",
+        type: "danger"
+      });
       document.getElementById("pinInput").value = "";
     }
 
     function showWelcome(j) {
       document.getElementById("pinScreen").style.display = "none";
       document.getElementById("welcomeScreen").style.display = "block";
-      document.getElementById("welcomeName").innerText = "Xush kelibsiz, " + (j.name.includes(":") ? j.name.split(":")[0] : j.name) + "!";
-      document.getElementById("welcomeRole").innerText = j.role;
+      document.getElementById("welcomeName").innerText = "Xush kelibsiz, " + j.name + "!";
+      document.getElementById("welcomeRole").innerText = `${j.id}-Hakam · ${j.role}`;
     }
 
     function cancelWelcome() {
@@ -200,8 +389,9 @@
       document.getElementById("judgeCabinet").style.display = "block";
       window.scrollTo(0, 0);
 
+      // Burchakdagi F.I.Sh. kartasini to'ldiramiz
       document.getElementById("activeJudgeName").innerText = j.name;
-      document.getElementById("activeJudgeRole").innerText = `Hakamlar hay'ati a'zosi · 5 ta mezon bo‘yicha 100 ballik baholash tizimi`;
+      document.getElementById("activeJudgeRole").innerText = `${j.id}-Hakam · ${j.role}`;
 
       // 1. DARHOL mavjud loyihalarni ekranga chiqarish (0 soniyada!)
       renderEvaluationCards();
@@ -247,47 +437,61 @@
       renderEvaluationCards();
     }
 
+    // =========================================================================
+    // MATEMATIK MANTOQ BO'YICHA 3 XIL STATUSNI HISOBLASH VA KARTALARNI CHIQARISH
+    // =========================================================================
+    function getSavedCriteriaStats(proj, judgeId) {
+      const ev = (proj.evaluations && proj.evaluations[judgeId]) ? proj.evaluations[judgeId] : {};
+      const c1 = ev.c1;
+      const c2 = ev.c2;
+      const c3 = ev.c3;
+      const c4 = ev.c4;
+      const c5 = ev.c5;
+
+      const filled = [c1, c2, c3, c4, c5].filter(v => v !== undefined && v !== null && v !== "");
+      const count = filled.length;
+      const total = (Number(c1) || 0) + (Number(c2) || 0) + (Number(c3) || 0) + (Number(c4) || 0) + (Number(c5) || 0);
+      return { count, total, isFull: count === 5, hasAny: count > 0, ev };
+    }
+
     function renderEvaluationCards() {
       const container = document.getElementById("evaluationsContainer");
       container.innerHTML = "";
 
-      let ratedCount = 0;
-      let unratedCount = 0;
+      let fullyRatedCount = 0;
 
-      // 1. Avval statistikani hisoblaymiz
+      // 1. Statistika
       appData.projects.forEach(p => {
-        const ev = (p.evaluations && p.evaluations[currentJudge.id]) ? p.evaluations[currentJudge.id] : {};
-        const has = (ev.c1 !== undefined && ev.c1 !== null && ev.c1 !== "") ||
-                    (ev.c2 !== undefined && ev.c2 !== null && ev.c2 !== "") ||
-                    (ev.c3 !== undefined && ev.c3 !== null && ev.c3 !== "") ||
-                    (ev.c4 !== undefined && ev.c4 !== null && ev.c4 !== "") ||
-                    (ev.c5 !== undefined && ev.c5 !== null && ev.c5 !== "");
-        if (has) ratedCount++;
-        else unratedCount++;
+        const stats = getSavedCriteriaStats(p, currentJudge.id);
+        const isUnlocked = unlockedProjects[p.id] === true;
+        // To'liq baholangan va qulflangan deb faqat 5 ta mezon to'liq saqlangan bo'lsa hisoblanadi
+        if (stats.isFull && !isUnlocked) {
+          fullyRatedCount++;
+        }
       });
+
+      const totalCount = appData.projects.length;
+      const unratedCount = totalCount - fullyRatedCount;
 
       const countAllEl = document.getElementById("countAll");
       const countRatedEl = document.getElementById("countRated");
       const countUnratedEl = document.getElementById("countUnrated");
       const progBadge = document.getElementById("judgeProgressBadge");
 
-      if (countAllEl) countAllEl.innerText = appData.projects.length;
-      if (countRatedEl) countRatedEl.innerText = ratedCount;
+      if (countAllEl) countAllEl.innerText = totalCount;
+      if (countRatedEl) countRatedEl.innerText = fullyRatedCount;
       if (countUnratedEl) countUnratedEl.innerText = unratedCount;
       if (progBadge) {
-        progBadge.innerHTML = `<i class="fa-solid fa-list-check"></i> ${ratedCount} / ${appData.projects.length} ta baholandi`;
+        progBadge.innerHTML = `<i class="fa-solid fa-list-check"></i> ${fullyRatedCount} / ${totalCount} ta baholandi`;
       }
 
-      // 2. Tanlangan filter bo'yicha loyihalarni saralaymiz
+      // 2. Filter bo'yicha loyihalar
       const visibleProjects = appData.projects.filter(p => {
-        const ev = (p.evaluations && p.evaluations[currentJudge.id]) ? p.evaluations[currentJudge.id] : {};
-        const has = (ev.c1 !== undefined && ev.c1 !== null && ev.c1 !== "") ||
-                    (ev.c2 !== undefined && ev.c2 !== null && ev.c2 !== "") ||
-                    (ev.c3 !== undefined && ev.c3 !== null && ev.c3 !== "") ||
-                    (ev.c4 !== undefined && ev.c4 !== null && ev.c4 !== "") ||
-                    (ev.c5 !== undefined && ev.c5 !== null && ev.c5 !== "");
-        if (cabinetFilter === "RATED") return has;
-        if (cabinetFilter === "UNRATED") return !has;
+        const stats = getSavedCriteriaStats(p, currentJudge.id);
+        const isUnlocked = unlockedProjects[p.id] === true;
+        const isDone = stats.isFull && !isUnlocked;
+        if (cabinetFilter === "RATED") return isDone;
+        if (cabinetFilter === "UNRATED") return !isDone;
         return true;
       });
 
@@ -304,36 +508,41 @@
 
       visibleProjects.forEach((proj) => {
         const realIdx = appData.projects.findIndex(x => x.id === proj.id);
-        const ev = (proj.evaluations && proj.evaluations[currentJudge.id]) ? proj.evaluations[currentJudge.id] : {};
+        const stats = getSavedCriteriaStats(proj, currentJudge.id);
+        const ev = stats.ev;
+
         const c1Val = (ev.c1 !== undefined && ev.c1 !== null) ? ev.c1 : "";
         const c2Val = (ev.c2 !== undefined && ev.c2 !== null) ? ev.c2 : "";
         const c3Val = (ev.c3 !== undefined && ev.c3 !== null) ? ev.c3 : "";
         const c4Val = (ev.c4 !== undefined && ev.c4 !== null) ? ev.c4 : "";
         const c5Val = (ev.c5 !== undefined && ev.c5 !== null) ? ev.c5 : "";
 
-        const hasSavedScore = (c1Val !== "" || c2Val !== "" || c3Val !== "" || c4Val !== "" || c5Val !== "");
         const isUnlocked = unlockedProjects[proj.id] === true;
-        const isLocked = hasSavedScore && !isUnlocked;
+        const isLocked = (stats.isFull || stats.hasAny) && !isUnlocked;
 
-        // 3 ta aniq holat:
-        // 1. Yashil (status-green): Baholangan va qulflangan
-        // 2. Sariq (status-yellow): Qulfi ochilgan (tahrirlanmoqda)
-        // 3. Qizil (status-red): Baholanmagan (kutilyapti)
+        // MATEMATIK HOLATLAR:
+        // 1. Yashil (status-green): 5/5 mezon to'liq to'ldirilgan va qulflangan
+        // 2. Sariq (status-yellow): 1..4 mezon to'ldirilgan YOKI qulfi ochilgan
+        // 3. Qizil (status-red): 0/5 mezon (umuman baholanmagan)
         let statusClass = "status-red";
         let statusBadge = "";
         let scoreColor = "#dc2626";
 
-        if (isLocked) {
+        if (isLocked && stats.isFull) {
           statusClass = "status-green";
-          statusBadge = `<span style="background: #dcfce7; color: #166534; border: 1.5px solid #86efac; padding: 6px 14px; border-radius: 20px; font-weight: 800; font-size: 13px; display: inline-flex; align-items: center; gap: 6px;"><i class="fa-solid fa-circle-check"></i> ✅ Baholangan va Qulflangan</span>`;
+          statusBadge = `<span class="status-badge-green"><i class="fa-solid fa-circle-check"></i> 🟢 Baholangan va Qulflangan (5/5)</span>`;
           scoreColor = "#15803d";
         } else if (isUnlocked) {
           statusClass = "status-yellow";
-          statusBadge = `<span style="background: #fef3c7; color: #92400e; border: 1.5px solid #fcd34d; padding: 6px 14px; border-radius: 20px; font-weight: 800; font-size: 13px; display: inline-flex; align-items: center; gap: 6px;"><i class="fa-solid fa-pen-to-square"></i> ✏️ Qulf ochilgan (Tahrirlashda)</span>`;
+          statusBadge = `<span class="status-badge-yellow"><i class="fa-solid fa-pen-to-square"></i> ✏️ Qulf ochilgan (${stats.count}/5 mezon)</span>`;
+          scoreColor = "#d97706";
+        } else if (stats.hasAny) {
+          statusClass = "status-yellow";
+          statusBadge = `<span class="status-badge-yellow"><i class="fa-solid fa-hourglass-half"></i> 🟡 Jarayonda (${stats.count}/5 mezon)</span>`;
           scoreColor = "#d97706";
         } else {
           statusClass = "status-red";
-          statusBadge = `<span id="statusBadge_${proj.id}" style="background: #fee2e2; color: #991b1b; border: 1.5px solid #fca5a5; padding: 6px 14px; border-radius: 20px; font-weight: 800; font-size: 13px; display: inline-flex; align-items: center; gap: 6px;"><i class="fa-solid fa-circle-exclamation"></i> ⚠️ Baholanmagan (Kutilmoqda)</span>`;
+          statusBadge = `<span class="status-badge-red"><i class="fa-solid fa-circle-xmark"></i> 🔴 Baholanmagan (0/5)</span>`;
           scoreColor = "#dc2626";
         }
 
@@ -349,33 +558,33 @@
         let bottomActionHtml = '';
         if (isLocked) {
           bottomActionHtml = `
-            <div style="display:flex; justify-content:space-between; align-items:center; gap:12px; flex-wrap:wrap; margin-top:12px; padding-top:12px; border-top:1px dashed #bbf7d0;">
-              <span style="font-size:13px; font-weight:700; color:#15803d;">
+            <div style="display:flex; justify-content:space-between; align-items:center; gap:12px; flex-wrap:wrap; margin-top:14px; padding-top:14px; border-top:1px dashed #bbf7d0;">
+              <span style="font-size:13.5px; font-weight:700; color:#15803d;">
                 <i class="fa-solid fa-shield-halved"></i> Baho to‘liq saqlangan va o‘zgartirishdan himoyalangan
               </span>
-              <button class="btn" style="background:#f59e0b; color:white; font-weight:700; padding:10px 18px;" onclick="unlockProject(${proj.id})">
+              <button class="btn" style="background:#f59e0b; color:white; font-weight:700; padding:10px 18px; border-radius:10px;" onclick="unlockProject(${proj.id})">
                 <i class="fa-solid fa-lock-open"></i> O‘zgartirish uchun qulfni ochish (Mas'ul PIN)
               </button>
             </div>
           `;
         } else if (isUnlocked) {
           bottomActionHtml = `
-            <div style="display:flex; justify-content:space-between; align-items:center; gap:12px; flex-wrap:wrap; margin-top:12px; padding-top:12px; border-top:1px dashed #fcd34d;">
-              <span style="font-size:13px; font-weight:700; color:#b45309;">
+            <div style="display:flex; justify-content:space-between; align-items:center; gap:12px; flex-wrap:wrap; margin-top:14px; padding-top:14px; border-top:1px dashed #fcd34d;">
+              <span id="savedMark_${proj.id}" style="font-size:13.5px; font-weight:700; color:#b45309;">
                 <i class="fa-solid fa-pen-to-square"></i> Baholarni to‘g‘rilang va qayta qulflash uchun saqlang
               </span>
-              <button class="btn btn-success" id="saveBtn_${proj.id}" style="font-weight:700; padding:12px 22px; font-size:15px;" onclick="saveOne(${proj.id})">
+              <button class="btn btn-success" id="saveBtn_${proj.id}" style="font-weight:700; padding:12px 22px; font-size:15px; border-radius:10px;" onclick="saveOne(${proj.id})">
                 <i class="fa-solid fa-floppy-disk"></i> Yangi bahoni saqlash va qayta qulflash
               </button>
             </div>
           `;
         } else {
           bottomActionHtml = `
-            <div style="display:flex; justify-content:space-between; align-items:center; gap:12px; flex-wrap:wrap; margin-top:12px; padding-top:12px; border-top:1px dashed #fca5a5;">
-              <span id="savedMark_${proj.id}" style="font-size:13px; font-weight:700; color:#dc2626;">
-                <i class="fa-solid fa-clock"></i> Ushbu o‘quvchi hali baholanmagan
+            <div style="display:flex; justify-content:space-between; align-items:center; gap:12px; flex-wrap:wrap; margin-top:14px; padding-top:14px; border-top:1px dashed #fca5a5;">
+              <span id="savedMark_${proj.id}" style="font-size:13.5px; font-weight:700; color:#dc2626;">
+                <i class="fa-solid fa-clock"></i> Ushbu loyiha hali baholanmagan
               </span>
-              <button class="btn btn-primary" id="saveBtn_${proj.id}" style="font-weight:700; padding:12px 22px; font-size:15px;" onclick="saveOne(${proj.id})">
+              <button class="btn btn-primary" id="saveBtn_${proj.id}" style="font-weight:700; padding:12px 22px; font-size:15px; border-radius:10px;" onclick="saveOne(${proj.id})">
                 <i class="fa-solid fa-floppy-disk"></i> Bahoni saqlash va qulflash
               </button>
             </div>
@@ -389,15 +598,15 @@
                 <span class="direction-tag">${proj.direction}</span>
                 <span id="badgeContainer_${proj.id}">${statusBadge}</span>
               </div>
-              <h3 style="font-size: 18px; font-weight: 800; color: var(--dark);">${realIdx + 1}. ${proj.projectName}</h3>
+              <h3 style="font-size: 18.5px; font-weight: 800; color: var(--dark); margin: 4px 0;">${realIdx + 1}. ${proj.projectName}</h3>
               <p style="font-size: 13.5px; color: #475569; margin-top: 4px;">
                 <i class="fa-solid fa-school" style="color: var(--primary);"></i> <strong>${proj.school}</strong> &nbsp;|&nbsp; 
                 <i class="fa-solid fa-users" style="color: var(--primary);"></i> Mualliflar: <strong>${membersStr}</strong>
               </p>
             </div>
-            <div style="background: white; border: 2px solid ${isLocked ? '#86efac' : isUnlocked ? '#fcd34d' : '#fca5a5'}; padding: 10px 18px; border-radius: 12px; text-align: right; box-shadow: 0 1px 3px rgba(0,0,0,0.05);">
+            <div style="background: white; border: 2px solid ${statusClass==='status-green' ? '#86efac' : statusClass==='status-yellow' ? '#fcd34d' : '#fca5a5'}; padding: 10px 18px; border-radius: 12px; text-align: right; box-shadow: 0 1px 3px rgba(0,0,0,0.05);">
               <span style="font-size: 12px; font-weight: 700; color: #64748b; text-transform: uppercase;">Ushbu hakam bali:</span>
-              <div id="totalDisplay_${proj.id}" style="font-size: 26px; font-weight: 900; color: ${scoreColor};">0 / 100</div>
+              <div id="totalDisplay_${proj.id}" style="font-size: 26px; font-weight: 900; color: ${scoreColor};">${stats.total} / 100</div>
             </div>
           </div>
 
@@ -405,7 +614,7 @@
           <div class="criteria-block">
             <div class="criteria-title">
               <span>1. Loyihaning tanlov yo‘nalishlariga mos tayyorlanganligi</span>
-              <span style="color: var(--primary);">Maksimal: 10 ball</span>
+              <span style="color: var(--primary); font-weight: 700;">Maksimal: 10 ball</span>
             </div>
             <div class="criteria-desc">Yo‘nalishga to‘liq mos, chuqur o‘rganilgan va muammolar to‘liq ko‘rsatilgan bo‘lsa yuqori ball.</div>
             
@@ -433,7 +642,7 @@
           <div class="criteria-block">
             <div class="criteria-title">
               <span>2. Loyiha taqdimoti (prezentatsiya sifatli, infografika, savollarga javob, reglament)</span>
-              <span style="color: var(--primary);">Maksimal: 25 ball</span>
+              <span style="color: var(--primary); font-weight: 700;">Maksimal: 25 ball</span>
             </div>
             <div class="criteria-desc">Vaqt reglamentiga (10-15 daqiqa) rioya qilish, slayd 12 betdan oshmasligi, texnik savollarga to‘liq javob.</div>
             
@@ -462,7 +671,7 @@
           <div class="criteria-block">
             <div class="criteria-title">
               <span>3. Loyihaning texnik sifati va amaliy ishlanmasi (model, maket, dasturiy ishlanma)</span>
-              <span style="color: var(--primary);">Maksimal: 25 ball (1-ustunlik)</span>
+              <span style="color: #166534; font-weight: 800;">Maksimal: 25 ball (1-ustunlik)</span>
             </div>
             <div class="criteria-desc">Tayyor holatdagi ishchi ishlanmalarga, amaliy prototiplarga yuqori ball beriladi. (Tenglikda 1-ustunlik).</div>
             
@@ -491,7 +700,7 @@
           <div class="criteria-block">
             <div class="criteria-title">
               <span>4. Loyihaning innovatsionligi va ijodiy yondashuv</span>
-              <span style="color: var(--primary);">Maksimal: 20 ball</span>
+              <span style="color: var(--primary); font-weight: 700;">Maksimal: 20 ball</span>
             </div>
             <div class="criteria-desc">An'anaviy usullardan chiqib, yangi texnologiyalar va yangicha g‘oyalar qo‘llanilganligi.</div>
             
@@ -520,7 +729,7 @@
           <div class="criteria-block">
             <div class="criteria-title">
               <span>5. Amalga oshirishda kutilayotgan natijalar va analoglardan afzalligi</span>
-              <span style="color: var(--primary);">Maksimal: 20 ball</span>
+              <span style="color: var(--primary); font-weight: 700;">Maksimal: 20 ball</span>
             </div>
             <div class="criteria-desc">Real muammolarni hal qilish, texnik va iqtisodiy asoslanganlik, o‘xshash analoglaridan ustunligi.</div>
             
@@ -548,57 +757,85 @@
           ${bottomActionHtml}
         `;
         container.appendChild(card);
-        updateLiveTotal(proj.id);
       });
     }
 
     function setScore(projId, criterionId, score) {
       if (unlockedProjects[projId] !== true) {
         const p = appData.projects.find(x => x.id === projId);
-        const ev = (p && p.evaluations && p.evaluations[currentJudge.id]) ? p.evaluations[currentJudge.id] : null;
-        if (ev && (ev.c1 !== undefined && ev.c1 !== null && ev.c1 !== "")) return;
+        const stats = getSavedCriteriaStats(p, currentJudge.id);
+        if (stats.isFull) return; // Qulflangan bo'lsa o'zgartirib bo'lmaydi
       }
-      document.getElementById(`${criterionId}_${projId}`).value = score;
+      const el = document.getElementById(`${criterionId}_${projId}`);
+      if (el) el.value = score;
       handleInputChange(projId);
     }
 
-    function handleInputChange(projId) {
-      updateLiveTotal(projId);
+    function getFormCriteriaStats(projId) {
+      const getVal = (cid) => {
+        const el = document.getElementById(`${cid}_${projId}`);
+        return el ? el.value.trim() : "";
+      };
+      const vals = [getVal("c1"), getVal("c2"), getVal("c3"), getVal("c4"), getVal("c5")];
+      const filled = vals.filter(v => v !== "" && v !== null && v !== undefined);
+      const count = filled.length;
+      const total = (Number(vals[0]) || 0) + (Number(vals[1]) || 0) + (Number(vals[2]) || 0) + (Number(vals[3]) || 0) + (Number(vals[4]) || 0);
+      return { count, total, isFull: count === 5, hasAny: count > 0 };
+    }
 
-      // Agar loyiha qulflanmagan bo'lsa, uni darhol SARIQ (status-yellow) qilib ko'rsatamiz
-      if (unlockedProjects[projId] !== true) {
-        const p = appData.projects.find(x => x.id === projId);
-        const ev = (p && p.evaluations && p.evaluations[currentJudge.id]) ? p.evaluations[currentJudge.id] : null;
-        const isLocked = ev && (ev.c1 !== undefined && ev.c1 !== null && ev.c1 !== "");
-        if (isLocked) return;
+    function handleInputChange(projId) {
+      const p = appData.projects.find(x => x.id === projId);
+      if (!p) return;
+
+      const isUnlocked = unlockedProjects[projId] === true;
+      const savedStats = getSavedCriteriaStats(p, currentJudge.id);
+      if (savedStats.isFull && !isUnlocked) return; // Qulflangan holda tegilmaydi
+
+      const stats = getFormCriteriaStats(projId);
+
+      // 1. Ball yig'indisini yangilash
+      const disp = document.getElementById(`totalDisplay_${projId}`);
+      if (disp) {
+        disp.innerText = `${stats.total} / 100`;
       }
 
       const card = document.getElementById(`projCard_${projId}`);
-      if (card) {
-        card.classList.remove("status-red");
-        card.classList.add("status-yellow");
-      }
       const badge = document.getElementById(`badgeContainer_${projId}`);
-      if (badge) {
-        badge.innerHTML = `<span style="background: #fef3c7; color: #92400e; border: 1.5px solid #fcd34d; padding: 6px 14px; border-radius: 20px; font-weight: 800; font-size: 13px; display: inline-flex; align-items: center; gap: 6px;"><i class="fa-solid fa-pen"></i> ✏️ To‘ldirilmoqda</span>`;
-      }
-      const disp = document.getElementById(`totalDisplay_${projId}`);
-      if (disp) {
-        disp.style.color = "#d97706";
-      }
-    }
+      const savedMark = document.getElementById(`savedMark_${projId}`);
 
-    function updateLiveTotal(projId) {
-      const c1 = Number(document.getElementById(`c1_${projId}`) ? document.getElementById(`c1_${projId}`).value : 0) || 0;
-      const c2 = Number(document.getElementById(`c2_${projId}`) ? document.getElementById(`c2_${projId}`).value : 0) || 0;
-      const c3 = Number(document.getElementById(`c3_${projId}`) ? document.getElementById(`c3_${projId}`).value : 0) || 0;
-      const c4 = Number(document.getElementById(`c4_${projId}`) ? document.getElementById(`c4_${projId}`).value : 0) || 0;
-      const c5 = Number(document.getElementById(`c5_${projId}`) ? document.getElementById(`c5_${projId}`).value : 0) || 0;
-
-      const total = c1 + c2 + c3 + c4 + c5;
-      const disp = document.getElementById(`totalDisplay_${projId}`);
-      if (disp) {
-        disp.innerText = `${total} / 100`;
+      // 2. MATEMATIK MANTOQ BO'YICHA RANGNI VA BADGENI DASTURXON QILISH:
+      if (stats.count === 0) {
+        // 0 ta mezon kiritilgan -> QIZIL
+        if (card) {
+          card.classList.remove("status-yellow", "status-green");
+          card.classList.add("status-red");
+        }
+        if (badge) {
+          badge.innerHTML = `<span class="status-badge-red"><i class="fa-solid fa-circle-xmark"></i> 🔴 Baholanmagan (0/5)</span>`;
+        }
+        if (disp) disp.style.color = "#dc2626";
+        if (savedMark) {
+          savedMark.innerHTML = `<i class="fa-solid fa-clock"></i> Ushbu loyiha hali baholanmagan`;
+          savedMark.style.color = "#dc2626";
+        }
+      } else {
+        // 1..5 ta mezon kiritilmoqda (lekin hali saqlanmagan) -> SARIQ
+        if (card) {
+          card.classList.remove("status-red", "status-green");
+          card.classList.add("status-yellow");
+        }
+        if (badge) {
+          if (isUnlocked) {
+            badge.innerHTML = `<span class="status-badge-yellow"><i class="fa-solid fa-pen-to-square"></i> ✏️ Qulf ochilgan (${stats.count}/5 mezon)</span>`;
+          } else {
+            badge.innerHTML = `<span class="status-badge-yellow"><i class="fa-solid fa-hourglass-half"></i> 🟡 Jarayonda (${stats.count}/5 mezon)</span>`;
+          }
+        }
+        if (disp) disp.style.color = "#d97706";
+        if (savedMark) {
+          savedMark.innerHTML = `<i class="fa-solid fa-pen"></i> Baholash jarayonda (${stats.count}/5 mezon). Saqlash uchun quyidagi tugmani bosing.`;
+          savedMark.style.color = "#b45309";
+        }
       }
     }
 
@@ -618,17 +855,28 @@
     }
 
     async function unlockProject(projId) {
-      const adminPin = prompt("DIQQAT: Loyiha bahosini qayta o‘zgartirish uchun tuman koordinatori (Umrbek Mamatov) maxsus PIN-kodini kiriting:");
-      if (!adminPin || !adminPin.trim()) return;
-
-      const isValid = await verifyAdminPin(adminPin.trim());
-      if (isValid) {
-        unlockedProjects[projId] = true;
-        showToast("✅ Qulf ochildi!", "Admin ruxsati tasdiqlandi. Endi baholarni o‘zgartirishingiz mumkin.");
-        renderEvaluationCards();
-      } else {
-        alert("❌ Noto‘g‘ri Mas'ul PIN-kodi! Qulf ochilmadi. Tuman koordinatori (Umrbek Mamatov) bilan bog‘laning.");
-      }
+      openCenterPromptPin({
+        title: "Qulfni ochish (Mas'ul PIN)",
+        desc: `${projId}-loyiha bahosini qayta o‘zgartirish uchun tuman koordinatori (Umrbek Mamatov) maxsus PIN-kodini kiriting:`,
+        onConfirm: async (adminPin) => {
+          const isValid = await verifyAdminPin(adminPin.trim());
+          if (isValid) {
+            unlockedProjects[projId] = true;
+            renderEvaluationCards();
+            openCenterAlert({
+              title: "Qulf ochildi!",
+              desc: "Admin ruxsati muvaffaqiyatli tasdiqlandi. Endi baholarni o‘zgartirishingiz mumkin.",
+              type: "success"
+            });
+          } else {
+            openCenterAlert({
+              title: "Noto‘g‘ri PIN-kod!",
+              desc: "Mas'ul PIN-kodi noto‘g‘ri kiritildi! Qulf ochilmadi. Tuman koordinatori (Umrbek Mamatov) bilan bog‘laning.",
+              type: "danger"
+            });
+          }
+        }
+      });
     }
 
     async function saveOne(projId) {
@@ -636,13 +884,32 @@
       const p = appData.projects.find(x => x.id === projId);
       const ev = readEval(p);
       if (!ev) { 
-        alert("Avval kamida bitta mezon bo‘yicha baho kiriting."); 
+        openCenterAlert({
+          title: "Baholar kiritilmadi!",
+          desc: "Iltimos, avval mezonlar bo‘yicha ballarni kiriting.",
+          type: "warning"
+        });
         return; 
       }
-      if (Object.values(ev).some(v => v === null)) {
-        if (!confirm("Diqqat! Ba'zi mezonlar bo‘sh qoldi. Shunday holatda saqlansinmi?")) return;
+
+      const filledCount = Object.values(ev).filter(v => v !== null).length;
+      if (filledCount < 5) {
+        openCenterConfirm({
+          title: "Barcha mezonlar to‘ldirilmadi!",
+          desc: `Diqqat! 5 ta mezondan faqat ${filledCount} tasi to‘ldirildi (${5 - filledCount} ta mezon bo‘sh qoldi).\n\nLoyiha to‘liq baholanmagan holatda saqlansinmi?`,
+          type: "warning",
+          confirmText: "Ha, saqlansin",
+          cancelText: "To‘ldirishda davom etish",
+          onConfirm: () => performSave(projId, ev)
+        });
+        return;
       }
 
+      performSave(projId, ev);
+    }
+
+    async function performSave(projId, ev) {
+      const p = appData.projects.find(x => x.id === projId);
       const saveBtn = document.getElementById(`saveBtn_${projId}`);
       if (saveBtn) {
         saveBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Saqlanmoqda...';
@@ -662,51 +929,31 @@
         console.warn("Sheetga yuborishda xatolik:", e);
       }
 
-      // Chiroyli Toast bildirishnomasi
-      showToast(`✅ ${projId}-loyiha saqlandi!`, `Baholar muvaffaqiyatli qulflandi va Google Sheetga yuborildi.`);
       renderEvaluationCards();
-    }
 
-    function showToast(title, message) {
-      const toast = document.getElementById("toastPopup");
-      if (!toast) return;
-      document.getElementById("toastTitle").innerText = title;
-      document.getElementById("toastMsg").innerText = message;
-      toast.style.display = "flex";
-      clearTimeout(window.toastTimer);
-      window.toastTimer = setTimeout(() => {
-        toast.style.display = "none";
-      }, 3500);
+      // Markaziy chiroyli xabarnoma (hech qanday browser alert yo'q!)
+      openCenterAlert({
+        title: "Muvaffaqiyatli saqlandi!",
+        desc: `${projId}-loyiha ("${p.projectName}") bahosi muvaffaqiyatli saqlandi va qulflandi!\n\nQayta o‘zgartirish faqat tuman koordinatori (Umrbek Mamatov) maxsus PIN-kodi orqali amalga oshiriladi.`,
+        type: "success"
+      });
     }
 
     function logoutJudge() {
-      if (!confirm("Tizimdan chiqmoqchimisiz?")) return;
-      currentJudge = null;
-      unlockedProjects = {};
-      document.getElementById("judgeCabinet").style.display = "none";
-      document.getElementById("pinScreen").style.display = "block";
-      document.getElementById("pinInput").value = "";
-    }
-
-    // Baholash mezonlari modalini boshqarish
-    function openCriteriaModal() {
-      document.getElementById("criteriaModal").style.display = "flex";
-      document.body.style.overflow = "hidden";
-    }
-
-    function closeCriteriaModal() {
-      document.getElementById("criteriaModal").style.display = "none";
-      document.body.style.overflow = "auto";
-    }
-  </script>
-
-    function logoutJudge() {
-      if (!confirm("Tizimdan chiqmoqchimisiz?")) return;
-      currentJudge = null;
-      unlockedProjects = {};
-      document.getElementById("judgeCabinet").style.display = "none";
-      document.getElementById("pinScreen").style.display = "block";
-      document.getElementById("pinInput").value = "";
+      openCenterConfirm({
+        title: "Tizimdan chiqish",
+        desc: "Haqiqatan ham hakamlar kabinetidan chiqmoqchimisiz?",
+        type: "danger",
+        confirmText: "Ha, chiqish",
+        cancelText: "Qolish",
+        onConfirm: () => {
+          currentJudge = null;
+          unlockedProjects = {};
+          document.getElementById("judgeCabinet").style.display = "none";
+          document.getElementById("pinScreen").style.display = "block";
+          document.getElementById("pinInput").value = "";
+        }
+      });
     }
 
     // Baholash mezonlari modalini boshqarish

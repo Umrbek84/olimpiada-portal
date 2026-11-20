@@ -70,15 +70,15 @@ const IXTIROCHILIK_CONFIG = {
     }
   ],
 
-  // 3-ILOVA: Hakamlar hay'atining namunaviy tarkibi (7 nafar)
+  // 3-ILOVA: Hakamlar hay'atining tarkibi (7 nafar)
   judges: [
-    { id: 1, name: "1-Hakam: Informatika fani o‘qituvchisi", role: "Informatika fani o‘qituvchisi", pin: "2001" },
-    { id: 2, name: "2-Hakam: Fizika fani o‘qituvchisi", role: "Fizika fani o‘qituvchisi", pin: "2002" },
-    { id: 3, name: "3-Hakam: Biologiya fani o‘qituvchisi", role: "Biologiya fani o‘qituvchisi", pin: "2003" },
-    { id: 4, name: "4-Hakam: Kimyo fani o‘qituvchisi", role: "Kimyo fani o‘qituvchisi", pin: "2004" },
-    { id: 5, name: "5-Hakam: Sohaga oid mutaxassis (IT)", role: "IT sohasi mutaxassisi", pin: "2005" },
-    { id: 6, name: "6-Hakam: Sohaga oid mutaxassis (Ekologiya/Qishloq xo‘jaligi)", role: "Ekologiya/Agrar mutaxassis", pin: "2006" },
-    { id: 7, name: "7-Hakam: Sohaga oid mutaxassis (Innovatsiya)", role: "Innovatsion ishlanmalar mutaxassisi", pin: "2007" }
+    { id: 1, name: "Abdullayev Rustam Alisherovich", role: "Informatika fani o‘qituvchisi", pin: "2001" },
+    { id: 2, name: "Karimov Sardor Baxtiyorovich", role: "Fizika fani o‘qituvchisi", pin: "2002" },
+    { id: 3, name: "Yo‘ldosheva Nilufar Ikromovna", role: "Biologiya fani o‘qituvchisi", pin: "2003" },
+    { id: 4, name: "Rahimov Jasur Erkinovich", role: "Kimyo fani o‘qituvchisi", pin: "2004" },
+    { id: 5, name: "Qodirov Elyor Farhodovich", role: "IT sohasi mutaxassisi", pin: "2005" },
+    { id: 6, name: "Sobirov Otabek Ulug‘bekovich", role: "Ekologiya va qishloq xo‘jaligi mutaxassisi", pin: "2006" },
+    { id: 7, name: "Mansurov Bekzod Shuhratovich", role: "Innovatsion ishlanmalar mutaxassisi", pin: "2007" }
   ],
 
   // 2-ILOVA: Tashkiliy qo'mita tarkibi
@@ -349,10 +349,12 @@ const IXTIROCHILIK_CONFIG = {
 
 // LocalStorage dan yuklash
 function loadIxtirochilikData() {
-  const saved = localStorage.getItem("ixtirochilik_data_v3");
+  const saved = localStorage.getItem("ixtirochilik_data_v4");
   if (saved) {
     try {
-      return JSON.parse(saved);
+      const parsed = JSON.parse(saved);
+      parsed.judges = IXTIROCHILIK_CONFIG.judges;
+      return parsed;
     } catch (e) {
       console.error(e);
     }
@@ -362,7 +364,7 @@ function loadIxtirochilikData() {
 }
 
 function saveIxtirochilikData(data) {
-  localStorage.setItem("ixtirochilik_data_v3", JSON.stringify(data));
+  localStorage.setItem("ixtirochilik_data_v4", JSON.stringify(data));
 }
 
 // Nizom bo'yicha hisoblash va tenglikda ustunlik algoritmi
