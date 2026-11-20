@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>"Iqtidorlilikka qadam" tanlovi - Onlayn Baholash Tizimi</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+<body>
+
+  <div class="container">
+    <!-- Header -->
+    <div class="header-box">
+      <div class="header-info">
+        <h1><i class="fa-solid fa-award" style="color: #f59e0b; margin-right: 8px;"></i> "Iqtidorlilikka qadam" tanlovi</h1>
+        <p>1-bosqich yakuniy baholash va reyting tizimi (Jonli svod jadvali)</p>
+      </div>
+      <div class="header-actions">
+        <a href="hakam.html" class="btn btn-primary">
+          <i class="fa-solid fa-key"></i> Hakam sifatida baholash (PIN)
+        </a>
+        <a href="bayonnoma.html" class="btn btn-success">
+          <i class="fa-solid fa-print"></i> Rasmiy Bayonnoma (PDF / Pechat)
+        </a>
+        <button onclick="openAddStudentModal()" class="btn btn-outline">
+          <i class="fa-solid fa-user-plus"></i> O‘quvchi qo‘shish
+        </button>
+        <button onclick="exportToCsv()" class="btn btn-outline">
+          <i class="fa-solid fa-file-excel"></i> Excelga yuklash
+        </button>
+      </div>
+    </div>
+
+    <!-- Statistika kartochkalari -->
+    <div class="stats-grid">
+      <div class="stat-card">
+        <div class="stat-icon blue"><i class="fa-solid fa-users"></i></div>
+        <div class="stat-content">
+          <h3 id="statTotalStudents">0</h3>
+          <p>Jami o‘quvchilar</p>
+        </div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon purple"><i class="fa-solid fa-user-check"></i></div>
+        <div class="stat-content">
+          <h3>6 nafar</h3>
+          <p>Tayinlangan hakamlar</p>
+        </div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon amber"><i class="fa-solid fa-trophy"></i></div>
+        <div class="stat-content">
+          <h3 id="statLeader">-</h3>
+          <p>1-o‘rin sohibi</p>
+        </div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon green"><i class="fa-solid fa-chart-line"></i></div>
+        <div class="stat-content">
+          <h3 id="statAvgScore">0</h3>
+          <p>O‘rtacha ko‘rsatkich</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Svod Jadvali -->
+    <div class="table-card">
+      <div class="table-header">
+        <div>
+          <h2><i class="fa-solid fa-table-list" style="color: var(--primary);"></i> Umumiy Baholash Svod Jadvali</h2>
+          <span style="font-size: 13px; color: #64748b;">(Ballar avtomatik hisoblanadi, 0 qiymatlar bo‘sh qoldiriladi)</span>
+        </div>
+        <div style="display: flex; gap: 10px; align-items: center;">
+          <input type="text" id="searchInput" placeholder="O‘quvchi yoki maktabni qidirish..." onkeyup="filterTable()" 
+                 style="padding: 8px 14px; border: 1px solid var(--border); border-radius: 8px; font-size: 14px; width: 260px;">
+          <button onclick="refreshData()" class="btn btn-outline" title="Yangilash">
+            <i class="fa-solid fa-rotate"></i>
+          </button>
+        </div>
+      </div>
+
+      <div class="table-responsive">
+        <table class="data-table" id="rankingTable">
+          <thead>
+            <tr>
+              <th style="width: 50px; text-align: center;">T/r</th>
+              <th>O‘quvchi F.I.SH</th>
+              <th>Ta'lim muassasasi</th>
+              <th style="width: 80px; text-align: center;">Sinf</th>
+              <th style="text-align: center;">1-Hakam</th>
+              <th style="text-align: center;">2-Hakam</th>
+              <th style="text-align: center;">3-Hakam</th>
+              <th style="text-align: center;">4-Hakam</th>
+              <th style="text-align: center;">5-Hakam</th>
+              <th style="text-align: center;">6-Hakam</th>
+              <th style="text-align: center; background: #e0e7ff; color: #1e3a8a;">Jami ball</th>
+              <th style="text-align: center; background: #ede9fe; color: #5b21b6;">O‘rtacha</th>
+              <th style="text-align: center; width: 90px;">O‘rni</th>
+            </tr>
+          </thead>
+          <tbody id="tableBody">
+            <!-- JavaScript orqali to'ldiriladi -->
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Google Sheet sozlash bo'limi -->
+    <div class="table-card" style="border-left: 6px solid #10b981;">
+      <h3 style="margin-bottom: 10px;"><i class="fa-brands fa-google-drive" style="color: #10b981;"></i> Google Sheetga Avtomatik Sinxronlash</h3>
+      <p style="color: #64748b; font-size: 14px; margin-bottom: 14px;">
+        Google Sheet orqali barcha 6 ta hakamning baholari va natijalarni jonli ravishda Google Jadvalga tushirib borish mumkin.
+      </p>
+      <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+        <input type="text" id="sheetsApiUrl" placeholder="Google Apps Script Web App URL manzilini kiriting..." 
+               style="flex: 1; min-width: 300px; padding: 10px 14px; border: 1px solid var(--border); border-radius: 8px;">
+        <button onclick="saveSheetsUrl()" class="btn btn-success">
+          <i class="fa-solid fa-cloud-arrow-up"></i> Ulanishni saqlash
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <script src="data.js"></script>
+  <script>
+    let appData = loadAppData();
+
+    function renderDashboard() {
+      const ranked = calculateRanking(appData.students);
+      const tbody = document.getElementById("tableBody");
+      tbody.innerHTML = "";
+
+      let totalScores = 0;
+      let countWithScores = 0;
+
+      ranked.forEach((st, idx) => {
+        if (st.averageScore !== "") {
+          totalScores += Number(st.averageScore);
+          countWithScores++;
+        }
+
+        const tr = document.createElement("tr");
+
+        // O'rin belgilash nishoni (badge)
+        let rankBadge = `<span class="rank-badge rank-other">${st.rank}</span>`;
+        if (st.rank === 1) rankBadge = `<span class="rank-badge rank-1"><i class="fa-solid fa-crown"></i> 1-o‘rin</span>`;
+        else if (st.rank === 2) rankBadge = `<span class="rank-badge rank-2">2-o‘rin</span>`;
+        else if (st.rank === 3) rankBadge = `<span class="rank-badge rank-3">3-o‘rin</span>`;
+
+        // 6 ta hakam ballari (0 yoki bo'sh bo'lsa bo'sh qoldirish - jadval standartlari)
+        let judgeCells = "";
+        for (let i = 0; i < 6; i++) {
+          const score = st.judgeScores[i];
+          const displayScore = (score === null || score === 0 || score === undefined) ? "" : score;
+          judgeCells += `<td class="score-cell">${displayScore}</td>`;
+        }
+
+        tr.innerHTML = `
+          <td style="text-align: center; font-weight: 600;">${idx + 1}</td>
+          <td style="font-weight: 600; color: var(--dark);">${st.name}</td>
+          <td>${st.school}</td>
+          <td style="text-align: center;">${st.grade}</td>
+          ${judgeCells}
+          <td class="score-highlight">${st.totalSum || ""}</td>
+          <td class="score-highlight" style="color: #6d28d9;">${st.averageScore || ""}</td>
+          <td style="text-align: center;">${rankBadge}</td>
+        `;
+        tbody.appendChild(tr);
+      });
+
+      // Statistikani yangilash
+      document.getElementById("statTotalStudents").innerText = ranked.length;
+      document.getElementById("statLeader").innerText = ranked.length > 0 && ranked[0].totalSum !== "" ? ranked[0].name.split(" ")[0] + " " + ranked[0].name.split(" ")[1] : "-";
+      document.getElementById("statAvgScore").innerText = countWithScores > 0 ? (totalScores / countWithScores).toFixed(1) : "0";
+    }
+
+    function filterTable() {
+      const q = document.getElementById("searchInput").value.toLowerCase();
+      const rows = document.querySelectorAll("#tableBody tr");
+      rows.forEach(r => {
+        const text = r.innerText.toLowerCase();
+        r.style.display = text.includes(q) ? "" : "none";
+      });
+    }
+
+    function refreshData() {
+      appData = loadAppData();
+      renderDashboard();
+    }
+
+    function openAddStudentModal() {
+      const name = prompt("O‘quvchining F.I.SH ini kiriting:");
+      if (!name) return;
+      const school = prompt("Maktab / Ta'lim muassasasi (masalan, 1-maktab):") || "Umumta'lim maktabi";
+      const grade = prompt("Sinfi (masalan, 8-sinf):") || "8-sinf";
+
+      const newId = appData.students.length > 0 ? Math.max(...appData.students.map(s => s.id)) + 1 : 1;
+      appData.students.push({
+        id: newId,
+        name: name.trim(),
+        school: school.trim(),
+        grade: grade.trim(),
+        scores: {}
+      });
+      saveAppData(appData);
+      renderDashboard();
+      alert("Yangi o‘quvchi ro‘yxatga qo‘shildi!");
+    }
+
+    function exportToCsv() {
+      const ranked = calculateRanking(appData.students);
+      let csv = "T/r,F.I.SH,Maktab,Sinf,1-Hakam,2-Hakam,3-Hakam,4-Hakam,5-Hakam,6-Hakam,Jami ball,O'rtacha ball,O'rni\n";
+      ranked.forEach((st, idx) => {
+        const j1 = st.judgeScores[0] || "";
+        const j2 = st.judgeScores[1] || "";
+        const j3 = st.judgeScores[2] || "";
+        const j4 = st.judgeScores[3] || "";
+        const j5 = st.judgeScores[4] || "";
+        const j6 = st.judgeScores[5] || "";
+        csv += `"${idx+1}","${st.name}","${st.school}","${st.grade}","${j1}","${j2}","${j3}","${j4}","${j5}","${j6}","${st.totalSum}","${st.averageScore}","${st.rank}"\n`;
+      });
+
+      const blob = new Blob(["\ufeff" + csv], { type: "text/csv;charset=utf-8;" });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = "Iqtidorlilikka_qadam_natijalari.csv";
+      a.click();
+    }
+
+    function saveSheetsUrl() {
+      const val = document.getElementById("sheetsApiUrl").value.trim();
+      localStorage.setItem("iqtidor_sheets_url", val);
+      alert("Google Sheets ulanish manzili saqlandi!");
+    }
+
+    // Boshlang'ich yuklash
+    renderDashboard();
+    const savedUrl = localStorage.getItem("iqtidor_sheets_url");
+    if (savedUrl) document.getElementById("sheetsApiUrl").value = savedUrl;
+  </script>
+</body>
+</html>

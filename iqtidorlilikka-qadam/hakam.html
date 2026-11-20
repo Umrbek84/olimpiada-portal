@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hakamlar Baholash Portali - "Iqtidorlilikka qadam"</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <style>
+    .judge-card {
+      background: white;
+      border-radius: 14px;
+      padding: 16px 20px;
+      margin-bottom: 12px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.04);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      flex-wrap: wrap;
+      border-left: 5px solid #cbd5e1;
+    }
+    .judge-card.scored {
+      border-left-color: var(--success);
+    }
+    .student-meta h4 {
+      font-size: 16px;
+      color: var(--dark);
+      margin-bottom: 3px;
+    }
+    .student-meta span {
+      font-size: 13px;
+      color: #64748b;
+    }
+    .score-input-group {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .score-input {
+      width: 80px;
+      padding: 10px;
+      font-size: 18px;
+      font-weight: 700;
+      text-align: center;
+      border: 2px solid var(--border);
+      border-radius: 10px;
+    }
+    .score-input:focus {
+      border-color: var(--primary);
+      outline: none;
+    }
+    .quick-btn {
+      padding: 6px 10px;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      background: #f8fafc;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+    .quick-btn:hover {
+      background: #e2e8f0;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <!-- PIN orqali kirish oynasi -->
+    <div id="pinScreen" class="pin-login-box">
+      <div style="font-size: 44px; color: var(--primary); margin-bottom: 10px;">
+        <i class="fa-solid fa-shield-halved"></i>
+      </div>
+      <h2>Hakamlar Tizimiga Kirish</h2>
+      <p style="color: #64748b; font-size: 14px; margin-top: 6px;">
+        O‘zingizga biriktirilgan maxsus 4 xonali PIN kodni kiriting
+      </p>
+
+      <input type="password" id="pinInput" class="pin-input" maxlength="4" placeholder="••••" autofocus onkeyup="checkPinAuto(event)">
+      
+      <button onclick="loginWithPin()" class="btn btn-primary" style="width: 100%; justify-content: center; padding: 14px; font-size: 16px;">
+        <i class="fa-solid fa-right-to-bracket"></i> Tizimga kirish
+      </button>
+
+      <div style="margin-top: 24px; padding-top: 16px; border-top: 1px solid var(--border); font-size: 12px; color: #94a3b8;">
+        Namunaviy PIN kodlar: <strong>1101, 1102, 1103, 1104, 1105, 1106</strong>
+      </div>
+      <div style="margin-top: 10px;">
+        <a href="index.html" style="font-size: 13px; color: var(--primary); text-decoration: none;">
+          ← Umumiy natijalarga qaytish
+        </a>
+      </div>
+    </div>
+
+    <!-- Hakamning shaxsiy baholash kabineti -->
+    <div id="scoringScreen" style="display: none;">
+      <div class="header-box">
+        <div class="header-info">
+          <h1 id="judgeTitle"><i class="fa-solid fa-user-check" style="color: var(--primary);"></i> Hakam Baholash Paneli</h1>
+          <p id="judgeSubject" style="color: #64748b;"></p>
+        </div>
+        <div class="header-actions">
+          <button onclick="saveAllScores()" class="btn btn-success">
+            <i class="fa-solid fa-floppy-disk"></i> Barcha baholarni saqlash
+          </button>
+          <a href="index.html" class="btn btn-outline">
+            <i class="fa-solid fa-chart-simple"></i> Natijalar (Svod)
+          </a>
+          <button onclick="logout()" class="btn btn-outline" style="color: var(--danger);">
+            <i class="fa-solid fa-arrow-right-from-bracket"></i> Chiqish
+          </button>
+        </div>
+      </div>
+
+      <!-- O'quvchilar ro'yxati -->
+      <div id="studentsList">
+        <!-- JS orqali to'ldiriladi -->
+      </div>
+
+      <div style="text-align: center; margin: 30px 0;">
+        <button onclick="saveAllScores()" class="btn btn-success" style="padding: 14px 28px; font-size: 16px;">
+          <i class="fa-solid fa-check-double"></i> Baholashni yakunlash va Saqlash
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <script src="data.js"></script>
+  <script>
+    let appData = loadAppData();
+    let currentJudge = null;
+
+    function checkPinAuto(e) {
+      if (document.getElementById("pinInput").value.length === 4 || e.key === "Enter") {
+        loginWithPin();
+      }
+    }
+
+    function loginWithPin() {
+      const pin = document.getElementById("pinInput").value.trim();
+      const judge = appData.judges.find(j => j.pin === pin);
+
+      if (!judge) {
+        alert("Noto‘g‘ri PIN kod kiritildi! Qaytadan urinib ko‘ring.");
+        document.getElementById("pinInput").value = "";
+        return;
+      }
+
+      currentJudge = judge;
+      document.getElementById("pinScreen").style.display = "none";
+      document.getElementById("scoringScreen").style.display = "block";
+
+      document.getElementById("judgeTitle").innerHTML = `<i class="fa-solid fa-user-check" style="color: var(--primary); margin-right: 8px;"></i> ${judge.name}`;
+      document.getElementById("judgeSubject").innerText = `Yo‘nalish: ${judge.subject} (Maksimal ball: ${appData.maxScore} ball)`;
+
+      renderStudents();
+    }
+
+    function renderStudents() {
+      const container = document.getElementById("studentsList");
+      container.innerHTML = "";
+
+      appData.students.forEach((st, idx) => {
+        const currentScore = (st.scores && st.scores[currentJudge.id] !== undefined && st.scores[currentJudge.id] !== null) 
+          ? st.scores[currentJudge.id] 
+          : "";
+        const isScored = currentScore !== "";
+
+        const card = document.createElement("div");
+        card.className = `judge-card ${isScored ? "scored" : ""}`;
+        card.id = `card_${st.id}`;
+
+        card.innerHTML = `
+          <div class="student-meta">
+            <h4>${idx + 1}. ${st.name}</h4>
+            <span><i class="fa-solid fa-school"></i> ${st.school} &nbsp;|&nbsp; <i class="fa-solid fa-graduation-cap"></i> ${st.grade}</span>
+          </div>
+          <div class="score-input-group">
+            <span style="font-size: 14px; font-weight: 600; color: #475569;">Baho:</span>
+            <input type="number" min="0" max="${appData.maxScore}" class="score-input" id="score_${st.id}" 
+                   value="${currentScore}" placeholder="0-${appData.maxScore}" oninput="onScoreChange(${st.id})">
+            <button class="quick-btn" onclick="setQuickScore(${st.id}, 85)">85</button>
+            <button class="quick-btn" onclick="setQuickScore(${st.id}, 90)">90</button>
+            <button class="quick-btn" onclick="setQuickScore(${st.id}, 95)">95</button>
+            <button class="quick-btn" onclick="setQuickScore(${st.id}, 100)">100</button>
+          </div>
+        `;
+        container.appendChild(card);
+      });
+    }
+
+    function onScoreChange(studentId) {
+      const val = document.getElementById(`score_${studentId}`).value;
+      const card = document.getElementById(`card_${studentId}`);
+      if (val !== "" && !isNaN(val)) {
+        card.classList.add("scored");
+      } else {
+        card.classList.remove("scored");
+      }
+    }
+
+    function setQuickScore(studentId, val) {
+      document.getElementById(`score_${studentId}`).value = val;
+      onScoreChange(studentId);
+    }
+
+    function saveAllScores() {
+      if (!currentJudge) return;
+
+      appData.students.forEach(st => {
+        const input = document.getElementById(`score_${st.id}`);
+        if (input) {
+          const val = input.value.trim();
+          if (!st.scores) st.scores = {};
+          st.scores[currentJudge.id] = (val === "" || isNaN(val)) ? null : Number(val);
+        }
+      });
+
+      saveAppData(appData);
+
+      // Agar Google Sheet URL bo'lsa, avtomatik sinxronlash
+      syncWithGoogleSheet();
+
+      alert("Barcha baholar muvaffaqiyatli saqlandi!");
+    }
+
+    function syncWithGoogleSheet() {
+      const sheetUrl = localStorage.getItem("iqtidor_sheets_url");
+      if (!sheetUrl) return;
+
+      try {
+        fetch(sheetUrl, {
+          method: "POST",
+          mode: "no-cors",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            judgeId: currentJudge.id,
+            judgeName: currentJudge.name,
+            timestamp: new Date().toISOString(),
+            students: appData.students
+          })
+        }).catch(err => console.log("Google Sheet sync error:", err));
+      } catch (e) {
+        console.error(e);
+      }
+    }
+
+    function logout() {
+      currentJudge = null;
+      document.getElementById("scoringScreen").style.display = "none";
+      document.getElementById("pinScreen").style.display = "block";
+      document.getElementById("pinInput").value = "";
+    }
+  </script>
+</body>
+</html>

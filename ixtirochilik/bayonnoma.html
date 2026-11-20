@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rasmiy Qaydnomasi (Bayonnoma) - "Ixtirochilikka qadam"</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <style>
+    .print-bar {
+      max-width: 1200px;
+      margin: 16px auto;
+      background: white;
+      padding: 14px 24px;
+      border-radius: 12px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.06);
+    }
+  </style>
+</head>
+<body style="background: #e2e8f0;">
+
+  <!-- Pechat paneli (chop etishda ko'rinmaydi) -->
+  <div class="print-bar no-print">
+    <div>
+      <h3 style="margin-bottom: 2px;"><i class="fa-solid fa-file-invoice" style="color: var(--primary);"></i> Rasmiy Yakuniy Bayonnoma (Vedomost)</h3>
+      <span style="font-size: 13px; color: #64748b;">Times New Roman · A4 Landshaft · 7 ta hakam va tashkiliy qo‘mita imzosi bilan</span>
+    </div>
+    <div style="display: flex; gap: 10px;">
+      <button onclick="window.print()" class="btn btn-primary" style="padding: 10px 22px; font-size: 15px;">
+        <i class="fa-solid fa-print"></i> Chop etish (Pechat / PDF)
+      </button>
+      <a href="index.html" class="btn btn-outline">
+        <i class="fa-solid fa-arrow-left"></i> Svod jadvalga qaytish
+      </a>
+    </div>
+  </div>
+
+  <!-- Rasmiy A4 Landshaft Hujjat -->
+  <div class="official-document">
+    <div class="doc-header">
+      <h2>Qo‘shko‘pir tumani Maktabgacha va maktab ta’limi bo‘limi</h2>
+      <h3>Umumiy o‘rta ta’lim muassasalari o‘quvchilari o‘rtasidagi “Ixtirochilikka qadam” tanlovining ikkinchi (tuman) bosqichi yakuniy baholash</h3>
+      <h2>QAYDNOMASI (BAYONNOMA)</h2>
+      <p id="docDateMeta">O‘tkazilgan sanasi: 2026-yil 4-5-dekabr | O‘tkazilish joyi: Qo‘shko‘pir tumani</p>
+    </div>
+
+    <!-- Svod Jadvali -->
+    <table class="official-table">
+      <thead>
+        <tr>
+          <th style="width: 30px;">T/r</th>
+          <th style="width: 140px;">Ta'lim muassasasi</th>
+          <th>Loyiha nomi</th>
+          <th style="width: 110px;">Yo‘nalish</th>
+          <th style="width: 150px;">Loyiha mualliflari<br><small>(F.I.SH.)</small></th>
+          <th style="width: 48px;">1-H<br><small>(IT)</small></th>
+          <th style="width: 48px;">2-H<br><small>(Fizika)</small></th>
+          <th style="width: 48px;">3-H<br><small>(Bio)</small></th>
+          <th style="width: 48px;">4-H<br><small>(Kimyo)</small></th>
+          <th style="width: 48px;">5-H<br><small>(Soha-1)</small></th>
+          <th style="width: 48px;">6-H<br><small>(Soha-2)</small></th>
+          <th style="width: 48px;">7-H<br><small>(Soha-3)</small></th>
+          <th style="width: 65px;">O‘rtacha<br>ball</th>
+          <th style="width: 55px;">O‘rni</th>
+          <th style="width: 100px;">Qaror / Tavsiya</th>
+        </tr>
+      </thead>
+      <tbody id="tableBodyOfficial">
+        <!-- JS orqali to'ldiriladi -->
+      </tbody>
+    </table>
+
+    <!-- Qaror qismi -->
+    <div style="margin-top: 15px; font-size: 10pt; line-height: 1.4;">
+      <p>
+        <strong>Hakamlar hay'ati qarori:</strong> Nizom talablariga muvofiq, eng yuqori ball to‘plagan 
+        <strong>1-, 2- va 3-o‘rin</strong> sohiblari bo‘lgan 3 ta loyiha mualliflari tanlovning uchinchi (viloyat) bosqichida ishtirok etish uchun tavsiya etilsin.
+      </p>
+    </div>
+
+    <!-- Imzolar bloki -->
+    <div class="signatures-block">
+      <!-- Tashkiliy qo'mita -->
+      <h4 style="font-size: 11pt; font-weight: bold; margin-bottom: 8px; text-transform: uppercase;">
+        Tashkiliy qo‘mita a'zolari:
+      </h4>
+      <div class="signatures-grid" style="margin-bottom: 20px;">
+        <div class="sig-row">
+          <span>1. Tuman maktabgacha va maktab ta'limi bo‘limi boshlig‘i, rais:</span>
+          <span>___________________ ( ____________ )</span>
+        </div>
+        <div class="sig-row">
+          <span>2. Tuman Barkamol avlod bolalar maktabi direktori, a'zo:</span>
+          <span>___________________ ( ____________ )</span>
+        </div>
+        <div class="sig-row">
+          <span>3. Ishlab chiqarish / xizmat ko‘rsatish sohasi vakili, a'zo:</span>
+          <span>___________________ ( ____________ )</span>
+        </div>
+        <div class="sig-row">
+          <span>4. Axborot texnologiyalari (IT) sohasi mutaxassisi, a'zo:</span>
+          <span>___________________ ( ____________ )</span>
+        </div>
+        <div class="sig-row">
+          <span>5. Tarbiyaviy ishlarni muvofiqlashtirish bosh mutaxassisi, kotib:</span>
+          <span>___________________ ( ____________ )</span>
+        </div>
+      </div>
+
+      <!-- Hakamlar hay'ati -->
+      <h4 style="font-size: 11pt; font-weight: bold; margin-bottom: 8px; text-transform: uppercase;">
+        Hakamlar hay'ati a'zolari (7 nafar):
+      </h4>
+      <div class="signatures-grid">
+        <div class="sig-row">
+          <span>1. Informatika fani o‘qituvchisi:</span>
+          <span>___________________ ( ____________ )</span>
+        </div>
+        <div class="sig-row">
+          <span>2. Fizika fani o‘qituvchisi:</span>
+          <span>___________________ ( ____________ )</span>
+        </div>
+        <div class="sig-row">
+          <span>3. Biologiya fani o‘qituvchisi:</span>
+          <span>___________________ ( ____________ )</span>
+        </div>
+        <div class="sig-row">
+          <span>4. Kimyo fani o‘qituvchisi:</span>
+          <span>___________________ ( ____________ )</span>
+        </div>
+        <div class="sig-row">
+          <span>5. Sohaga oid mutaxassis (IT):</span>
+          <span>___________________ ( ____________ )</span>
+        </div>
+        <div class="sig-row">
+          <span>6. Sohaga oid mutaxassis (Ekologiya):</span>
+          <span>___________________ ( ____________ )</span>
+        </div>
+        <div class="sig-row">
+          <span>7. Sohaga oid mutaxassis (Innovatsiya):</span>
+          <span>___________________ ( ____________ )</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="data.js"></script>
+  <script>
+    const currentData = loadIxtirochilikData();
+    const ranked = calculateIxtirochilikRanking(currentData.projects);
+    const tbody = document.getElementById("tableBodyOfficial");
+
+    ranked.forEach((p, idx) => {
+      const tr = document.createElement("tr");
+
+      // 7 ta hakam ballari (0 yoki yo'q bo'lsa bo'sh - jadval standartlari)
+      let judgeCols = "";
+      for (let j = 0; j < 7; j++) {
+        const score = p.judgeTotalScores[j];
+        const val = (score === null || score === 0 || score === undefined) ? "" : score;
+        judgeCols += `<td class="center bold">${val}</td>`;
+      }
+
+      const authors = p.members.map(m => m.name).join("<br>");
+      const decision = p.recommendedToRegion 
+        ? "<strong>Viloyatga tavsiya</strong>" 
+        : "Ishtirokchi";
+
+      tr.innerHTML = `
+        <td class="center bold">${idx + 1}</td>
+        <td>${p.school}</td>
+        <td class="bold">${p.projectName}</td>
+        <td>${p.direction}</td>
+        <td style="font-size: 9pt;">${authors}</td>
+        ${judgeCols}
+        <td class="center bold" style="font-size: 10.5pt;">${p.finalAverage || ""}</td>
+        <td class="center bold">${p.rank || ""}</td>
+        <td class="center" style="font-size: 8.5pt;">${decision}</td>
+      `;
+      tbody.appendChild(tr);
+    });
+  </script>
+</body>
+</html>

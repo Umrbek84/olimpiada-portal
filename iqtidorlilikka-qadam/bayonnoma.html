@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rasmiy Baholash Qaydnomasi (Bayonnoma) - "Iqtidorlilikka qadam"</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <style>
+    /* Faqat chop etish uchun maxsus sozlamalar */
+    .print-toolbar {
+      max-width: 1200px;
+      margin: 20px auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: white;
+      padding: 16px 24px;
+      border-radius: 12px;
+      box-shadow: var(--card-shadow);
+    }
+  </style>
+</head>
+<body style="background: #e2e8f0;">
+
+  <!-- Pechat paneli (chop etishda ko'rinmaydi) -->
+  <div class="print-toolbar no-print">
+    <div>
+      <h3 style="margin-bottom: 4px;"><i class="fa-solid fa-file-contract" style="color: var(--primary);"></i> Rasmiy Bayonnoma (Vedomost)</h3>
+      <span style="font-size: 13px; color: #64748b;">A4 Landshaft formati, Times New Roman, hakamlar imzosi bilan</span>
+    </div>
+    <div style="display: flex; gap: 10px;">
+      <button onclick="window.print()" class="btn btn-primary" style="padding: 10px 20px; font-size: 15px;">
+        <i class="fa-solid fa-print"></i> Chop etish (Pechat / PDF)
+      </button>
+      <a href="index.html" class="btn btn-outline">
+        <i class="fa-solid fa-arrow-left"></i> Svod jadvalga qaytish
+      </a>
+    </div>
+  </div>
+
+  <!-- Rasmiy A4 Hujjat (Pechatga to'liq tayyor) -->
+  <div class="official-document">
+    <div class="doc-header">
+      <h2>Qo‘shko‘pir tumani Maktabgacha va maktab ta'limi bo‘limi</h2>
+      <h3>"Iqtidorlilikka qadam" tanlovi 1-bosqich yakuniy baholash</h3>
+      <h2>QAYDNOMASI (BAYONNOMA)</h2>
+      <p id="docDate" style="margin-top: 8px;">Sana: 2026-yil 20-noyabr | O‘tkazilish joyi: Qo‘shko‘pir tumani</p>
+    </div>
+
+    <table class="official-table">
+      <thead>
+        <tr>
+          <th style="width: 35px;">T/r</th>
+          <th>O‘quvchining familiyasi, ismi, otasining ismi</th>
+          <th style="width: 170px;">Ta'lim muassasasi</th>
+          <th style="width: 55px;">Sinf</th>
+          <th style="width: 65px;">1-Hakam<br><small>(Mantiq)</small></th>
+          <th style="width: 65px;">2-Hakam<br><small>(Ijod)</small></th>
+          <th style="width: 65px;">3-Hakam<br><small>(Aniq)</small></th>
+          <th style="width: 65px;">4-Hakam<br><small>(Tabiiy)</small></th>
+          <th style="width: 65px;">5-Hakam<br><small>(Til)</small></th>
+          <th style="width: 65px;">6-Hakam<br><small>(Nutq)</small></th>
+          <th style="width: 75px;">Jami ball</th>
+          <th style="width: 75px;">O‘rtacha ball</th>
+          <th style="width: 60px;">O‘rni</th>
+          <th style="width: 80px;">Imzo</th>
+        </tr>
+      </thead>
+      <tbody id="officialTableBody">
+        <!-- JS orqali to'ldiriladi -->
+      </tbody>
+    </table>
+
+    <!-- Hakamlar hay'ati imzolari bloki -->
+    <div style="margin-top: 25px;">
+      <h4 style="font-size: 12pt; font-weight: bold; margin-bottom: 15px; text-transform: uppercase;">
+        Hakamlar hay'ati a'zolari:
+      </h4>
+      <div class="signatures-grid">
+        <div class="signature-item">
+          <span class="title">1. Hakamlar hay'ati raisi:</span>
+          <span class="line">___________________ ( U. Mamatov )</span>
+        </div>
+        <div class="signature-item">
+          <span class="title">2. 1-Hakam (Mantiqiy tafakkur):</span>
+          <span class="line">___________________ ( ____________ )</span>
+        </div>
+        <div class="signature-item">
+          <span class="title">3. 2-Hakam (Ijodiy fikrlash):</span>
+          <span class="line">___________________ ( ____________ )</span>
+        </div>
+        <div class="signature-item">
+          <span class="title">4. 3-Hakam (Aniq fanlar):</span>
+          <span class="line">___________________ ( ____________ )</span>
+        </div>
+        <div class="signature-item">
+          <span class="title">5. 4-Hakam (Tabiiy fanlar):</span>
+          <span class="line">___________________ ( ____________ )</span>
+        </div>
+        <div class="signature-item">
+          <span class="title">6. 5-Hakam (Til va adabiyot):</span>
+          <span class="line">___________________ ( ____________ )</span>
+        </div>
+        <div class="signature-item">
+          <span class="title">7. 6-Hakam (Taqdimot va faollik):</span>
+          <span class="line">___________________ ( ____________ )</span>
+        </div>
+        <div class="signature-item">
+          <span class="title">Kotib (Mas'ul xodim):</span>
+          <span class="line">___________________ ( ____________ )</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="data.js"></script>
+  <script>
+    const appData = loadAppData();
+    const ranked = calculateRanking(appData.students);
+    const tbody = document.getElementById("officialTableBody");
+
+    ranked.forEach((st, idx) => {
+      const tr = document.createElement("tr");
+
+      // 6 ta hakam ballari (0 yoki kiritilmagan bo'lsa PUSTOY qoldiriladi - jadval standartlari)
+      let judgeCells = "";
+      for (let i = 0; i < 6; i++) {
+        const score = st.judgeScores[i];
+        const displayScore = (score === null || score === 0 || score === undefined) ? "" : score;
+        judgeCells += `<td class="center bold">${displayScore}</td>`;
+      }
+
+      tr.innerHTML = `
+        <td class="center bold">${idx + 1}</td>
+        <td>${st.name}</td>
+        <td>${st.school}</td>
+        <td class="center">${st.grade}</td>
+        ${judgeCells}
+        <td class="center bold">${st.totalSum || ""}</td>
+        <td class="center bold">${st.averageScore || ""}</td>
+        <td class="center bold">${st.rank || ""}</td>
+        <td class="center"></td>
+      `;
+      tbody.appendChild(tr);
+    });
+  </script>
+</body>
+</html>
