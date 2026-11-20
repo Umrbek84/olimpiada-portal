@@ -470,7 +470,7 @@ function calculateIxtirochilikRanking(projects) {
 // GOOGLE SHEETS JONLI SINXRONLASH VA PIN TEKSHIRISH
 // =========================================================================
 function getGoogleSheetsApiUrl() {
-  return localStorage.getItem("ixtirochilik_sheets_api_url") || "";
+  return localStorage.getItem("ixtirochilik_sheets_api_url") || "https://script.google.com/macros/s/AKfycbzaL-LBrctvYGw_NxpSZ9IyfbH2zK_oP106ZzYIXEEE-GT-nk1Lzb8-oMQATs0tFdtofQ/exec";
 }
 
 function setGoogleSheetsApiUrl(url) {

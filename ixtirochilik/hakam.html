@@ -86,20 +86,53 @@
     let appData = loadIxtirochilikData();
     let currentJudge = null;
 
-    function loginJudge() {
+    async function loginJudge() {
       const pin = document.getElementById("pinInput").value.trim();
-      const j = appData.judges.find(item => item.pin === pin);
+      if (!pin) return;
 
-      if (!j) {
-        alert("Noto‘g‘ri PIN kod kiritildi! Iltimos, qaytadan tekshirib ko‘ring.");
-        document.getElementById("pinInput").value = "";
+      const btn = document.querySelector("#pinScreen button");
+      const origText = btn.innerHTML;
+      btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Tekshirilmoqda...';
+
+      // 1. Google Sheetdan PIN tekshirish
+      const url = getGoogleSheetsApiUrl();
+      if (url) {
+        try {
+          const res = await fetch(url + (url.includes("?") ? "&" : "?") + "action=verify_pin&pin=" + encodeURIComponent(pin));
+          const json = await res.json();
+          if (json && json.valid && json.judge) {
+            btn.innerHTML = origText;
+            currentJudge = {
+              id: json.judge.id,
+              name: `${json.judge.id}-Hakam: ${json.judge.name}`,
+              role: json.judge.role,
+              pin: pin
+            };
+            showWelcome(currentJudge);
+            return;
+          }
+        } catch (e) {
+          console.warn("Online PIN tekshirishda xatolik, mahalliy tekshiriladi:", e);
+        }
+      }
+
+      // 2. Mahalliy zaxira tekshiruv
+      btn.innerHTML = origText;
+      const j = appData.judges.find(item => item.pin === pin);
+      if (j) {
+        currentJudge = j;
+        showWelcome(j);
         return;
       }
 
-      currentJudge = j;
+      alert("Noto‘g‘ri PIN kod kiritildi! Iltimos, qaytadan tekshirib ko‘ring.");
+      document.getElementById("pinInput").value = "";
+    }
+
+    function showWelcome(j) {
       document.getElementById("pinScreen").style.display = "none";
       document.getElementById("welcomeScreen").style.display = "block";
-      document.getElementById("welcomeName").innerText = "Xush kelibsiz, " + j.name.split(":")[0] + "!";
+      document.getElementById("welcomeName").innerText = "Xush kelibsiz, " + (j.name.includes(":") ? j.name.split(":")[0] : j.name) + "!";
       document.getElementById("welcomeRole").innerText = j.role;
     }
 
