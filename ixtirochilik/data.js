@@ -84,7 +84,7 @@ const IXTIROCHILIK_CONFIG = {
   // 2-ILOVA: Tashkiliy qõmita tarkibi
   committee: [
     { role: "Tashkiliy qõmita raisi", name: "Jumaniyazov Şokir Rõzmetoviç", post: "Qõşkõpir tuman maktabgaça va maktab taʼlimi bõlimi başliğõ" },
-    { role: "Tashkiliy qõmita aʼzosi", name: "«Kelajak markazi» direktori", post: "«Kelajak markazi» direktori" },
+    { role: "Tashkiliy qõmita aʼzosi", name: "Erjanova Oygul Ilxombek qizi", post: "«Kelajak markazi» direktori" },
     { role: "Tashkiliy qõmita aʼzosi", name: "Avezov Jasurbek Ravşanbekoviç", post: "Raqamli taʼlim va sunʼiy intellektni rivojlantiriş şõbasi baş mutaxassisi" },
     { role: "Tashkiliy qõmita masʼul kotibi", name: "Mamatov Umrbek Oliquliyeviç", post: "Tashkiliy qõmita masʼul kotibi" }
   ],
