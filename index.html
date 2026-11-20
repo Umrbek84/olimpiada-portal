@@ -3,74 +3,223 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Olimpiadalarni o‘tkazish sayti | olimpiada.umamatov.uz</title>
+  <title>Olimpiada va tanlovlarni õtkaziş sayti | olimpiada.umamatov.uz</title>
+  <meta name="description" content="Qõşkõpir tumani maktabgaça va maktab taʼlimi bõlimi tasarrufidagi olimpiada va tanlovlar onlayn baholaş portali.">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
   <style>
-    *{box-sizing:border-box;margin:0;padding:0}
-    body{font-family:'Times New Roman',serif;background:#f8fafc;color:#1e293b}
-    header{background:linear-gradient(135deg,#0f172a,#1e40af);color:#fff;padding:18px 24px}
-    .bar{max-width:1200px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px}
-    .bar b{font-size:20px}
-    nav a{color:#e2e8f0;text-decoration:none;margin-left:18px;font-size:15px;font-weight:700}
-    nav a:hover{color:#fff}
-    .hero{max-width:1200px;margin:32px auto 10px;padding:0 20px}
-    .hero h1{font-size:32px;color:#0f172a}
-    .hero p{color:#64748b;margin-top:8px;font-size:17px}
-    .grid{max-width:1200px;margin:24px auto;padding:0 20px;display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:20px}
-    .card{background:#fff;border:1px solid #e2e8f0;border-radius:16px;padding:26px;box-shadow:0 4px 10px rgba(0,0,0,.05);text-decoration:none;color:inherit;transition:.2s;display:block}
-    .card:hover{transform:translateY(-3px);box-shadow:0 10px 24px rgba(0,0,0,.1)}
-    .ic{width:54px;height:54px;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:24px;margin-bottom:14px}
-    .card h2{font-size:20px;margin-bottom:6px}
-    .card p{color:#64748b;font-size:15px}
-    .tag{display:inline-block;margin-top:12px;background:#e0f2fe;color:#0369a1;padding:3px 10px;border-radius:12px;font-size:13px;font-weight:700}
-    .soon{opacity:.6}
-    footer{text-align:center;color:#94a3b8;padding:30px;font-size:14px}
-    footer a{color:#1e40af}
+    :root{
+      --ink:#1b1740; --ink-2:#4a4670; --bg:#f6f4fb; --card:#ffffff; --line:#e6e2f3;
+      --brand:#5b34c9; --brand-2:#7c5ce6; --gold:#f2b134; --ok:#17a673;
+      --shadow:0 10px 30px -12px rgba(52,28,120,.28);
+    }
+    *{box-sizing:border-box;margin:0;padding:0;font-family:'Times New Roman',Times,serif;}
+    html{scroll-behavior:smooth}
+    body{font-family:'Times New Roman',Times,serif;color:var(--ink);background:var(--bg);line-height:1.55}
+    a{color:inherit}
+    .wrap{max-width:1120px;margin:0 auto;padding:0 20px}
+
+    /* header */
+    header{position:sticky;top:0;z-index:20;background:rgba(246,244,251,.94);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+    .nav{display:flex;align-items:center;justify-content:space-between;height:68px}
+    .brand{display:flex;align-items:center;gap:12px;font-weight:700;font-size:17px;text-decoration:none;color:var(--ink)}
+    .logo{width:38px;height:38px;border-radius:10px;background:linear-gradient(135deg,var(--brand),var(--brand-2));display:grid;place-items:center;color:#fff;font-size:18px;box-shadow:0 4px 10px rgba(91,52,201,.35)}
+    .nav .links{display:flex;align-items:center;gap:20px}
+    .nav a.link{font-size:15px;font-weight:700;color:var(--ink-2);text-decoration:none;transition:.2s}
+    .nav a.link:hover{color:var(--brand)}
+    @media(max-width:768px){.nav .links{display:none}}
+
+    /* hero */
+    .hero{position:relative;overflow:hidden;background:radial-gradient(1200px 500px at 85% -10%,#8d6df0 0,transparent 60%),linear-gradient(160deg,#2a1670,#4a27b0 60%,#5b34c9);color:#fff}
+    .hero::after{content:"";position:absolute;inset:0;background-image:radial-gradient(rgba(255,255,255,.09) 1px,transparent 1px);background-size:22px 22px;mask-image:linear-gradient(to bottom,#000,transparent 85%);pointer-events:none}
+    .hero .wrap{position:relative;z-index:1;padding-top:60px;padding-bottom:70px;display:grid;grid-template-columns:1.25fr .75fr;gap:40px;align-items:center}
+    .eyebrow{display:inline-flex;align-items:center;gap:8px;font-size:13.5px;letter-spacing:.04em;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.22);padding:6px 14px;border-radius:99px;margin-bottom:18px}
+    h1{font-family:'Times New Roman',Times,serif;font-size:clamp(30px,4.5vw,48px);line-height:1.15;font-weight:700;margin-bottom:16px}
+    h1 span{color:var(--gold)}
+    .hero p.lead{font-size:17px;color:#e4dcff;max-width:580px;margin-bottom:26px;line-height:1.6}
+    .btn-group{display:flex;flex-wrap:wrap;gap:12px}
+    .btn{display:inline-flex;align-items:center;gap:10px;border:0;cursor:pointer;font:inherit;font-weight:700;font-size:16px;padding:14px 26px;border-radius:12px;text-decoration:none;transition:.2s}
+    .btn-gold{background:var(--gold);color:#2a1670;box-shadow:0 10px 24px -8px rgba(242,177,52,.7)}
+    .btn-gold:hover{transform:translateY(-2px);background:#ffc04d}
+    .btn-ghost{background:rgba(255,255,255,.12);color:#fff;border:1px solid rgba(255,255,255,.3)}
+    .btn-ghost:hover{background:rgba(255,255,255,.2);transform:translateY(-2px)}
+
+    /* panel */
+    .panel{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);border-radius:20px;padding:24px;backdrop-filter:blur(6px)}
+    .panel h3{font-size:14px;font-weight:700;color:#d9ceff;margin-bottom:14px;letter-spacing:.06em;text-transform:uppercase}
+    .stat{display:flex;justify-content:space-between;align-items:baseline;padding:12px 0;border-top:1px solid rgba(255,255,255,.16)}
+    .stat:first-of-type{border-top:0}
+    .stat b{font-family:'Times New Roman',Times,serif;font-size:26px;color:#fff}
+    .stat span{color:#d9ceff;font-size:14px}
+    @media(max-width:860px){.hero .wrap{grid-template-columns:1fr;padding-top:40px;padding-bottom:50px}}
+
+    /* section cards */
+    section{padding:50px 0}
+    .sec-head{margin-bottom:30px}
+    .sec-head h2{font-size:28px;font-weight:700;color:var(--ink);margin-bottom:6px}
+    .sec-head p{color:var(--ink-2);font-size:16px}
+    .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:20px}
+    .card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:24px;text-decoration:none;color:inherit;transition:.2s;box-shadow:var(--shadow);display:flex;flex-direction:column;justify-content:space-between}
+    .card:hover{transform:translateY(-4px);border-color:var(--brand-2);box-shadow:0 14px 28px rgba(91,52,201,.18)}
+    .card .ic{width:52px;height:52px;border-radius:14px;display:grid;place-items:center;font-size:22px;margin-bottom:16px;color:#fff}
+    .card h3{font-size:19px;font-weight:700;margin-bottom:8px;color:var(--ink)}
+    .card p{font-size:14.5px;color:var(--ink-2);line-height:1.5;margin-bottom:14px}
+    .card .tag{align-self:flex-start;font-size:12.5px;font-weight:700;padding:4px 12px;border-radius:20px;background:#e0f2fe;color:#0369a1}
+
+    /* footer */
+    .site-footer{background:#0f1729;color:#cfd6e6;padding:46px 0 30px;margin-top:40px;width:100%}
+    .site-footer .wrap{max-width:1120px;margin:0 auto;padding:0 20px}
+    .f-top{display:flex;align-items:center;gap:18px;margin-bottom:16px}
+    .f-logo{object-fit:cover;width:84px;height:84px;flex:none;border-radius:50%;border:3px solid var(--gold);background:radial-gradient(circle,#1d2542,#0b1020);box-shadow:0 0 18px rgba(242,177,52,.35)}
+    .f-name{font-size:24px;font-weight:700;color:#fff}
+    .f-role{font-size:13px;font-weight:700;letter-spacing:.08em;color:#fff;margin-top:2px}
+    .f-slogan{font-style:italic;font-size:14px;color:#cfd6e6}
+    .f-desc{max-width:580px;font-size:15px;color:#cfd6e6;margin-bottom:24px;line-height:1.6}
+    .site-footer h5{font-size:16px;color:#fff;margin-bottom:14px;font-weight:700}
+    .f-links{display:flex;flex-wrap:wrap;gap:12px}
+    .f-links a{display:inline-flex;align-items:center;gap:9px;color:#fff;text-decoration:none;font-weight:700;font-size:14px;border:1px solid #38425e;border-radius:12px;padding:12px 18px;transition:all .2s;background:rgba(255,255,255,.03)}
+    .f-links a:hover{border-color:var(--gold);background:rgba(242,177,52,.12);transform:translateY(-2px)}
+    .f-links svg{width:18px;height:18px;fill:#fff;flex:none}
+    .f-copy{margin-top:30px;padding-top:20px;border-top:1px solid #222c47;text-align:center;font-size:13px;color:#94a3b8}
+    @media(max-width:640px){.f-top{flex-direction:column;align-items:flex-start}.f-links{flex-direction:column}.f-links a{width:100%}}
   </style>
 </head>
 <body>
+
 <header>
-  <div class="bar">
-    <b><i class="fa-solid fa-trophy"></i> Olimpiadalarni o‘tkazish sayti</b>
-    <nav>
-      <a href="ixtirochilik/index.html">Ixtirochilikka qadam</a>
-      <a href="iqtidorlilikka-qadam/index.html">Iqtidorlilikka qadam</a>
-      <a href="ixtirochilik/nizom.html">Nizomlar</a>
-      <a href="https://umamatov.uz">umamatov.uz</a>
-    </nav>
+  <div class="wrap nav">
+    <a class="brand" href="index.html">
+      <span class="logo"><i class="fa-solid fa-trophy"></i></span>
+      <span>Olimpiada va tanlovlarni õtkaziş sayti</span>
+    </a>
+    <div class="links">
+      <a class="link" href="ixtirochilik/index.html">Ixtiroçilikka qadam</a>
+      <a class="link" href="ixtirochilik/hakam.html">Hakamlar kabineti</a>
+      <a class="link" href="ixtirochilik/nizom.html">Nizom va Mezonlar</a>
+      <a class="link" href="ixtirochilik/bayonnoma.html">Rasmiy Bayonnoma</a>
+      <a class="link" href="https://umamatov.uz" target="_blank" style="color:var(--brand);"><i class="fa-solid fa-globe"></i> umamatov.uz</a>
+    </div>
   </div>
 </header>
 
 <div class="hero">
-  <h1>Olimpiada va tanlovlar onlayn baholash tizimi</h1>
-  <p>Hakamlar PIN-kod orqali baholaydi, natijalar va o‘rinlar avtomatik hisoblanadi, imzo qo‘yiladigan bayonnoma pechatga tayyor.</p>
-</div>
+  <div class="wrap">
+    <div>
+      <span class="eyebrow"><i class="fa-solid fa-landmark"></i> Qõşkõpir tumani maktabgaça va maktab taʼlimi bõlimi</span>
+      <h1>Olimpiada va tanlovlar <span>onlayn baholaş tizimi</span></h1>
+      <p class="lead">
+        Hakamlar hayʼati maxsus PIN-kod orqali baholaydi. Natijalar va reyting õrinlari Nizom ustunlik algoritmi bõyiça 100% avtomatik hisoblanadi. Rasmiy bayonnoma peçatga to‘liq tayyor.
+      </p>
+      <div class="btn-group">
+        <a class="btn btn-gold" href="ixtirochilik/index.html">
+          <i class="fa-solid fa-lightbulb"></i> “Ixtiroçilikka qadam” tanlovi
+        </a>
+        <a class="btn btn-ghost" href="ixtirochilik/hakam.html">
+          <i class="fa-solid fa-user-check"></i> Hakam kabinetiga kiriş
+        </a>
+      </div>
+    </div>
 
-<div class="grid">
-  <a class="card" href="ixtirochilik/index.html">
-    <div class="ic" style="background:#cffafe;color:#0891b2"><i class="fa-solid fa-lightbulb"></i></div>
-    <h2>“Ixtirochilikka qadam” tanlovi</h2>
-    <p>2-(tuman) bosqich · 4–5-dekabr · 7 hakam · 5 mezon, 100 ball · 3 ta loyiha viloyatga tavsiya.</p>
-    <span class="tag">Nizom asosida</span>
-  </a>
-  <a class="card" href="iqtidorlilikka-qadam/index.html">
-    <div class="ic" style="background:#fef3c7;color:#d97706"><i class="fa-solid fa-award"></i></div>
-    <h2>“Iqtidorlilikka qadam” tanlovi</h2>
-    <p>1-bosqich · 6 hakam · jami ball, o‘rtacha ball va o‘rin avtomatik · rasmiy bayonnoma.</p>
-    <span class="tag">Namunaviy shablon</span>
-  </a>
-  <a class="card" href="ixtirochilik/nizom.html">
-    <div class="ic" style="background:#ede9fe;color:#7c3aed"><i class="fa-solid fa-book"></i></div>
-    <h2>Nizomlar va mezonlar</h2>
-    <p>Vazirlik ilovalari: mezonlar, hakamlar hay’ati, tashkiliy qo‘mita, tenglikda ustunlik tartibi.</p>
-  </a>
-  <div class="card soon">
-    <div class="ic" style="background:#e2e8f0;color:#64748b"><i class="fa-solid fa-plus"></i></div>
-    <h2>Yangi tanlov</h2>
-    <p>Keyingi olimpiada va ko‘rik-tanlovlar shu yerga qo‘shiladi.</p>
+    <div class="panel">
+      <h3><i class="fa-solid fa-chart-pie"></i> Tanlov parametrlari</h3>
+      <div class="stat">
+        <span>Tuman bosqiçi muddati:</span>
+        <b>4–5-dekabr 2026</b>
+      </div>
+      <div class="stat">
+        <span>Hakamlar hayʼati:</span>
+        <b>7 nafar mutaxassis</b>
+      </div>
+      <div class="stat">
+        <span>Iştirokçi loyihalar:</span>
+        <b>13 ta jamoa</b>
+      </div>
+      <div class="stat">
+        <span>Viloyatga tavsiya:</span>
+        <b style="color:var(--gold);">3 ta loyiha</b>
+      </div>
+    </div>
   </div>
 </div>
 
-<footer>© 2026 Umrbek Mamatov · <a href="https://umamatov.uz">Asosiy sayt: umamatov.uz</a></footer>
+<section class="wrap">
+  <div class="sec-head">
+    <h2>Tanlovlar va Rasmiy Bõlimlar</h2>
+    <p>Kerakli yõnaliş yoki mezonlar bilan tanişiş uçun quyidagi bõlimlardan birini tanlang:</p>
+  </div>
+
+  <div class="grid">
+    <a class="card" href="ixtirochilik/index.html">
+      <div>
+        <div class="ic" style="background:linear-gradient(135deg,#0284c7,#0369a1);"><i class="fa-solid fa-lightbulb"></i></div>
+        <h3>“Ixtiroçilikka qadam” tanlovi</h3>
+        <p>2-(tuman) bosqiçi · 7 nafar hakam · 5 ta mezon (100 ball) · 7 bosqiçli ustunlik tartibi bõyiça reyting.</p>
+      </div>
+      <span class="tag">Nizom asosida onlayn svod</span>
+    </a>
+
+    <a class="card" href="ixtirochilik/hakam.html">
+      <div>
+        <div class="ic" style="background:linear-gradient(135deg,#10b981,#059669);"><i class="fa-solid fa-user-check"></i></div>
+        <h3>Hakamlar Kabineti (PIN-kod)</h3>
+        <p>Har bir hakamga berilgan maxsus 4 xonali PIN-kod orqali baholaş va qulflaş tizimi.</p>
+      </div>
+      <span class="tag" style="background:#dcfce7;color:#15803d;">Antikorrupciya himoyasi</span>
+    </a>
+
+    <a class="card" href="ixtirochilik/nizom.html">
+      <div>
+        <div class="ic" style="background:linear-gradient(135deg,#7c3aed,#6d28d9);"><i class="fa-solid fa-book-open"></i></div>
+        <h3>Nizom va Mezonlar</h3>
+        <p>Vazirlik ilovalari: 5 ta mezon tavsifi, taşkiliy qõmita tarkibi va 7 bosqiçli ustunlik tartibi.</p>
+      </div>
+      <span class="tag" style="background:#f3e8ff;color:#7e22ce;">Rasmiy hujjat</span>
+    </a>
+
+    <a class="card" href="ixtirochilik/bayonnoma.html">
+      <div>
+        <div class="ic" style="background:linear-gradient(135deg,#ea580c,#c2410c);"><i class="fa-solid fa-print"></i></div>
+        <h3>Rasmiy Yakuniy Bayonnoma</h3>
+        <p>Chop etişga to‘liq tayyor A4 landshaft vedomost. 7 nafar hakamlar hayʼati imzosi bilan.</p>
+      </div>
+      <span class="tag" style="background:#ffedd5;color:#c2410c;">Pechat / PDF tayyor</span>
+    </a>
+  </div>
+</section>
+
+<!-- Rasmiy Portal Footeri (test.umamatov.uz andozasida) -->
+  <footer class="site-footer no-print">
+    <div class="wrap">
+      <div class="f-top">
+        <img class="f-logo" alt="Umrbek Mamatov" src="assets/umrbek-mamatov.jpg">
+        <div>
+          <div class="f-name">Umrbek Mamatov</div>
+          <div class="f-role">BOŞ MUTAXASSIS</div>
+          <div class="f-slogan">Taʼlim sifati — kelajak kafolati</div>
+        </div>
+      </div>
+      <div class="f-desc">Qõşkõpir tumani taʼlim yõnalişidagi rasmiy monitoring va axborot portali.</div>
+      <h5>Rasmiy boğlaniş va ijtimoiy tarmoqlar</h5>
+      <div class="f-links">
+        <a href="https://instagram.com/umrbek_mamatov" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+          Instagram (@umrbek_mamatov)
+        </a>
+        <a href="https://facebook.com/Umrbek Mamatov" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+          Facebook (Umrbek Mamatov)
+        </a>
+        <a href="tel:+998996601415">
+          <svg viewBox="0 0 24 24"><path d="M20 15.5c-1.25 0-2.45-.2-3.57-.57a1.02 1.02 0 0 0-1.02.24l-2.2 2.2a15.045 15.045 0 0 1-6.59-6.59l2.2-2.21a.96.96 0 0 0 .25-1A11.36 11.36 0 0 1 8.5 4c0-.55-.45-1-1-1H4c-.55 0-1 .45-1 1 0 9.39 7.61 17 17 17 .55 0 1-.45 1-1v-3.5c0-.55-.45-1-1-1zM19 12h2a9 9 0 0 0-9-9v2c3.87 0 7 3.13 7 7zm-4 0h2c0-2.76-2.24-5-5-5v2c1.66 0 3 1.34 3 3z"/></svg>
+          +998 99 660 14 15
+        </a>
+        <a href="mailto:umrbek84@gmail.com">
+          <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+          umrbek84@gmail.com
+        </a>
+      </div>
+      <div class="f-copy">© 2026 Umrbek Mamatov. Barça huquqlar himoyalangan.</div>
+    </div>
+  </footer>
+
 </body>
 </html>

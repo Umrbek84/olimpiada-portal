@@ -11,8 +11,8 @@ const IXTIROCHILIK_CONFIG = {
   criteria: [
     {
       id: "c1",
-      name: "Loyihaning tanlov yo‘nalishlariga mos tayyorlanganligi",
-      shortName: "Yo‘nalishga moslik",
+      name: "Loyihaning tanlov yõnalişlariga mos tayyorlanganligi",
+      shortName: "Yõnalişga moslik",
       max: 10,
       levels: [
         { score: "1-3", desc: "Loyiha tayyorlangan, lekin yo‘nalishga mos kelmagan, maqsad aks etmagan." },
@@ -46,7 +46,7 @@ const IXTIROCHILIK_CONFIG = {
     },
     {
       id: "c4",
-      name: "Loyihaning innovatsionligi va ijodiy yondashuv",
+      name: "Loyihaning innovacionligi va ijodiy yondaşuv",
       shortName: "Innovatsionlik",
       max: 20,
       levels: [
@@ -91,11 +91,11 @@ const IXTIROCHILIK_CONFIG = {
 
   // 5 ta rasmiy yo'nalish
   directions: [
-    "Ta‘lim",
+    "Taʼlim",
     "Axborot texnologiyalari (IT)",
-    "Yashil energiya",
-    "Ekologiya va iqlim o‘zgarishi",
-    "Qishloq xo‘jaligi"
+    "Yaşil energiya",
+    "Ekologiya va iqlim õzgarişi",
+    "Qişloq xõjaligi"
   ],
 
   // Maktablardan namunaviy jamoalar va loyihalar
@@ -103,18 +103,18 @@ const IXTIROCHILIK_CONFIG = {
       {
           "id": 1,
           "siteId": 1709,
-          "school": "23-son umumiy o‘rta ta’lim maktabi",
+          "school": "23-son umumiy õrta taʼlim maktabi",
           "projectName": "Harakatlanuvchi qurilma",
           "direction": "Axborot texnologiyalari (IT)",
           "isTeam": true,
           "members": [
               {
-                  "name": "ABDULLAYEV JAMSHIDBEK DIYOR O‘G‘LI",
+                  "name": "ABDULLAYEV JAMŞIDBEK DIYOR ÕĞLI",
                   "birthDate": "2012-12-28",
                   "grade": "8-sinf"
               },
               {
-                  "name": "OTAJONOV AKROMJON G‘ULOMJON O‘G‘LI",
+                  "name": "OTAJONOV AKROMJON ĞULOMJON ÕĞLI",
                   "birthDate": "2011-11-13",
                   "grade": "9-sinf"
               }
@@ -124,13 +124,13 @@ const IXTIROCHILIK_CONFIG = {
       {
           "id": 2,
           "siteId": 1660,
-          "school": "30-son umumiy o‘rta ta’lim maktabi",
+          "school": "30-son umumiy õrta taʼlim maktabi",
           "projectName": "Robot yordamchi",
           "direction": "Axborot texnologiyalari (IT)",
           "isTeam": false,
           "members": [
               {
-                  "name": "RAVSHANBEKOV MIRJALOL MIRKAMOL O‘G‘LI",
+                  "name": "RAVŞANBEKOV MIRJALOL MIRKAMOL ÕĞLI",
                   "birthDate": "2014-11-19",
                   "grade": "6-sinf"
               }
@@ -140,13 +140,13 @@ const IXTIROCHILIK_CONFIG = {
       {
           "id": 3,
           "siteId": 1604,
-          "school": "32-son umumiy o‘rta ta’lim maktabi",
+          "school": "32-son umumiy õrta taʼlim maktabi",
           "projectName": "Robototexnika",
           "direction": "Axborot texnologiyalari (IT)",
           "isTeam": false,
           "members": [
               {
-                  "name": "NORXONOV BUNYODBEK QUVANDIQ O‘G‘LI",
+                  "name": "NORXONOV BUNYODBEK QUVANDIQ ÕĞLI",
                   "birthDate": "2014-04-23",
                   "grade": "7-sinf"
               }
@@ -162,7 +162,7 @@ const IXTIROCHILIK_CONFIG = {
           "isTeam": false,
           "members": [
               {
-                  "name": "MASHARIPOV JAVOHIR HASANBOY O‘G‘LI",
+                  "name": "MASHARIPOV JAVOHIR HASANBOY ÕĞLI",
                   "birthDate": "2012-09-07",
                   "grade": "7-sinf"
               }
@@ -172,13 +172,13 @@ const IXTIROCHILIK_CONFIG = {
       {
           "id": 5,
           "siteId": 1470,
-          "school": "25-son umumiy o‘rta ta’lim maktabi",
+          "school": "25-son umumiy õrta taʼlim maktabi",
           "projectName": "Robototexnika",
           "direction": "Axborot texnologiyalari (IT)",
           "isTeam": false,
           "members": [
               {
-                  "name": "PO‘LATOV NURBEK MUXAMMAD O‘G‘LI",
+                  "name": "PO‘LATOV NURBEK MUXAMMAD ÕĞLI",
                   "birthDate": "2014-08-26",
                   "grade": "6-sinf"
               }
@@ -188,13 +188,13 @@ const IXTIROCHILIK_CONFIG = {
       {
           "id": 6,
           "siteId": 1406,
-          "school": "6-son umumiy o‘rta ta’lim maktabi",
+          "school": "6-son umumiy õrta taʼlim maktabi",
           "projectName": "AGRO ROBOT (GROWERX)",
-          "direction": "Qishloq xo‘jaligi",
+          "direction": "Qişloq xõjaligi",
           "isTeam": false,
           "members": [
               {
-                  "name": "FAYZULLAYEV BOYMUROD BOBOMUROD O‘G‘LI",
+                  "name": "FAYZULLAYEV BOYMUROD BOBOMUROD ÕĞLI",
                   "birthDate": "2009-10-23",
                   "grade": "11-sinf"
               }
@@ -204,23 +204,23 @@ const IXTIROCHILIK_CONFIG = {
       {
           "id": 7,
           "siteId": 1374,
-          "school": "51-son umumiy o‘rta ta’lim maktabi",
+          "school": "51-son umumiy õrta taʼlim maktabi",
           "projectName": "Quyosh energiyasida ishlaydigan o‘t maydalagich",
-          "direction": "Qishloq xo‘jaligi",
+          "direction": "Qişloq xõjaligi",
           "isTeam": true,
           "members": [
               {
-                  "name": "RAJABOV ELMUROD XOLMUROD O‘G‘LI",
+                  "name": "RAJABOV ELMUROD XOLMUROD ÕĞLI",
                   "birthDate": "2013-09-21",
                   "grade": "7-sinf"
               },
               {
-                  "name": "BEKCHANOV KAMRONBEK OZODBOY O‘G‘LI",
+                  "name": "BEKCHANOV KAMRONBEK OZODBOY ÕĞLI",
                   "birthDate": "2012-08-10",
                   "grade": "8-sinf"
               },
               {
-                  "name": "BAXTIYOROV KAMRONBEK ELDORBEK O‘G‘LI",
+                  "name": "BAXTIYOROV KAMRONBEK ELDORBEK ÕĞLI",
                   "birthDate": "2014-07-21",
                   "grade": "6-sinf"
               }
@@ -230,18 +230,18 @@ const IXTIROCHILIK_CONFIG = {
       {
           "id": 8,
           "siteId": 1331,
-          "school": "20-son umumiy o‘rta ta’lim maktabi",
+          "school": "20-son umumiy õrta taʼlim maktabi",
           "projectName": "Robot yordamchi",
           "direction": "Axborot texnologiyalari (IT)",
           "isTeam": true,
           "members": [
               {
-                  "name": "OTAMURODOV BILOLBEK BUNYOD O‘G‘LI",
+                  "name": "OTAMURODOV BILOLBEK BUNYOD ÕĞLI",
                   "birthDate": "2015-08-20",
                   "grade": "5-sinf"
               },
               {
-                  "name": "SHUXRATOV ABDULAZIZ ABDULLA O‘G‘LI",
+                  "name": "SHUXRATOV ABDULAZIZ ABDULLA ÕĞLI",
                   "birthDate": "2015-07-31",
                   "grade": "5-sinf"
               }
@@ -253,21 +253,21 @@ const IXTIROCHILIK_CONFIG = {
           "siteId": 1256,
           "school": "5-son ixtisoslashtirilgan maktab",
           "projectName": "Energiya tejaydigan uy",
-          "direction": "Yashil energiya",
+          "direction": "Yaşil energiya",
           "isTeam": true,
           "members": [
               {
-                  "name": "SANJARBEKOV MIRALI SANJARBEK O‘G‘LI",
+                  "name": "SANJARBEKOV MIRALI SANJARBEK ÕĞLI",
                   "birthDate": "2011-08-27",
                   "grade": "9-sinf"
               },
               {
-                  "name": "QADAMBOYEV JO‘SHQINBEK MANSURBEK O‘G‘LI",
+                  "name": "QADAMBOYEV JO‘SHQINBEK MANSURBEK ÕĞLI",
                   "birthDate": "2013-09-20",
                   "grade": "7-sinf"
               },
               {
-                  "name": "RAVSHANBEKOV ASADBEK ISLOMBEK O‘G‘LI",
+                  "name": "RAVŞANBEKOV ASADBEK ISLOMBEK ÕĞLI",
                   "birthDate": "2013-08-05",
                   "grade": "7-sinf"
               }
@@ -277,9 +277,9 @@ const IXTIROCHILIK_CONFIG = {
       {
           "id": 10,
           "siteId": 816,
-          "school": "14-son umumiy o‘rta ta’lim maktabi",
+          "school": "14-son umumiy õrta taʼlim maktabi",
           "projectName": "Robot-yordamchi",
-          "direction": "Yashil energiya",
+          "direction": "Yaşil energiya",
           "isTeam": false,
           "members": [
               {
@@ -293,18 +293,18 @@ const IXTIROCHILIK_CONFIG = {
       {
           "id": 11,
           "siteId": 198,
-          "school": "42-son umumiy o‘rta ta’lim maktabi",
+          "school": "42-son umumiy õrta taʼlim maktabi",
           "projectName": "Aqlli uy",
           "direction": "Axborot texnologiyalari (IT)",
           "isTeam": true,
           "members": [
               {
-                  "name": "DO‘SCHANOV MURODBEK UMRBEK O‘G‘LI",
+                  "name": "DO‘SCHANOV MURODBEK UMRBEK ÕĞLI",
                   "birthDate": "2014-11-19",
                   "grade": "6-sinf"
               },
               {
-                  "name": "SULTONMUROTOV ERKABOY ULUG‘BEK O‘G‘LI",
+                  "name": "SULTONMUROTOV ERKABOY ULUG‘BEK ÕĞLI",
                   "birthDate": "2014-03-10",
                   "grade": "6-sinf"
               }
@@ -314,13 +314,13 @@ const IXTIROCHILIK_CONFIG = {
       {
           "id": 12,
           "siteId": 139,
-          "school": "19-son umumiy o‘rta ta’lim maktabi",
+          "school": "19-son umumiy õrta taʼlim maktabi",
           "projectName": "Robot mashina",
           "direction": "Axborot texnologiyalari (IT)",
           "isTeam": false,
           "members": [
               {
-                  "name": "OTANAZAROV XOLMIRZO ERGASH O‘G‘LI",
+                  "name": "OTANAZAROV XOLMIRZO ERGASH ÕĞLI",
                   "birthDate": "2011-10-15",
                   "grade": "9-sinf"
               }
@@ -330,13 +330,13 @@ const IXTIROCHILIK_CONFIG = {
       {
           "id": 13,
           "siteId": 1771,
-          "school": "29-son umumiy o‘rta ta’lim maktabi",
+          "school": "29-son umumiy õrta taʼlim maktabi",
           "projectName": "Batareya yordamida harakatlanuvchi mashina",
           "direction": "Axborot texnologiyalari (IT)",
           "isTeam": false,
           "members": [
               {
-                  "name": "SOBIROV SHOHJAHON XURMATBEK O‘G‘LI",
+                  "name": "SOBIROV SHOHJAHON XURMATBEK ÕĞLI",
                   "birthDate": "2012-06-10",
                   "grade": "8-sinf"
               }
@@ -446,7 +446,7 @@ function calculateIxtirochilikRanking(projects) {
   // 3) 4-mezon: Loyihaning innovatsionligi va ijodiy yondashilganligi
   // 4) 5-mezon: Loyihani amalga oshirishda kutilayotgan natijalar va analoglardan afzalligi
   // 5) 1-mezon: Loyihaning tanlov yo‘nalishlariga mos tayyorlanganligi
-  // 6) Ishtirokchilar soni: Dastlab individual ishtirokchiga (1 kishi), so‘ngra a’zolari kam bo‘lgan jamoaga ustunlik
+  // 6) Iştirokçilar soni: Dastlab individual ishtirokchiga (1 kishi), so‘ngra a’zolari kam bo‘lgan jamoaga ustunlik
   // 7) Tug‘ilgan sanasi bo‘yicha: Yoshroq (jamoaning o‘rtacha yoshi kichikroq, kechroq tug‘ilgan) ishtirokchilarga ustunlik
   calculated.sort((a, b) => {
     const scoreA = a.finalAverage !== "" ? Number(a.finalAverage) : -1;
@@ -481,7 +481,7 @@ function calculateIxtirochilikRanking(projects) {
       return b.criteriaAverages.c1 - a.criteriaAverages.c1;
     }
 
-    // 6-ustunlik: Ishtirokchilar soni (individual 1 kishi > kam a'zoli jamoa)
+    // 6-ustunlik: Iştirokçilar soni (individual 1 kishi > kam a'zoli jamoa)
     if (a.membersCount !== b.membersCount) {
       return a.membersCount - b.membersCount;
     }
