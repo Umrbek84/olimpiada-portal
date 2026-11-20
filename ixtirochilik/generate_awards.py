@@ -177,7 +177,11 @@ def main():
     target_dir = r"C:\Users\Monitoring\Desktop\ОЛИМПИАДАЛАР\2026\Ихтирочиликка қадам\туман босқичи\туман босқичи ғолибларни тақдирлаш"
     output_pdf = os.path.join(target_dir, "Goliblar_Diplom_va_Tashakkurnoma_2026.pdf")
     output_img_dir = os.path.join(target_dir, "Goliblar_Rasmlar_2026")
-    os.makedirs(output_img_dir, exist_ok=True)
+    # Clear previous image files in output_img_dir to ensure no duplicates
+    for f in os.listdir(output_img_dir):
+        fp = os.path.join(output_img_dir, f)
+        if os.path.isfile(fp):
+            os.remove(fp)
 
     winners = [
         {
@@ -232,7 +236,7 @@ def main():
                 place=place,
                 number=str(cert_counter).zfill(3)
             )
-            clean_name = st["name"].replace(" ", "_").replace("'", "").replace("ʻ", "").replace("ʼ", "")
+            clean_name = to_yangi_lotin(st["name"]).replace(" ", "_").replace("'", "").replace("ʻ", "").replace("ʼ", "")
             dip_path = os.path.join(output_img_dir, f"Diplom_{place}-orin_{metal_name}_{clean_name}.jpg")
             dip_img.save(dip_path, quality=95)
             all_pages.append(dip_img)
@@ -250,7 +254,7 @@ def main():
                 place=place,
                 number=str(cert_counter).zfill(3)
             )
-            clean_tname = w["teacher"].replace(" ", "_").replace("'", "").replace("ʻ", "").replace("ʼ", "")
+            clean_tname = to_yangi_lotin(w["teacher"]).replace(" ", "_").replace("'", "").replace("ʻ", "").replace("ʼ", "")
             tash_path = os.path.join(output_img_dir, f"Tashakkurnoma_{place}-orin_{metal_name}_ustoz_{clean_tname}.jpg")
             tash_img.save(tash_path, quality=95)
             all_pages.append(tash_img)
