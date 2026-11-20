@@ -2,12 +2,12 @@
 // O'zbekiston Respublikasi Ta'lim va ilm-fan vazirligi xatiga 1-, 2-, 3-ilovalar asosida
 
 const IXTIROCHILIK_CONFIG = {
-  competitionName: "\"Ixtirochilikka qadam\" tanlovi",
-  stage: "Ikkinchi (tuman/shahar) bosqichi",
-  dates: "2026-yil 4-5-dekabr",
+  competitionName: "“Ixtiroçilikka qadam” tanlovi",
+  stage: "Ikkinçi (tuman/şahar) bosqiçi",
+  dates: "2026-yil 4–5-dekabr",
   maxScorePerJudge: 100,
 
-  // 1-ILOVA: 5 ta rasmiy baholash mezoni
+  // 1-ILOVA: 5 ta rasmiy baholaş mezoni
   criteria: [
     {
       id: "c1",
@@ -16,8 +16,8 @@ const IXTIROCHILIK_CONFIG = {
       max: 10,
       levels: [
         { score: "1-3", desc: "Loyiha tayyorlangan, lekin yönalişga mos kelmagan, maqsad aks etmagan." },
-        { score: "4-6", desc: "Qisman mos, ammo yönaliş chuqur o‘rganilmagan." },
-        { score: "7-10", desc: "To‘liq mos, chuqur o‘rganilgan va mavjud muammolar to‘liq ko‘rsatilgan." }
+        { score: "4-6", desc: "Qisman mos, ammo yönaliş çuqur örganilmagan." },
+        { score: "7-10", desc: "Töliq mos, çuqur örganilgan va mavjud muammolar töliq körsatilgan." }
       ]
     },
     {
@@ -27,66 +27,66 @@ const IXTIROCHILIK_CONFIG = {
       max: 25,
       levels: [
         { score: "1-6", desc: "Talab darajasida emas, texnik sust, vaqt reglamentiga rioya qilinmagan." },
-        { score: "7-12", desc: "Sodda va tushunarli, ammo savollarga to‘liq javob berilmagan." },
-        { score: "13-18", desc: "Mantiqiy to‘g‘ri, mazmunli, reglamentga rioya qilingan, ayrim xatoliklar bor." },
-        { score: "19-25", desc: "Talab asosida, infografikali, savollarga to‘liq va aniq javob, reglamentga rioya qilingan." }
+        { score: "7-12", desc: "Sodda va tuşunarli, ammo savollarga töliq javob berilmagan." },
+        { score: "13-18", desc: "Mantiqiy töğri, mazmunli, reglamentga rioya qilingan, ayrim xatoliklar bor." },
+        { score: "19-25", desc: "Talab asosida, infografikali, savollarga töliq va aniq javob, reglamentga rioya qilingan." }
       ]
     },
     {
       id: "c3",
-      name: "Loyihaning texnik jihatdan sifatli va puxta tayyorlanganligi (model, maket, ishlanma)",
+      name: "Loyihaning texnik jihatdan sifatli va puxta tayyorlanganligi (model, maket, işlanma)",
       shortName: "Texnik sifat (Model)",
       max: 25,
       levels: [
-        { score: "1-6", desc: "Texnik jihatdan sust yoki amaliy ishlanma mavjud emas." },
-        { score: "7-12", desc: "Qisman yoki yarim tayyor holatda, texnik kamchiliklar mavjud." },
-        { score: "13-18", desc: "Deyarli tayyor, ishchi holatda, ammo ba'zi kamchiliklar bor." },
-        { score: "19-25", desc: "To‘liq tayyor, ishchi model, barcha elementlar puxta ishlab chiqilgan." }
+        { score: "1-6", desc: "Texnik jihatdan sust yoki amaliy işlanma mavjud emas." },
+        { score: "7-12", desc: "Qisman yoki yarim tayyor holatda, texnik kamçiliklar mavjud." },
+        { score: "13-18", desc: "Deyarli tayyor, işçi holatda, ammo baʼzi kamçiliklar bor." },
+        { score: "19-25", desc: "Töliq tayyor, işçi model, barça elementlar puxta işlab çiqilgan." }
       ]
     },
     {
       id: "c4",
-      name: "Loyihaning innovacionligi va ijodiy yondaşuv",
+      name: "Loyihaning innovatsionligi va ijodiy yondaşuv",
       shortName: "Innovatsionlik",
       max: 20,
       levels: [
-        { score: "1-5", desc: "Ijodiy yondashuv yo‘q, odatiy usul, yangilik mavjud emas." },
-        { score: "6-10", desc: "Qisman ijodiy, yangi texnologiyalar yetarli emas, to‘liq javob berolmagan." },
-        { score: "11-15", desc: "Ijodiy va innovatsion, yangicha g‘oya bor, ammo savollarga to‘liq javob berolmagan." },
-        { score: "16-20", desc: "Yangicha g‘oya, innovatsion yechimlar, barcha savollarga aniq va to‘liq javob." }
+        { score: "1-5", desc: "Ijodiy yondaşuv yöq, odatiy usul, yangilik mavjud emas." },
+        { score: "6-10", desc: "Qisman ijodiy, yangi texnologiyalar yetarli emas, töliq javob berolmagan." },
+        { score: "11-15", desc: "Ijodiy va innovatsion, yangiça ğoya bor, ammo savollarga töliq javob berolmagan." },
+        { score: "16-20", desc: "Yangiça ğoya, innovatsion yeçimlar, barça savollarga aniq va töliq javob." }
       ]
     },
     {
       id: "c5",
-      name: "Loyihani amalga oshirishda kutilayotgan natijalar va analoglardan afzalligi",
+      name: "Loyihani amalga oşirişda kutilayotgan natijalar va analoglardan afzalligi",
       shortName: "Kutilayotgan natijalar",
       max: 20,
       levels: [
-        { score: "1-5", desc: "Real muammolarni hal qilishga qaratilmagan yoki natijalar mavhum." },
-        { score: "6-10", desc: "Qisman hal qiladi, ammo tatbiq etish imkoni mavjud emas." },
-        { score: "11-15", desc: "Tatbiq etish imkoni bor, lekin analoglaridan afzalligi yo‘q." },
+        { score: "1-5", desc: "Real muammolarni hal qilişga qaratilmagan yoki natijalar mavhum." },
+        { score: "6-10", desc: "Qisman hal qiladi, ammo tatbiq etiş imkoni mavjud emas." },
+        { score: "11-15", desc: "Tatbiq etiş imkoni bor, lekin analoglaridan afzalligi yöq." },
         { score: "16-20", desc: "Real muammolarni hal qiladi, iqtisodiy asoslangan, analoglaridan aniq afzal." }
       ]
     }
   ],
 
-  // 3-ILOVA: Hakamlar hay'atining tarkibi (7 nafar)
+  // 3-ILOVA: Hakamlar hayʼatining tarkibi (7 nafar)
   judges: [
-    { id: 1, name: "Abdullayev Rustam Alisherovich", role: "Informatika fani o‘qituvchisi", pin: "2001" },
-    { id: 2, name: "Karimov Sardor Baxtiyorovich", role: "Fizika fani o‘qituvchisi", pin: "2002" },
-    { id: 3, name: "Yo‘ldosheva Nilufar Ikromovna", role: "Biologiya fani o‘qituvchisi", pin: "2003" },
-    { id: 4, name: "Rahimov Jasur Erkinovich", role: "Kimyo fani o‘qituvchisi", pin: "2004" },
-    { id: 5, name: "Qodirov Elyor Farhodovich", role: "IT sohasi mutaxassisi", pin: "2005" },
-    { id: 6, name: "Sobirov Otabek Ulug‘bekovich", role: "Ekologiya va qishloq xo‘jaligi mutaxassisi", pin: "2006" },
-    { id: 7, name: "Mansurov Bekzod Shuhratovich", role: "Innovatsion ishlanmalar mutaxassisi", pin: "2007" }
+    { id: 1, name: "Abdullayev Rustam Alişeroviç", role: "Informatika fani öqituvçisi", pin: "2001" },
+    { id: 2, name: "Karimov Sardor Baxtiyoroviç", role: "Fizika fani öqituvçisi", pin: "2002" },
+    { id: 3, name: "Yöldoşeva Nilufar Ikromovna", role: "Biologiya fani öqituvçisi", pin: "2003" },
+    { id: 4, name: "Rahimov Jasur Erkinoviç", role: "Kimyo fani öqituvçisi", pin: "2004" },
+    { id: 5, name: "Qodirov Elyor Farhodoviç", role: "IT sohasi mutaxassisi", pin: "2005" },
+    { id: 6, name: "Sobirov Otabek Uluğbekoviç", role: "Ekologiya va qişloq xöjaligi mutaxassisi", pin: "2006" },
+    { id: 7, name: "Mansurov Bekzod Şuhratoviç", role: "Innovatsion işlanmalar mutaxassisi", pin: "2007" }
   ],
 
-  // 2-ILOVA: Tashkiliy qömita tarkibi
+  // 2-ILOVA: Taşkiliy qömita tarkibi
   committee: [
-    { role: "Tashkiliy qömita raisi", name: "Jumaniyazov Şokir Rözmetoviç", post: "Qöşköpir tuman maktabgaça va maktab taʼlimi bölimi başliğö" },
-    { role: "Tashkiliy qömita aʼzosi", name: "Erjanova Oygul Ilxombek qizi", post: "«Kelajak markazi» direktori" },
-    { role: "Tashkiliy qömita aʼzosi", name: "Avezov Jasurbek Ravşanbekoviç", post: "Raqamli taʼlim va sunʼiy intellektni rivojlantiriş şöbasi baş mutaxassisi" },
-    { role: "Tashkiliy qömita masʼul kotibi", name: "Mamatov Umrbek Oliquliyeviç", post: "Tashkiliy qömita masʼul kotibi" }
+    { role: "Taşkiliy qömita raisi", name: "Jumaniyazov Şokir Rözmetoviç", post: "Qöşköpir tumani maktabgaça va maktab taʼlimi bölimi boşliği" },
+    { role: "Taşkiliy qömita aʼzosi", name: "Erjanova Oygul Ilxombek qizi", post: "“Kelajak markazi” direktori" },
+    { role: "Taşkiliy qömita aʼzosi", name: "Avezov Jasurbek Ravşanbekoviç", post: "Raqamli taʼlim va sunʼiy intellektni rivojlantiriş şöbasi boş mutaxassisi" },
+    { role: "Taşkiliy qömita masʼul kotibi", name: "Mamatov Umrbek Oliquliyeviç", post: "Taşkiliy qömita masʼul kotibi" }
   ],
 
   // 5 ta rasmiy yönaliş
@@ -205,7 +205,7 @@ const IXTIROCHILIK_CONFIG = {
     "id": 7,
     "siteId": 1374,
     "school": "51-son umumiy örta taʼlim maktabi",
-    "projectName": "Quyaş energiyasida işlaydigan öt maydalagiç",
+    "projectName": "Quyoş energiyasida işlaydigan öt maydalagiç",
     "direction": "Qişloq xöjaligi",
     "isTeam": true,
     "members": [

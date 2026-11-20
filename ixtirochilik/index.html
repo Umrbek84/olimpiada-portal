@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>“Ixtiroçilikka qadam” tanlovi - 2-tuman bosqichi | Onlayn Baholash Tizimi</title>
-  <link rel="stylesheet" href="style.css?v=20261120_1710">
+  <title>“Ixtiroçilikka qadam” tanlovi - 2-tuman bosqiçi | Onlayn Baholaş Tizimi</title>
+  <link rel="stylesheet" href="style.css?v=20261120_1830">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 </head>
 <body>
@@ -17,10 +17,11 @@
         <span>Olimpiada va tanlovlarni ötkaziş sayti</span>
       </a>
       <ul class="nav-menu">
-        <li><a href="index.html" class="active"><i class="fa-solid fa-trophy"></i> Baş sahifa</a></li>
+        <li><a href="index.html" class="active"><i class="fa-solid fa-trophy"></i> Boş sahifa</a></li>
         <li><a href="nizom.html"><i class="fa-solid fa-book"></i> Nizom va Mezonlar</a></li>
         <li><a href="hakam.html"><i class="fa-solid fa-user-check"></i> Hakamlar Kabineti (PIN)</a></li>
         <li><a href="bayonnoma.html"><i class="fa-solid fa-print"></i> Rasmiy Bayonnoma</a></li>
+        <li><a href="diplom.html"><i class="fa-solid fa-award"></i> Diplomlar</a></li>
       </ul>
     </nav>
 
@@ -28,12 +29,12 @@
     <div class="hero-card">
       <div class="hero-text">
         <span style="background: rgba(255,255,255,0.2); padding: 4px 12px; border-radius: 20px; font-size: 13px; font-weight: 700; text-transform: uppercase;">
-          <i class="fa-solid fa-lightbulb"></i> Tuman bosqiçi · 2026-yil 4-5-dekabr
+          <i class="fa-solid fa-lightbulb"></i> Tuman bosqiçi · 2026-yil 4–5-dekabr
         </span>
         <h1 style="margin-top: 10px;">“Ixtiroçilikka qadam” tanlovi</h1>
         <p>
-          Umumiy o‘rta ta’lim muassasalari öquvçilari o‘rtasida ötkaziladigan tanlovning ikkinçi bosqiçi onlayn baholash va reyting platformasi.
-          Eng yuqori natija ko‘rsatgan 3 ta loyiha uçinçi (viloyat) bosqiçiga tavsiya etiladi.
+          Umumiy örta taʼlim muassasalari öquvçilari örtasida ötkaziladigan tanlovning ikkinçi bosqiçi onlayn baholaş va reyting platformasi.
+          Eng yuqori natija körsatgan 3 ta loyiha uçinçi (viloyat) bosqiçiga tavsiya etiladi.
         </p>
       </div>
       <div class="hero-actions">
@@ -59,7 +60,7 @@
         <div class="stat-icon purple"><i class="fa-solid fa-users-gear"></i></div>
         <div>
           <h3 style="font-size: 22px; font-weight: 800;">7 nafar</h3>
-          <p style="font-size: 13px; color: #64748b;">Hakamlar hay'ati</p>
+          <p style="font-size: 13px; color: #64748b;">Hakamlar hayʼati</p>
         </div>
       </div>
       <div class="stat-box">
@@ -91,14 +92,14 @@
         </div>
         <div style="display: flex; gap: 10px; flex-wrap: wrap;">
           <select id="directionFilter" onchange="filterProjects()" style="padding: 8px 12px; border: 1px solid var(--border); border-radius: 8px; font-size: 13px; font-weight: 600;">
-            <option value="ALL">Barcha yönalişlar</option>
+            <option value="ALL">Barça yönalişlar</option>
             <option value="Taʼlim">Taʼlim</option>
             <option value="Axborot texnologiyalari (IT)">Axborot texnologiyalari (IT)</option>
             <option value="Yaşil energiya">Yaşil energiya</option>
             <option value="Ekologiya va iqlim özgarişi">Ekologiya va iqlim özgarişi</option>
             <option value="Qişloq xöjaligi">Qişloq xöjaligi</option>
           </select>
-          <button onclick="configureSheetsUrl()" class="btn btn-outline" style="font-size: 13px; color: #059669; border-color: #a7f3d0;" title="Google Sheet bazasi ulanishi">
+          <button onclick="configureSheetsUrl()" class="btn btn-outline" style="font-size: 13px; color: #059669; border-color: #a7f3d0;" title="Google Sheet bazasi ulanişi">
             <i class="fa-solid fa-cloud-arrow-up"></i> Google Sheet
           </button>
           <button onclick="exportToCsv()" class="btn btn-outline" style="font-size: 13px;">
@@ -113,7 +114,7 @@
             <tr>
               <th style="width: 45px; text-align: center;">T/r</th>
               <th>Taʼlim muassasasi / Loyiha nomi</th>
-              <th style="width: 140px;">Yo‘nalish</th>
+              <th style="width: 140px;">Yönaliş</th>
               <th style="width: 180px;">Mualliflar (Jamoa)</th>
               <th style="text-align: center;" title="Informatika">1-H<br><small>IT</small></th>
               <th style="text-align: center;" title="Fizika">2-H<br><small>Fizika</small></th>
@@ -122,8 +123,8 @@
               <th style="text-align: center;" title="Sohaviy IT">5-H<br><small>Soha</small></th>
               <th style="text-align: center;" title="Sohaviy Ekologiya">6-H<br><small>Eko</small></th>
               <th style="text-align: center;" title="Sohaviy Innovatsiya">7-H<br><small>Innov</small></th>
-              <th style="text-align: center; background: #e0f2fe; color: #0369a1;">O‘rtacha ball</th>
-              <th style="text-align: center; width: 90px;">O‘rni</th>
+              <th style="text-align: center; background: #e0f2fe; color: #0369a1;">Örtaça ball</th>
+              <th style="text-align: center; width: 90px;">Örni</th>
               <th style="text-align: center; width: 140px;">Status</th>
             </tr>
           </thead>
@@ -134,23 +135,23 @@
       </div>
     </div>
 
-    <!-- Teng ballar yuzaga kelganda o'rinlarni aniqlash (Tie-breaker) qoidasi -->
+    <!-- Teng ballar yuzaga kelganda örinlarni aniqlash (Tie-breaker) qoidasi -->
     <div class="card" style="border-left: 5px solid #0284c7; background: linear-gradient(135deg, #ffffff 0%, #f0f9ff 100%); margin-bottom: 24px;">
       <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 12px;">
         <i class="fa-solid fa-scale-balanced" style="font-size: 24px; color: #0284c7;"></i>
         <h3 style="font-size: 18px; font-weight: 800; color: var(--dark); margin: 0;">
-          Teng ballar yuzaga kelganda o‘rinlarni aniqlash tartibi (Rasmiy Nizom qoidasi):
+          Teng ballar yuzaga kelganda örinlarni aniqlaş tartibi (Rasmiy Nizom qoidasi):
         </h3>
       </div>
       <p style="font-size: 13.5px; color: #475569; margin-bottom: 14px;">
-        Agar bir nechta jamoa yoki ishtirokchilarning umumiy o‘rtacha bali teng kelib qolsa, tizim avtomatik ravishda quyidagi <strong>7 bosqichli qat'iy ketma-ketlik</strong> böyiça yuqori o‘rinni aniqlaydi:
+        Agar bir neçta jamoa yoki iştirokçilarning umumiy örtaça bali teng kelib qolsa, tizim avtomatik ravişda quyidagi <strong>7 bosqiçli qatʼiy ketma-ketlik</strong> böyiça yuqori örinni aniqlaydi:
       </p>
 
       <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 12px;">
         <div style="background: white; border: 1.5px solid #bbf7d0; border-radius: 12px; padding: 12px 16px;">
-          <div style="color: #166534; font-weight: 800; font-size: 13px;">1-USTUNLIK (Birlamchi mezon):</div>
+          <div style="color: #166534; font-weight: 800; font-size: 13px;">1-USTUNLIK (Birlamçi mezon):</div>
           <div style="font-size: 14px; font-weight: 700; color: #1e293b; margin-top: 2px;">3-mezon: Texnik sifat va amaliy işlanma</div>
-          <div style="font-size: 12px; color: #64748b; margin-top: 2px;">Tayyor ishchi model, maket yoki dasturiy yechimning puxtaligi bali yuqorisi.</div>
+          <div style="font-size: 12px; color: #64748b; margin-top: 2px;">Tayyor işçi model, maket yoki dasturiy yeçimning puxtaligi bali yuqorisi.</div>
         </div>
 
         <div style="background: white; border: 1.5px solid #bae6fd; border-radius: 12px; padding: 12px 16px;">
@@ -162,50 +163,50 @@
         <div style="background: white; border: 1.5px solid #e2e8f0; border-radius: 12px; padding: 12px 16px;">
           <div style="color: #475569; font-weight: 800; font-size: 13px;">3-USTUNLIK:</div>
           <div style="font-size: 14px; font-weight: 700; color: #1e293b; margin-top: 2px;">4-mezon: Innovatsionlik va ijodiy yondaşuv</div>
-          <div style="font-size: 12px; color: #64748b; margin-top: 2px;">Yangi g‘oya va yangicha texnologiyalar qo‘llanilganligi bali yuqorisi.</div>
+          <div style="font-size: 12px; color: #64748b; margin-top: 2px;">Yangi ğoya va yangiça texnologiyalar qöllanilganligi bali yuqorisi.</div>
         </div>
 
         <div style="background: white; border: 1.5px solid #e2e8f0; border-radius: 12px; padding: 12px 16px;">
           <div style="color: #475569; font-weight: 800; font-size: 13px;">4-USTUNLIK:</div>
           <div style="font-size: 14px; font-weight: 700; color: #1e293b; margin-top: 2px;">5-mezon: Kutilayotgan natijalar va analoglardan afzallik</div>
-          <div style="font-size: 12px; color: #64748b; margin-top: 2px;">Real muammolarni hal qilish va iqtisodiy asoslanganlik bali yuqorisi.</div>
+          <div style="font-size: 12px; color: #64748b; margin-top: 2px;">Real muammolarni hal qiliş va iqtisodiy asoslanganlik bali yuqorisi.</div>
         </div>
 
         <div style="background: white; border: 1.5px solid #e2e8f0; border-radius: 12px; padding: 12px 16px;">
           <div style="color: #475569; font-weight: 800; font-size: 13px;">5-USTUNLIK:</div>
           <div style="font-size: 14px; font-weight: 700; color: #1e293b; margin-top: 2px;">1-mezon: Tanlov yönalişlariga moslik</div>
-          <div style="font-size: 12px; color: #64748b; margin-top: 2px;">Yo‘nalish chuqur o‘rganilganligi va muammolar aniq ko‘rsatilganligi.</div>
+          <div style="font-size: 12px; color: #64748b; margin-top: 2px;">Yönaliş çuqur örganilganligi va muammolar aniq körsatilganligi.</div>
         </div>
 
         <div style="background: white; border: 1.5px solid #fef08a; border-radius: 12px; padding: 12px 16px;">
           <div style="color: #854d0e; font-weight: 800; font-size: 13px;">6-USTUNLIK (Iştirokçilar soni):</div>
-          <div style="font-size: 14px; font-weight: 700; color: #1e293b; margin-top: 2px;">Individual ishtirokchi (1 kishi) > Jamoa</div>
-          <div style="font-size: 12px; color: #64748b; margin-top: 2px;">Dastlab 1 kishilik individual iştirokçiga, so‘ng a’zolari kamroq jamoaga ustunlik.</div>
+          <div style="font-size: 14px; font-weight: 700; color: #1e293b; margin-top: 2px;">Individual iştirokçi (1 kişi) &gt; Jamoa</div>
+          <div style="font-size: 12px; color: #64748b; margin-top: 2px;">Dastlab 1 kişilik individual iştirokçiga, söng aʼzolari kamroq jamoaga ustunlik.</div>
         </div>
 
         <div style="background: white; border: 1.5px solid #fbcfe8; border-radius: 12px; padding: 12px 16px;">
           <div style="color: #9d174d; font-weight: 800; font-size: 13px;">7-USTUNLIK (Tuğilgan sana / Yoşi):</div>
           <div style="font-size: 14px; font-weight: 700; color: #1e293b; margin-top: 2px;">Yoşroq iştirokçiga ustunlik</div>
-          <div style="font-size: 12px; color: #64748b; margin-top: 2px;">Tuğilgan sanasi böyiça yoshroq (jamoaning o‘rtacha yoshi kichikroq) iştirokçiga ustunlik beriladi.</div>
+          <div style="font-size: 12px; color: #64748b; margin-top: 2px;">Tuğilgan sanasi böyiça yoşroq (jamoaning örtaça yoşi kiçikroq) iştirokçiga ustunlik beriladi.</div>
         </div>
       </div>
     </div>
 
-    <!-- 5 ta yönaliş ma'lumot bloki -->
+    <!-- 5 ta yönaliş maʼlumot bloki -->
     <div class="card" style="border-left: 5px solid var(--secondary);">
       <h3 style="margin-bottom: 12px;"><i class="fa-solid fa-compass" style="color: var(--secondary);"></i> Tanlovning 5 ta ustuvor yönalişi (Nizom talablari):</h3>
       <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 14px;">
         <div style="background: #f8fafc; padding: 14px; border-radius: 10px; border: 1px solid var(--border);">
           <strong>1. Taʼlim</strong>
-          <p style="font-size: 12px; color: #64748b; margin-top: 4px;">O‘quv jarayonini yaxshilovchi yangi pedagogik vositalar va simulyatorlar.</p>
+          <p style="font-size: 12px; color: #64748b; margin-top: 4px;">Öquv jarayonini yaxşilovçi yangi pedagogik vositalar va simulyatorlar.</p>
         </div>
         <div style="background: #f8fafc; padding: 14px; border-radius: 10px; border: 1px solid var(--border);">
           <strong>2. Axborot texnologiyalari (IT)</strong>
-          <p style="font-size: 12px; color: #64748b; margin-top: 4px;">Dasturiy mahsulotlar, sun'iy intellekt, robototexnika va veb-yeçimlar.</p>
+          <p style="font-size: 12px; color: #64748b; margin-top: 4px;">Dasturiy mahsulotlar, sunʼiy intellekt, robototexnika va veb-yeçimlar.</p>
         </div>
         <div style="background: #f8fafc; padding: 14px; border-radius: 10px; border: 1px solid var(--border);">
           <strong>3. Yaşil energiya</strong>
-          <p style="font-size: 12px; color: #64748b; margin-top: 4px;">Quyaş, şamol, muqobil energiya va energiya tejovchi qurilmalar.</p>
+          <p style="font-size: 12px; color: #64748b; margin-top: 4px;">Quyoş, şamol, muqobil energiya va energiya tejovçi qurilmalar.</p>
         </div>
         <div style="background: #f8fafc; padding: 14px; border-radius: 10px; border: 1px solid var(--border);">
           <strong>4. Ekologiya va iqlim özgarişi</strong>
@@ -219,7 +220,7 @@
     </div>
   </div>
 
-  <script src="data.js?v=20261120_1710"></script>
+  <script src="data.js?v=20261120_1830"></script>
   <script>
     let currentData = loadIxtirochilikData();
     if (!currentData.projects || currentData.projects.length < 16) {
@@ -319,7 +320,7 @@
       const entered = prompt("Google Apps Script Web App URL manzilini kiriting:\n(Google Sheet -> Extensions -> Apps Script -> Deploy -> Web app):", current);
       if (entered !== null) {
         setGoogleSheetsApiUrl(entered);
-        alert(entered.trim() ? "Google Sheet ulanish manzili saqlandi!" : "Ulanish manzili tozalandi (Mahalliy rejim).");
+        alert(entered.trim() ? "Google Sheet ulaniş manzili saqlandi!" : "Ulaniş manzili tozalandi (Mahalliy rejim).");
         loadLiveSheetsData();
       }
     }
