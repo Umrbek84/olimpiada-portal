@@ -20,28 +20,32 @@
         “Ixtirochilikka qadam” tanlovi 2-bosqichi hakamlar hay'ati a'zosi PIN kodini kiriting
       </p>
 
-      <input type="password" id="pinInput" class="pin-input" maxlength="4" placeholder="••••" autofocus onkeyup="if(event.key==='Enter'||this.value.length===4) loginJudge()">
+      <input type="password" id="pinInput" class="pin-input" maxlength="4" placeholder="••••" autofocus onkeyup="if(event.key==='Enter') loginJudge()">
       
       <button onclick="loginJudge()" class="btn btn-primary" style="width: 100%; justify-content: center; padding: 14px; font-size: 16px;">
         <i class="fa-solid fa-right-to-bracket"></i> Tizimga kirish
       </button>
-
-      <div style="margin-top: 24px; padding-top: 14px; border-top: 1px solid var(--border); font-size: 12px; color: #94a3b8; text-align: left;">
-        <strong>Namunaviy hakamlar PIN kodlari:</strong><br>
-        • 2001: Informatika fani o‘qituvchisi<br>
-        • 2002: Fizika fani o‘qituvchisi<br>
-        • 2003: Biologiya fani o‘qituvchisi<br>
-        • 2004: Kimyo fani o‘qituvchisi<br>
-        • 2005: Sohaga oid mutaxassis (IT)<br>
-        • 2006: Sohaga oid mutaxassis (Ekologiya)<br>
-        • 2007: Sohaga oid mutaxassis (Innovatsiya)
-      </div>
 
       <div style="margin-top: 14px;">
         <a href="index.html" style="font-size: 13px; color: var(--primary); text-decoration: none;">
           ← Umumiy natijalarga qaytish
         </a>
       </div>
+    </div>
+
+    <!-- Xush kelibsiz ekrani -->
+    <div id="welcomeScreen" class="pin-card" style="display:none;">
+      <div style="font-size: 56px; color: #059669; margin-bottom: 10px;"><i class="fa-solid fa-circle-check"></i></div>
+      <p style="color:#64748b; font-size:14px;">PIN kod tasdiqlandi</p>
+      <h2 id="welcomeName" style="margin: 8px 0 4px;"></h2>
+      <p id="welcomeRole" style="color:#475569; font-size:14px; margin-bottom: 8px;"></p>
+      <p style="color:#64748b; font-size:13px;">Siz “Ixtirochilikka qadam” tanlovi hakamlar hay'ati a'zosi sifatida kabinetga kirmoqdasiz. Barcha baholaringiz shaxsiy hisoblanadi.</p>
+      <button onclick="enterCabinet()" class="btn btn-primary" style="width:100%; justify-content:center; padding:14px; font-size:16px; margin-top:20px;">
+        <i class="fa-solid fa-door-open"></i> Kabinetga kirish
+      </button>
+      <button onclick="cancelWelcome()" class="btn btn-outline" style="width:100%; justify-content:center; margin-top:10px;">
+        Bekor qilish (boshqa PIN)
+      </button>
     </div>
 
     <!-- Hakam Baholash Kabineti -->
@@ -94,7 +98,23 @@
 
       currentJudge = j;
       document.getElementById("pinScreen").style.display = "none";
+      document.getElementById("welcomeScreen").style.display = "block";
+      document.getElementById("welcomeName").innerText = "Xush kelibsiz, " + j.name.split(":")[0] + "!";
+      document.getElementById("welcomeRole").innerText = j.role;
+    }
+
+    function cancelWelcome() {
+      currentJudge = null;
+      document.getElementById("welcomeScreen").style.display = "none";
+      document.getElementById("pinScreen").style.display = "block";
+      document.getElementById("pinInput").value = "";
+    }
+
+    function enterCabinet() {
+      const j = currentJudge;
+      document.getElementById("welcomeScreen").style.display = "none";
       document.getElementById("judgeCabinet").style.display = "block";
+      window.scrollTo(0, 0);
 
       document.getElementById("activeJudgeName").innerText = j.name;
       document.getElementById("activeJudgeRole").innerText = `Hakamlar hay'ati a'zosi · 5 ta mezon bo‘yicha 100 ballik baholash tizimi`;
@@ -215,6 +235,13 @@
               <button class="chip-btn" onclick="setScore(${proj.id}, 'c5', 20)">16-20 (Real afzal)</button>
             </div>
           </div>
+
+          <div style="display:flex; justify-content:space-between; align-items:center; gap:12px; flex-wrap:wrap; margin-top:6px;">
+            <span id="savedMark_${proj.id}" style="font-size:13px; font-weight:700; color:#059669;">${(proj.evaluations && proj.evaluations[currentJudge.id]) ? "✓ Saqlangan" : ""}</span>
+            <button class="btn btn-success" onclick="saveOne(${proj.id})">
+              <i class="fa-solid fa-floppy-disk"></i> Shu loyiha bahosini saqlash
+            </button>
+          </div>
         `;
         container.appendChild(card);
         updateLiveTotal(proj.id);
@@ -235,6 +262,31 @@
 
       const total = c1 + c2 + c3 + c4 + c5;
       document.getElementById(`totalDisplay_${projId}`).innerText = `${total} / 100`;
+    }
+
+    function readEval(p) {
+      const g = (k) => document.getElementById(`${k}_${p.id}`).value;
+      const c = { c1: g("c1"), c2: g("c2"), c3: g("c3"), c4: g("c4"), c5: g("c5") };
+      if (Object.values(c).every(v => v === "")) return null;
+      const lim = { c1: 10, c2: 25, c3: 25, c4: 20, c5: 20 };
+      const out = {};
+      for (const k in c) out[k] = c[k] !== "" ? Math.min(lim[k], Math.max(0, Number(c[k]))) : null;
+      return out;
+    }
+
+    function saveOne(projId) {
+      if (!currentJudge) return;
+      const p = appData.projects.find(x => x.id === projId);
+      const ev = readEval(p);
+      if (!ev) { alert("Avval baho kiriting."); return; }
+      if (Object.values(ev).some(v => v === null)) {
+        if (!confirm("Ba'zi mezonlar bo‘sh qoldi. Shunday saqlansinmi?")) return;
+      }
+      if (!p.evaluations) p.evaluations = {};
+      p.evaluations[currentJudge.id] = ev;
+      saveIxtirochilikData(appData);
+      document.getElementById(`savedMark_${projId}`).innerText = "✓ Saqlandi";
+      updateLiveTotal(projId);
     }
 
     function saveEvaluations() {
@@ -265,6 +317,7 @@
     }
 
     function logoutJudge() {
+      if (!confirm("Tizimdan chiqmoqchimisiz? Saqlanmagan baholar yo‘qoladi.")) return;
       currentJudge = null;
       document.getElementById("judgeCabinet").style.display = "none";
       document.getElementById("pinScreen").style.display = "block";

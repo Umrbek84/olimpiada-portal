@@ -1,4 +1,4 @@
-// "Ixtirochilikka qadam" tanlovi (2-tuman bosqichi) - Rasmiy Nizom va Mezonlar Bazasi
+﻿// "Ixtirochilikka qadam" tanlovi (2-tuman bosqichi) - Rasmiy Nizom va Mezonlar Bazasi
 // O'zbekiston Respublikasi Ta'lim va ilm-fan vazirligi xatiga 1-, 2-, 3-ilovalar asosida
 
 const IXTIROCHILIK_CONFIG = {
@@ -111,11 +111,13 @@ const IXTIROCHILIK_CONFIG = {
           "members": [
               {
                   "name": "ABDULLAYEV JAMSHIDBEK DIYOR O‘G‘LI",
-                  "birthDate": "2012-12-28"
+                  "birthDate": "2012-12-28",
+                  "grade": "8-sinf"
               },
               {
                   "name": "OTAJONOV AKROMJON G‘ULOMJON O‘G‘LI",
-                  "birthDate": "2011-11-13"
+                  "birthDate": "2011-11-13",
+                  "grade": "9-sinf"
               }
           ],
           "evaluations": {}
@@ -130,7 +132,8 @@ const IXTIROCHILIK_CONFIG = {
           "members": [
               {
                   "name": "RAVSHANBEKOV MIRJALOL MIRKAMOL O‘G‘LI",
-                  "birthDate": "2014-11-19"
+                  "birthDate": "2014-11-19",
+                  "grade": "6-sinf"
               }
           ],
           "evaluations": {}
@@ -145,7 +148,8 @@ const IXTIROCHILIK_CONFIG = {
           "members": [
               {
                   "name": "NORXONOV BUNYODBEK QUVANDIQ O‘G‘LI",
-                  "birthDate": "2014-04-23"
+                  "birthDate": "2014-04-23",
+                  "grade": "7-sinf"
               }
           ],
           "evaluations": {}
@@ -160,7 +164,8 @@ const IXTIROCHILIK_CONFIG = {
           "members": [
               {
                   "name": "MASHARIPOV JAVOHIR HASANBOY O‘G‘LI",
-                  "birthDate": "2012-09-07"
+                  "birthDate": "2012-09-07",
+                  "grade": "7-sinf"
               }
           ],
           "evaluations": {}
@@ -175,7 +180,8 @@ const IXTIROCHILIK_CONFIG = {
           "members": [
               {
                   "name": "PO‘LATOV NURBEK MUXAMMAD O‘G‘LI",
-                  "birthDate": "2014-08-26"
+                  "birthDate": "2014-08-26",
+                  "grade": "6-sinf"
               }
           ],
           "evaluations": {}
@@ -190,7 +196,8 @@ const IXTIROCHILIK_CONFIG = {
           "members": [
               {
                   "name": "FAYZULLAYEV BOYMUROD BOBOMUROD O‘G‘LI",
-                  "birthDate": "2009-10-23"
+                  "birthDate": "2009-10-23",
+                  "grade": "11-sinf"
               }
           ],
           "evaluations": {}
@@ -205,15 +212,18 @@ const IXTIROCHILIK_CONFIG = {
           "members": [
               {
                   "name": "RAJABOV ELMUROD XOLMUROD O‘G‘LI",
-                  "birthDate": "2013-09-21"
+                  "birthDate": "2013-09-21",
+                  "grade": "7-sinf"
               },
               {
                   "name": "BEKCHANOV KAMRONBEK OZODBOY O‘G‘LI",
-                  "birthDate": "2012-08-10"
+                  "birthDate": "2012-08-10",
+                  "grade": "8-sinf"
               },
               {
                   "name": "BAXTIYOROV KAMRONBEK ELDORBEK O‘G‘LI",
-                  "birthDate": "2014-07-21"
+                  "birthDate": "2014-07-21",
+                  "grade": "6-sinf"
               }
           ],
           "evaluations": {}
@@ -228,11 +238,13 @@ const IXTIROCHILIK_CONFIG = {
           "members": [
               {
                   "name": "OTAMURODOV BILOLBEK BUNYOD O‘G‘LI",
-                  "birthDate": "2015-08-20"
+                  "birthDate": "2015-08-20",
+                  "grade": "5-sinf"
               },
               {
                   "name": "SHUXRATOV ABDULAZIZ ABDULLA O‘G‘LI",
-                  "birthDate": "2015-07-31"
+                  "birthDate": "2015-07-31",
+                  "grade": "5-sinf"
               }
           ],
           "evaluations": {}
@@ -247,15 +259,18 @@ const IXTIROCHILIK_CONFIG = {
           "members": [
               {
                   "name": "SANJARBEKOV MIRALI SANJARBEK O‘G‘LI",
-                  "birthDate": "2011-08-27"
+                  "birthDate": "2011-08-27",
+                  "grade": "9-sinf"
               },
               {
                   "name": "QADAMBOYEV JO‘SHQINBEK MANSURBEK O‘G‘LI",
-                  "birthDate": "2013-09-20"
+                  "birthDate": "2013-09-20",
+                  "grade": "7-sinf"
               },
               {
                   "name": "RAVSHANBEKOV ASADBEK ISLOMBEK O‘G‘LI",
-                  "birthDate": "2013-08-05"
+                  "birthDate": "2013-08-05",
+                  "grade": "7-sinf"
               }
           ],
           "evaluations": {}
@@ -270,7 +285,8 @@ const IXTIROCHILIK_CONFIG = {
           "members": [
               {
                   "name": "OMONBOYEV NOSIRBEK NODIRBEKOVICH",
-                  "birthDate": "2013-04-12"
+                  "birthDate": "2013-04-12",
+                  "grade": "7-sinf"
               }
           ],
           "evaluations": {}
@@ -285,11 +301,13 @@ const IXTIROCHILIK_CONFIG = {
           "members": [
               {
                   "name": "DO‘SCHANOV MURODBEK UMRBEK O‘G‘LI",
-                  "birthDate": "2014-11-19"
+                  "birthDate": "2014-11-19",
+                  "grade": "6-sinf"
               },
               {
                   "name": "SULTONMUROTOV ERKABOY ULUG‘BEK O‘G‘LI",
-                  "birthDate": "2014-03-10"
+                  "birthDate": "2014-03-10",
+                  "grade": "6-sinf"
               }
           ],
           "evaluations": {}
@@ -304,7 +322,24 @@ const IXTIROCHILIK_CONFIG = {
           "members": [
               {
                   "name": "OTANAZAROV XOLMIRZO ERGASH O‘G‘LI",
-                  "birthDate": "2011-10-15"
+                  "birthDate": "2011-10-15",
+                  "grade": "9-sinf"
+              }
+          ],
+          "evaluations": {}
+      },
+      {
+          "id": 13,
+          "siteId": 1771,
+          "school": "29-son umumiy o‘rta ta’lim maktabi",
+          "projectName": "Batareya yordamida harakatlanuvchi mashina",
+          "direction": "Axborot texnologiyalari (IT)",
+          "isTeam": false,
+          "members": [
+              {
+                  "name": "SOBIROV SHOHJAHON XURMATBEK O‘G‘LI",
+                  "birthDate": "2012-06-10",
+                  "grade": "8-sinf"
               }
           ],
           "evaluations": {}
@@ -314,7 +349,7 @@ const IXTIROCHILIK_CONFIG = {
 
 // LocalStorage dan yuklash
 function loadIxtirochilikData() {
-  const saved = localStorage.getItem("ixtirochilik_data_v2");
+  const saved = localStorage.getItem("ixtirochilik_data_v3");
   if (saved) {
     try {
       return JSON.parse(saved);
@@ -327,7 +362,7 @@ function loadIxtirochilikData() {
 }
 
 function saveIxtirochilikData(data) {
-  localStorage.setItem("ixtirochilik_data_v2", JSON.stringify(data));
+  localStorage.setItem("ixtirochilik_data_v3", JSON.stringify(data));
 }
 
 // Nizom bo'yicha hisoblash va tenglikda ustunlik algoritmi
@@ -429,3 +464,4 @@ function calculateIxtirochilikRanking(projects) {
 
   return calculated;
 }
+
