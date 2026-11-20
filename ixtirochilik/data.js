@@ -401,23 +401,55 @@ const IXTIROCHILIK_CONFIG = {
 
 // LocalStorage dan yuklash
 function loadIxtirochilikData() {
-  const saved = localStorage.getItem("ixtirochilik_data_v4");
+  let data = null;
+  const saved = localStorage.getItem("ixtirochilik_data_v5") || localStorage.getItem("ixtirochilik_data_v4");
   if (saved) {
     try {
-      const parsed = JSON.parse(saved);
-      parsed.judges = IXTIROCHILIK_CONFIG.judges;
-      parsed.committee = IXTIROCHILIK_CONFIG.committee;
-      return parsed;
+      data = JSON.parse(saved);
     } catch (e) {
-      console.error(e);
+      data = null;
     }
   }
-  saveIxtirochilikData(IXTIROCHILIK_CONFIG);
-  return IXTIROCHILIK_CONFIG;
+
+  if (!data) {
+    data = JSON.parse(JSON.stringify(IXTIROCHILIK_CONFIG));
+  } else {
+    data.judges = IXTIROCHILIK_CONFIG.judges;
+    data.committee = IXTIROCHILIK_CONFIG.committee;
+    data.directions = IXTIROCHILIK_CONFIG.directions;
+    data.criteria = IXTIROCHILIK_CONFIG.criteria;
+
+    if (!Array.isArray(data.projects)) data.projects = [];
+
+    // Barcha yangi loyihalarni saqlangan baholarni yo'qotmagan holda qo'shish
+    IXTIROCHILIK_CONFIG.projects.forEach(cp => {
+      const existing = data.projects.find(p => p.id === cp.id || p.siteId === cp.siteId);
+      if (!existing) {
+        data.projects.push(JSON.parse(JSON.stringify(cp)));
+      } else {
+        existing.school = cp.school;
+        existing.projectName = cp.projectName;
+        existing.direction = cp.direction;
+        existing.members = cp.members;
+        existing.isTeam = cp.isTeam;
+        existing.siteId = cp.siteId;
+      }
+    });
+
+    data.projects.sort((a, b) => a.id - b.id);
+  }
+
+  saveIxtirochilikData(data);
+  return data;
 }
 
 function saveIxtirochilikData(data) {
-  localStorage.setItem("ixtirochilik_data_v4", JSON.stringify(data));
+  try {
+    localStorage.setItem("ixtirochilik_data_v5", JSON.stringify(data));
+    localStorage.setItem("ixtirochilik_data_v4", JSON.stringify(data));
+  } catch (e) {
+    console.warn("Saqlashda xatolik:", e);
+  }
 }
 
 // Nizom bo'yicha hisoblash va tenglikda ustunlik algoritmi (Tie-breaker)
