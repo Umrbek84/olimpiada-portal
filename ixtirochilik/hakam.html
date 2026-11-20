@@ -285,7 +285,10 @@
       if (!p.evaluations) p.evaluations = {};
       p.evaluations[currentJudge.id] = ev;
       saveIxtirochilikData(appData);
-      document.getElementById(`savedMark_${projId}`).innerText = "✓ Saqlandi";
+      document.getElementById(`savedMark_${projId}`).innerText = "✓ Saqlanmoqda...";
+      syncScoreToGoogleSheets(projId, currentJudge.id, ev).then(res => {
+        document.getElementById(`savedMark_${projId}`).innerText = res.ok ? "✓ Saqlandi (Google Sheet)" : "✓ Saqlandi (Mahalliy)";
+      });
       updateLiveTotal(projId);
     }
 
@@ -313,7 +316,12 @@
       });
 
       saveIxtirochilikData(appData);
-      alert("Hakam baholari muvaffaqiyatli saqlandi va umumiy bazaga yozildi!");
+      appData.projects.forEach(p => {
+        if (p.evaluations && p.evaluations[currentJudge.id]) {
+          syncScoreToGoogleSheets(p.id, currentJudge.id, p.evaluations[currentJudge.id]);
+        }
+      });
+      alert("Hakam baholari muvaffaqiyatli saqlandi va Google Sheetga yuborildi!");
     }
 
     function logoutJudge() {

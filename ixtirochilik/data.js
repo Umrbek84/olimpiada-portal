@@ -465,3 +465,53 @@ function calculateIxtirochilikRanking(projects) {
   return calculated;
 }
 
+
+// =========================================================================
+// GOOGLE SHEETS JONLI SINXRONLASH VA PIN TEKSHIRISH
+// =========================================================================
+function getGoogleSheetsApiUrl() {
+  return localStorage.getItem("ixtirochilik_sheets_api_url") || "";
+}
+
+function setGoogleSheetsApiUrl(url) {
+  localStorage.setItem("ixtirochilik_sheets_api_url", url ? url.trim() : "");
+}
+
+async function syncScoreToGoogleSheets(projectId, judgeId, scores) {
+  const url = getGoogleSheetsApiUrl();
+  if (!url) return { ok: false, localOnly: true };
+
+  try {
+    await fetch(url, {
+      method: "POST",
+      mode: "no-cors",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        action: "save_score",
+        projectId: projectId,
+        judgeId: judgeId,
+        scores: scores
+      })
+    });
+    return { ok: true };
+  } catch (err) {
+    console.warn("Google Sheetga yuborishda xatolik:", err);
+    return { ok: false, error: err };
+  }
+}
+
+async function fetchLiveScoresFromGoogleSheets() {
+  const url = getGoogleSheetsApiUrl();
+  if (!url) return null;
+
+  try {
+    const res = await fetch(url + (url.includes("?") ? "&" : "?") + "action=get_data");
+    const json = await res.json();
+    if (json && json.status === "success" && json.evaluations) {
+      return json.evaluations;
+    }
+  } catch (err) {
+    console.warn("Google Sheetdan o'qishda xatolik:", err);
+  }
+  return null;
+}

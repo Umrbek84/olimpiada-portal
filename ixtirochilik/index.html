@@ -98,6 +98,9 @@
             <option value="Ekologiya va iqlim o‘zgarishi">Ekologiya va iqlim o‘zgarishi</option>
             <option value="Qishloq xo‘jaligi">Qishloq xo‘jaligi</option>
           </select>
+          <button onclick="configureSheetsUrl()" class="btn btn-outline" style="font-size: 13px; color: #059669; border-color: #a7f3d0;" title="Google Sheet bazasi ulanishi">
+            <i class="fa-solid fa-cloud-arrow-up"></i> Google Sheet
+          </button>
           <button onclick="exportToCsv()" class="btn btn-outline" style="font-size: 13px;">
             <i class="fa-solid fa-file-excel"></i> Excelga yuklash
           </button>
@@ -249,7 +252,31 @@
       a.click();
     }
 
+    function configureSheetsUrl() {
+      const current = getGoogleSheetsApiUrl();
+      const entered = prompt("Google Apps Script Web App URL manzilini kiriting:\n(Google Sheet -> Extensions -> Apps Script -> Deploy -> Web app):", current);
+      if (entered !== null) {
+        setGoogleSheetsApiUrl(entered);
+        alert(entered.trim() ? "Google Sheet ulanish manzili saqlandi!" : "Ulanish manzili tozalandi (Mahalliy rejim).");
+        loadLiveSheetsData();
+      }
+    }
+
+    async function loadLiveSheetsData() {
+      const liveEvals = await fetchLiveScoresFromGoogleSheets();
+      if (liveEvals) {
+        currentData.projects.forEach(p => {
+          if (liveEvals[p.id]) {
+            p.evaluations = liveEvals[p.id];
+          }
+        });
+        saveIxtirochilikData(currentData);
+        renderTable();
+      }
+    }
+
     renderTable();
+    loadLiveSheetsData();
   </script>
 </body>
 </html>
