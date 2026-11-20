@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Rasmiy Qaydnomasi (Bayonnoma) - "Ixtirochilikka qadam"</title>
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="style.css?v=20261120_1620">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
   <style>
     .print-bar {
@@ -120,9 +120,13 @@
     </div>
   </div>
 
-  <script src="data.js"></script>
+  <script src="data.js?v=20261120_1620"></script>
   <script>
-    const currentData = loadIxtirochilikData();
+    let currentData = loadIxtirochilikData();
+    if (!currentData.projects || currentData.projects.length < 16) {
+      currentData = JSON.parse(JSON.stringify(IXTIROCHILIK_CONFIG));
+      saveIxtirochilikData(currentData);
+    }
     const ranked = calculateIxtirochilikRanking(currentData.projects);
     const tbody = document.getElementById("tableBodyOfficial");
 
