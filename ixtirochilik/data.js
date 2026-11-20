@@ -101,112 +101,220 @@ const IXTIROCHILIK_CONFIG = {
 
   // Maktablardan namunaviy jamoalar va loyihalar
   projects: [
-    {
-      id: 1,
-      school: "1-son umumta'lim maktabi",
-      projectName: "Aqlli quyosh panellari orientatsiya tizimi",
-      direction: "Yashil energiya",
-      isTeam: true,
-      members: [
-        { name: "O‘rozboyev Doniyorbek Alisher o‘g‘li", birthDate: "2010-04-12" },
-        { name: "Yo‘ldoshev Jasurbek Bobur o‘g‘li", birthDate: "2010-08-25" }
-      ],
-      // Hakamlar qo'ygan mezon ballari: { judgeId: { c1: 9, c2: 23, c3: 24, c4: 18, c5: 19 } }
-      evaluations: {
-        1: { c1: 10, c2: 24, c3: 24, c4: 19, c5: 19 },
-        2: { c1: 9, c2: 23, c3: 25, c4: 18, c5: 18 },
-        3: { c1: 9, c2: 22, c3: 23, c4: 18, c5: 19 },
-        4: { c1: 10, c2: 24, c3: 24, c4: 19, c5: 19 },
-        5: { c1: 9, c2: 23, c3: 25, c4: 19, c5: 18 },
-        6: { c1: 10, c2: 24, c3: 24, c4: 18, c5: 19 },
-        7: { c1: 9, c2: 23, c3: 24, c4: 18, c5: 18 }
+      {
+          "id": 1,
+          "siteId": 1709,
+          "school": "23-son umumiy o‘rta ta’lim maktabi",
+          "projectName": "Harakatlanuvchi qurilma",
+          "direction": "Axborot texnologiyalari (IT)",
+          "isTeam": true,
+          "members": [
+              {
+                  "name": "ABDULLAYEV JAMSHIDBEK DIYOR O‘G‘LI",
+                  "birthDate": "2012-12-28"
+              },
+              {
+                  "name": "OTAJONOV AKROMJON G‘ULOMJON O‘G‘LI",
+                  "birthDate": "2011-11-13"
+              }
+          ],
+          "evaluations": {}
+      },
+      {
+          "id": 2,
+          "siteId": 1660,
+          "school": "30-son umumiy o‘rta ta’lim maktabi",
+          "projectName": "Robot yordamchi",
+          "direction": "Axborot texnologiyalari (IT)",
+          "isTeam": false,
+          "members": [
+              {
+                  "name": "RAVSHANBEKOV MIRJALOL MIRKAMOL O‘G‘LI",
+                  "birthDate": "2014-11-19"
+              }
+          ],
+          "evaluations": {}
+      },
+      {
+          "id": 3,
+          "siteId": 1604,
+          "school": "32-son umumiy o‘rta ta’lim maktabi",
+          "projectName": "Robototexnika",
+          "direction": "Axborot texnologiyalari (IT)",
+          "isTeam": false,
+          "members": [
+              {
+                  "name": "NORXONOV BUNYODBEK QUVANDIQ O‘G‘LI",
+                  "birthDate": "2014-04-23"
+              }
+          ],
+          "evaluations": {}
+      },
+      {
+          "id": 4,
+          "siteId": 1575,
+          "school": "9-son ixtisoslashtirilgan maktab",
+          "projectName": "Robot ekskavator",
+          "direction": "Axborot texnologiyalari (IT)",
+          "isTeam": false,
+          "members": [
+              {
+                  "name": "MASHARIPOV JAVOHIR HASANBOY O‘G‘LI",
+                  "birthDate": "2012-09-07"
+              }
+          ],
+          "evaluations": {}
+      },
+      {
+          "id": 5,
+          "siteId": 1470,
+          "school": "25-son umumiy o‘rta ta’lim maktabi",
+          "projectName": "Robototexnika",
+          "direction": "Axborot texnologiyalari (IT)",
+          "isTeam": false,
+          "members": [
+              {
+                  "name": "PO‘LATOV NURBEK MUXAMMAD O‘G‘LI",
+                  "birthDate": "2014-08-26"
+              }
+          ],
+          "evaluations": {}
+      },
+      {
+          "id": 6,
+          "siteId": 1406,
+          "school": "6-son umumiy o‘rta ta’lim maktabi",
+          "projectName": "AGRO ROBOT (GROWERX)",
+          "direction": "Qishloq xo‘jaligi",
+          "isTeam": false,
+          "members": [
+              {
+                  "name": "FAYZULLAYEV BOYMUROD BOBOMUROD O‘G‘LI",
+                  "birthDate": "2009-10-23"
+              }
+          ],
+          "evaluations": {}
+      },
+      {
+          "id": 7,
+          "siteId": 1374,
+          "school": "51-son umumiy o‘rta ta’lim maktabi",
+          "projectName": "Quyosh energiyasida ishlaydigan o‘t maydalagich",
+          "direction": "Qishloq xo‘jaligi",
+          "isTeam": true,
+          "members": [
+              {
+                  "name": "RAJABOV ELMUROD XOLMUROD O‘G‘LI",
+                  "birthDate": "2013-09-21"
+              },
+              {
+                  "name": "BEKCHANOV KAMRONBEK OZODBOY O‘G‘LI",
+                  "birthDate": "2012-08-10"
+              },
+              {
+                  "name": "BAXTIYOROV KAMRONBEK ELDORBEK O‘G‘LI",
+                  "birthDate": "2014-07-21"
+              }
+          ],
+          "evaluations": {}
+      },
+      {
+          "id": 8,
+          "siteId": 1331,
+          "school": "20-son umumiy o‘rta ta’lim maktabi",
+          "projectName": "Robot yordamchi",
+          "direction": "Axborot texnologiyalari (IT)",
+          "isTeam": true,
+          "members": [
+              {
+                  "name": "OTAMURODOV BILOLBEK BUNYOD O‘G‘LI",
+                  "birthDate": "2015-08-20"
+              },
+              {
+                  "name": "SHUXRATOV ABDULAZIZ ABDULLA O‘G‘LI",
+                  "birthDate": "2015-07-31"
+              }
+          ],
+          "evaluations": {}
+      },
+      {
+          "id": 9,
+          "siteId": 1256,
+          "school": "5-son ixtisoslashtirilgan maktab",
+          "projectName": "Energiya tejaydigan uy",
+          "direction": "Yashil energiya",
+          "isTeam": true,
+          "members": [
+              {
+                  "name": "SANJARBEKOV MIRALI SANJARBEK O‘G‘LI",
+                  "birthDate": "2011-08-27"
+              },
+              {
+                  "name": "QADAMBOYEV JO‘SHQINBEK MANSURBEK O‘G‘LI",
+                  "birthDate": "2013-09-20"
+              },
+              {
+                  "name": "RAVSHANBEKOV ASADBEK ISLOMBEK O‘G‘LI",
+                  "birthDate": "2013-08-05"
+              }
+          ],
+          "evaluations": {}
+      },
+      {
+          "id": 10,
+          "siteId": 816,
+          "school": "14-son umumiy o‘rta ta’lim maktabi",
+          "projectName": "Robot-yordamchi",
+          "direction": "Yashil energiya",
+          "isTeam": false,
+          "members": [
+              {
+                  "name": "OMONBOYEV NOSIRBEK NODIRBEKOVICH",
+                  "birthDate": "2013-04-12"
+              }
+          ],
+          "evaluations": {}
+      },
+      {
+          "id": 11,
+          "siteId": 198,
+          "school": "42-son umumiy o‘rta ta’lim maktabi",
+          "projectName": "Aqlli uy",
+          "direction": "Axborot texnologiyalari (IT)",
+          "isTeam": true,
+          "members": [
+              {
+                  "name": "DO‘SCHANOV MURODBEK UMRBEK O‘G‘LI",
+                  "birthDate": "2014-11-19"
+              },
+              {
+                  "name": "SULTONMUROTOV ERKABOY ULUG‘BEK O‘G‘LI",
+                  "birthDate": "2014-03-10"
+              }
+          ],
+          "evaluations": {}
+      },
+      {
+          "id": 12,
+          "siteId": 139,
+          "school": "19-son umumiy o‘rta ta’lim maktabi",
+          "projectName": "Robot mashina",
+          "direction": "Axborot texnologiyalari (IT)",
+          "isTeam": false,
+          "members": [
+              {
+                  "name": "OTANAZAROV XOLMIRZO ERGASH O‘G‘LI",
+                  "birthDate": "2011-10-15"
+              }
+          ],
+          "evaluations": {}
       }
-    },
-    {
-      id: 2,
-      school: "4-son IDUM",
-      projectName: "AI-EkoDron: Ekinlarni masofadan kasalliklarini aniqlash",
-      direction: "Qishloq xo‘jaligi",
-      isTeam: false,
-      members: [
-        { name: "Karimova Mohinur Sanjar qizi", birthDate: "2010-02-15" }
-      ],
-      evaluations: {
-        1: { c1: 10, c2: 25, c3: 25, c4: 20, c5: 20 },
-        2: { c1: 10, c2: 24, c3: 25, c4: 20, c5: 19 },
-        3: { c1: 10, c2: 25, c3: 24, c4: 19, c5: 20 },
-        4: { c1: 10, c2: 24, c3: 25, c4: 20, c5: 19 },
-        5: { c1: 10, c2: 25, c3: 25, c4: 20, c5: 20 },
-        6: { c1: 10, c2: 25, c3: 25, c4: 20, c5: 20 },
-        7: { c1: 10, c2: 24, c3: 24, c4: 19, c5: 19 }
-      }
-    },
-    {
-      id: 3,
-      school: "12-son umumta'lim maktabi",
-      projectName: "Maktab laboratoriyalari uchun arzon virtual simulyator",
-      direction: "Ta‘lim",
-      isTeam: true,
-      members: [
-        { name: "Matyoqubova Sabina Farhod qizi", birthDate: "2009-11-05" },
-        { name: "Ro‘zmetova Dilnoza Mansur qizi", birthDate: "2010-01-20" },
-        { name: "Otajonova Madina Komil qizi", birthDate: "2010-06-18" }
-      ],
-      evaluations: {
-        1: { c1: 9, c2: 22, c3: 22, c4: 17, c5: 18 },
-        2: { c1: 8, c2: 21, c3: 23, c4: 18, c5: 17 },
-        3: { c1: 9, c2: 23, c3: 22, c4: 17, c5: 18 },
-        4: { c1: 8, c2: 20, c3: 22, c4: 16, c5: 17 },
-        5: { c1: 9, c2: 22, c3: 23, c4: 17, c5: 18 },
-        6: { c1: 8, c2: 21, c3: 22, c4: 18, c5: 17 },
-        7: { c1: 9, c2: 22, c3: 22, c4: 17, c5: 18 }
-      }
-    },
-    {
-      id: 4,
-      school: "2-son IDUM",
-      projectName: "Suvni tejovchi avtomatlashtirilgan tomchilatib sug‘orish datchigi",
-      direction: "Ekologiya va iqlim o‘zgarishi",
-      isTeam: false,
-      members: [
-        { name: "Bekchanov Sardorbek Otabek o‘g‘li", birthDate: "2010-09-10" }
-      ],
-      evaluations: {
-        1: { c1: 9, c2: 24, c3: 24, c4: 19, c5: 19 },
-        2: { c1: 10, c2: 23, c3: 24, c4: 18, c5: 19 },
-        3: { c1: 9, c2: 23, c3: 23, c4: 19, c5: 18 },
-        4: { c1: 10, c2: 24, c3: 24, c4: 18, c5: 19 },
-        5: { c1: 9, c2: 24, c3: 24, c4: 19, c5: 18 },
-        6: { c1: 9, c2: 23, c3: 24, c4: 18, c5: 19 },
-        7: { c1: 10, c2: 24, c3: 23, c4: 19, c5: 18 }
-      }
-    },
-    {
-      id: 5,
-      school: "18-son umumta'lim maktabi",
-      projectName: "Bio-plastik: Organik chiqindilardan qadoqlash materiali olish",
-      direction: "Ekologiya va iqlim o‘zgarishi",
-      isTeam: true,
-      members: [
-        { name: "Jumaniyozov Bobur Davron o‘g‘li", birthDate: "2010-07-14" },
-        { name: "Quryozov Sherzod Ilhom o‘g‘li", birthDate: "2010-12-01" }
-      ],
-      evaluations: {
-        1: { c1: 8, c2: 19, c3: 20, c4: 16, c5: 17 },
-        2: { c1: 8, c2: 20, c3: 21, c4: 17, c5: 16 },
-        3: { c1: 9, c2: 20, c3: 20, c4: 16, c5: 17 },
-        4: { c1: 9, c2: 21, c3: 21, c4: 17, c5: 17 },
-        5: { c1: 8, c2: 19, c3: 20, c4: 16, c5: 16 },
-        6: { c1: 9, c2: 20, c3: 21, c4: 17, c5: 17 },
-        7: { c1: 8, c2: 19, c3: 20, c4: 16, c5: 16 }
-      }
-    }
   ]
 };
 
 // LocalStorage dan yuklash
 function loadIxtirochilikData() {
-  const saved = localStorage.getItem("ixtirochilik_data");
+  const saved = localStorage.getItem("ixtirochilik_data_v2");
   if (saved) {
     try {
       return JSON.parse(saved);
@@ -219,7 +327,7 @@ function loadIxtirochilikData() {
 }
 
 function saveIxtirochilikData(data) {
-  localStorage.setItem("ixtirochilik_data", JSON.stringify(data));
+  localStorage.setItem("ixtirochilik_data_v2", JSON.stringify(data));
 }
 
 // Nizom bo'yicha hisoblash va tenglikda ustunlik algoritmi
