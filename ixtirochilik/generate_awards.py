@@ -2,34 +2,42 @@ import os
 import sys
 from PIL import Image, ImageDraw, ImageFont
 
-# Path to base templates
 BASE_DIR = r"C:\Users\Monitoring\.gemini\antigravity\scratch\olimpiada-portal\ixtirochilik"
-DIPLOM_BASE = os.path.join(BASE_DIR, "assets", "diplom_base.jpg")
-TASH_BASE = os.path.join(BASE_DIR, "assets", "tashakkurnoma_base.jpg")
+ASSETS_DIR = os.path.join(BASE_DIR, "assets")
 
-# Windows fonts
 FONT_TIMES = r"C:\Windows\Fonts\times.ttf"
 FONT_TIMES_BD = r"C:\Windows\Fonts\timesbd.ttf"
 
 def to_yangi_lotin(text):
-    """Yangi lotin yozuvi qoidalariga moslash"""
     if not text:
         return ""
     t = str(text)
-    # O' / G'
     t = t.replace("O'", "Õ").replace("o'", "õ")
     t = t.replace("Oʻ", "Õ").replace("oʻ", "õ")
     t = t.replace("O‘", "Õ").replace("o‘", "õ")
     t = t.replace("G'", "Ğ").replace("g'", "ğ")
     t = t.replace("Gʻ", "Ğ").replace("gʻ", "ğ")
     t = t.replace("G‘", "Ğ").replace("g‘", "ğ")
-    # Ch / Sh
     t = t.replace("CH", "Ç").replace("Ch", "Ç").replace("ch", "ç")
     t = t.replace("SH", "Ş").replace("Sh", "Ş").replace("sh", "ş")
     return t
 
+def get_diplom_base(place):
+    p = place if place in [1, 2, 3] else 1
+    path = os.path.join(ASSETS_DIR, f"diplom_base_{p}.jpg")
+    if not os.path.exists(path):
+        path = os.path.join(ASSETS_DIR, "diplom_base.jpg")
+    return Image.open(path).convert("RGB")
+
+def get_tash_base(place):
+    p = place if place in [1, 2, 3] else 1
+    path = os.path.join(ASSETS_DIR, f"tashakkurnoma_base_{p}.jpg")
+    if not os.path.exists(path):
+        path = os.path.join(ASSETS_DIR, "tashakkurnoma_base.jpg")
+    return Image.open(path).convert("RGB")
+
 def create_diploma(student_name, school, grade, direction, place, number="001"):
-    base = Image.open(DIPLOM_BASE).convert("RGB")
+    base = get_diplom_base(place)
     draw = ImageDraw.Draw(base)
 
     font_num = ImageFont.truetype(FONT_TIMES_BD, 26)
@@ -68,7 +76,6 @@ def create_diploma(student_name, school, grade, direction, place, number="001"):
 
     # 4. Student Name
     w_n = draw.textlength(student_clean, font=font_name)
-    # If text is too wide, reduce font size
     if w_n > 1400:
         font_name_smaller = ImageFont.truetype(FONT_TIMES_BD, 42)
         w_n = draw.textlength(student_clean, font=font_name_smaller)
@@ -79,7 +86,7 @@ def create_diploma(student_name, school, grade, direction, place, number="001"):
     return base
 
 def create_tashakkurnoma(teacher_name, school, role_or_subject, student_name, grade, direction, place, number="001"):
-    base = Image.open(TASH_BASE).convert("RGB")
+    base = get_tash_base(place)
     draw = ImageDraw.Draw(base)
 
     font_num = ImageFont.truetype(FONT_TIMES_BD, 26)
@@ -116,8 +123,9 @@ def create_tashakkurnoma(teacher_name, school, role_or_subject, student_name, gr
     w_sub = draw.textlength(sub_text, font=font_sub)
     draw.text(((1754 - w_sub)/2, 455), sub_text, font=font_sub, fill=(60, 60, 60))
 
-    # 5. Gold separator line
-    draw.line([(405, 505), (1345, 505)], fill=(212, 175, 55), width=3)
+    # 5. Metallic separator line
+    div_colors = {1: (212, 175, 55), 2: (168, 178, 188), 3: (180, 115, 80)}
+    draw.line([(405, 505), (1345, 505)], fill=div_colors.get(place, (212, 175, 55)), width=3)
 
     # 6. Minnatdorchilik matni
     grade_clean = to_yangi_lotin(grade if "sinf" in str(grade) else f"{grade}-sinf")
@@ -152,10 +160,9 @@ def main():
     output_img_dir = os.path.join(target_dir, "Goliblar_Rasmlar_2026")
     os.makedirs(output_img_dir, exist_ok=True)
 
-    # Example current top 3 winners
     winners = [
         {
-            "place": 1,
+            "place": 1, # OLTIN (GOLD)
             "school": "6-son umumiy õrta taʼlim maktabi",
             "project": "AGRO ROBOT (GROWERX)",
             "direction": "Qişloq xõjaligi",
@@ -166,7 +173,7 @@ def main():
             "teacher_role": "Informatika va axborot texnologiyalari fani õqituvçisi"
         },
         {
-            "place": 2,
+            "place": 2, # KUMUSH (SILVER)
             "school": "23-son umumiy õrta taʼlim maktabi",
             "project": "Harakatlanuvçi qurilma",
             "direction": "Axborot texnologiyalari (IT)",
@@ -178,7 +185,7 @@ def main():
             "teacher_role": "Fizika va robototexnika toʻgaragi rahbari"
         },
         {
-            "place": 3,
+            "place": 3, # BRONZA (BRONZE)
             "school": "9-son ixtisoslaştirilgan maktab",
             "project": "Robot ekskavator",
             "direction": "Axborot texnologiyalari (IT)",
@@ -195,6 +202,7 @@ def main():
 
     for w in winners:
         place = w["place"]
+        metal_name = "Oltin" if place == 1 else "Kumush" if place == 2 else "Bronza"
         # Generate diplomas for all team members
         for st in w["students"]:
             dip_img = create_diploma(
@@ -205,8 +213,8 @@ def main():
                 place=place,
                 number=str(cert_counter).zfill(3)
             )
-            clean_name = st["name"].replace(" ", "_").replace("'", "")
-            dip_path = os.path.join(output_img_dir, f"Diplom_{place}-orin_{clean_name}.jpg")
+            clean_name = st["name"].replace(" ", "_").replace("'", "").replace("ʻ", "").replace("ʼ", "")
+            dip_path = os.path.join(output_img_dir, f"Diplom_{place}-orin_{metal_name}_{clean_name}.jpg")
             dip_img.save(dip_path, quality=95)
             all_pages.append(dip_img)
             cert_counter += 1
@@ -223,8 +231,8 @@ def main():
                 place=place,
                 number=str(cert_counter).zfill(3)
             )
-            clean_tname = w["teacher"].replace(" ", "_").replace("'", "")
-            tash_path = os.path.join(output_img_dir, f"Tashakkurnoma_{place}-orin_ustoz_{clean_tname}.jpg")
+            clean_tname = w["teacher"].replace(" ", "_").replace("'", "").replace("ʻ", "").replace("ʼ", "")
+            tash_path = os.path.join(output_img_dir, f"Tashakkurnoma_{place}-orin_{metal_name}_ustoz_{clean_tname}.jpg")
             tash_img.save(tash_path, quality=95)
             all_pages.append(tash_img)
             cert_counter += 1
@@ -237,7 +245,7 @@ def main():
             append_images=all_pages[1:],
             resolution=150.0
         )
-        print(f"SUCCESS: Generated {len(all_pages)} award documents!")
+        print(f"SUCCESS: Generated {len(all_pages)} award documents with Gold, Silver, Bronze metals!")
         print(f"Unified PDF: {output_pdf}")
         print(f"Image files in: {output_img_dir}")
 

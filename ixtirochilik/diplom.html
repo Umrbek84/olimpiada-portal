@@ -448,21 +448,35 @@
     let currentDocType = "diplom"; // 'diplom' or 'tashakkur'
     let currentRanked = [];
 
-    const imgDiplomBase = new Image();
-    imgDiplomBase.src = "assets/diplom_base.jpg";
+    const imgDiplomBases = {
+      1: new Image(),
+      2: new Image(),
+      3: new Image()
+    };
+    imgDiplomBases[1].src = "assets/diplom_base_1.jpg";
+    imgDiplomBases[2].src = "assets/diplom_base_2.jpg";
+    imgDiplomBases[3].src = "assets/diplom_base_3.jpg";
 
-    const imgTashBase = new Image();
-    imgTashBase.src = "assets/tashakkurnoma_base.jpg";
+    const imgTashBases = {
+      1: new Image(),
+      2: new Image(),
+      3: new Image()
+    };
+    imgTashBases[1].src = "assets/tashakkurnoma_base_1.jpg";
+    imgTashBases[2].src = "assets/tashakkurnoma_base_2.jpg";
+    imgTashBases[3].src = "assets/tashakkurnoma_base_3.jpg";
 
     let imagesLoaded = 0;
     function checkLoaded() {
       imagesLoaded++;
-      if (imagesLoaded >= 2) {
+      if (imagesLoaded >= 6) {
         initAwardPage();
       }
     }
-    imgDiplomBase.onload = checkLoaded;
-    imgTashBase.onload = checkLoaded;
+    for (let i = 1; i <= 3; i++) {
+      imgDiplomBases[i].onload = checkLoaded;
+      imgTashBases[i].onload = checkLoaded;
+    }
 
     // Yangi Lotin Yozuvi o'zgartirish yordamchisi
     function toYangiLotin(str) {
@@ -588,7 +602,8 @@
 
       // 1. Asosiy shablon rasmini chizish
       if (currentDocType === "diplom") {
-        ctx.drawImage(imgDiplomBase, 0, 0, 1754, 1240);
+        const baseImg = imgDiplomBases[place] || imgDiplomBases[1];
+        ctx.drawImage(baseImg, 0, 0, 1754, 1240);
 
         // Box Number
         ctx.font = "bold 26px 'Times New Roman'";
@@ -621,8 +636,9 @@
         ctx.fillText(studentName, 1754 / 2, 675);
 
       } else {
-        // TAŞAKKURNOMA
-        ctx.drawImage(imgTashBase, 0, 0, 1754, 1240);
+        // TAŞAKKURNOMA (Oltin, Kumush, Bronza hoshiyalar)
+        const baseImg = imgTashBases[place] || imgTashBases[1];
+        ctx.drawImage(baseImg, 0, 0, 1754, 1240);
 
         // Box Number
         ctx.font = "bold 26px 'Times New Roman'";
@@ -649,8 +665,9 @@
         ctx.fillStyle = "#475569";
         ctx.fillText(`(${school}, ${teacherRole})`, 1754 / 2, 480);
 
-        // Oltin chiziq
-        ctx.strokeStyle = "#d4af37";
+        // Metal ajratuvchi chiziq (1-Oltin, 2-Kumush, 3-Bronza)
+        const divColors = { 1: "#d4af37", 2: "#a8b2bc", 3: "#b47350" };
+        ctx.strokeStyle = divColors[place] || "#d4af37";
         ctx.lineWidth = 3;
         ctx.beginPath();
         ctx.moveTo(405, 520);
