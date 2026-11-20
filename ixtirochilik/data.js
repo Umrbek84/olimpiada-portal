@@ -100,250 +100,303 @@ const IXTIROCHILIK_CONFIG = {
 
   // Maktablardan namunaviy jamoalar va loyihalar
   projects: [
+  {
+    "id": 1,
+    "siteId": 1709,
+    "school": "23-son umumiy õrta taʼlim maktabi",
+    "projectName": "Harakatlanuvçi qurilma",
+    "direction": "Axborot texnologiyalari (IT)",
+    "isTeam": true,
+    "members": [
       {
-          "id": 1,
-          "siteId": 1709,
-          "school": "23-son umumiy õrta taʼlim maktabi",
-          "projectName": "Harakatlanuvchi qurilma",
-          "direction": "Axborot texnologiyalari (IT)",
-          "isTeam": true,
-          "members": [
-              {
-                  "name": "ABDULLAYEV JAMŞIDBEK DIYOR ÕĞLI",
-                  "birthDate": "2012-12-28",
-                  "grade": "8-sinf"
-              },
-              {
-                  "name": "OTAJONOV AKROMJON ĞULOMJON ÕĞLI",
-                  "birthDate": "2011-11-13",
-                  "grade": "9-sinf"
-              }
-          ],
-          "evaluations": {}
+        "name": "ABDULLAYEV JAMŞIDBEK DIYOR ÕĞLI",
+        "birthDate": "2012-12-28",
+        "grade": "8-sinf"
       },
       {
-          "id": 2,
-          "siteId": 1660,
-          "school": "30-son umumiy õrta taʼlim maktabi",
-          "projectName": "Robot yordamchi",
-          "direction": "Axborot texnologiyalari (IT)",
-          "isTeam": false,
-          "members": [
-              {
-                  "name": "RAVŞANBEKOV MIRJALOL MIRKAMOL ÕĞLI",
-                  "birthDate": "2014-11-19",
-                  "grade": "6-sinf"
-              }
-          ],
-          "evaluations": {}
-      },
-      {
-          "id": 3,
-          "siteId": 1604,
-          "school": "32-son umumiy õrta taʼlim maktabi",
-          "projectName": "Robototexnika",
-          "direction": "Axborot texnologiyalari (IT)",
-          "isTeam": false,
-          "members": [
-              {
-                  "name": "NORXONOV BUNYODBEK QUVANDIQ ÕĞLI",
-                  "birthDate": "2014-04-23",
-                  "grade": "7-sinf"
-              }
-          ],
-          "evaluations": {}
-      },
-      {
-          "id": 4,
-          "siteId": 1575,
-          "school": "9-son ixtisoslashtirilgan maktab",
-          "projectName": "Robot ekskavator",
-          "direction": "Axborot texnologiyalari (IT)",
-          "isTeam": false,
-          "members": [
-              {
-                  "name": "MASHARIPOV JAVOHIR HASANBOY ÕĞLI",
-                  "birthDate": "2012-09-07",
-                  "grade": "7-sinf"
-              }
-          ],
-          "evaluations": {}
-      },
-      {
-          "id": 5,
-          "siteId": 1470,
-          "school": "25-son umumiy õrta taʼlim maktabi",
-          "projectName": "Robototexnika",
-          "direction": "Axborot texnologiyalari (IT)",
-          "isTeam": false,
-          "members": [
-              {
-                  "name": "PO‘LATOV NURBEK MUXAMMAD ÕĞLI",
-                  "birthDate": "2014-08-26",
-                  "grade": "6-sinf"
-              }
-          ],
-          "evaluations": {}
-      },
-      {
-          "id": 6,
-          "siteId": 1406,
-          "school": "6-son umumiy õrta taʼlim maktabi",
-          "projectName": "AGRO ROBOT (GROWERX)",
-          "direction": "Qişloq xõjaligi",
-          "isTeam": false,
-          "members": [
-              {
-                  "name": "FAYZULLAYEV BOYMUROD BOBOMUROD ÕĞLI",
-                  "birthDate": "2009-10-23",
-                  "grade": "11-sinf"
-              }
-          ],
-          "evaluations": {}
-      },
-      {
-          "id": 7,
-          "siteId": 1374,
-          "school": "51-son umumiy õrta taʼlim maktabi",
-          "projectName": "Quyosh energiyasida ishlaydigan o‘t maydalagich",
-          "direction": "Qişloq xõjaligi",
-          "isTeam": true,
-          "members": [
-              {
-                  "name": "RAJABOV ELMUROD XOLMUROD ÕĞLI",
-                  "birthDate": "2013-09-21",
-                  "grade": "7-sinf"
-              },
-              {
-                  "name": "BEKCHANOV KAMRONBEK OZODBOY ÕĞLI",
-                  "birthDate": "2012-08-10",
-                  "grade": "8-sinf"
-              },
-              {
-                  "name": "BAXTIYOROV KAMRONBEK ELDORBEK ÕĞLI",
-                  "birthDate": "2014-07-21",
-                  "grade": "6-sinf"
-              }
-          ],
-          "evaluations": {}
-      },
-      {
-          "id": 8,
-          "siteId": 1331,
-          "school": "20-son umumiy õrta taʼlim maktabi",
-          "projectName": "Robot yordamchi",
-          "direction": "Axborot texnologiyalari (IT)",
-          "isTeam": true,
-          "members": [
-              {
-                  "name": "OTAMURODOV BILOLBEK BUNYOD ÕĞLI",
-                  "birthDate": "2015-08-20",
-                  "grade": "5-sinf"
-              },
-              {
-                  "name": "SHUXRATOV ABDULAZIZ ABDULLA ÕĞLI",
-                  "birthDate": "2015-07-31",
-                  "grade": "5-sinf"
-              }
-          ],
-          "evaluations": {}
-      },
-      {
-          "id": 9,
-          "siteId": 1256,
-          "school": "5-son ixtisoslashtirilgan maktab",
-          "projectName": "Energiya tejaydigan uy",
-          "direction": "Yaşil energiya",
-          "isTeam": true,
-          "members": [
-              {
-                  "name": "SANJARBEKOV MIRALI SANJARBEK ÕĞLI",
-                  "birthDate": "2011-08-27",
-                  "grade": "9-sinf"
-              },
-              {
-                  "name": "QADAMBOYEV JO‘SHQINBEK MANSURBEK ÕĞLI",
-                  "birthDate": "2013-09-20",
-                  "grade": "7-sinf"
-              },
-              {
-                  "name": "RAVŞANBEKOV ASADBEK ISLOMBEK ÕĞLI",
-                  "birthDate": "2013-08-05",
-                  "grade": "7-sinf"
-              }
-          ],
-          "evaluations": {}
-      },
-      {
-          "id": 10,
-          "siteId": 816,
-          "school": "14-son umumiy õrta taʼlim maktabi",
-          "projectName": "Robot-yordamchi",
-          "direction": "Yaşil energiya",
-          "isTeam": false,
-          "members": [
-              {
-                  "name": "OMONBOYEV NOSIRBEK NODIRBEKOVICH",
-                  "birthDate": "2013-04-12",
-                  "grade": "7-sinf"
-              }
-          ],
-          "evaluations": {}
-      },
-      {
-          "id": 11,
-          "siteId": 198,
-          "school": "42-son umumiy õrta taʼlim maktabi",
-          "projectName": "Aqlli uy",
-          "direction": "Axborot texnologiyalari (IT)",
-          "isTeam": true,
-          "members": [
-              {
-                  "name": "DO‘SCHANOV MURODBEK UMRBEK ÕĞLI",
-                  "birthDate": "2014-11-19",
-                  "grade": "6-sinf"
-              },
-              {
-                  "name": "SULTONMUROTOV ERKABOY ULUG‘BEK ÕĞLI",
-                  "birthDate": "2014-03-10",
-                  "grade": "6-sinf"
-              }
-          ],
-          "evaluations": {}
-      },
-      {
-          "id": 12,
-          "siteId": 139,
-          "school": "19-son umumiy õrta taʼlim maktabi",
-          "projectName": "Robot mashina",
-          "direction": "Axborot texnologiyalari (IT)",
-          "isTeam": false,
-          "members": [
-              {
-                  "name": "OTANAZAROV XOLMIRZO ERGASH ÕĞLI",
-                  "birthDate": "2011-10-15",
-                  "grade": "9-sinf"
-              }
-          ],
-          "evaluations": {}
-      },
-      {
-          "id": 13,
-          "siteId": 1771,
-          "school": "29-son umumiy õrta taʼlim maktabi",
-          "projectName": "Batareya yordamida harakatlanuvchi mashina",
-          "direction": "Axborot texnologiyalari (IT)",
-          "isTeam": false,
-          "members": [
-              {
-                  "name": "SOBIROV SHOHJAHON XURMATBEK ÕĞLI",
-                  "birthDate": "2012-06-10",
-                  "grade": "8-sinf"
-              }
-          ],
-          "evaluations": {}
+        "name": "OTAJONOV AKROMJON ĞULOMJON ÕĞLI",
+        "birthDate": "2011-11-13",
+        "grade": "9-sinf"
       }
-  ]
+    ],
+    "evaluations": {}
+  },
+  {
+    "id": 2,
+    "siteId": 1660,
+    "school": "30-son umumiy õrta taʼlim maktabi",
+    "projectName": "Robot yordamçi",
+    "direction": "Axborot texnologiyalari (IT)",
+    "isTeam": false,
+    "members": [
+      {
+        "name": "RAVŞANBEKOV MIRJALOL MIRKAMOL ÕĞLI",
+        "birthDate": "2014-11-19",
+        "grade": "6-sinf"
+      }
+    ],
+    "evaluations": {}
+  },
+  {
+    "id": 3,
+    "siteId": 1604,
+    "school": "32-son umumiy õrta taʼlim maktabi",
+    "projectName": "Robototexnika",
+    "direction": "Axborot texnologiyalari (IT)",
+    "isTeam": false,
+    "members": [
+      {
+        "name": "NORXONOV BUNYODBEK QUVANDIQ ÕĞLI",
+        "birthDate": "2014-04-23",
+        "grade": "7-sinf"
+      }
+    ],
+    "evaluations": {}
+  },
+  {
+    "id": 4,
+    "siteId": 1575,
+    "school": "9-son ixtisoslaştirilgan maktab",
+    "projectName": "Robot ekskavator",
+    "direction": "Axborot texnologiyalari (IT)",
+    "isTeam": false,
+    "members": [
+      {
+        "name": "MAŞARIPOV JAVOHIR HASANBOY ÕĞLI",
+        "birthDate": "2012-09-07",
+        "grade": "7-sinf"
+      }
+    ],
+    "evaluations": {}
+  },
+  {
+    "id": 5,
+    "siteId": 1470,
+    "school": "25-son umumiy õrta taʼlim maktabi",
+    "projectName": "Robototexnika",
+    "direction": "Axborot texnologiyalari (IT)",
+    "isTeam": false,
+    "members": [
+      {
+        "name": "PÕLATOV NURBEK MUXAMMAD ÕĞLI",
+        "birthDate": "2014-08-26",
+        "grade": "6-sinf"
+      }
+    ],
+    "evaluations": {}
+  },
+  {
+    "id": 6,
+    "siteId": 1406,
+    "school": "6-son umumiy õrta taʼlim maktabi",
+    "projectName": "AGRO ROBOT (GROWERX)",
+    "direction": "Qişloq xõjaligi",
+    "isTeam": false,
+    "members": [
+      {
+        "name": "FAYZULLAYEV BOYMUROD BOBOMUROD ÕĞLI",
+        "birthDate": "2009-10-23",
+        "grade": "11-sinf"
+      }
+    ],
+    "evaluations": {}
+  },
+  {
+    "id": 7,
+    "siteId": 1374,
+    "school": "51-son umumiy õrta taʼlim maktabi",
+    "projectName": "Quyaş energiyasida işlaydigan õt maydalagiç",
+    "direction": "Qişloq xõjaligi",
+    "isTeam": true,
+    "members": [
+      {
+        "name": "RAJABOV ELMUROD XOLMUROD ÕĞLI",
+        "birthDate": "2013-09-21",
+        "grade": "7-sinf"
+      },
+      {
+        "name": "BEKÇANOV KAMRONBEK OZODBOY ÕĞLI",
+        "birthDate": "2012-08-10",
+        "grade": "8-sinf"
+      },
+      {
+        "name": "BAXTIYOROV KAMRONBEK ELDORBEK ÕĞLI",
+        "birthDate": "2014-07-21",
+        "grade": "6-sinf"
+      }
+    ],
+    "evaluations": {}
+  },
+  {
+    "id": 8,
+    "siteId": 1331,
+    "school": "20-son umumiy õrta taʼlim maktabi",
+    "projectName": "Robot yordamçi",
+    "direction": "Axborot texnologiyalari (IT)",
+    "isTeam": true,
+    "members": [
+      {
+        "name": "OTAMURODOV BILOLBEK BUNYOD ÕĞLI",
+        "birthDate": "2015-08-20",
+        "grade": "5-sinf"
+      },
+      {
+        "name": "ŞUXRATOV ABDULAZIZ ABDULLA ÕĞLI",
+        "birthDate": "2015-07-31",
+        "grade": "5-sinf"
+      }
+    ],
+    "evaluations": {}
+  },
+  {
+    "id": 9,
+    "siteId": 1256,
+    "school": "5-son ixtisoslaştirilgan maktab",
+    "projectName": "Energiya tejaydigan uy",
+    "direction": "Yaşil energiya",
+    "isTeam": true,
+    "members": [
+      {
+        "name": "SANJARBEKOV MIRALI SANJARBEK ÕĞLI",
+        "birthDate": "2011-08-27",
+        "grade": "9-sinf"
+      },
+      {
+        "name": "QADAMBOYEV JÕŞQINBEK MANSURBEK ÕĞLI",
+        "birthDate": "2013-09-20",
+        "grade": "7-sinf"
+      },
+      {
+        "name": "RAVŞANBEKOV ASADBEK ISLOMBEK ÕĞLI",
+        "birthDate": "2013-08-05",
+        "grade": "7-sinf"
+      }
+    ],
+    "evaluations": {}
+  },
+  {
+    "id": 10,
+    "siteId": 816,
+    "school": "14-son umumiy õrta taʼlim maktabi",
+    "projectName": "Robot-yordamçi",
+    "direction": "Yaşil energiya",
+    "isTeam": false,
+    "members": [
+      {
+        "name": "OMONBOYEV NOSIRBEK NODIRBEKOVIÇ",
+        "birthDate": "2013-04-12",
+        "grade": "7-sinf"
+      }
+    ],
+    "evaluations": {}
+  },
+  {
+    "id": 11,
+    "siteId": 198,
+    "school": "42-son umumiy õrta taʼlim maktabi",
+    "projectName": "Aqlli uy",
+    "direction": "Axborot texnologiyalari (IT)",
+    "isTeam": true,
+    "members": [
+      {
+        "name": "DÕŞÇANOV MURODBEK UMRBEK ÕĞLI",
+        "birthDate": "2014-11-19",
+        "grade": "6-sinf"
+      },
+      {
+        "name": "SULTONMUROTOV ERKABOY ULUĞBEK ÕĞLI",
+        "birthDate": "2014-03-10",
+        "grade": "6-sinf"
+      }
+    ],
+    "evaluations": {}
+  },
+  {
+    "id": 12,
+    "siteId": 139,
+    "school": "19-son umumiy õrta taʼlim maktabi",
+    "projectName": "Robot maşina",
+    "direction": "Axborot texnologiyalari (IT)",
+    "isTeam": false,
+    "members": [
+      {
+        "name": "OTANAZAROV XOLMIRZO ERGAŞ ÕĞLI",
+        "birthDate": "2011-10-15",
+        "grade": "9-sinf"
+      }
+    ],
+    "evaluations": {}
+  },
+  {
+    "id": 13,
+    "siteId": 1771,
+    "school": "29-son umumiy õrta taʼlim maktabi",
+    "projectName": "Batareya yordamida harakatlanuvçi maşina",
+    "direction": "Axborot texnologiyalari (IT)",
+    "isTeam": false,
+    "members": [
+      {
+        "name": "SOBIROV ŞOHJAHON XURMATBEK ÕĞLI",
+        "birthDate": "2012-06-10",
+        "grade": "8-sinf"
+      }
+    ],
+    "evaluations": {}
+  },
+  {
+    "id": 14,
+    "siteId": 1916,
+    "school": "2-son umumiy õrta taʼlim maktabi",
+    "projectName": "Yaşil energiya",
+    "direction": "Yaşil energiya",
+    "isTeam": false,
+    "members": [
+      {
+        "name": "XAYITBOYEV JAMŞIDBEK NODIRBEK ÕĞLI",
+        "birthDate": "2011-05-09",
+        "grade": "9-sinf"
+      }
+    ],
+    "evaluations": {}
+  },
+  {
+    "id": 15,
+    "siteId": 1831,
+    "school": "18-son umumiy õrta taʼlim maktabi",
+    "projectName": "Ixtiroçilikka qadam",
+    "direction": "Ekologiya va iqlim õzgarişi",
+    "isTeam": true,
+    "members": [
+      {
+        "name": "ARSLONOV MUSTAFO SARDORBEK ÕĞLI",
+        "birthDate": "2012-07-27",
+        "grade": "7-sinf"
+      },
+      {
+        "name": "YUSUPOV ZEXRIDDIN SARVAR ÕĞLI",
+        "birthDate": "2013-01-13",
+        "grade": "7-sinf"
+      }
+    ],
+    "evaluations": {}
+  },
+  {
+    "id": 16,
+    "siteId": 1814,
+    "school": "4-son umumiy õrta taʼlim maktabi",
+    "projectName": "Foydali texnikalar",
+    "direction": "Ekologiya va iqlim õzgarişi",
+    "isTeam": false,
+    "members": [
+      {
+        "name": "RÕZMATOV RÕZMATBOY XUŞNUDBEK ÕĞLI",
+        "birthDate": "2012-08-14",
+        "grade": "8-sinf"
+      }
+    ],
+    "evaluations": {}
+  }
+]
 };
 
 // LocalStorage dan yuklash
