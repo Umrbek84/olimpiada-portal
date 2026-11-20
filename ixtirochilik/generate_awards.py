@@ -48,7 +48,7 @@ def get_metal_colors(place):
     if place == 1:
         return {"primary": (184, 134, 11), "accent": (212, 175, 55), "name": "Oltin"}
     elif place == 2:
-        return {"primary": (100, 116, 139), "accent": (148, 163, 184), "name": "Kumush"}
+        return {"primary": (100, 116, 139), "accent": (148, 163, 184), "name": "Kumuş"}
     else:
         return {"primary": (154, 80, 40), "accent": (180, 115, 80), "name": "Bronza"}
 
@@ -56,22 +56,14 @@ def draw_common_frame(base, direction, place, box_label, number):
     draw = ImageDraw.Draw(base)
     metal = get_metal_colors(place)
 
-    # 1. Ministry emblem at top center (clean breathing room below top border on all 5 themes)
-    emblem_path = os.path.join(THEMES_DIR, "ministry_emblem.png")
-    if os.path.exists(emblem_path):
-        emblem = Image.open(emblem_path).convert("RGBA")
-        emblem = emblem.resize((98, 82), Image.Resampling.LANCZOS)
-        base.paste(emblem, (877 - 49, 132), emblem)
+    # 1. Top 3 official logos strip (Vazirlik + Agentlik + Fan Olimpiadalari Markazi)
+    logos_path = os.path.join(THEMES_DIR, "top_3_logos.png")
+    if os.path.exists(logos_path):
+        logos = Image.open(logos_path).convert("RGBA")
+        logos = logos.resize((760, 116), Image.Resampling.LANCZOS)
+        base.paste(logos, (877 - 380, 132), logos)
 
-    # 2. Official header text
-    f_hdr1 = ImageFont.truetype(FONT_TIMES_BD, 18)
-    f_hdr2 = ImageFont.truetype(FONT_TIMES_BD, 17)
-    h1 = "ÖZBEKISTON RESPUBLIKASI MAKTABGAÇA VA MAKTAB TAʼLIMI VAZIRLIGI"
-    h2 = "QÖŞKÖPIR TUMANI MAKTABGAÇA VA MAKTAB TAʼLIMI BÖLIMI"
-    draw.text(((1754 - draw.textlength(h1, font=f_hdr1))/2, 220), h1, font=f_hdr1, fill=(15, 41, 74))
-    draw.text(((1754 - draw.textlength(h2, font=f_hdr2))/2, 244), h2, font=f_hdr2, fill=(51, 65, 85))
-
-    # 3. Top-right rounded number box inside 100% open white safe area on all 5 themes
+    # 2. Top-right rounded number box inside 100% open white safe area
     bx1, by1, bx2, by2 = 1315, 148, 1490, 214
     draw.rounded_rectangle([(bx1, by1), (bx2, by2)], radius=10, fill=(255, 255, 255), outline=metal["accent"], width=3)
     f_lbl = ImageFont.truetype(FONT_TIMES, 14)
@@ -80,22 +72,20 @@ def draw_common_frame(base, direction, place, box_label, number):
     draw.text(((bx1 + bx2 - draw.textlength(box_label, font=f_lbl))/2, by1 + 9), box_label, font=f_lbl, fill=(71, 85, 105))
     draw.text(((bx1 + bx2 - draw.textlength(num_str, font=f_num))/2, by1 + 30), num_str, font=f_num, fill=(12, 26, 48))
 
-    # 4. Bottom official seal + signature (left) & Director title (right)
+    # 3. Bottom official seal + signature (left) & Director title (right)
     seal_path = os.path.join(THEMES_DIR, "seal_signature.png")
     if os.path.exists(seal_path):
         seal = Image.open(seal_path).convert("RGBA")
         seal = seal.resize((345, 214), Image.Resampling.LANCZOS)
         base.paste(seal, (365, 795), seal)
 
-    f_sig_t = ImageFont.truetype(FONT_TIMES_BD, 18)
-    f_sig_n = ImageFont.truetype(FONT_TIMES_BD, 30)
-    st1 = "QÖŞKÖPIR TUMANI MAKTABGAÇA VA"
-    st2 = "MAKTAB TAʼLIMI BÖLIMI BOŞLIĞI"
+    f_sig_t = ImageFont.truetype(FONT_TIMES_BD, 20)
+    f_sig_n = ImageFont.truetype(FONT_TIMES_BD, 32)
+    st = "QÖŞKÖPIR TUMAN TAʼLIM BÖLIMI BOŞLIĞI"
     sn = "Ş.R. JUMANIYOZOV"
-    cx_r = 1205
-    draw.text((cx_r - draw.textlength(st1, font=f_sig_t)/2, 855), st1, font=f_sig_t, fill=(51, 65, 85))
-    draw.text((cx_r - draw.textlength(st2, font=f_sig_t)/2, 880), st2, font=f_sig_t, fill=(51, 65, 85))
-    draw.text((cx_r - draw.textlength(sn, font=f_sig_n)/2, 922), sn, font=f_sig_n, fill=(12, 26, 48))
+    cx_r = 1195
+    draw.text((cx_r - draw.textlength(st, font=f_sig_t)/2, 872), st, font=f_sig_t, fill=(51, 65, 85))
+    draw.text((cx_r - draw.textlength(sn, font=f_sig_n)/2, 914), sn, font=f_sig_n, fill=(12, 26, 48))
 
     # Date at bottom center
     f_dt = ImageFont.truetype(FONT_TIMES_IT, 18)
@@ -118,12 +108,12 @@ def create_diploma(student_name, school, grade, direction, place, number="001"):
 
     # Title
     t_str = "D I P L O M"
-    draw.text(((1754 - draw.textlength(t_str, font=f_title))/2, 276), t_str, font=f_title, fill=(12, 26, 48))
+    draw.text(((1754 - draw.textlength(t_str, font=f_title))/2, 272), t_str, font=f_title, fill=(12, 26, 48))
 
     # Daraja in metallic Gold/Silver/Bronze
     daraja_map = {1: "I DARAJALI", 2: "II DARAJALI", 3: "III DARAJALI"}
     daraja_text = daraja_map.get(place, f"{place}-DARAJALI")
-    draw.text(((1754 - draw.textlength(daraja_text, font=f_daraja))/2, 370), daraja_text, font=f_daraja, fill=metal["primary"])
+    draw.text(((1754 - draw.textlength(daraja_text, font=f_daraja))/2, 368), daraja_text, font=f_daraja, fill=metal["primary"])
 
     # Description
     grade_clean = to_yangi_lotin(grade if "sinf" in str(grade) else f"{grade}-sinf")
@@ -141,7 +131,7 @@ def create_diploma(student_name, school, grade, direction, place, number="001"):
 
     # Student Name
     w_n = draw.textlength(student_clean, font=f_name)
-    if w_n > 1320:
+    if w_n > 1250:
         f_name = ImageFont.truetype(FONT_TIMES_BD, 38)
         w_n = draw.textlength(student_clean, font=f_name)
     draw.text(((1754 - w_n)/2, 608), student_clean, font=f_name, fill=(12, 26, 48))
@@ -170,11 +160,11 @@ def create_tashakkurnoma(teacher_name, school, role_or_subject, student_name, gr
 
     # Title
     t_str = "T A Ş A K K U R N O M A"
-    draw.text(((1754 - draw.textlength(t_str, font=f_title))/2, 276), t_str, font=f_title, fill=(12, 26, 48))
+    draw.text(((1754 - draw.textlength(t_str, font=f_title))/2, 272), t_str, font=f_title, fill=(12, 26, 48))
 
     # Hurmatli
     h_str = "Hurmatli"
-    draw.text(((1754 - draw.textlength(h_str, font=f_hurmatli))/2, 350), h_str, font=f_hurmatli, fill=(51, 65, 85))
+    draw.text(((1754 - draw.textlength(h_str, font=f_hurmatli))/2, 348), h_str, font=f_hurmatli, fill=(51, 65, 85))
 
     # Teacher Name
     teacher_clean = to_yangi_lotin(teacher_name)
@@ -182,13 +172,13 @@ def create_tashakkurnoma(teacher_name, school, role_or_subject, student_name, gr
     if w_tn > 1250:
         f_teacher = ImageFont.truetype(FONT_TIMES_BD, 38)
         w_tn = draw.textlength(teacher_clean, font=f_teacher)
-    draw.text(((1754 - w_tn)/2, 400), teacher_clean, font=f_teacher, fill=(12, 26, 48))
+    draw.text(((1754 - w_tn)/2, 398), teacher_clean, font=f_teacher, fill=(12, 26, 48))
 
     # School & Role
     school_clean = to_yangi_lotin(school)
     role_clean = to_yangi_lotin(role_or_subject or "tögarak rahbari")
     sub_text = f"({school_clean}, {role_clean})"
-    draw.text(((1754 - draw.textlength(sub_text, font=f_sub))/2, 458), sub_text, font=f_sub, fill=(71, 85, 105))
+    draw.text(((1754 - draw.textlength(sub_text, font=f_sub))/2, 456), sub_text, font=f_sub, fill=(71, 85, 105))
 
     # Metallic divider line
     draw.line([(420, 502), (1334, 502)], fill=metal["accent"], width=3)
@@ -204,7 +194,6 @@ def create_tashakkurnoma(teacher_name, school, role_or_subject, student_name, gr
     p4 = "ilhomlantiruvçi ustozligingiz uçun Sizga çuqur minnatdorçilik bildiramiz."
 
     for idx, line in enumerate([p1, p2, p3, p4]):
-        # Auto-shrink slightly if line is very long (e.g., team of 2-3 students)
         f_use = f_para
         if draw.textlength(line, font=f_use) > 1250:
             f_use = ImageFont.truetype(FONT_TIMES, 22)
@@ -215,6 +204,56 @@ def create_tashakkurnoma(teacher_name, school, role_or_subject, student_name, gr
     draw.text(((1754 - draw.textlength(cl, font=f_close))/2, 708), cl, font=f_close, fill=metal["primary"])
 
     return base
+
+def generate_all_5_directions_samples(target_dir):
+    samples_root = os.path.join(target_dir, "Namuna_5_Yonalish_2026")
+    os.makedirs(samples_root, exist_ok=True)
+
+    directions_meta = [
+        ("01_Talim", "Taʼlim", "14-son umumiy örta taʼlim maktabi", "9-sinf", "NAMUNA ÖQUVÇI F.I.Ş.", "Namuna Ustoz F.I.Ş.", "Informatika fani öqituvçisi"),
+        ("02_Axborot_texnologiyalari_IT", "Axborot texnologiyalari (IT)", "23-son umumiy örta taʼlim maktabi", "8-sinf", "ABDULLAYEV JAMŞIDBEK DIYOR ÖĞLI", "Madaminov Jasurbek Baxtiyoroviç", "Fizika va robototexnika tögaragi rahbari"),
+        ("03_Yashil_energiya", "Yaşil energiya", "5-son ixtisoslaştirilgan maktab", "9-sinf", "SANJARBEKOV MIRALI SANJARBEK ÖĞLI", "Namuna Ustoz F.I.Ş.", "Fizika fani öqituvçisi"),
+        ("04_Ekologiya_va_iqlim_ozgarishi", "Ekologiya va iqlim özgarişi", "4-son umumiy örta taʼlim maktabi", "8-sinf", "RÖZMATOV RÖZMATBOY XUŞNUDBEK ÖĞLI", "Namuna Ustoz F.I.Ş.", "Biologiya va ekologiya fani öqituvçisi"),
+        ("05_Qishloq_xojaligi", "Qişloq xöjaligi", "6-son umumiy örta taʼlim maktabi", "11-sinf", "FAYZULLAYEV BOYMUROD BOBOMUROD ÖĞLI", "Ollaberganova Laylo Rözimbayevna", "Informatika va axborot texnologiyalari fani öqituvçisi"),
+    ]
+
+    all_diploms = []
+    all_tashakkurs = []
+    dip_num = 1
+    tash_num = 1
+
+    for folder_name, dir_label, school, grade, student, teacher, role in directions_meta:
+        dir_folder = os.path.join(samples_root, folder_name)
+        os.makedirs(dir_folder, exist_ok=True)
+        for f in os.listdir(dir_folder):
+            fp = os.path.join(dir_folder, f)
+            if os.path.isfile(fp):
+                os.remove(fp)
+
+        for place in [1, 2, 3]:
+            metal_name = get_metal_colors(place)["name"]
+            # Diplom sample
+            dip_img = create_diploma(student, school, grade, dir_label, place, str(dip_num).zfill(3))
+            dip_file = os.path.join(dir_folder, f"Diplom_{place}-orin_{metal_name}_{folder_name}.jpg")
+            dip_img.save(dip_file, quality=95)
+            all_diploms.append(dip_img)
+            dip_num += 1
+
+            # Tashakkurnoma sample
+            tash_img = create_tashakkurnoma(teacher, school, role, student, grade, dir_label, place, str(tash_num).zfill(3))
+            tash_file = os.path.join(dir_folder, f"Tashakkurnoma_{place}-orin_{metal_name}_{folder_name}.jpg")
+            tash_img.save(tash_file, quality=95)
+            all_tashakkurs.append(tash_img)
+            tash_num += 1
+
+    # Save 2 unified print-ready PDFs for all 15 Diploms and all 15 Tashakkurnomas
+    pdf_dips = os.path.join(samples_root, "Namuna_15_ta_Diplom_5_yonalish.pdf")
+    all_diploms[0].save(pdf_dips, save_all=True, append_images=all_diploms[1:], resolution=150.0)
+
+    pdf_tash = os.path.join(samples_root, "Namuna_15_ta_Tashakkurnoma_5_yonalish.pdf")
+    all_tashakkurs[0].save(pdf_tash, save_all=True, append_images=all_tashakkurs[1:], resolution=150.0)
+
+    print(f"SUCCESS: Generated 15 Diplom + 15 Tashakkurnoma samples across all 5 directions in {samples_root}")
 
 def main():
     target_dir = r"C:\Users\Monitoring\Desktop\ОЛИМПИАДАЛАР\2026\Ихтирочиликка қадам\туман босқичи\туман босқичи ғолибларни тақдирлаш"
@@ -309,9 +348,10 @@ def main():
             append_images=all_pages[1:],
             resolution=150.0
         )
-        print(f"SUCCESS: Generated {len(all_pages)} themed award documents!")
-        print(f"Unified PDF: {output_pdf}")
-        print(f"Image files in: {output_img_dir}")
+        print(f"SUCCESS: Generated {len(all_pages)} current winner award documents!")
+
+    # Also generate full 5 directions x 3 places (15 Diploms + 15 Tashakkurnomas) ready sample pack!
+    generate_all_5_directions_samples(target_dir)
 
 if __name__ == "__main__":
     main()

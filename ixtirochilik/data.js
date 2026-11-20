@@ -83,7 +83,7 @@ const IXTIROCHILIK_CONFIG = {
 
   // 2-ILOVA: Taşkiliy qömita tarkibi
   committee: [
-    { role: "Taşkiliy qömita raisi", name: "Jumaniyazov Şokir Rözmetoviç", post: "Qöşköpir tumani maktabgaça va maktab taʼlimi bölimi boşliği" },
+    { role: "Taşkiliy qömita raisi", name: "Jumaniyazov Şokir Rözmetoviç", post: "Qöşköpir tuman taʼlim bölimi boşliği" },
     { role: "Taşkiliy qömita aʼzosi", name: "Erjanova Oygul Ilxombek qizi", post: "“Kelajak markazi” direktori" },
     { role: "Taşkiliy qömita aʼzosi", name: "Avezov Jasurbek Ravşanbekoviç", post: "Raqamli taʼlim va sunʼiy intellektni rivojlantiriş şöbasi boş mutaxassisi" },
     { role: "Taşkiliy qömita masʼul kotibi", name: "Mamatov Umrbek Oliquliyeviç", post: "Taşkiliy qömita masʼul kotibi" }

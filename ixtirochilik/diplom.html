@@ -282,7 +282,7 @@
           <i class="fa-solid fa-trophy brand-icon"></i>
           <div>
             <h1 class="portal-title">Olimpiada va tanlovlarni ötkaziş sayti</h1>
-            <p class="portal-subtitle">Qöşköpir tumani maktabgaça va maktab taʼlimi bölimi</p>
+            <p class="portal-subtitle">Qöşköpir tuman taʼlim bölimi</p>
           </div>
         </a>
       </div>
@@ -443,18 +443,18 @@
         </div>
       </div>
       <div class="f-desc">
-        Qöşköpir tumani maktabgaça va maktab taʼlimi bölimi rasmiy axborot va reyting portali.
+        Qöşköpir tuman taʼlim bölimi rasmiy axborot va reyting portali.
       </div>
     </div>
   </footer>
 
-  <script src="data.js?v=20261120_1830"></script>
+  <script src="data.js?v=20261120_2120"></script>
   <script>
     let appData = loadIxtirochilikData();
     let currentDocType = "diplom"; // 'diplom' or 'tashakkur'
     let currentRanked = [];
 
-    const ASSET_V = "20261120_1830";
+    const ASSET_V = "20261120_2120";
     const themeImages = {
       talim: new Image(),
       it: new Image(),
@@ -468,8 +468,8 @@
     themeImages.ekologiya.src = `assets/themes/bg_ekologiya.jpg?v=${ASSET_V}`;
     themeImages.qishloq.src = `assets/themes/bg_qishloq.jpg?v=${ASSET_V}`;
 
-    const imgEmblem = new Image();
-    imgEmblem.src = `assets/themes/ministry_emblem.png?v=${ASSET_V}`;
+    const imgTopLogos = new Image();
+    imgTopLogos.src = `assets/themes/top_3_logos.png?v=${ASSET_V}`;
 
     const imgSeal = new Image();
     imgSeal.src = `assets/themes/seal_signature.png?v=${ASSET_V}`;
@@ -483,7 +483,7 @@
       }
     }
     Object.values(themeImages).forEach(im => { im.onload = checkLoaded; im.onerror = checkLoaded; });
-    imgEmblem.onload = checkLoaded; imgEmblem.onerror = checkLoaded;
+    imgTopLogos.onload = checkLoaded; imgTopLogos.onerror = checkLoaded;
     imgSeal.onload = checkLoaded; imgSeal.onerror = checkLoaded;
 
     // Yangi Lotin Yozuvi o'zgartirish yordamchisi (Ö/ö qat'iy standart)
@@ -685,20 +685,13 @@
         ctx.fillRect(0, 0, 1754, 1240);
       }
 
-      // 2. Vazirlik emblemasi (yuqori markazda, xavfsiz oraliqda)
-      if (imgEmblem && imgEmblem.complete) {
-        ctx.drawImage(imgEmblem, 877 - 49, 132, 98, 82);
+      // 2. Yuqori 3 ta rasmiy logotip (Vazirlik + Agentlik + Fan Olimpiadalari Markazi)
+      if (imgTopLogos && imgTopLogos.complete) {
+        ctx.drawImage(imgTopLogos, 877 - 380, 132, 760, 116);
       }
 
-      // 3. Rasmiy muassasa sarlavhasi
       ctx.textAlign = "center";
       ctx.textBaseline = "top";
-      ctx.font = "bold 18px 'Times New Roman'";
-      ctx.fillStyle = "#0f294a";
-      ctx.fillText("ÖZBEKISTON RESPUBLIKASI MAKTABGAÇA VA MAKTAB TAʼLIMI VAZIRLIGI", 877, 220);
-      ctx.font = "bold 17px 'Times New Roman'";
-      ctx.fillStyle = "#334155";
-      ctx.fillText("QÖŞKÖPIR TUMANI MAKTABGAÇA VA MAKTAB TAʼLIMI BÖLIMI", 877, 244);
 
       // 4. Yuqori öng raqam qutisi (xavfsiz oq maydonda, metal hoshiyali)
       const bx = 1315, by = 148, bw = 175, bh = 66;
@@ -816,13 +809,12 @@
         ctx.drawImage(imgSeal, 365, 795, 345, 214);
       }
 
-      ctx.font = "bold 18px 'Times New Roman'";
+      ctx.font = "bold 20px 'Times New Roman'";
       ctx.fillStyle = "#334155";
-      ctx.fillText("QÖŞKÖPIR TUMANI MAKTABGAÇA VA", 1205, 855);
-      ctx.fillText("MAKTAB TAʼLIMI BÖLIMI BOŞLIĞI", 1205, 880);
-      ctx.font = "bold 30px 'Times New Roman'";
+      ctx.fillText("QÖŞKÖPIR TUMAN TAʼLIM BÖLIMI BOŞLIĞI", 1195, 872);
+      ctx.font = "bold 32px 'Times New Roman'";
       ctx.fillStyle = "#0c1a30";
-      ctx.fillText("Ş.R. JUMANIYOZOV", 1205, 922);
+      ctx.fillText("Ş.R. JUMANIYOZOV", 1195, 914);
 
       // Sana
       ctx.font = "italic 18px 'Times New Roman'";
