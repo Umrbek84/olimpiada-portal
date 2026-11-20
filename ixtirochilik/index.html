@@ -134,6 +134,63 @@
       </div>
     </div>
 
+    <!-- Teng ballar yuzaga kelganda o'rinlarni aniqlash (Tie-breaker) qoidasi -->
+    <div class="card" style="border-left: 5px solid #0284c7; background: linear-gradient(135deg, #ffffff 0%, #f0f9ff 100%); margin-bottom: 24px;">
+      <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 12px;">
+        <i class="fa-solid fa-scale-balanced" style="font-size: 24px; color: #0284c7;"></i>
+        <h3 style="font-size: 18px; font-weight: 800; color: var(--dark); margin: 0;">
+          Teng ballar yuzaga kelganda o‘rinlarni aniqlash tartibi (Rasmiy Nizom qoidasi):
+        </h3>
+      </div>
+      <p style="font-size: 13.5px; color: #475569; margin-bottom: 14px;">
+        Agar bir nechta jamoa yoki ishtirokchilarning umumiy o‘rtacha bali teng kelib qolsa, tizim avtomatik ravishda quyidagi <strong>7 bosqichli qat'iy ketma-ketlik</strong> bo‘yicha yuqori o‘rinni aniqlaydi:
+      </p>
+
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 12px;">
+        <div style="background: white; border: 1.5px solid #bbf7d0; border-radius: 12px; padding: 12px 16px;">
+          <div style="color: #166534; font-weight: 800; font-size: 13px;">1-USTUNLIK (Birlamchi mezon):</div>
+          <div style="font-size: 14px; font-weight: 700; color: #1e293b; margin-top: 2px;">3-mezon: Texnik sifat va amaliy ishlanma</div>
+          <div style="font-size: 12px; color: #64748b; margin-top: 2px;">Tayyor ishchi model, maket yoki dasturiy yechimning puxtaligi bali yuqorisi.</div>
+        </div>
+
+        <div style="background: white; border: 1.5px solid #bae6fd; border-radius: 12px; padding: 12px 16px;">
+          <div style="color: #0369a1; font-weight: 800; font-size: 13px;">2-USTUNLIK:</div>
+          <div style="font-size: 14px; font-weight: 700; color: #1e293b; margin-top: 2px;">2-mezon: Loyiha taqdimoti (prezentatsiya)</div>
+          <div style="font-size: 12px; color: #64748b; margin-top: 2px;">Vaqt reglamenti, sifatli slayd va savollarga to‘liq javob bali yuqorisi.</div>
+        </div>
+
+        <div style="background: white; border: 1.5px solid #e2e8f0; border-radius: 12px; padding: 12px 16px;">
+          <div style="color: #475569; font-weight: 800; font-size: 13px;">3-USTUNLIK:</div>
+          <div style="font-size: 14px; font-weight: 700; color: #1e293b; margin-top: 2px;">4-mezon: Innovatsionlik va ijodiy yondashuv</div>
+          <div style="font-size: 12px; color: #64748b; margin-top: 2px;">Yangi g‘oya va yangicha texnologiyalar qo‘llanilganligi bali yuqorisi.</div>
+        </div>
+
+        <div style="background: white; border: 1.5px solid #e2e8f0; border-radius: 12px; padding: 12px 16px;">
+          <div style="color: #475569; font-weight: 800; font-size: 13px;">4-USTUNLIK:</div>
+          <div style="font-size: 14px; font-weight: 700; color: #1e293b; margin-top: 2px;">5-mezon: Kutilayotgan natijalar va analoglardan afzallik</div>
+          <div style="font-size: 12px; color: #64748b; margin-top: 2px;">Real muammolarni hal qilish va iqtisodiy asoslanganlik bali yuqorisi.</div>
+        </div>
+
+        <div style="background: white; border: 1.5px solid #e2e8f0; border-radius: 12px; padding: 12px 16px;">
+          <div style="color: #475569; font-weight: 800; font-size: 13px;">5-USTUNLIK:</div>
+          <div style="font-size: 14px; font-weight: 700; color: #1e293b; margin-top: 2px;">1-mezon: Tanlov yo‘nalishlariga moslik</div>
+          <div style="font-size: 12px; color: #64748b; margin-top: 2px;">Yo‘nalish chuqur o‘rganilganligi va muammolar aniq ko‘rsatilganligi.</div>
+        </div>
+
+        <div style="background: white; border: 1.5px solid #fef08a; border-radius: 12px; padding: 12px 16px;">
+          <div style="color: #854d0e; font-weight: 800; font-size: 13px;">6-USTUNLIK (Ishtirokchilar soni):</div>
+          <div style="font-size: 14px; font-weight: 700; color: #1e293b; margin-top: 2px;">Individual ishtirokchi (1 kishi) > Jamoa</div>
+          <div style="font-size: 12px; color: #64748b; margin-top: 2px;">Dastlab 1 kishilik individual ishtirokchiga, so‘ng a’zolari kamroq jamoaga ustunlik.</div>
+        </div>
+
+        <div style="background: white; border: 1.5px solid #fbcfe8; border-radius: 12px; padding: 12px 16px;">
+          <div style="color: #9d174d; font-weight: 800; font-size: 13px;">7-USTUNLIK (Tug‘ilgan sana / Yoshi):</div>
+          <div style="font-size: 14px; font-weight: 700; color: #1e293b; margin-top: 2px;">Yoshroq ishtirokchiga ustunlik</div>
+          <div style="font-size: 12px; color: #64748b; margin-top: 2px;">Tug‘ilgan sanasi bo‘yicha yoshroq (jamoaning o‘rtacha yoshi kichikroq) ishtirokchiga ustunlik beriladi.</div>
+        </div>
+      </div>
+    </div>
+
     <!-- 5 ta yo'nalish ma'lumot bloki -->
     <div class="card" style="border-left: 5px solid var(--secondary);">
       <h3 style="margin-bottom: 12px;"><i class="fa-solid fa-compass" style="color: var(--secondary);"></i> Tanlovning 5 ta ustuvor yo‘nalishi (Nizom talablari):</h3>

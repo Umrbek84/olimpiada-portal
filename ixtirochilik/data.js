@@ -367,11 +367,10 @@ function saveIxtirochilikData(data) {
   localStorage.setItem("ixtirochilik_data_v4", JSON.stringify(data));
 }
 
-// Nizom bo'yicha hisoblash va tenglikda ustunlik algoritmi
+// Nizom bo'yicha hisoblash va tenglikda ustunlik algoritmi (Tie-breaker)
 function calculateIxtirochilikRanking(projects) {
   const calculated = projects.map(proj => {
     let judgeTotalScores = []; // 7 ta hakamning umumiy ballari
-    let criteriaAverages = { c1: 0, c2: 0, c3: 0, c4: 0, c5: 0 };
     let criteriaSums = { c1: 0, c2: 0, c3: 0, c4: 0, c5: 0 };
     let totalScoreSum = 0;
     let judgesCount = 0;
@@ -395,15 +394,37 @@ function calculateIxtirochilikRanking(projects) {
       }
     }
 
+    let criteriaAverages = { c1: 0, c2: 0, c3: 0, c4: 0, c5: 0 };
     if (judgesCount > 0) {
-      criteriaAverages.c1 = criteriaSums.c1 / judgesCount;
-      criteriaAverages.c2 = criteriaSums.c2 / judgesCount;
-      criteriaAverages.c3 = criteriaSums.c3 / judgesCount;
-      criteriaAverages.c4 = criteriaSums.c4 / judgesCount;
-      criteriaAverages.c5 = criteriaSums.c5 / judgesCount;
+      criteriaAverages.c1 = Number((criteriaSums.c1 / judgesCount).toFixed(3));
+      criteriaAverages.c2 = Number((criteriaSums.c2 / judgesCount).toFixed(3));
+      criteriaAverages.c3 = Number((criteriaSums.c3 / judgesCount).toFixed(3));
+      criteriaAverages.c4 = Number((criteriaSums.c4 / judgesCount).toFixed(3));
+      criteriaAverages.c5 = Number((criteriaSums.c5 / judgesCount).toFixed(3));
     }
 
     const finalAverage = judgesCount > 0 ? (totalScoreSum / judgesCount).toFixed(2) : "";
+
+    // Jamoa a'zolari soni (kamroq a'zoli jamoaga ustunlik)
+    const membersCount = (proj.members && proj.members.length > 0) ? proj.members.length : 1;
+
+    // Jamoa a'zolarining o'rtacha tug'ilgan sanasi va yoshi (yoshroqqa ustunlik)
+    let totalBirthTime = 0;
+    let validDatesCount = 0;
+    if (proj.members && proj.members.length > 0) {
+      proj.members.forEach(m => {
+        if (m.birthDate) {
+          const dt = new Date(m.birthDate);
+          if (!isNaN(dt.getTime())) {
+            totalBirthTime += dt.getTime();
+            validDatesCount++;
+          }
+        }
+      });
+    }
+    const avgBirthTimestamp = validDatesCount > 0 ? Math.round(totalBirthTime / validDatesCount) : 0;
+    const nowMs = new Date("2026-12-04").getTime();
+    const avgAgeYears = avgBirthTimestamp > 0 ? Number(((nowMs - avgBirthTimestamp) / (365.25 * 24 * 3600 * 1000)).toFixed(1)) : null;
 
     return {
       ...proj,
@@ -412,52 +433,72 @@ function calculateIxtirochilikRanking(projects) {
       judgesCount,
       totalScoreSum: judgesCount > 0 ? totalScoreSum : "",
       finalAverage: finalAverage,
-      membersCount: proj.members ? proj.members.length : 1
+      membersCount: membersCount,
+      avgBirthTimestamp: avgBirthTimestamp,
+      avgAgeYears: avgAgeYears
     };
   });
 
-  // Nizom bo'yicha saralash va Tie-breaker (tenglikda ustunlik berish):
-  // 1) O'rtacha umumiy ball;
-  // 2) 3-mezon (Texnik sifat);
-  // 3) 2-mezon (Taqdimot);
-  // 4) 4-mezon (Innovatsiya);
-  // 5) 5-mezon (Kutilayotgan natijalar);
-  // 6) 1-mezon (Yo'nalishga moslik);
-  // 7) A'zolar soni kamligi (individual > kichik jamoa)
+  // Nizom bo'yicha qat'iy ketma-ketlikda saralash va Tie-breaker (tenglikda ustunlik berish):
+  // 0) Umumiy o'rtacha ball (eng yuqori)
+  // 1) 3-mezon: Loyihaning texnik jihatdan sifatli va puxta tayyorlanganligi (model/maket/dastur)
+  // 2) 2-mezon: Loyiha taqdimoti (prezentatsiya sifati, savol-javob, reglament)
+  // 3) 4-mezon: Loyihaning innovatsionligi va ijodiy yondashilganligi
+  // 4) 5-mezon: Loyihani amalga oshirishda kutilayotgan natijalar va analoglardan afzalligi
+  // 5) 1-mezon: Loyihaning tanlov yo‘nalishlariga mos tayyorlanganligi
+  // 6) Ishtirokchilar soni: Dastlab individual ishtirokchiga (1 kishi), so‘ngra a’zolari kam bo‘lgan jamoaga ustunlik
+  // 7) Tug‘ilgan sanasi bo‘yicha: Yoshroq (jamoaning o‘rtacha yoshi kichikroq, kechroq tug‘ilgan) ishtirokchilarga ustunlik
   calculated.sort((a, b) => {
     const scoreA = a.finalAverage !== "" ? Number(a.finalAverage) : -1;
     const scoreB = b.finalAverage !== "" ? Number(b.finalAverage) : -1;
     if (scoreB !== scoreA) return scoreB - scoreA;
 
-    // 1-ustunlik: 3-mezon (Texnik sifat)
+    // Agar ikkalasi ham hali baholanmagan bo'lsa (ball yo'q), dastlabki id tartibida turadi
+    if (scoreA === -1 && scoreB === -1) return a.id - b.id;
+
+    // 1-ustunlik: 3-mezon (Texnik jihatdan sifatli va puxta tayyorlanganligi)
     if (b.criteriaAverages.c3 !== a.criteriaAverages.c3) {
       return b.criteriaAverages.c3 - a.criteriaAverages.c3;
     }
-    // 2-ustunlik: 2-mezon (Taqdimot)
+
+    // 2-ustunlik: 2-mezon (Loyiha taqdimoti)
     if (b.criteriaAverages.c2 !== a.criteriaAverages.c2) {
       return b.criteriaAverages.c2 - a.criteriaAverages.c2;
     }
-    // 3-ustunlik: 4-mezon (Innovatsiya)
+
+    // 3-ustunlik: 4-mezon (Innovatsionligi va ijodiy yondashilganligi)
     if (b.criteriaAverages.c4 !== a.criteriaAverages.c4) {
       return b.criteriaAverages.c4 - a.criteriaAverages.c4;
     }
-    // 4-ustunlik: 5-mezon (Kutilayotgan natijalar)
+
+    // 4-ustunlik: 5-mezon (Kutilayotgan natijalar va analoglardan afzalligi)
     if (b.criteriaAverages.c5 !== a.criteriaAverages.c5) {
       return b.criteriaAverages.c5 - a.criteriaAverages.c5;
     }
-    // 5-ustunlik: 1-mezon (Yo'nalish)
+
+    // 5-ustunlik: 1-mezon (Tanlov yo‘nalishlariga mos tayyorlanganligi)
     if (b.criteriaAverages.c1 !== a.criteriaAverages.c1) {
       return b.criteriaAverages.c1 - a.criteriaAverages.c1;
     }
-    // 6-ustunlik: a'zolar soni kamligi
-    return a.membersCount - b.membersCount;
+
+    // 6-ustunlik: Ishtirokchilar soni (individual 1 kishi > kam a'zoli jamoa)
+    if (a.membersCount !== b.membersCount) {
+      return a.membersCount - b.membersCount;
+    }
+
+    // 7-ustunlik: Tug'ilgan sanasi bo'yicha yoshroq ishtirokchilarga ustunlik (kechroq tug'ilgan = timestamp katta)
+    if (b.avgBirthTimestamp !== a.avgBirthTimestamp) {
+      return b.avgBirthTimestamp - a.avgBirthTimestamp;
+    }
+
+    return a.id - b.id;
   });
 
   // O'rinlarni belgilash (1-, 2-, 3-o'rinlar viloyatga tavsiya etiladi)
   calculated.forEach((proj, idx) => {
     if (proj.finalAverage !== "") {
       proj.rank = idx + 1;
-      proj.recommendedToRegion = (idx < 3); // 1-, 2-, 3-o'rinlar
+      proj.recommendedToRegion = (idx < 3); // 1-, 2-, 3-o'rinlar viloyat bosqichiga yo'llanma oladi
     } else {
       proj.rank = "-";
       proj.recommendedToRegion = false;
