@@ -6,6 +6,7 @@
   <title>“Ixtiroçilikka qadam” tanlovi - 2-tuman bosqiçi | Onlayn Baholaş Tizimi</title>
   <link rel="stylesheet" href="style.css?v=20261120_1830">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/exceljs@4.4.0/dist/exceljs.min.js"></script>
 </head>
 <body>
 
@@ -99,11 +100,8 @@
             <option value="Ekologiya va iqlim özgarişi">Ekologiya va iqlim özgarişi</option>
             <option value="Qişloq xöjaligi">Qişloq xöjaligi</option>
           </select>
-          <button onclick="configureSheetsUrl()" class="btn btn-outline" style="font-size: 13px; color: #059669; border-color: #a7f3d0;" title="Google Sheet bazasi ulanişi">
-            <i class="fa-solid fa-cloud-arrow-up"></i> Google Sheet
-          </button>
-          <button onclick="exportToCsv()" class="btn btn-outline" style="font-size: 13px;">
-            <i class="fa-solid fa-file-excel"></i> Excelga yuklaş
+          <button onclick="exportToExcel()" class="btn btn-outline" style="font-size: 13px; color: #15803d; border-color: #86efac; background: #f0fdf4; font-weight: 700;">
+            <i class="fa-solid fa-file-excel"></i> Excelga yuklaş (.xlsx)
           </button>
         </div>
       </div>
@@ -296,33 +294,136 @@
       renderTable();
     }
 
-    function exportToCsv() {
+    async function exportToExcel() {
       const ranked = calculateIxtirochilikRanking(currentData.projects);
-      let csv = "T/r,Loyiha nomi,Maktab,Yönaliş,Mualliflar,1-Hakam,2-Hakam,3-Hakam,4-Hakam,5-Hakam,6-Hakam,7-Hakam,Örtaça ball,Örni,Viloyatga tavsiya\n";
-      
-      ranked.forEach((p, idx) => {
-        const authors = p.members.map(m => m.name).join("; ");
-        const j = p.judgeTotalScores.map(v => v || "");
-        const status = p.recommendedToRegion ? "Viloyatga tavsiya etildi" : "Iştirokçi";
-        csv += `"${idx+1}","${p.projectName}","${p.school}","${p.direction}","${authors}","${j[0]}","${j[1]}","${j[2]}","${j[3]}","${j[4]}","${j[5]}","${j[6]}","${p.finalAverage}","${p.rank}","${status}"\n`;
+      const now = new Date();
+      const pad = n => String(n).padStart(2, "0");
+      const dateStr = `${pad(now.getDate())}.${pad(now.getMonth() + 1)}.${now.getFullYear()} ${pad(now.getHours())}:${pad(now.getMinutes())}`;
+
+      if (typeof ExcelJS === "undefined") {
+        alert("Excel kutubxonasi yuklanmadi. Internet ulanişini tekşirib qayta urinib köring.");
+        return;
+      }
+
+      const wb = new ExcelJS.Workbook();
+      const ws = wb.addWorksheet("Reyting Qaydnomasi", {
+        views: [{ showGridLines: true, state: "frozen", ySplit: 4 }],
+        pageSetup: {
+          paperSize: 9, // A4
+          orientation: "landscape",
+          fitToPage: true,
+          fitToWidth: 1,
+          fitToHeight: 0,
+          horizontalCentered: true,
+          margins: { left: 0.35, right: 0.35, top: 0.5, bottom: 0.5, header: 0.25, footer: 0.25 },
+          printTitlesRow: "1:4"
+        }
       });
 
-      const blob = new Blob(["\ufeff" + csv], { type: "text/csv;charset=utf-8;" });
+      // Sarlavha qatorlari
+      ws.mergeCells("A1:O1");
+      const c1 = ws.getCell("A1");
+      c1.value = "QÖŞKÖPIR TUMAN TAʼLIM BÖLIMI — “IXTIROÇILIKKA QADAM” TANLOVI TUMAN BOSQIÇI REYTING QAYDNOMASI";
+      c1.font = { name: "Times New Roman", size: 14, bold: true, color: { argb: "FF0F172A" } };
+      c1.alignment = { horizontal: "center", vertical: "middle", wrapText: true };
+      ws.getRow(1).height = 28;
+
+      ws.mergeCells("A2:O2");
+      const c2 = ws.getCell("A2");
+      c2.value = `Holat sanasi: ${dateStr} | Jami iştirokçilar: ${ranked.length} ta loyiha | 7 nafar hakam (100 ballik tizim)`;
+      c2.font = { name: "Times New Roman", size: 10, italic: true, color: { argb: "FF475569" } };
+      c2.alignment = { horizontal: "center", vertical: "middle" };
+      ws.getRow(2).height = 20;
+
+      ws.getRow(3).height = 8;
+
+      // Ustun sarlavhalari (4-qator)
+      const headers = [
+        "T/r", "Taʼlim muassasasi", "Loyiha nomi", "Yönaliş", "Mualliflar (F.I.Ş.)",
+        "1-H\n(IT)", "2-H\n(Fizika)", "3-H\n(Bio)", "4-H\n(Kimyo)", "5-H\n(Soha)", "6-H\n(Eko)", "7-H\n(Innov)",
+        "Örtaça\nball", "Örni", "Status"
+      ];
+      const headerRow = ws.getRow(4);
+      headerRow.height = 34;
+
+      const thinBorder = {
+        top: { style: "thin", color: { argb: "FF334155" } },
+        left: { style: "thin", color: { argb: "FF334155" } },
+        bottom: { style: "thin", color: { argb: "FF334155" } },
+        right: { style: "thin", color: { argb: "FF334155" } }
+      };
+
+      headers.forEach((text, i) => {
+        const cell = headerRow.getCell(i + 1);
+        cell.value = text;
+        cell.font = { name: "Times New Roman", size: 11, bold: true, color: { argb: "FFFFFFFF" } };
+        cell.fill = { type: "pattern", pattern: "solid", fgColor: { argb: "FF1E3A8A" } };
+        cell.alignment = { horizontal: "center", vertical: "middle", wrapText: true };
+        cell.border = thinBorder;
+      });
+
+      // Ustun kengliklari (barcha matnlar chiroyli sig'ishi uchun)
+      const colWidths = [5, 28, 24, 22, 34, 7.5, 7.5, 7.5, 7.5, 7.5, 7.5, 7.5, 10, 9, 18];
+      colWidths.forEach((w, idx) => { ws.getColumn(idx + 1).width = w; });
+
+      // Ma'lumot qatorlari (0 qiymatlar bo'sh/pustoy qoldiriladi!)
+      ranked.forEach((p, idx) => {
+        const rowNum = 5 + idx;
+        const row = ws.getRow(rowNum);
+        const authors = p.members.map(m => m.name).join("\n");
+        const jScores = p.judgeTotalScores.map(v => (v && Number(v) > 0) ? Number(v) : "");
+        const avgVal = (p.finalAverage && Number(p.finalAverage) > 0) ? Number(p.finalAverage) : "";
+        const rankVal = (p.rank && p.rank !== "-" && avgVal !== "") ? `${p.rank}-örin` : "";
+        const statusVal = (p.recommendedToRegion && avgVal !== "") ? "Viloyatga tavsiya" : "Iştirokçi";
+
+        const values = [
+          idx + 1, p.school, p.projectName, p.direction, authors,
+          jScores[0], jScores[1], jScores[2], jScores[3], jScores[4], jScores[5], jScores[6],
+          avgVal, rankVal, statusVal
+        ];
+
+        // Qator rangi (1-, 2-, 3-örin yumshoq ajratiladi, qolganlari zebra)
+        let bgArgb = (idx % 2 === 1) ? "FFF8FAFC" : "FFFFFFFF";
+        if (avgVal !== "" && p.rank === 1) bgArgb = "FFFEF9C3";
+        else if (avgVal !== "" && p.rank === 2) bgArgb = "FFF1F5F9";
+        else if (avgVal !== "" && p.rank === 3) bgArgb = "FFFFEDD5";
+
+        values.forEach((val, colIdx) => {
+          const cell = row.getCell(colIdx + 1);
+          cell.value = val;
+          cell.font = {
+            name: "Times New Roman",
+            size: 10,
+            bold: (colIdx === 0 || colIdx === 12 || colIdx === 13),
+            color: { argb: colIdx === 12 ? "FF0369A1" : "FF0F172A" }
+          };
+          cell.fill = { type: "pattern", pattern: "solid", fgColor: { argb: bgArgb } };
+          cell.border = thinBorder;
+
+          const isTextCol = (colIdx >= 1 && colIdx <= 4);
+          cell.alignment = {
+            horizontal: isTextCol ? "left" : "center",
+            vertical: "middle",
+            wrapText: true
+          };
+          if (colIdx === 12 && typeof val === "number") {
+            cell.numFmt = '0.00;-0.00;""';
+          } else if (colIdx >= 5 && colIdx <= 11 && typeof val === "number") {
+            cell.numFmt = '#,##0;-#,##0;""';
+          }
+        });
+
+        row.height = Math.max(22, p.members.length * 16 + 8);
+      });
+
+      const buffer = await wb.xlsx.writeBuffer();
+      const blob = new Blob([buffer], { type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" });
       const url = URL.createObjectURL(blob);
       const a = document.createElement("a");
       a.href = url;
-      a.download = "Ixtirochilikka_qadam_Tuman_bosqichi_Natijalari.csv";
+      a.download = "Ixtirochilikka_qadam_Reyting_2026.xlsx";
       a.click();
-    }
-
-    function configureSheetsUrl() {
-      const current = getGoogleSheetsApiUrl();
-      const entered = prompt("Google Apps Script Web App URL manzilini kiriting:\n(Google Sheet -> Extensions -> Apps Script -> Deploy -> Web app):", current);
-      if (entered !== null) {
-        setGoogleSheetsApiUrl(entered);
-        alert(entered.trim() ? "Google Sheet ulaniş manzili saqlandi!" : "Ulaniş manzili tozalandi (Mahalliy rejim).");
-        loadLiveSheetsData();
-      }
+      setTimeout(() => URL.revokeObjectURL(url), 1000);
     }
 
     async function loadLiveSheetsData() {
