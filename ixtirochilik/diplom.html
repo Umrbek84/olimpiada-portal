@@ -233,6 +233,34 @@
       background: #e2e8f0;
     }
 
+    #batchPrintContainer {
+      display: none;
+    }
+
+    .member-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 6px;
+    }
+
+    .member-pill {
+      padding: 4px 10px;
+      font-size: 11.5px;
+      font-weight: 600;
+      border: 1px solid #cbd5e1;
+      border-radius: 99px;
+      background: #f8fafc;
+      color: #334155;
+      cursor: pointer;
+    }
+
+    .member-pill.active {
+      background: #0284c7;
+      color: #ffffff;
+      border-color: #0284c7;
+    }
+
     /* Print styling: Perfect full-bleed A4 Landscape */
     @media print {
       body {
@@ -264,6 +292,24 @@
         width: 100vw !important;
         height: 100vh !important;
         object-fit: contain !important;
+      }
+      body.batch-printing .award-app-container {
+        display: none !important;
+      }
+      body.batch-printing #batchPrintContainer {
+        display: block !important;
+      }
+      .batch-print-page {
+        display: block !important;
+        width: 100vw !important;
+        height: 100vh !important;
+        object-fit: contain !important;
+        page-break-after: always;
+        break-after: page;
+      }
+      .batch-print-page:last-child {
+        page-break-after: auto;
+        break-after: auto;
       }
       @page {
         size: A4 landscape;
@@ -339,7 +385,7 @@
         </div>
 
         <div class="form-group">
-          <label class="form-label" for="selProject">Yoki 17 ta loyihadan tanlang:</label>
+          <label class="form-label" for="selProject" id="lblSelProject">1-örin uçun 17 ta loyihadan tanlang:</label>
           <select id="selProject" class="form-control" onchange="onSelectProjectChange(this.value)">
             <!-- JavaScript orqali to'ldiriladi -->
           </select>
@@ -347,7 +393,7 @@
 
         <div class="form-group">
           <label class="form-label" for="inpPlace">Örin (Daraja):</label>
-          <select id="inpPlace" class="form-control" onchange="updatePreview()">
+          <select id="inpPlace" class="form-control" onchange="onPlaceSelectChange(this.value)">
             <option value="1">1-örin (I DARAJALI — Oltin)</option>
             <option value="2">2-örin (II DARAJALI — Kumuş)</option>
             <option value="3">3-örin (III DARAJALI — Bronza)</option>
@@ -357,6 +403,7 @@
         <div class="form-group">
           <label class="form-label" for="inpStudentName">Öquvçi F.I.Ş.:</label>
           <input type="text" id="inpStudentName" class="form-control" oninput="updatePreview()" placeholder="FAYZULLAYEV BOYMUROD BOBOMUROD ÖĞLI">
+          <div id="memberPills" class="member-pills"></div>
         </div>
 
         <div class="form-group">
@@ -431,6 +478,9 @@
       </div>
     </div>
   </main>
+
+  <!-- Barcha g'oliblarni avtomatik ko'p sahifali chop etish konteyneri -->
+  <div id="batchPrintContainer"></div>
 
   <footer class="site-footer no-print">
     <div class="wrap">
@@ -540,20 +590,56 @@
       return { primary: "#9a5028", accent: "#b47350", name: "Bronza" };
     }
 
+    let activePlace = 1;
+    let activeProject = null;
+
     function initAwardPage() {
+      if (!appData.projects || appData.projects.length < 17) {
+        appData = JSON.parse(JSON.stringify(IXTIROCHILIK_CONFIG));
+        saveIxtirochilikData(appData);
+      }
       currentRanked = calculateIxtirochilikRanking(appData.projects);
+      selectQuickWinner(1);
+
+      // Google Sheet'dan jonli ballarni ham yuklab reytingni avtomatik yangilash
+      if (typeof fetchLiveScoresFromGoogleSheets === "function") {
+        fetchLiveScoresFromGoogleSheets().then(liveEvals => {
+          if (liveEvals) {
+            appData.projects.forEach(p => {
+              if (liveEvals[p.id]) p.evaluations = liveEvals[p.id];
+            });
+            saveIxtirochilikData(appData);
+            currentRanked = calculateIxtirochilikRanking(appData.projects);
+            populateProjectDropdownForPlace(activePlace, document.getElementById("selProject").value);
+          }
+        }).catch(() => {});
+      }
+    }
+
+    // Tanlangan o'rin (1, 2 yoki 3) uchun BARCHA 17 ta loyihani faqat shu o'rin sifatida ro'yxatga chiqarish
+    function populateProjectDropdownForPlace(place, preserveSelectedId) {
+      const metal = getMetalColors(place);
+      const lbl = document.getElementById("lblSelProject");
+      if (lbl) {
+        lbl.textContent = `${place}-örin (${metal.name}) uçun 17 ta loyihadan tanlang:`;
+      }
 
       const sel = document.getElementById("selProject");
-      sel.innerHTML = '<option value="">-- Loyihani tanlang --</option>';
+      sel.innerHTML = "";
       currentRanked.forEach((p, idx) => {
         const opt = document.createElement("option");
         opt.value = p.id;
-        const rankText = p.rank ? `${p.rank}-örin` : `${idx + 1}-örin`;
-        opt.textContent = `${rankText}: ${p.projectName} (${p.school})`;
+        const star = (idx === place - 1 && p.finalAverage > 0) ? "⭐ " : "";
+        opt.textContent = `${star}${place}-örin (${metal.name}): ${p.projectName} — ${p.school}`;
         sel.appendChild(opt);
       });
 
-      selectQuickWinner(1);
+      if (preserveSelectedId) {
+        sel.value = preserveSelectedId;
+      } else {
+        const defaultProj = currentRanked[place - 1] || currentRanked[0];
+        if (defaultProj) sel.value = defaultProj.id;
+      }
     }
 
     function switchDocType(type) {
@@ -574,41 +660,100 @@
     }
 
     function selectQuickWinner(place) {
+      activePlace = parseInt(place) || 1;
       [1, 2, 3].forEach(p => {
         const btn = document.getElementById(`qw_${p}`);
-        if (btn) btn.classList.toggle("active-winner", p === place);
+        if (btn) btn.classList.toggle("active-winner", p === activePlace);
       });
 
-      document.getElementById("inpPlace").value = place;
-      document.getElementById("inpDocNum").value = String(place).padStart(3, '0');
+      document.getElementById("inpPlace").value = activePlace;
+      document.getElementById("inpDocNum").value = String(activePlace).padStart(3, '0');
 
-      const proj = currentRanked[place - 1];
+      // Ro'yxatda faqat shu o'rin (1-, 2- yoki 3-örin) sifatida 17 ta loyihani chiqarish
+      populateProjectDropdownForPlace(activePlace, null);
+
+      const proj = currentRanked[activePlace - 1] || currentRanked[0];
       if (proj) {
         document.getElementById("selProject").value = proj.id;
-        fillFieldsFromProject(proj, place);
+        fillFieldsFromProject(proj, activePlace);
       } else {
         updatePreview();
       }
+    }
+
+    function onPlaceSelectChange(val) {
+      const place = parseInt(val) || 1;
+      activePlace = place;
+      [1, 2, 3].forEach(p => {
+        const btn = document.getElementById(`qw_${p}`);
+        if (btn) btn.classList.toggle("active-winner", p === activePlace);
+      });
+      const currentProjId = document.getElementById("selProject").value;
+      populateProjectDropdownForPlace(activePlace, currentProjId);
+      updatePreview();
     }
 
     function onSelectProjectChange(projId) {
       if (!projId) return;
       const proj = appData.projects.find(x => x.id == projId);
       if (proj) {
-        const idx = currentRanked.findIndex(x => x.id == projId);
-        const place = (idx >= 0 && idx < 3) ? (idx + 1) : 1;
-        document.getElementById("inpPlace").value = place;
+        // Tanlangan o'rinni (1, 2 yoki 3 — Oltin/Kumuş/Bronza) O'ZGARTIRMASDAN saqlab qolamiz!
+        const place = parseInt(document.getElementById("inpPlace").value) || activePlace || 1;
         fillFieldsFromProject(proj, place);
       }
     }
 
+    function renderMemberPills(proj) {
+      const container = document.getElementById("memberPills");
+      if (!container) return;
+      container.innerHTML = "";
+      if (!proj || !proj.members || proj.members.length <= 1) return;
+
+      const allBtn = document.createElement("button");
+      allBtn.type = "button";
+      allBtn.className = "member-pill active";
+      allBtn.textContent = `Barçasi (${proj.members.length})`;
+      allBtn.onclick = () => {
+        container.querySelectorAll(".member-pill").forEach(b => b.classList.remove("active"));
+        allBtn.classList.add("active");
+        document.getElementById("inpStudentName").value = toYangiLotin(proj.members.map(m => m.name).join(", "));
+        document.getElementById("inpGrade").value = toYangiLotin(proj.members.map(m => m.grade).join(", "));
+        updatePreview();
+      };
+      container.appendChild(allBtn);
+
+      proj.members.forEach((m, idx) => {
+        const btn = document.createElement("button");
+        btn.type = "button";
+        btn.className = "member-pill";
+        btn.textContent = `${idx + 1}-öquvçi`;
+        btn.title = m.name;
+        btn.onclick = () => {
+          container.querySelectorAll(".member-pill").forEach(b => b.classList.remove("active"));
+          btn.classList.add("active");
+          document.getElementById("inpStudentName").value = toYangiLotin(m.name);
+          document.getElementById("inpGrade").value = toYangiLotin(m.grade);
+          updatePreview();
+        };
+        container.appendChild(btn);
+      });
+    }
+
+    function getDefaultTeacherForPlace(place) {
+      if (place === 1) return { name: "Ollaberganova Laylo Rözimbayevna", role: "Informatika va axborot texnologiyalari fani öqituvçisi" };
+      if (place === 2) return { name: "Madaminov Jasurbek Baxtiyoroviç", role: "Fizika va robototexnika tögaragi rahbari" };
+      return { name: "Bobojonov Şavkat Rustamoviç", role: "Informatika fani öqituvçisi" };
+    }
+
     function fillFieldsFromProject(proj, place) {
+      activeProject = proj;
       const studentNames = proj.members.map(m => m.name).join(", ");
       const grades = proj.members.map(m => m.grade).join(", ");
 
       document.getElementById("inpStudentName").value = toYangiLotin(studentNames);
       document.getElementById("inpSchool").value = toYangiLotin(proj.school);
       document.getElementById("inpGrade").value = toYangiLotin(grades);
+      renderMemberPills(proj);
 
       // Select boxdagi mos yönalişni avtomatik belgilash
       const dirClean = toYangiLotin(proj.direction);
@@ -630,60 +775,23 @@
           document.getElementById("inpTeacherName").value.includes("Ollaberganova") ||
           document.getElementById("inpTeacherName").value.includes("Madaminov") ||
           document.getElementById("inpTeacherName").value.includes("Bobojonov")) {
-        if (place === 1) {
-          document.getElementById("inpTeacherName").value = "Ollaberganova Laylo Rözimbayevna";
-          document.getElementById("inpTeacherRole").value = "Informatika va axborot texnologiyalari fani öqituvçisi";
-        } else if (place === 2) {
-          document.getElementById("inpTeacherName").value = "Madaminov Jasurbek Baxtiyoroviç";
-          document.getElementById("inpTeacherRole").value = "Fizika va robototexnika tögaragi rahbari";
-        } else {
-          document.getElementById("inpTeacherName").value = "Bobojonov Şavkat Rustamoviç";
-          document.getElementById("inpTeacherRole").value = "Informatika fani öqituvçisi";
-        }
+        const t = getDefaultTeacherForPlace(place);
+        document.getElementById("inpTeacherName").value = t.name;
+        document.getElementById("inpTeacherRole").value = t.role;
       }
 
       updatePreview();
     }
 
-    function drawRoundedRect(ctx, x, y, w, h, r) {
-      ctx.beginPath();
-      ctx.moveTo(x + r, y);
-      ctx.lineTo(x + w - r, y);
-      ctx.quadraticCurveTo(x + w, y, x + w, y + r);
-      ctx.lineTo(x + w, y + h - r);
-      ctx.quadraticCurveTo(x + w, y + h, x + w - r, y + h);
-      ctx.lineTo(x + r, y + h);
-      ctx.quadraticCurveTo(x, y + h, x, y + h - r);
-      ctx.lineTo(x, y + r);
-      ctx.quadraticCurveTo(x, y, x + r, y);
-      ctx.closePath();
-    }
-
-    function updatePreview() {
-      const canvas = document.getElementById("awardCanvas");
+    function renderAwardToCanvas(canvas, params) {
       const ctx = canvas.getContext("2d");
-
-      const place = parseInt(document.getElementById("inpPlace").value) || 1;
-      const docNum = String(document.getElementById("inpDocNum").value || "001").padStart(3, "0");
-      const studentName = toYangiLotin(document.getElementById("inpStudentName").value || "ÖQUVÇI F.I.Ş.").toUpperCase();
-      const school = toYangiLotin(document.getElementById("inpSchool").value || "Maktab");
-      const grade = toYangiLotin(document.getElementById("inpGrade").value || "9-sinf");
-      const direction = toYangiLotin(document.getElementById("inpDirection").value || "Axborot texnologiyalari (IT)");
-      const teacherName = toYangiLotin(document.getElementById("inpTeacherName").value || "Ustoz F.I.Ş.");
-      const teacherRole = toYangiLotin(document.getElementById("inpTeacherRole").value || "öqituvçi");
-
+      const { docType, place, docNum, studentName, school, grade, direction, teacherName, teacherRole } = params;
       const gradeStr = grade.includes("sinf") ? grade : `${grade}-sinf`;
       const themeInfo = getThemeInfoByDirection(direction);
       const metal = getMetalColors(place);
 
-      // Aktiv fon nishonini yangilash
-      const badge = document.getElementById("activeThemeBadge");
-      if (badge) {
-        badge.textContent = `🏅 Ramka: ${metal.name} · 🎨 Orqa fon: ${themeInfo.label}`;
-      }
-
       // 1. Örin böyiça Oltin (1), Kumuş (2) yoki Bronza (3) rasmiy ramkani çiziş
-      const baseImg = (currentDocType === "diplom" ? imgDiplomBases[place] : imgTashBases[place]) || imgDiplomBases[1];
+      const baseImg = (docType === "diplom" ? imgDiplomBases[place] : imgTashBases[place]) || imgDiplomBases[1];
       if (baseImg && baseImg.complete) {
         ctx.drawImage(baseImg, 0, 0, 1754, 1240);
       } else {
@@ -694,7 +802,7 @@
       // 2. Yönaliş böyiça ramka içida bilinar-bilinmas orqa fon (watermark)
       const wmImg = wmImages[themeInfo.key] || wmImages.talim;
       if (wmImg && wmImg.complete) {
-        const yPos = currentDocType === "diplom" ? 270 : 260;
+        const yPos = docType === "diplom" ? 270 : 260;
         ctx.drawImage(wmImg, 877 - 270, yPos, 540, 540);
       }
 
@@ -704,42 +812,36 @@
       // 3. Yuqori öng rasmiy raqam qutisi (x: 1485..1665, y: 58..126)
       ctx.font = "15px 'Times New Roman'";
       ctx.fillStyle = "#475569";
-      ctx.fillText(currentDocType === "diplom" ? "DIPLOM RAQAMI" : "RAQAMI", (1485 + 1665) / 2, 66);
+      ctx.fillText(docType === "diplom" ? "DIPLOM RAQAMI" : "RAQAMI", (1485 + 1665) / 2, 66);
 
       ctx.font = "bold 24px 'Times New Roman'";
       ctx.fillStyle = "#0c1a30";
       ctx.fillText(`№ ${docNum}`, (1485 + 1665) / 2, 90);
 
       // 4. Asosiy matn qismi
-      if (currentDocType === "diplom") {
-        // Daraja (Oltin / Kumuş / Bronza)
+      if (docType === "diplom") {
         const darajaMap = { 1: "I DARAJALI", 2: "II DARAJALI", 3: "III DARAJALI" };
         ctx.font = "bold 46px 'Times New Roman'";
         ctx.fillStyle = metal.primary;
         ctx.fillText(darajaMap[place] || `${place}-DARAJALI`, 877, 355);
 
-        // Tavsif qatorlari
         ctx.font = "32px 'Times New Roman'";
         ctx.fillStyle = "#1e293b";
         ctx.fillText("2026/2027-öquv yilidagi “Ixtiroçilikka qadam” tanlovining tuman bosqiçida", 877, 448);
         ctx.fillText(`${gradeStr} böyiça ${direction} yönalişida ${place}-örinni qölga kiritgani uçun`, 877, 503);
         ctx.fillText(`Qöşköpir tumani, ${school} öquvçisi`, 877, 558);
 
-        // Öquvçi F.I.Ş.
         ctx.font = "bold 50px 'Times New Roman'";
         ctx.fillStyle = "#0c1a30";
         if (ctx.measureText(studentName).width > 1360) {
           ctx.font = "bold 40px 'Times New Roman'";
         }
         ctx.fillText(studentName, 877, 642);
-
       } else {
-        // Hurmatli
         ctx.font = "italic 42px 'Times New Roman'";
         ctx.fillStyle = "#334155";
         ctx.fillText("Hurmatli", 877, 315);
 
-        // Ustoz F.I.Ş.
         ctx.font = "bold 50px 'Times New Roman'";
         ctx.fillStyle = "#0c1a30";
         if (ctx.measureText(teacherName).width > 1360) {
@@ -747,12 +849,10 @@
         }
         ctx.fillText(teacherName, 877, 380);
 
-        // Maktab va lavozim
         ctx.font = "28px 'Times New Roman'";
         ctx.fillStyle = "#475569";
         ctx.fillText(`(${school}, ${teacherRole})`, 877, 455);
 
-        // Minnatdorçilik matni
         const lines = [
           `Siz tayyorlagan ${gradeStr} öquvçisi ${studentName} 2026/2027-öquv`,
           `yilidagi “Ixtiroçilikka qadam” tanlovining tuman bosqiçida ${direction} yönalişida ${place}-örinni egalladi.`,
@@ -768,10 +868,32 @@
           ctx.fillText(ln, 877, 552 + idx * 42);
         });
 
-        // Tilak
         ctx.font = "bold 30px 'Times New Roman'";
         ctx.fillStyle = metal.primary;
         ctx.fillText("İş faoliyatingizda yangi zafarlar tilaymiz!", 877, 742);
+      }
+      return { themeInfo, metal };
+    }
+
+    function updatePreview() {
+      const canvas = document.getElementById("awardCanvas");
+      const place = parseInt(document.getElementById("inpPlace").value) || 1;
+      const docNum = String(document.getElementById("inpDocNum").value || "001").padStart(3, "0");
+      const studentName = toYangiLotin(document.getElementById("inpStudentName").value || "ÖQUVÇI F.I.Ş.").toUpperCase();
+      const school = toYangiLotin(document.getElementById("inpSchool").value || "Maktab");
+      const grade = toYangiLotin(document.getElementById("inpGrade").value || "9-sinf");
+      const direction = toYangiLotin(document.getElementById("inpDirection").value || "Axborot texnologiyalari (IT)");
+      const teacherName = toYangiLotin(document.getElementById("inpTeacherName").value || "Ustoz F.I.Ş.");
+      const teacherRole = toYangiLotin(document.getElementById("inpTeacherRole").value || "öqituvçi");
+
+      const { themeInfo, metal } = renderAwardToCanvas(canvas, {
+        docType: currentDocType,
+        place, docNum, studentName, school, grade, direction, teacherName, teacherRole
+      });
+
+      const badge = document.getElementById("activeThemeBadge");
+      if (badge) {
+        badge.textContent = `🏅 Ramka: ${metal.name} · 🎨 Orqa fon: ${themeInfo.label}`;
       }
     }
 
@@ -787,9 +909,69 @@
       link.click();
     }
 
+    // Reytingdagi haqiqiy 1-, 2-, 3-o'rin g'oliblarining BARCHA diplom va tashakkurnomalarini 1 bosishda avtomatik chop etish
     function printAllWinnersBatch() {
-      alert("Barça 1-, 2-, 3-örin ğoliblari va ularning ustozlari uçun diplomlar çop etişga tayyorlandi!");
-      window.print();
+      const container = document.getElementById("batchPrintContainer");
+      container.innerHTML = "";
+
+      const offCanvas = document.createElement("canvas");
+      offCanvas.width = 1754;
+      offCanvas.height = 1240;
+
+      const top3 = currentRanked.slice(0, 3);
+      let certCounter = 1;
+
+      top3.forEach((proj, idx) => {
+        const place = idx + 1;
+        const school = toYangiLotin(proj.school);
+        const direction = toYangiLotin(proj.direction);
+        const t = getDefaultTeacherForPlace(place);
+
+        // Har bir jamoa a'zosi uchun alohida Diplom
+        proj.members.forEach(m => {
+          renderAwardToCanvas(offCanvas, {
+            docType: "diplom",
+            place,
+            docNum: String(certCounter++).padStart(3, "0"),
+            studentName: toYangiLotin(m.name).toUpperCase(),
+            school,
+            grade: toYangiLotin(m.grade),
+            direction,
+            teacherName: t.name,
+            teacherRole: t.role
+          });
+          const img = document.createElement("img");
+          img.className = "batch-print-page";
+          img.src = offCanvas.toDataURL("image/jpeg", 0.95);
+          container.appendChild(img);
+        });
+
+        // Ustoz uchun Taşakkurnoma
+        renderAwardToCanvas(offCanvas, {
+          docType: "tashakkur",
+          place,
+          docNum: String(certCounter++).padStart(3, "0"),
+          studentName: toYangiLotin(proj.members.map(m => m.name).join(", ")).toUpperCase(),
+          school,
+          grade: toYangiLotin(proj.members.map(m => m.grade).join(", ")),
+          direction,
+          teacherName: t.name,
+          teacherRole: t.role
+        });
+        const imgT = document.createElement("img");
+        imgT.className = "batch-print-page";
+        imgT.src = offCanvas.toDataURL("image/jpeg", 0.95);
+        container.appendChild(imgT);
+      });
+
+      document.body.classList.add("batch-printing");
+      window.onafterprint = () => {
+        document.body.classList.remove("batch-printing");
+        container.innerHTML = "";
+      };
+      setTimeout(() => {
+        window.print();
+      }, 250);
     }
   </script>
 </body>
