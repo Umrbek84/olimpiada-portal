@@ -156,7 +156,7 @@ const IXTIROCHILIK_CONFIG = {
   {
     "id": 4,
     "siteId": 1575,
-    "school": "9-son ixtisoslaştirilgan maktab",
+    "school": "9-IDUM",
     "projectName": "Robot ekskavator",
     "direction": "Axborot texnologiyalari (IT)",
     "isTeam": false,
@@ -251,7 +251,7 @@ const IXTIROCHILIK_CONFIG = {
   {
     "id": 9,
     "siteId": 1256,
-    "school": "5-son ixtisoslaştirilgan maktab",
+    "school": "5-IDUM",
     "projectName": "Energiya tejaydigan uy",
     "direction": "Yaşil energiya",
     "isTeam": true,
@@ -383,7 +383,7 @@ const IXTIROCHILIK_CONFIG = {
   {
     "id": 16,
     "siteId": 1814,
-    "school": "4-son umumiy örta taʼlim maktabi",
+    "school": "4-IDUM",
     "projectName": "Foydali texnikalar",
     "direction": "Ekologiya va iqlim özgarişi",
     "isTeam": false,

@@ -182,8 +182,8 @@ def generate_all_5_directions_samples(target_dir):
     directions_meta = [
         ("01_Talim", "Taʼlim", "14-son umumiy örta taʼlim maktabi", "9-sinf", "NAMUNA ÖQUVÇI F.I.Ş.", "Namuna Ustoz F.I.Ş.", "Informatika fani öqituvçisi"),
         ("02_Axborot_texnologiyalari_IT", "Axborot texnologiyalari (IT)", "23-son umumiy örta taʼlim maktabi", "8-sinf", "ABDULLAYEV JAMŞIDBEK DIYOR ÖĞLI", "Madaminov Jasurbek Baxtiyoroviç", "Fizika va robototexnika tögaragi rahbari"),
-        ("03_Yashil_energiya", "Yaşil energiya", "5-son ixtisoslaştirilgan maktab", "9-sinf", "SANJARBEKOV MIRALI SANJARBEK ÖĞLI", "Namuna Ustoz F.I.Ş.", "Fizika fani öqituvçisi"),
-        ("04_Ekologiya_va_iqlim_ozgarishi", "Ekologiya va iqlim özgarişi", "4-son umumiy örta taʼlim maktabi", "8-sinf", "RÖZMATOV RÖZMATBOY XUŞNUDBEK ÖĞLI", "Namuna Ustoz F.I.Ş.", "Biologiya va ekologiya fani öqituvçisi"),
+        ("03_Yashil_energiya", "Yaşil energiya", "5-IDUM", "9-sinf", "SANJARBEKOV MIRALI SANJARBEK ÖĞLI", "Namuna Ustoz F.I.Ş.", "Fizika fani öqituvçisi"),
+        ("04_Ekologiya_va_iqlim_ozgarishi", "Ekologiya va iqlim özgarişi", "4-IDUM", "8-sinf", "RÖZMATOV RÖZMATBOY XUŞNUDBEK ÖĞLI", "Namuna Ustoz F.I.Ş.", "Biologiya va ekologiya fani öqituvçisi"),
         ("05_Qishloq_xojaligi", "Qişloq xöjaligi", "6-son umumiy örta taʼlim maktabi", "11-sinf", "FAYZULLAYEV BOYMUROD BOBOMUROD ÖĞLI", "Ollaberganova Laylo Rözimbayevna", "Informatika va axborot texnologiyalari fani öqituvçisi"),
     ]
 
@@ -259,7 +259,7 @@ def main():
         },
         {
             "place": 3,
-            "school": "9-son ixtisoslaştirilgan maktab",
+            "school": "9-IDUM",
             "project": "Robot ekskavator",
             "direction": "Axborot texnologiyalari (IT)",
             "students": [
