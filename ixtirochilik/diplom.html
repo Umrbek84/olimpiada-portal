@@ -823,20 +823,56 @@
         const darajaMap = { 1: "I DARAJALI", 2: "II DARAJALI", 3: "III DARAJALI" };
         ctx.font = "bold 46px 'Times New Roman'";
         ctx.fillStyle = metal.primary;
-        ctx.fillText(darajaMap[place] || `${place}-DARAJALI`, 877, 355);
+        ctx.fillText(darajaMap[place] || `${place}-DARAJALI`, 877, 352);
 
-        ctx.font = "32px 'Times New Roman'";
+        // Jamoaviy (2 yoki 3 nafar) öquvçilarni ketma-ket qatorlarga ajratiş
+        const nameLines = studentName.split(",").map(s => s.trim()).filter(Boolean);
+        const isMulti = nameLines.length > 1;
+        const pupilWord = isMulti ? "öquvçilari" : "öquvçisi";
+
+        // Tavsif qatorlari (3 kishilik jamoada biroz yuqoriroq joylaşadi)
+        const descStart = nameLines.length >= 3 ? 426 : (nameLines.length === 2 ? 436 : 448);
+        const descGap = nameLines.length >= 3 ? 46 : 52;
+        ctx.font = "31px 'Times New Roman'";
         ctx.fillStyle = "#1e293b";
-        ctx.fillText("2026/2027-öquv yilidagi “Ixtiroçilikka qadam” tanlovining tuman bosqiçida", 877, 448);
-        ctx.fillText(`${gradeStr} böyiça ${direction} yönalişida ${place}-örinni qölga kiritgani uçun`, 877, 503);
-        ctx.fillText(`Qöşköpir tumani, ${school} öquvçisi`, 877, 558);
+        ctx.fillText("2026/2027-öquv yilidagi “Ixtiroçilikka qadam” tanlovining tuman bosqiçida", 877, descStart);
+        ctx.fillText(`${gradeStr} böyiça ${direction} yönalişida ${place}-örinni qölga kiritgani uçun`, 877, descStart + descGap);
+        ctx.fillText(`Qöşköpir tumani, ${school} ${pupilWord}`, 877, descStart + descGap * 2);
 
-        ctx.font = "bold 50px 'Times New Roman'";
+        // Öquvçi F.I.Ş. (1 kishi -> 1 qator, 2 kishi -> 2 qator, 3 kishi -> 3 qator ketma-ket tagma-tag)
         ctx.fillStyle = "#0c1a30";
-        if (ctx.measureText(studentName).width > 1360) {
-          ctx.font = "bold 40px 'Times New Roman'";
+        if (nameLines.length === 1) {
+          let fSize = 50;
+          ctx.font = `bold ${fSize}px 'Times New Roman'`;
+          while (ctx.measureText(nameLines[0]).width > 1340 && fSize > 28) {
+            fSize -= 2;
+            ctx.font = `bold ${fSize}px 'Times New Roman'`;
+          }
+          ctx.fillText(nameLines[0], 877, 640);
+        } else if (nameLines.length === 2) {
+          let fSize = 38;
+          ctx.font = `bold ${fSize}px 'Times New Roman'`;
+          const maxW = Math.max(...nameLines.map(n => ctx.measureText(n).width));
+          if (maxW > 1340) {
+            fSize = 32;
+            ctx.font = `bold ${fSize}px 'Times New Roman'`;
+          }
+          ctx.fillText(nameLines[0], 877, 608);
+          ctx.fillText(nameLines[1], 877, 656);
+        } else {
+          let fSize = 32;
+          ctx.font = `bold ${fSize}px 'Times New Roman'`;
+          const maxW = Math.max(...nameLines.map(n => ctx.measureText(n).width));
+          if (maxW > 1340) {
+            fSize = 27;
+            ctx.font = `bold ${fSize}px 'Times New Roman'`;
+          }
+          const startY = 582;
+          const lineStep = 40;
+          nameLines.slice(0, 3).forEach((ln, idx) => {
+            ctx.fillText(ln, 877, startY + idx * lineStep);
+          });
         }
-        ctx.fillText(studentName, 877, 642);
       } else {
         ctx.font = "italic 42px 'Times New Roman'";
         ctx.fillStyle = "#334155";
@@ -844,7 +880,7 @@
 
         ctx.font = "bold 50px 'Times New Roman'";
         ctx.fillStyle = "#0c1a30";
-        if (ctx.measureText(teacherName).width > 1360) {
+        if (ctx.measureText(teacherName).width > 1340) {
           ctx.font = "bold 40px 'Times New Roman'";
         }
         ctx.fillText(teacherName, 877, 380);
@@ -853,19 +889,35 @@
         ctx.fillStyle = "#475569";
         ctx.fillText(`(${school}, ${teacherRole})`, 877, 455);
 
-        const lines = [
-          `Siz tayyorlagan ${gradeStr} öquvçisi ${studentName} 2026/2027-öquv`,
-          `yilidagi “Ixtiroçilikka qadam” tanlovining tuman bosqiçida ${direction} yönalişida ${place}-örinni egalladi.`,
-          "Öquvçilarni yuksak natijalarga yetaklagan fidokorona mehnatingiz, kasbiy mahoratingiz va",
-          "ilhomlantiruvçi ustozligingiz uçun Sizga çuqur minnatdorçilik bildiramiz."
-        ];
+        const nameList = studentName.split(",").map(s => s.trim()).filter(Boolean);
+        const pupilWord = nameList.length > 1 ? "öquvçilari" : "öquvçisi";
+
+        let bodyLines = [];
+        if (nameList.length >= 2) {
+          bodyLines = [
+            `Siz tayyorlagan ${gradeStr} ${pupilWord} ${nameList.join(", ")}`,
+            `2026/2027-öquv yilidagi “Ixtiroçilikka qadam” tanlovining tuman bosqiçida`,
+            `${direction} yönalişida ${place}-örinni egalladi. Öquvçilarni yuksak natijalarga yetaklagan`,
+            `fidokorona mehnatingiz, kasbiy mahoratingiz va ustozligingiz uçun çuqur minnatdorçilik bildiramiz.`
+          ];
+        } else {
+          bodyLines = [
+            `Siz tayyorlagan ${gradeStr} ${pupilWord} ${studentName} 2026/2027-öquv`,
+            `yilidagi “Ixtiroçilikka qadam” tanlovining tuman bosqiçida ${direction} yönalişida ${place}-örinni egalladi.`,
+            "Öquvçilarni yuksak natijalarga yetaklagan fidokorona mehnatingiz, kasbiy mahoratingiz va",
+            "ilhomlantiruvçi ustozligingiz uçun Sizga çuqur minnatdorçilik bildiramiz."
+          ];
+        }
+
         ctx.fillStyle = "#1e293b";
-        lines.forEach((ln, idx) => {
-          ctx.font = "28px 'Times New Roman'";
-          if (ctx.measureText(ln).width > 1340) {
-            ctx.font = "23px 'Times New Roman'";
+        bodyLines.forEach((ln, idx) => {
+          let fSize = 28;
+          ctx.font = `${fSize}px 'Times New Roman'`;
+          while (ctx.measureText(ln).width > 1340 && fSize > 18) {
+            fSize -= 1;
+            ctx.font = `${fSize}px 'Times New Roman'`;
           }
-          ctx.fillText(ln, 877, 552 + idx * 42);
+          ctx.fillText(ln, 877, 550 + idx * 42);
         });
 
         ctx.font = "bold 30px 'Times New Roman'";
