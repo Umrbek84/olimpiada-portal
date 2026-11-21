@@ -395,6 +395,32 @@ const IXTIROCHILIK_CONFIG = {
       }
     ],
     "evaluations": {}
+  },
+  {
+    "id": 17,
+    "siteId": 2050,
+    "school": "48-son umumiy örta taʼlim maktabi",
+    "projectName": "Bilimscan AI",
+    "direction": "Axborot texnologiyalari (IT)",
+    "isTeam": true,
+    "members": [
+      {
+        "name": "ATABEKOV XASANBOY MANSURBEK ÖĞLI",
+        "birthDate": "2012-08-29",
+        "grade": "9-sinf"
+      },
+      {
+        "name": "SABIROV RÖZMAT RASULBEK ÖĞLI",
+        "birthDate": "2010-12-09",
+        "grade": "10-sinf"
+      },
+      {
+        "name": "OLIMBAYEV YUNUSBEK XURSANDBEK ÖĞLI",
+        "birthDate": "2009-11-20",
+        "grade": "11-sinf"
+      }
+    ],
+    "evaluations": {}
   }
 ]
 };
