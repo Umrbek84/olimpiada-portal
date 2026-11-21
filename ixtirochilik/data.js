@@ -383,7 +383,7 @@ const IXTIROCHILIK_CONFIG = {
   {
     "id": 16,
     "siteId": 1814,
-    "school": "4-IDUM",
+    "school": "4-son umumiy örta taʼlim maktabi",
     "projectName": "Foydali texnikalar",
     "direction": "Ekologiya va iqlim özgarişi",
     "isTeam": false,
