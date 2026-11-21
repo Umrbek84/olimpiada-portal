@@ -659,10 +659,35 @@ async function fetchLiveScoresFromGoogleSheets() {
   if (!url) return null;
 
   try {
-    const res = await fetch(url + (url.includes("?") ? "&" : "?") + "action=get_data");
+    const sep = url.includes("?") ? "&" : "?";
+    const res = await fetch(`${url}${sep}action=get_data&_t=${Date.now()}`, { cache: "no-store" });
     const json = await res.json();
-    if (json && json.status === "success" && json.evaluations) {
-      return json.evaluations;
+    if (json && json.status === "success" && json.evaluations && typeof json.evaluations === "object") {
+      // Faqat haqiqiy (0 dan katta) baholarni qoldiramiz; Sheet'da o'chirilgan/bo'shatilgan baholar saytda ham o'chadi
+      const cleaned = {};
+      Object.keys(json.evaluations).forEach(projId => {
+        const projEvals = json.evaluations[projId] || {};
+        const cleanProj = {};
+        Object.keys(projEvals).forEach(jId => {
+          const ev = projEvals[jId];
+          if (ev) {
+            const total = (Number(ev.c1) || 0) + (Number(ev.c2) || 0) + (Number(ev.c3) || 0) + (Number(ev.c4) || 0) + (Number(ev.c5) || 0);
+            if (total > 0) {
+              cleanProj[jId] = {
+                c1: Number(ev.c1) || 0,
+                c2: Number(ev.c2) || 0,
+                c3: Number(ev.c3) || 0,
+                c4: Number(ev.c4) || 0,
+                c5: Number(ev.c5) || 0
+              };
+            }
+          }
+        });
+        if (Object.keys(cleanProj).length > 0) {
+          cleaned[projId] = cleanProj;
+        }
+      });
+      return cleaned;
     }
   } catch (err) {
     console.warn("Google Sheetdan o'qishda xatolik:", err);

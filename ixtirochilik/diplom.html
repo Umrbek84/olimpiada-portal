@@ -498,7 +498,7 @@
     </div>
   </footer>
 
-  <script src="data.js?v=20261121_1035"></script>
+  <script src="data.js?v=20261121_1210"></script>
   <script>
     let appData = loadIxtirochilikData();
     let currentDocType = "diplom"; // 'diplom' or 'tashakkur'
@@ -604,9 +604,10 @@
       // Google Sheet'dan jonli ballarni ham yuklab reytingni avtomatik yangilash
       if (typeof fetchLiveScoresFromGoogleSheets === "function") {
         fetchLiveScoresFromGoogleSheets().then(liveEvals => {
-          if (liveEvals) {
+          if (liveEvals !== null) {
             appData.projects.forEach(p => {
-              if (liveEvals[p.id]) p.evaluations = liveEvals[p.id];
+              // Google Sheet — yagona asosiy manba
+              p.evaluations = liveEvals[p.id] ? liveEvals[p.id] : {};
             });
             saveIxtirochilikData(appData);
             currentRanked = calculateIxtirochilikRanking(appData.projects);

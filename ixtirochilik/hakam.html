@@ -139,7 +139,7 @@
     </div>
   </div>
 
-  <script src="data.js?v=20261121_1035"></script>
+  <script src="data.js?v=20261121_1210"></script>
   <script>
     let appData = loadIxtirochilikData();
     let currentJudge = null;
@@ -408,12 +408,10 @@
 
       try {
         const liveEvals = await fetchLiveScoresFromGoogleSheets();
-        if (liveEvals) {
+        if (liveEvals !== null) {
           appData.projects.forEach(p => {
-            if (liveEvals[p.id]) {
-              if (!p.evaluations) p.evaluations = {};
-              Object.assign(p.evaluations, liveEvals[p.id]);
-            }
+            // Google Sheet — yagona asosiy manba: Sheet'da o'chirilgan baho hakam kabinetida ham ochiladi/o'chadi
+            p.evaluations = liveEvals[p.id] ? liveEvals[p.id] : {};
           });
           saveIxtirochilikData(appData);
           renderEvaluationCards();

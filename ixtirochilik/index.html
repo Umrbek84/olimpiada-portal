@@ -220,7 +220,7 @@
     </div>
   </div>
 
-  <script src="data.js?v=20261121_1035"></script>
+  <script src="data.js?v=20261121_1210"></script>
   <script>
     let currentData = loadIxtirochilikData();
     if (!currentData.projects || currentData.projects.length < 17) {
@@ -327,11 +327,10 @@
 
     async function loadLiveSheetsData() {
       const liveEvals = await fetchLiveScoresFromGoogleSheets();
-      if (liveEvals) {
+      if (liveEvals !== null) {
         currentData.projects.forEach(p => {
-          if (liveEvals[p.id]) {
-            p.evaluations = liveEvals[p.id];
-          }
+          // Google Sheet — yagona asosiy manba: Sheet'da o'chirilgan baho saytda ham o'chadi
+          p.evaluations = liveEvals[p.id] ? liveEvals[p.id] : {};
         });
         saveIxtirochilikData(currentData);
         renderTable();
