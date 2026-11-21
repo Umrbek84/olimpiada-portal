@@ -315,10 +315,79 @@
         size: A4 landscape;
         margin: 0;
       }
+      body.diplom-locked main,
+      body.diplom-locked #batchPrintContainer {
+        display: none !important;
+      }
+    }
+
+    /* Admin PIN Gate */
+    .pin-gate-wrap {
+      max-width: 460px;
+      margin: 64px auto;
+      padding: 0 16px;
+    }
+    .pin-gate-card {
+      background: #ffffff;
+      border: 1px solid #e2e8f0;
+      border-radius: 18px;
+      padding: 34px 28px;
+      text-align: center;
+      box-shadow: 0 12px 32px rgba(15, 23, 42, 0.08);
+    }
+    .pin-gate-icon {
+      width: 68px;
+      height: 68px;
+      border-radius: 50%;
+      margin: 0 auto 16px;
+      background: linear-gradient(135deg, #0284c7, #1d4ed8);
+      color: #ffffff;
+      display: grid;
+      place-items: center;
+      font-size: 28px;
+      box-shadow: 0 8px 20px rgba(2, 132, 199, 0.3);
+    }
+    .pin-input {
+      width: 100%;
+      padding: 13px 16px;
+      font-size: 20px;
+      font-weight: 700;
+      letter-spacing: 6px;
+      text-align: center;
+      border: 2px solid #cbd5e1;
+      border-radius: 10px;
+      margin: 16px 0 12px;
+      outline: none;
+    }
+    .pin-input:focus {
+      border-color: #0284c7;
+      box-shadow: 0 0 0 3px rgba(2, 132, 199, 0.15);
+    }
+    .pin-btn {
+      width: 100%;
+      padding: 13px;
+      font-size: 15px;
+      font-weight: 700;
+      color: #ffffff;
+      background: linear-gradient(135deg, #0284c7, #0369a1);
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+    }
+    .pin-btn:disabled {
+      opacity: 0.65;
+      cursor: not-allowed;
+    }
+    .pin-error {
+      color: #dc2626;
+      font-size: 13px;
+      font-weight: 600;
+      margin-top: 10px;
+      min-height: 18px;
     }
   </style>
 </head>
-<body>
+<body class="diplom-locked">
 
   <!-- Sayt Yuqori Paneli -->
   <header class="site-header no-print">
@@ -343,14 +412,37 @@
     </div>
   </header>
 
-  <main class="award-app-container">
-    <div style="margin-bottom: 20px;" class="no-print">
-      <h2 style="font-size: 24px; font-weight: 800; color: #0f172a; margin-bottom: 6px;">
-        <i class="fa-solid fa-award" style="color: #ca8a04;"></i> Diplom va Taşakkurnomalar Generatori
+  <!-- Faqat Mas'ul Xodim (Admin) uchun PIN-kod Himoya Ekrani -->
+  <section id="adminPinGate" class="pin-gate-wrap no-print">
+    <div class="pin-gate-card">
+      <div class="pin-gate-icon"><i class="fa-solid fa-shield-halved"></i></div>
+      <h2 style="font-size: 21px; font-weight: 800; color: #0f172a; margin-bottom: 8px;">
+        Diplom va Taşakkurnomalar Bölimi
       </h2>
-      <p style="color: #64748b; font-size: 14px;">
-        “Ixtiroçilikka qadam” tanlovi tuman bosqiçi ğoliblari (1-, 2-, 3-örin) va ularning ustozlari uçun 5 ta yönalişga mos maxsus fonli, rasmiy peçatli diplom va taşakkurnomalarni avtomatik tayyorlaş tizimi.
+      <p style="font-size: 13.5px; color: #64748b; line-height: 1.5;">
+        Uşbu sahifa faqat taşkiliy qömita masʼul xodimi (Admin) uçun himoyalangan. Kiriş uçun Google Sheet’dagi maxsus Admin PIN-kodini kiriting:
       </p>
+      <input type="password" id="diplomPinInput" class="pin-input" inputmode="numeric" maxlength="10" placeholder="••••" onkeydown="if(event.key==='Enter') unlockDiplomPage()">
+      <button type="button" id="diplomPinBtn" class="pin-btn" onclick="unlockDiplomPage()">
+        <i class="fa-solid fa-lock-open"></i> Kiriş (PIN-kodni tekşiriş)
+      </button>
+      <div id="diplomPinError" class="pin-error"></div>
+    </div>
+  </section>
+
+  <main id="diplomMainApp" class="award-app-container" style="display: none;">
+    <div style="margin-bottom: 20px; display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 12px;" class="no-print">
+      <div>
+        <h2 style="font-size: 24px; font-weight: 800; color: #0f172a; margin-bottom: 6px;">
+          <i class="fa-solid fa-award" style="color: #ca8a04;"></i> Diplom va Taşakkurnomalar Generatori
+        </h2>
+        <p style="color: #64748b; font-size: 14px;">
+          “Ixtiroçilikka qadam” tanlovi tuman bosqiçi ğoliblari (1-, 2-, 3-örin) va ularning ustozlari uçun 5 ta yönalişga mos maxsus fonli, rasmiy peçatli diplom va taşakkurnomalarni avtomatik tayyorlaş tizimi.
+        </p>
+      </div>
+      <button type="button" onclick="lockDiplomPage()" style="padding: 8px 14px; border-radius: 8px; border: 1px solid #fecaca; background: #fef2f2; color: #b91c1c; font-weight: 700; font-size: 13px; cursor: pointer;">
+        <i class="fa-solid fa-lock"></i> Qulflaş (Çiqiş)
+      </button>
     </div>
 
     <div class="award-grid">
@@ -498,8 +590,72 @@
     </div>
   </footer>
 
-  <script src="data.js?v=20261121_1210"></script>
+  <script src="data.js?v=20261121_1215"></script>
   <script>
+    // Admin PIN himoyasi (Google Sheet'dagi Hakamlar -> ADMIN qatoridan jonli tekshiradi)
+    function showDiplomApp() {
+      document.body.classList.remove("diplom-locked");
+      const gate = document.getElementById("adminPinGate");
+      const app = document.getElementById("diplomMainApp");
+      if (gate) gate.style.display = "none";
+      if (app) app.style.display = "block";
+      updatePreview();
+    }
+
+    function lockDiplomPage() {
+      sessionStorage.removeItem("diplom_admin_unlocked");
+      document.body.classList.add("diplom-locked");
+      const gate = document.getElementById("adminPinGate");
+      const app = document.getElementById("diplomMainApp");
+      if (app) app.style.display = "none";
+      if (gate) gate.style.display = "block";
+      const inp = document.getElementById("diplomPinInput");
+      if (inp) { inp.value = ""; inp.focus(); }
+      const err = document.getElementById("diplomPinError");
+      if (err) err.textContent = "";
+    }
+
+    async function unlockDiplomPage() {
+      const inp = document.getElementById("diplomPinInput");
+      const btn = document.getElementById("diplomPinBtn");
+      const err = document.getElementById("diplomPinError");
+      const pin = (inp ? inp.value : "").trim();
+      if (!pin) {
+        err.textContent = "Iltimos, Admin PIN-kodini kiriting!";
+        return;
+      }
+      err.textContent = "";
+      btn.disabled = true;
+      btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Google Sheet’dan tekşirilmoqda...';
+
+      try {
+        const ok = await verifyAdminPin(pin);
+        if (ok) {
+          sessionStorage.setItem("diplom_admin_unlocked", "1");
+          showDiplomApp();
+        } else {
+          err.textContent = "Notöğri PIN-kod! Faqat masʼul xodim (Admin) kirişi mumkin.";
+          inp.value = "";
+          inp.focus();
+        }
+      } catch (e) {
+        err.textContent = "Tekşirişda xatolik yuz berdi. Qayta urinib köring.";
+      } finally {
+        btn.disabled = false;
+        btn.innerHTML = '<i class="fa-solid fa-lock-open"></i> Kiriş (PIN-kodni tekşiriş)';
+      }
+    }
+
+    // Sahifa yuklanganda sessiyani tekshirish
+    window.addEventListener("DOMContentLoaded", () => {
+      if (sessionStorage.getItem("diplom_admin_unlocked") === "1") {
+        showDiplomApp();
+      } else {
+        const inp = document.getElementById("diplomPinInput");
+        if (inp) inp.focus();
+      }
+    });
+
     let appData = loadIxtirochilikData();
     let currentDocType = "diplom"; // 'diplom' or 'tashakkur'
     let currentRanked = [];
