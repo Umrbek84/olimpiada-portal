@@ -3,7 +3,8 @@ import sys
 from PIL import Image, ImageDraw, ImageFont
 
 BASE_DIR = r"C:\Users\Monitoring\.gemini\antigravity\scratch\olimpiada-portal\ixtirochilik"
-THEMES_DIR = os.path.join(BASE_DIR, "assets", "themes")
+ASSETS_DIR = os.path.join(BASE_DIR, "assets")
+THEMES_DIR = os.path.join(ASSETS_DIR, "themes")
 
 FONT_TIMES = r"C:\Windows\Fonts\times.ttf"
 FONT_TIMES_BD = r"C:\Windows\Fonts\timesbd.ttf"
@@ -48,74 +49,51 @@ def get_metal_colors(place):
     if place == 1:
         return {"primary": (184, 134, 11), "accent": (212, 175, 55), "name": "Oltin"}
     elif place == 2:
-        return {"primary": (100, 116, 139), "accent": (148, 163, 184), "name": "Kumuş"}
+        return {"primary": (90, 105, 125), "accent": (158, 170, 184), "name": "Kumuş"}
     else:
         return {"primary": (154, 80, 40), "accent": (180, 115, 80), "name": "Bronza"}
 
-def draw_common_frame(base, direction, place, box_label, number):
+def load_metallic_base(doc_type, place, direction):
+    p = place if place in [1, 2, 3] else 1
+    prefix = "diplom_base" if doc_type == "diplom" else "tashakkurnoma_base"
+    base_path = os.path.join(ASSETS_DIR, f"{prefix}_{p}.jpg")
+    base = Image.open(base_path).convert("RGBA")
+
+    # Subtle direction watermark inside the white interior (bilinar-bilinmas orqa fon)
+    theme_key = get_theme_key(direction)
+    wm_path = os.path.join(THEMES_DIR, f"wm_{theme_key}.png")
+    if os.path.exists(wm_path):
+        wm = Image.open(wm_path).convert("RGBA")
+        wm = wm.resize((540, 540), Image.Resampling.LANCZOS)
+        # Position softly centered behind the body text area
+        y_pos = 270 if doc_type == "diplom" else 260
+        base.alpha_composite(wm, (877 - 270, y_pos))
+
+    return base.convert("RGB")
+
+def create_diploma(student_name, school, grade, direction, place, number="001"):
+    base = load_metallic_base("diplom", place, direction)
     draw = ImageDraw.Draw(base)
     metal = get_metal_colors(place)
 
-    # 1. Top 3 official logos strip (Vazirlik + Agentlik + Fan Olimpiadalari Markazi)
-    logos_path = os.path.join(THEMES_DIR, "top_3_logos.png")
-    if os.path.exists(logos_path):
-        logos = Image.open(logos_path).convert("RGBA")
-        logos = logos.resize((760, 116), Image.Resampling.LANCZOS)
-        base.paste(logos, (877 - 380, 132), logos)
+    font_box_lbl = ImageFont.truetype(FONT_TIMES, 15)
+    font_box_num = ImageFont.truetype(FONT_TIMES_BD, 24)
+    font_daraja = ImageFont.truetype(FONT_TIMES_BD, 46)
+    font_text = ImageFont.truetype(FONT_TIMES, 32)
+    font_name = ImageFont.truetype(FONT_TIMES_BD, 50)
 
-    # 2. Top-right rounded number box inside 100% open white safe area
-    bx1, by1, bx2, by2 = 1315, 148, 1490, 214
-    draw.rounded_rectangle([(bx1, by1), (bx2, by2)], radius=10, fill=(255, 255, 255), outline=metal["accent"], width=3)
-    f_lbl = ImageFont.truetype(FONT_TIMES, 14)
-    f_num = ImageFont.truetype(FONT_TIMES_BD, 24)
+    # 1. Top-right number box (cleanly centered inside official metallic box)
+    lbl = "DIPLOM RAQAMI"
     num_str = f"№ {str(number).zfill(3)}"
-    draw.text(((bx1 + bx2 - draw.textlength(box_label, font=f_lbl))/2, by1 + 9), box_label, font=f_lbl, fill=(71, 85, 105))
-    draw.text(((bx1 + bx2 - draw.textlength(num_str, font=f_num))/2, by1 + 30), num_str, font=f_num, fill=(12, 26, 48))
+    draw.text(((1485 + 1665 - draw.textlength(lbl, font=font_box_lbl))/2, 66), lbl, font=font_box_lbl, fill=(70, 70, 70))
+    draw.text(((1485 + 1665 - draw.textlength(num_str, font=font_box_num))/2, 90), num_str, font=font_box_num, fill=(10, 20, 50))
 
-    # 3. Bottom official seal + signature (left) & Director title (right)
-    seal_path = os.path.join(THEMES_DIR, "seal_signature.png")
-    if os.path.exists(seal_path):
-        seal = Image.open(seal_path).convert("RGBA")
-        seal = seal.resize((345, 214), Image.Resampling.LANCZOS)
-        base.paste(seal, (365, 795), seal)
-
-    f_sig_t = ImageFont.truetype(FONT_TIMES_BD, 20)
-    f_sig_n = ImageFont.truetype(FONT_TIMES_BD, 32)
-    st = "QÖŞKÖPIR TUMAN TAʼLIM BÖLIMI BOŞLIĞI"
-    sn = "Ş.R. JUMANIYOZOV"
-    cx_r = 1195
-    draw.text((cx_r - draw.textlength(st, font=f_sig_t)/2, 872), st, font=f_sig_t, fill=(51, 65, 85))
-    draw.text((cx_r - draw.textlength(sn, font=f_sig_n)/2, 914), sn, font=f_sig_n, fill=(12, 26, 48))
-
-    # Date at bottom center
-    f_dt = ImageFont.truetype(FONT_TIMES_IT, 18)
-    dt = "2026-yil dekabr"
-    draw.text(((1754 - draw.textlength(dt, font=f_dt))/2, 1018), dt, font=f_dt, fill=(100, 116, 139))
-
-    return draw, metal
-
-def create_diploma(student_name, school, grade, direction, place, number="001"):
-    theme_key = get_theme_key(direction)
-    bg_path = os.path.join(THEMES_DIR, f"bg_{theme_key}.jpg")
-    base = Image.open(bg_path).convert("RGB")
-    draw, metal = draw_common_frame(base, direction, place, "DIPLOM RAQAMI", number)
-
-    f_title = ImageFont.truetype(FONT_TIMES_BD, 78)
-    f_daraja = ImageFont.truetype(FONT_TIMES_BD, 44)
-    f_text = ImageFont.truetype(FONT_TIMES, 30)
-    f_name = ImageFont.truetype(FONT_TIMES_BD, 48)
-    f_taqdir = ImageFont.truetype(FONT_TIMES_BD, 32)
-
-    # Title
-    t_str = "D I P L O M"
-    draw.text(((1754 - draw.textlength(t_str, font=f_title))/2, 272), t_str, font=f_title, fill=(12, 26, 48))
-
-    # Daraja in metallic Gold/Silver/Bronze
+    # 2. Daraja in Gold / Silver / Bronze
     daraja_map = {1: "I DARAJALI", 2: "II DARAJALI", 3: "III DARAJALI"}
     daraja_text = daraja_map.get(place, f"{place}-DARAJALI")
-    draw.text(((1754 - draw.textlength(daraja_text, font=f_daraja))/2, 368), daraja_text, font=f_daraja, fill=metal["primary"])
+    draw.text(((1754 - draw.textlength(daraja_text, font=font_daraja))/2, 355), daraja_text, font=font_daraja, fill=metal["primary"])
 
-    # Description
+    # 3. Description
     grade_clean = to_yangi_lotin(grade if "sinf" in str(grade) else f"{grade}-sinf")
     dir_clean = to_yangi_lotin(direction)
     school_clean = to_yangi_lotin(school)
@@ -125,65 +103,57 @@ def create_diploma(student_name, school, grade, direction, place, number="001"):
     l2 = f"{grade_clean} böyiça {dir_clean} yönalişida {place}-örinni qölga kiritgani uçun"
     l3 = f"Qöşköpir tumani, {school_clean} öquvçisi"
 
-    draw.text(((1754 - draw.textlength(l1, font=f_text))/2, 440), l1, font=f_text, fill=(30, 41, 59))
-    draw.text(((1754 - draw.textlength(l2, font=f_text))/2, 488), l2, font=f_text, fill=(30, 41, 59))
-    draw.text(((1754 - draw.textlength(l3, font=f_text))/2, 536), l3, font=f_text, fill=(30, 41, 59))
+    draw.text(((1754 - draw.textlength(l1, font=font_text))/2, 448), l1, font=font_text, fill=(30, 30, 30))
+    draw.text(((1754 - draw.textlength(l2, font=font_text))/2, 503), l2, font=font_text, fill=(30, 30, 30))
+    draw.text(((1754 - draw.textlength(l3, font=font_text))/2, 558), l3, font=font_text, fill=(30, 30, 30))
 
-    # Student Name
-    w_n = draw.textlength(student_clean, font=f_name)
-    if w_n > 1250:
-        f_name = ImageFont.truetype(FONT_TIMES_BD, 38)
-        w_n = draw.textlength(student_clean, font=f_name)
-    draw.text(((1754 - w_n)/2, 608), student_clean, font=f_name, fill=(12, 26, 48))
-
-    # Metallic divider line
-    draw.line([(420, 682), (1334, 682)], fill=metal["accent"], width=3)
-
-    # TAQDIRLANADI
-    taq = "T A Q D I R L A N A D I"
-    draw.text(((1754 - draw.textlength(taq, font=f_taqdir))/2, 706), taq, font=f_taqdir, fill=(30, 41, 59))
+    # 4. Student Name
+    w_n = draw.textlength(student_clean, font=font_name)
+    if w_n > 1360:
+        font_name = ImageFont.truetype(FONT_TIMES_BD, 40)
+        w_n = draw.textlength(student_clean, font=font_name)
+    draw.text(((1754 - w_n)/2, 642), student_clean, font=font_name, fill=(10, 20, 50))
 
     return base
 
 def create_tashakkurnoma(teacher_name, school, role_or_subject, student_name, grade, direction, place, number="001"):
-    theme_key = get_theme_key(direction)
-    bg_path = os.path.join(THEMES_DIR, f"bg_{theme_key}.jpg")
-    base = Image.open(bg_path).convert("RGB")
-    draw, metal = draw_common_frame(base, direction, place, "RAQAMI", number)
+    base = load_metallic_base("tashakkur", place, direction)
+    draw = ImageDraw.Draw(base)
+    metal = get_metal_colors(place)
 
-    f_title = ImageFont.truetype(FONT_TIMES_BD, 62)
-    f_hurmatli = ImageFont.truetype(FONT_TIMES_IT, 38)
-    f_teacher = ImageFont.truetype(FONT_TIMES_BD, 46)
-    f_sub = ImageFont.truetype(FONT_TIMES, 26)
-    f_para = ImageFont.truetype(FONT_TIMES, 27)
-    f_close = ImageFont.truetype(FONT_TIMES_BD, 28)
+    font_box_lbl = ImageFont.truetype(FONT_TIMES, 16)
+    font_box_num = ImageFont.truetype(FONT_TIMES_BD, 24)
+    font_hurmatli = ImageFont.truetype(FONT_TIMES_IT, 42)
+    font_teacher = ImageFont.truetype(FONT_TIMES_BD, 50)
+    font_sub = ImageFont.truetype(FONT_TIMES, 28)
+    font_para = ImageFont.truetype(FONT_TIMES, 28)
+    font_close = ImageFont.truetype(FONT_TIMES_BD, 30)
 
-    # Title
-    t_str = "T A Ş A K K U R N O M A"
-    draw.text(((1754 - draw.textlength(t_str, font=f_title))/2, 272), t_str, font=f_title, fill=(12, 26, 48))
+    # 1. Box number
+    lbl = "RAQAMI"
+    num_str = f"№ {str(number).zfill(3)}"
+    draw.text(((1485 + 1665 - draw.textlength(lbl, font=font_box_lbl))/2, 66), lbl, font=font_box_lbl, fill=(70, 70, 70))
+    draw.text(((1485 + 1665 - draw.textlength(num_str, font=font_box_num))/2, 90), num_str, font=font_box_num, fill=(10, 20, 50))
 
-    # Hurmatli
-    h_str = "Hurmatli"
-    draw.text(((1754 - draw.textlength(h_str, font=f_hurmatli))/2, 348), h_str, font=f_hurmatli, fill=(51, 65, 85))
+    # 2. Hurmatli
+    h_text = "Hurmatli"
+    draw.text(((1754 - draw.textlength(h_text, font=font_hurmatli))/2, 315), h_text, font=font_hurmatli, fill=(45, 55, 72))
 
-    # Teacher Name
+    # 3. Teacher Name
     teacher_clean = to_yangi_lotin(teacher_name)
-    w_tn = draw.textlength(teacher_clean, font=f_teacher)
-    if w_tn > 1250:
-        f_teacher = ImageFont.truetype(FONT_TIMES_BD, 38)
-        w_tn = draw.textlength(teacher_clean, font=f_teacher)
-    draw.text(((1754 - w_tn)/2, 398), teacher_clean, font=f_teacher, fill=(12, 26, 48))
+    w_tn = draw.textlength(teacher_clean, font=font_teacher)
+    if w_tn > 1360:
+        font_teacher = ImageFont.truetype(FONT_TIMES_BD, 40)
+        w_tn = draw.textlength(teacher_clean, font=font_teacher)
+    draw.text(((1754 - w_tn)/2, 380), teacher_clean, font=font_teacher, fill=(10, 20, 50))
 
-    # School & Role
+    # 4. School & Role
     school_clean = to_yangi_lotin(school)
     role_clean = to_yangi_lotin(role_or_subject or "tögarak rahbari")
     sub_text = f"({school_clean}, {role_clean})"
-    draw.text(((1754 - draw.textlength(sub_text, font=f_sub))/2, 456), sub_text, font=f_sub, fill=(71, 85, 105))
+    draw.text(((1754 - draw.textlength(sub_text, font=font_sub))/2, 455), sub_text, font=font_sub, fill=(60, 60, 60))
 
-    # Metallic divider line
-    draw.line([(420, 502), (1334, 502)], fill=metal["accent"], width=3)
-
-    # Body paragraph
+    # 5. Body paragraph
     grade_clean = to_yangi_lotin(grade if "sinf" in str(grade) else f"{grade}-sinf")
     student_clean = to_yangi_lotin(student_name)
     dir_clean = to_yangi_lotin(direction)
@@ -194,14 +164,14 @@ def create_tashakkurnoma(teacher_name, school, role_or_subject, student_name, gr
     p4 = "ilhomlantiruvçi ustozligingiz uçun Sizga çuqur minnatdorçilik bildiramiz."
 
     for idx, line in enumerate([p1, p2, p3, p4]):
-        f_use = f_para
-        if draw.textlength(line, font=f_use) > 1250:
-            f_use = ImageFont.truetype(FONT_TIMES, 22)
-        draw.text(((1754 - draw.textlength(line, font=f_use))/2, 526 + idx * 40), line, font=f_use, fill=(30, 41, 59))
+        f_use = font_para
+        if draw.textlength(line, font=f_use) > 1340:
+            f_use = ImageFont.truetype(FONT_TIMES, 23)
+        draw.text(((1754 - draw.textlength(line, font=f_use))/2, 552 + idx * 42), line, font=f_use, fill=(30, 30, 30))
 
-    # Closing
+    # 6. Closing
     cl = "İş faoliyatingizda yangi zafarlar tilaymiz!"
-    draw.text(((1754 - draw.textlength(cl, font=f_close))/2, 708), cl, font=f_close, fill=metal["primary"])
+    draw.text(((1754 - draw.textlength(cl, font=font_close))/2, 742), cl, font=font_close, fill=metal["primary"])
 
     return base
 
@@ -232,28 +202,25 @@ def generate_all_5_directions_samples(target_dir):
 
         for place in [1, 2, 3]:
             metal_name = get_metal_colors(place)["name"]
-            # Diplom sample
             dip_img = create_diploma(student, school, grade, dir_label, place, str(dip_num).zfill(3))
             dip_file = os.path.join(dir_folder, f"Diplom_{place}-orin_{metal_name}_{folder_name}.jpg")
             dip_img.save(dip_file, quality=95)
             all_diploms.append(dip_img)
             dip_num += 1
 
-            # Tashakkurnoma sample
             tash_img = create_tashakkurnoma(teacher, school, role, student, grade, dir_label, place, str(tash_num).zfill(3))
             tash_file = os.path.join(dir_folder, f"Tashakkurnoma_{place}-orin_{metal_name}_{folder_name}.jpg")
             tash_img.save(tash_file, quality=95)
             all_tashakkurs.append(tash_img)
             tash_num += 1
 
-    # Save 2 unified print-ready PDFs for all 15 Diploms and all 15 Tashakkurnomas
     pdf_dips = os.path.join(samples_root, "Namuna_15_ta_Diplom_5_yonalish.pdf")
     all_diploms[0].save(pdf_dips, save_all=True, append_images=all_diploms[1:], resolution=150.0)
 
     pdf_tash = os.path.join(samples_root, "Namuna_15_ta_Tashakkurnoma_5_yonalish.pdf")
     all_tashakkurs[0].save(pdf_tash, save_all=True, append_images=all_tashakkurs[1:], resolution=150.0)
 
-    print(f"SUCCESS: Generated 15 Diplom + 15 Tashakkurnoma samples across all 5 directions in {samples_root}")
+    print(f"SUCCESS: Generated 15 Diplom + 15 Tashakkurnoma (Gold/Silver/Bronze frames + 5 direction watermarks) in {samples_root}")
 
 def main():
     target_dir = r"C:\Users\Monitoring\Desktop\ОЛИМПИАДАЛАР\2026\Ихтирочиликка қадам\туман босқичи\туман босқичи ғолибларни тақдирлаш"
@@ -350,7 +317,6 @@ def main():
         )
         print(f"SUCCESS: Generated {len(all_pages)} current winner award documents!")
 
-    # Also generate full 5 directions x 3 places (15 Diploms + 15 Tashakkurnomas) ready sample pack!
     generate_all_5_directions_samples(target_dir)
 
 if __name__ == "__main__":

@@ -448,43 +448,49 @@
     </div>
   </footer>
 
-  <script src="data.js?v=20261120_2120"></script>
+  <script src="data.js?v=20261121_0955"></script>
   <script>
     let appData = loadIxtirochilikData();
     let currentDocType = "diplom"; // 'diplom' or 'tashakkur'
     let currentRanked = [];
 
-    const ASSET_V = "20261120_2120";
-    const themeImages = {
+    const ASSET_V = "20261121_0955";
+    const imgDiplomBases = { 1: new Image(), 2: new Image(), 3: new Image() };
+    imgDiplomBases[1].src = `assets/diplom_base_1.jpg?v=${ASSET_V}`;
+    imgDiplomBases[2].src = `assets/diplom_base_2.jpg?v=${ASSET_V}`;
+    imgDiplomBases[3].src = `assets/diplom_base_3.jpg?v=${ASSET_V}`;
+
+    const imgTashBases = { 1: new Image(), 2: new Image(), 3: new Image() };
+    imgTashBases[1].src = `assets/tashakkurnoma_base_1.jpg?v=${ASSET_V}`;
+    imgTashBases[2].src = `assets/tashakkurnoma_base_2.jpg?v=${ASSET_V}`;
+    imgTashBases[3].src = `assets/tashakkurnoma_base_3.jpg?v=${ASSET_V}`;
+
+    const wmImages = {
       talim: new Image(),
       it: new Image(),
       yashil: new Image(),
       ekologiya: new Image(),
       qishloq: new Image()
     };
-    themeImages.talim.src = `assets/themes/bg_talim.jpg?v=${ASSET_V}`;
-    themeImages.it.src = `assets/themes/bg_it.jpg?v=${ASSET_V}`;
-    themeImages.yashil.src = `assets/themes/bg_yashil.jpg?v=${ASSET_V}`;
-    themeImages.ekologiya.src = `assets/themes/bg_ekologiya.jpg?v=${ASSET_V}`;
-    themeImages.qishloq.src = `assets/themes/bg_qishloq.jpg?v=${ASSET_V}`;
-
-    const imgTopLogos = new Image();
-    imgTopLogos.src = `assets/themes/top_3_logos.png?v=${ASSET_V}`;
-
-    const imgSeal = new Image();
-    imgSeal.src = `assets/themes/seal_signature.png?v=${ASSET_V}`;
+    wmImages.talim.src = `assets/themes/wm_talim.png?v=${ASSET_V}`;
+    wmImages.it.src = `assets/themes/wm_it.png?v=${ASSET_V}`;
+    wmImages.yashil.src = `assets/themes/wm_yashil.png?v=${ASSET_V}`;
+    wmImages.ekologiya.src = `assets/themes/wm_ekologiya.png?v=${ASSET_V}`;
+    wmImages.qishloq.src = `assets/themes/wm_qishloq.png?v=${ASSET_V}`;
 
     let imagesLoaded = 0;
-    const totalToLoad = 7;
+    const totalToLoad = 11;
     function checkLoaded() {
       imagesLoaded++;
       if (imagesLoaded >= totalToLoad) {
         initAwardPage();
       }
     }
-    Object.values(themeImages).forEach(im => { im.onload = checkLoaded; im.onerror = checkLoaded; });
-    imgTopLogos.onload = checkLoaded; imgTopLogos.onerror = checkLoaded;
-    imgSeal.onload = checkLoaded; imgSeal.onerror = checkLoaded;
+    [1, 2, 3].forEach(i => {
+      imgDiplomBases[i].onload = checkLoaded; imgDiplomBases[i].onerror = checkLoaded;
+      imgTashBases[i].onload = checkLoaded; imgTashBases[i].onerror = checkLoaded;
+    });
+    Object.values(wmImages).forEach(im => { im.onload = checkLoaded; im.onerror = checkLoaded; });
 
     // Yangi Lotin Yozuvi o'zgartirish yordamchisi (Ö/ö qat'iy standart)
     function toYangiLotin(str) {
@@ -673,114 +679,78 @@
       // Aktiv fon nishonini yangilash
       const badge = document.getElementById("activeThemeBadge");
       if (badge) {
-        badge.textContent = `🎨 Fon: ${themeInfo.label} (${metal.name})`;
+        badge.textContent = `🏅 Ramka: ${metal.name} · 🎨 Orqa fon: ${themeInfo.label}`;
       }
 
-      // 1. 5 ta yönalişdan mos orqa fonni çiziş
-      const bgImg = themeImages[themeInfo.key] || themeImages.talim;
-      if (bgImg && bgImg.complete) {
-        ctx.drawImage(bgImg, 0, 0, 1754, 1240);
+      // 1. Örin böyiça Oltin (1), Kumuş (2) yoki Bronza (3) rasmiy ramkani çiziş
+      const baseImg = (currentDocType === "diplom" ? imgDiplomBases[place] : imgTashBases[place]) || imgDiplomBases[1];
+      if (baseImg && baseImg.complete) {
+        ctx.drawImage(baseImg, 0, 0, 1754, 1240);
       } else {
         ctx.fillStyle = "#ffffff";
         ctx.fillRect(0, 0, 1754, 1240);
       }
 
-      // 2. Yuqori 3 ta rasmiy logotip (Vazirlik + Agentlik + Fan Olimpiadalari Markazi)
-      if (imgTopLogos && imgTopLogos.complete) {
-        ctx.drawImage(imgTopLogos, 877 - 380, 132, 760, 116);
+      // 2. Yönaliş böyiça ramka içida bilinar-bilinmas orqa fon (watermark)
+      const wmImg = wmImages[themeInfo.key] || wmImages.talim;
+      if (wmImg && wmImg.complete) {
+        const yPos = currentDocType === "diplom" ? 270 : 260;
+        ctx.drawImage(wmImg, 877 - 270, yPos, 540, 540);
       }
 
       ctx.textAlign = "center";
       ctx.textBaseline = "top";
 
-      // 4. Yuqori öng raqam qutisi (xavfsiz oq maydonda, metal hoshiyali)
-      const bx = 1315, by = 148, bw = 175, bh = 66;
-      drawRoundedRect(ctx, bx, by, bw, bh, 10);
-      ctx.fillStyle = "#ffffff";
-      ctx.fill();
-      ctx.lineWidth = 3;
-      ctx.strokeStyle = metal.accent;
-      ctx.stroke();
-
-      ctx.font = "14px 'Times New Roman'";
+      // 3. Yuqori öng rasmiy raqam qutisi (x: 1485..1665, y: 58..126)
+      ctx.font = "15px 'Times New Roman'";
       ctx.fillStyle = "#475569";
-      ctx.fillText(currentDocType === "diplom" ? "DIPLOM RAQAMI" : "RAQAMI", bx + bw / 2, by + 10);
+      ctx.fillText(currentDocType === "diplom" ? "DIPLOM RAQAMI" : "RAQAMI", (1485 + 1665) / 2, 66);
+
       ctx.font = "bold 24px 'Times New Roman'";
       ctx.fillStyle = "#0c1a30";
-      ctx.fillText(`№ ${docNum}`, bx + bw / 2, by + 31);
+      ctx.fillText(`№ ${docNum}`, (1485 + 1665) / 2, 90);
 
-      // 5. Asosiy matn qismi
+      // 4. Asosiy matn qismi
       if (currentDocType === "diplom") {
-        // DIPLOM sarlavhasi
-        ctx.font = "bold 78px 'Times New Roman'";
-        ctx.fillStyle = "#0c1a30";
-        ctx.fillText("D I P L O M", 877, 276);
-
         // Daraja (Oltin / Kumuş / Bronza)
         const darajaMap = { 1: "I DARAJALI", 2: "II DARAJALI", 3: "III DARAJALI" };
-        ctx.font = "bold 44px 'Times New Roman'";
+        ctx.font = "bold 46px 'Times New Roman'";
         ctx.fillStyle = metal.primary;
-        ctx.fillText(darajaMap[place] || `${place}-DARAJALI`, 877, 370);
+        ctx.fillText(darajaMap[place] || `${place}-DARAJALI`, 877, 355);
 
         // Tavsif qatorlari
-        ctx.font = "30px 'Times New Roman'";
+        ctx.font = "32px 'Times New Roman'";
         ctx.fillStyle = "#1e293b";
-        ctx.fillText("2026/2027-öquv yilidagi “Ixtiroçilikka qadam” tanlovining tuman bosqiçida", 877, 440);
-        ctx.fillText(`${gradeStr} böyiça ${direction} yönalişida ${place}-örinni qölga kiritgani uçun`, 877, 488);
-        ctx.fillText(`Qöşköpir tumani, ${school} öquvçisi`, 877, 536);
+        ctx.fillText("2026/2027-öquv yilidagi “Ixtiroçilikka qadam” tanlovining tuman bosqiçida", 877, 448);
+        ctx.fillText(`${gradeStr} böyiça ${direction} yönalişida ${place}-örinni qölga kiritgani uçun`, 877, 503);
+        ctx.fillText(`Qöşköpir tumani, ${school} öquvçisi`, 877, 558);
 
         // Öquvçi F.I.Ş.
-        ctx.font = "bold 48px 'Times New Roman'";
+        ctx.font = "bold 50px 'Times New Roman'";
         ctx.fillStyle = "#0c1a30";
-        if (ctx.measureText(studentName).width > 1250) {
-          ctx.font = "bold 36px 'Times New Roman'";
+        if (ctx.measureText(studentName).width > 1360) {
+          ctx.font = "bold 40px 'Times New Roman'";
         }
-        ctx.fillText(studentName, 877, 608);
-
-        // Metal ajratuvçi çiziq
-        ctx.strokeStyle = metal.accent;
-        ctx.lineWidth = 3;
-        ctx.beginPath();
-        ctx.moveTo(420, 682);
-        ctx.lineTo(1334, 682);
-        ctx.stroke();
-
-        // TAQDIRLANADI
-        ctx.font = "bold 32px 'Times New Roman'";
-        ctx.fillStyle = "#1e293b";
-        ctx.fillText("T A Q D I R L A N A D I", 877, 706);
+        ctx.fillText(studentName, 877, 642);
 
       } else {
-        // TAŞAKKURNOMA sarlavhasi
-        ctx.font = "bold 62px 'Times New Roman'";
-        ctx.fillStyle = "#0c1a30";
-        ctx.fillText("T A Ş A K K U R N O M A", 877, 276);
-
         // Hurmatli
-        ctx.font = "italic 38px 'Times New Roman'";
+        ctx.font = "italic 42px 'Times New Roman'";
         ctx.fillStyle = "#334155";
-        ctx.fillText("Hurmatli", 877, 350);
+        ctx.fillText("Hurmatli", 877, 315);
 
         // Ustoz F.I.Ş.
-        ctx.font = "bold 46px 'Times New Roman'";
+        ctx.font = "bold 50px 'Times New Roman'";
         ctx.fillStyle = "#0c1a30";
-        if (ctx.measureText(teacherName).width > 1250) {
-          ctx.font = "bold 36px 'Times New Roman'";
+        if (ctx.measureText(teacherName).width > 1360) {
+          ctx.font = "bold 40px 'Times New Roman'";
         }
-        ctx.fillText(teacherName, 877, 400);
+        ctx.fillText(teacherName, 877, 380);
 
         // Maktab va lavozim
-        ctx.font = "26px 'Times New Roman'";
+        ctx.font = "28px 'Times New Roman'";
         ctx.fillStyle = "#475569";
-        ctx.fillText(`(${school}, ${teacherRole})`, 877, 458);
-
-        // Metal ajratuvçi çiziq
-        ctx.strokeStyle = metal.accent;
-        ctx.lineWidth = 3;
-        ctx.beginPath();
-        ctx.moveTo(420, 502);
-        ctx.lineTo(1334, 502);
-        ctx.stroke();
+        ctx.fillText(`(${school}, ${teacherRole})`, 877, 455);
 
         // Minnatdorçilik matni
         const lines = [
@@ -791,35 +761,18 @@
         ];
         ctx.fillStyle = "#1e293b";
         lines.forEach((ln, idx) => {
-          ctx.font = "27px 'Times New Roman'";
-          if (ctx.measureText(ln).width > 1250) {
-            ctx.font = "22px 'Times New Roman'";
+          ctx.font = "28px 'Times New Roman'";
+          if (ctx.measureText(ln).width > 1340) {
+            ctx.font = "23px 'Times New Roman'";
           }
-          ctx.fillText(ln, 877, 526 + idx * 40);
+          ctx.fillText(ln, 877, 552 + idx * 42);
         });
 
         // Tilak
-        ctx.font = "bold 28px 'Times New Roman'";
+        ctx.font = "bold 30px 'Times New Roman'";
         ctx.fillStyle = metal.primary;
-        ctx.fillText("İş faoliyatingizda yangi zafarlar tilaymiz!", 877, 708);
+        ctx.fillText("İş faoliyatingizda yangi zafarlar tilaymiz!", 877, 742);
       }
-
-      // 6. Rasmiy muhr va imzo (pastki çap) + Bölim boşliği (pastki öng)
-      if (imgSeal && imgSeal.complete) {
-        ctx.drawImage(imgSeal, 365, 795, 345, 214);
-      }
-
-      ctx.font = "bold 20px 'Times New Roman'";
-      ctx.fillStyle = "#334155";
-      ctx.fillText("QÖŞKÖPIR TUMAN TAʼLIM BÖLIMI BOŞLIĞI", 1195, 872);
-      ctx.font = "bold 32px 'Times New Roman'";
-      ctx.fillStyle = "#0c1a30";
-      ctx.fillText("Ş.R. JUMANIYOZOV", 1195, 914);
-
-      // Sana
-      ctx.font = "italic 18px 'Times New Roman'";
-      ctx.fillStyle = "#64748b";
-      ctx.fillText("2026-yil dekabr", 877, 1018);
     }
 
     function downloadCanvasImage() {
