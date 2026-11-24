@@ -1,0 +1,31 @@
+name: Daily Hududiy Olimpiada Telegram Bot (17:00 Tashkent)
+
+on:
+  schedule:
+    # Every day at 12:00 UTC = 17:00 Asia/Tashkent (+05:00)
+    - cron: '0 12 * * *'
+  workflow_dispatch:
+    inputs:
+      target_date:
+        description: 'Ixtiyoriy sana (YYYY-MM-DD, bo‘sh qolsa avtomatik ertangi kun)'
+        required: false
+        default: ''
+
+jobs:
+  send-announcement:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Send Tomorrow Olympiad Announcement to Zavuchlar Group
+        env:
+          TG_BOT_TOKEN: ${{ secrets.TG_BOT_TOKEN }}
+          TG_CHAT_ID: ${{ secrets.TG_CHAT_ID }}
+          TARGET_DATE: ${{ github.event.inputs.target_date }}
+        run: python bot/send_daily_elon.py
