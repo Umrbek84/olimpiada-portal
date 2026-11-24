@@ -153,15 +153,28 @@ def send_telegram_message(token, chat_id, text):
             raise RuntimeError(f"Telegram API error: {res}")
         return res
 
+FINAL_EXAM_DATE = "2026-12-04"
+
 def main():
     token = os.environ.get("TG_BOT_TOKEN", "").strip()
     chat_id = os.environ.get("TG_CHAT_ID", "").strip()
     target_date = os.environ.get("TARGET_DATE", "").strip()
     dry_run = os.environ.get("DRY_RUN", "0") == "1"
 
+    now_tash = get_tashkent_now()
+    today_str = now_tash.strftime("%Y-%m-%d")
+
+    # 4-dekabr kuni va undan keyin avtomatik o'chish / to'xtash nazorati
+    if today_str > FINAL_EXAM_DATE:
+        print(f"Hududiy olimpiada jadvali {FINAL_EXAM_DATE} kuni to'liq yakunlangan. Bot avtomatik o'chirilgan.")
+        return
+
     if not target_date:
-        now_tash = get_tashkent_now()
         target_date = (now_tash + timedelta(days=1)).strftime("%Y-%m-%d")
+
+    if target_date > FINAL_EXAM_DATE:
+        print(f"Ertangi sana ({target_date}) oxirgi olimpiada kuni ({FINAL_EXAM_DATE}) dan keyinda. Yangi e'lon yo'q, bot to'xtatildi.")
+        return
 
     print(f"Checking Olympiad schedule for tomorrow: {target_date}")
     data = fetch_students_data()
