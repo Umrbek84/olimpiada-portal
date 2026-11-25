@@ -99,20 +99,23 @@ def prepare_day_data(data, target_date_str):
             "students": st_objs
         })
 
+    total_count = sum(len(s["students"]) for s in sections)
+
     return {
         "groups": groups,
         "sections": sections,
         "unique_students": unique_students,
         "has_it": has_it,
         "has_other": has_other,
+        "total_count": total_count,
         "total_unique": len(unique_students),
-        "total_entries": sum(len(v) for v in groups.values()),
+        "total_entries": total_count,
         "date_uz": format_date_uz(target_date_str)
     }
 
 def build_photo_caption(day_info):
     date_uz = day_info["date_uz"]
-    total_unique = day_info["total_unique"]
+    total_count = day_info["total_count"]
 
     venue_lines = []
     if day_info["has_it"]:
@@ -124,7 +127,7 @@ def build_photo_caption(day_info):
 
     caption = (
         f"📢 <b>ERTANGI HUDUDIY OLIMPIADA EʼLONI</b>\n"
-        f"📅 <b>Sana:</b> {date_uz} | 👥 <b>Jami:</b> {total_unique} nafar öquvçi\n\n"
+        f"📅 <b>Sana:</b> {date_uz} | 👥 <b>Jami:</b> {total_count} nafar öquvçi\n\n"
         f"Ertaga qatnaşadigan öquvçilar röyxati va imtihon vaqtlari yuqoridagi rasmda keltirilgan.\n\n"
         f"Iştirokçilar ertaga töliq <b>öquvçi formasida</b>, özlari bilan <b>şaxsini tasdiqlovçi hujjati, beydjik va ruçka</b> olib kelişlari talab etiladi. Tegişli hujjatlarsiz kelgan va keçikkanlar kiritilmaydi.\n\n"
         f"❗️<b>Oçiliş marosimi bölişini inobatga olib, barça iştirokçilarni ertalab soat 8:30 dan keç qolmagan holda yetib kelişlarini taʼminlaşingiz va qatʼiy nazoratga olişingiz söraladi.</b>\n\n"
@@ -261,7 +264,7 @@ def main():
     # 1. Generate JPG infographic card
     card_html = build_olimpiada_html(
         day_info["date_uz"],
-        day_info["total_unique"],
+        day_info["total_count"],
         day_info["sections"],
         day_info["has_it"],
         day_info["has_other"]
