@@ -23,6 +23,9 @@ jobs:
         with:
           python-version: '3.11'
 
+      - name: Install dependencies
+        run: pip install pillow requests
+
       - name: Send Tomorrow Olympiad Announcement to Zavuchlar Group
         env:
           TG_BOT_TOKEN: ${{ secrets.TG_BOT_TOKEN }}
