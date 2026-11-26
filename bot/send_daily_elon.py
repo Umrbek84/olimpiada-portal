@@ -176,7 +176,7 @@ def build_photo_caption(day_info):
         f"📅 <b>Sana:</b> {date_uz} | 👥 <b>Jami:</b> {total_count} nafar öquvçi\n\n"
         f"Ertaga qatnaşadigan öquvçilar röyxati va imtihon vaqtlari yuqoridagi rasmda keltirilgan.\n\n"
         f"Iştirokçilar ertaga töliq <b>öquvçi formasida</b>, özlari bilan <b>şaxsini tasdiqlovçi hujjati, beydjik va ruçka</b> olib kelişlari talab etiladi. Tegişli hujjatlarsiz kelgan va keçikkanlar kiritilmaydi.\n\n"
-        f"❗️<b>Oçiliş marosimi bölişini inobatga olib, barça iştirokçilarni ertalab soat 8:30 dan keç qolmagan holda yetib kelişlarini taʼminlaşingiz va qatʼiy nazoratga olişingiz söraladi.</b>\n\n"
+        f"❗️<b>Röyxatdagi barça iştirokçilarni ertalab soat 8:30 dan keç qolmagan holda yetib kelişlarini taʼminlaşingiz va qatʼiy nazoratga olişingiz söraladi.</b>\n\n"
         f"⚠️ <i>Bu yozuvlarni gruppalarga pereslat qilmasdan, iştirokçilar bilan töliq gaplaşib xabardor qilinglar.</i>\n\n"
         f"📍 <b>Manzillar:</b>\n"
         f"{venues_str}\n\n"
@@ -198,7 +198,7 @@ def build_fallback_text_messages(day_info):
         "",
         "Ertaga olimpiadaga qatnaşadigan öquvçilar röyxati yuborilmoqda. Uşbu iştirokçilar ertaga töliq <b>öquvçi formasida</b> kelişlari talab etiladi. Bundan taşqari özlari bilan <b>şaxsini tasdiqlovçi hujjati, beydjik va ruçka</b> olib kelişlari söraladi. Tegişli hujjatlarsiz kelgan va keçikib kelgan iştirokçilar kiritilmaydi.",
         "",
-        "❗️<b>Ertaga oçiliş marosimi bölişini inobatga olib, röyxatdagi barça iştirokçilarni ertalab soat 8:30 dan keç qolmagan holda yetib kelişlarini taʼminlaşingiz söraladi va qatʼiy nazoratga olinglar.</b>",
+        "❗️<b>Röyxatdagi barça iştirokçilarni ertalab soat 8:30 dan keç qolmagan holda yetib kelişlarini taʼminlaşingiz söraladi va qatʼiy nazoratga olinglar.</b>",
         "",
         "⚠️ <i>Bu yozuvlarni gruppalarga pereslat qilmasdan, röyxatdagi iştirokçilar bilan töliq gaplaşib xabardor qilinglar.</i>",
         "",
@@ -351,7 +351,7 @@ def main():
         try:
             print(f"Sending photo card to chat {chat_id} with caption ({len(caption)} chars)...")
             res = send_telegram_photo(token, chat_id, jpg_path, caption)
-            print(f"✓ Photo announcement sent successfully! message_id={res['result']['message_id']}")
+            print(f"[OK] Photo announcement sent successfully! message_id={res['result']['message_id']}")
             set_last_sent_date(today_str)
             return
         except Exception as e:
