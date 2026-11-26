@@ -1,0 +1,5 @@
+
+# Local scheduler batch and logs
+bot/run_daily.bat
+bot/*.log
+bot/last_sent.txt

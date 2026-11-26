@@ -2,12 +2,16 @@ name: Daily Hududiy Olimpiada Telegram Bot (17:00 Tashkent)
 
 on:
   schedule:
-    # Every day at 12:00 UTC = 17:00 Asia/Tashkent (+05:00)
-    - cron: '0 12 * * *'
+    # 11:50 UTC = 16:50 Asia/Tashkent (+05:00)
+    # 12:05 UTC = 17:05 Asia/Tashkent (+05:00)
+    # 12:20 UTC = 17:20 Asia/Tashkent (+05:00)
+    - cron: '50 11 * * *'
+    - cron: '5 12 * * *'
+    - cron: '20 12 * * *'
   workflow_dispatch:
     inputs:
       target_date:
-        description: 'Ixtiyoriy sana (YYYY-MM-DD, bo‘sh qolsa avtomatik ertangi kun)'
+        description: 'Ixtiyoriy sana (YYYY-MM-DD)'
         required: false
         default: ''
 
@@ -30,5 +34,6 @@ jobs:
         env:
           TG_BOT_TOKEN: ${{ secrets.TG_BOT_TOKEN }}
           TG_CHAT_ID: ${{ secrets.TG_CHAT_ID }}
+          GH_PAT: ${{ secrets.GH_PAT }}
           TARGET_DATE: ${{ github.event.inputs.target_date }}
         run: python bot/send_daily_elon.py

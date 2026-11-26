@@ -15,6 +15,52 @@ DATA_URL = "https://umamatov.uz/hududiy-oquvchilar.json"
 SITE_URL = "https://umamatov.uz/hududiy-bosqich.html"
 FINAL_EXAM_DATE = "2026-12-04"
 
+GH_OWNER = "Umrbek84"
+GH_REPO = "olimpiada-portal"
+GH_PAT = os.environ.get("GH_PAT", "").strip()
+
+def get_last_sent_date():
+    try:
+        url = f"https://api.github.com/repos/{GH_OWNER}/{GH_REPO}/actions/variables/LAST_SENT_DATE"
+        req = urllib.request.Request(url, headers={
+            "Authorization": f"token {GH_PAT}",
+            "Accept": "application/vnd.github+json",
+            "User-Agent": "OlimpiadaBot"
+        })
+        with urllib.request.urlopen(req, timeout=10) as resp:
+            data = json.loads(resp.read().decode())
+            return data.get("value", "").strip()
+    except Exception:
+        pass
+    local_f = os.path.join(os.path.dirname(os.path.abspath(__file__)), "last_sent.txt")
+    if os.path.exists(local_f):
+        try:
+            with open(local_f, "r", encoding="utf-8") as f:
+                return f.read().strip()
+        except Exception:
+            pass
+    return ""
+
+def set_last_sent_date(date_str):
+    try:
+        url = f"https://api.github.com/repos/{GH_OWNER}/{GH_REPO}/actions/variables/LAST_SENT_DATE"
+        payload = json.dumps({"name": "LAST_SENT_DATE", "value": date_str}).encode()
+        req = urllib.request.Request(url, data=payload, headers={
+            "Authorization": f"token {GH_PAT}",
+            "Accept": "application/vnd.github+json",
+            "User-Agent": "OlimpiadaBot"
+        }, method="PATCH")
+        with urllib.request.urlopen(req, timeout=10) as resp:
+            pass
+    except Exception:
+        pass
+    try:
+        local_f = os.path.join(os.path.dirname(os.path.abspath(__file__)), "last_sent.txt")
+        with open(local_f, "w", encoding="utf-8") as f:
+            f.write(date_str)
+    except Exception:
+        pass
+
 MONTHS = [
     "yanvar", "fevral", "mart", "aprel", "may", "iyun",
     "iyul", "avgust", "sentabr", "oktabr", "noyabr", "dekabr"
@@ -246,6 +292,21 @@ def main():
         print(f"Hududiy olimpiada jadvali {FINAL_EXAM_DATE} kuni to'liq yakunlangan. Bot avtomatik o'chirilgan.")
         return
 
+    # VAQT QALQONI: E'lon faqat soat 17:00 atrofida (16:50 - 18:00) yuborilishi shart!
+    # Tunda yoki boshqa soatda adashib xabar ketishining oldi olinadi.
+    is_force = (os.environ.get("FORCE_SEND", "0") == "1") or dry_run or bool(target_date)
+    cur_minutes = now_tash.hour * 60 + now_tash.minute
+    if not (1010 <= cur_minutes <= 1080) and not is_force:
+        print(f"VAQT QALQONI: Hozirgi Toshkent vaqti {now_tash.strftime('%H:%M')}. Ruxsat etilgan vaqt: 16:50 - 18:00. Noto'g'ri vaqtdagi chaqiruv bekor qilindi.")
+        return
+
+    # 3. Dublikatdan himoya: Agar bugungi e'lon allaqachon yuborilgan bo'lsa, qayta yuborilmaydi
+    if not dry_run and not bool(target_date):
+        last_sent = get_last_sent_date()
+        if last_sent == today_str:
+            print(f"DUBLIKAT HIMOYA: Bugungi e'lon ({today_str}) allaqachon muvaffaqiyatli yuborilgan. Qayta yuborilmaydi.")
+            return
+
     if not target_date:
         target_date = (now_tash + timedelta(days=1)).strftime("%Y-%m-%d")
 
@@ -291,6 +352,7 @@ def main():
             print(f"Sending photo card to chat {chat_id} with caption ({len(caption)} chars)...")
             res = send_telegram_photo(token, chat_id, jpg_path, caption)
             print(f"✓ Photo announcement sent successfully! message_id={res['result']['message_id']}")
+            set_last_sent_date(today_str)
             return
         except Exception as e:
             print(f"WARNING: Photo sending failed ({e}), falling back to text messages...", file=sys.stderr)
@@ -300,6 +362,7 @@ def main():
     for i, m in enumerate(fallback_messages, 1):
         res = send_telegram_message(token, chat_id, m)
         print(f"Sent fallback text message {i}/{len(fallback_messages)} successfully! message_id={res['result']['message_id']}")
+    set_last_sent_date(today_str)
 
 if __name__ == "__main__":
     main()
