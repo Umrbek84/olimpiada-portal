@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="uz"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Hududiy bosqiç natijalari | Umrbek Mamatov</title>
+<meta name="description" content="Asosiy olimpiadaning uçinçi – hududiy bosqiçi natijalari: har bir fan va sinf böyiça, Qöşköpir öquvçilari alohida belgilangan.">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}html{scroll-behavior:smooth}
+:root{--navy:#0f2a5c;--gold:#f59e0b;--line:#e2e8f0;--mut:#64748b}
+body{font-family:'Lexend', 'Plus Jakarta Sans', sans-serif;background:#f8fafc;color:#0f172a;line-height:1.5;font-size:17px}
+a{color:inherit;text-decoration:none}button,input{font-family:inherit}
+.top{position:sticky;top:0;z-index:50;background:#fff;border-bottom:1px solid var(--line);box-shadow:0 1px 8px rgba(15,23,42,.05)}
+.top-in{max-width:1180px;margin:0 auto;padding:12px 20px;display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap}
+.brand b{display:block;font-size:1.2rem}.brand span{font-size:.72rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#b45309}
+.top nav{display:flex;gap:8px;flex-wrap:wrap}.top nav a{font-size:.95rem;font-weight:700;padding:8px 14px;border-radius:999px;color:#334155;background:#f1f5f9}
+.top nav a:hover{background:#e2e8f0}.top nav a.on{background:var(--navy);color:#fff}
+.top nav a.vn{background:linear-gradient(135deg,#f59e0b,#dc2626);color:#fff;box-shadow:0 4px 14px rgba(220,38,38,.4);position:relative;animation:vnp 1.8s infinite}.top nav a.vn:hover{filter:brightness(1.08)}.top nav a.vn.on{outline:3px solid #fde68a}.top nav a.vn b{background:#fde68a;color:#7c2d12;font-size:.62rem;padding:2px 6px;border-radius:999px;margin-left:5px;letter-spacing:.04em}@keyframes vnp{0%,100%{box-shadow:0 4px 14px rgba(220,38,38,.4)}50%{box-shadow:0 4px 22px rgba(245,158,11,.85)}}
+.hero{background:radial-gradient(1200px 500px at 85% -10%,rgba(245,158,11,.28),transparent 60%),linear-gradient(135deg,#0a2150,#0f2a5c 55%,#12408c);color:#fff;padding:40px 20px 80px}
+.hero-in{max-width:1180px;margin:0 auto}
+.kick{display:inline-block;font-size:.8rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.25);padding:6px 14px;border-radius:999px;margin-bottom:14px}
+.hero h1{font-size:clamp(1.9rem,4.6vw,3rem);line-height:1.12;margin-bottom:10px}.hero p{max-width:780px;opacity:.92;font-size:1.1rem}
+.wrap{max-width:1180px;margin:0 auto;padding:0 20px}
+.stats{margin-top:-52px;position:relative;display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+.st{background:#fff;border-radius:18px;padding:16px 20px;box-shadow:0 12px 30px rgba(15,23,42,.12)}
+.st small{display:block;font-size:.72rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--mut)}.st b{font-size:2rem;line-height:1.2;color:var(--navy)}
+.st.q{background:linear-gradient(135deg,#fff7e0,#fff);border:2px solid var(--gold)}.st.q b{color:#b45309}
+.tabs{margin-top:26px;display:inline-flex;background:#e9eef6;border-radius:12px;padding:4px;gap:2px;flex-wrap:wrap}
+.tabs button{border:0;background:transparent;padding:9px 18px;border-radius:9px;font-size:1rem;font-weight:700;color:#475569;cursor:pointer}
+.tabs button.on{background:#fff;color:var(--navy);box-shadow:0 1px 4px rgba(15,23,42,.15)}
+.card{background:#fff;border:1px solid var(--line);border-radius:18px;box-shadow:0 6px 20px -14px rgba(15,23,42,.4)}
+.mx{margin-top:16px;padding:8px 12px;overflow-x:auto}
+.mx table{border-collapse:separate;border-spacing:6px;width:100%}
+.mx th{font-size:.78rem;letter-spacing:.08em;text-transform:uppercase;color:var(--mut);padding:4px 8px}
+.mx td.f{font-weight:700;padding:4px 10px;white-space:nowrap}
+.cell{width:100%;min-width:86px;border:1.5px solid #d8e0ec;background:#fff;border-radius:12px;padding:8px 6px;font-size:1rem;font-weight:700;color:var(--navy);cursor:pointer}
+.cell:hover{border-color:var(--navy)}.cell.on{background:var(--navy);color:#fff;border-color:var(--navy)}
+.cell.no{background:#f1f5f9;color:#94a3b8;border-style:dashed;cursor:default;font-weight:400;font-size:.85rem}
+.cell i{margin-right:5px}.cell em{font-style:normal;font-size:.78rem;opacity:.8;margin-left:4px}
+.hd{margin-top:22px;display:flex;justify-content:space-between;align-items:flex-end;gap:12px;flex-wrap:wrap}
+.hd h2{font-size:1.7rem;line-height:1.2}.hd p{color:var(--mut)}
+.qs{margin-top:16px;display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:12px}
+.qc{background:linear-gradient(135deg,#fff7e0,#fff);border:2px solid var(--gold);border-radius:16px;padding:14px 16px;position:relative}
+.qc .tag{position:absolute;top:-11px;left:14px;background:var(--gold);color:#fff;font-size:.72rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;border-radius:999px;padding:2px 12px}
+.qc b{display:block;font-size:1.1rem;margin-top:4px}.qc span{color:var(--mut);font-size:.95rem}
+.qc .sc{display:flex;gap:14px;align-items:baseline;margin-top:6px;flex-wrap:wrap}.qc .sc strong{font-size:1.8rem;color:#b45309}.qc .sc em{font-style:normal;font-weight:700;color:var(--navy)}
+.ctl{margin-top:16px;display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+.search{flex:1;min-width:220px;display:flex;align-items:center;gap:8px;background:#fff;border:1px solid #d8e0ec;border-radius:12px;padding:0 12px}
+.search input{border:0;outline:0;background:transparent;padding:10px 0;width:100%;font-size:1rem}
+.pill{border:1px solid #d8e0ec;background:#fff;border-radius:999px;padding:8px 16px;font-size:.95rem;font-weight:700;color:#1e293b;cursor:pointer}
+.pill.on{background:var(--gold);border-color:var(--gold);color:#fff}
+.tw{margin-top:14px;overflow-x:auto}
+table.rs{width:100%;border-collapse:collapse;min-width:820px}
+.rs th{background:var(--navy);color:#fff;font-size:.85rem;letter-spacing:.04em;text-align:left;padding:11px 12px;position:sticky;top:0}
+.rs th.n,.rs td.n{text-align:right}.rs th:first-child{border-top-left-radius:14px}.rs th:last-child{border-top-right-radius:14px}
+.rs td{padding:10px 12px;border-bottom:1px solid #edf1f7;vertical-align:middle}
+.rs tr:nth-child(even) td{background:#fafcff}
+.rs td.rk{font-weight:700;width:58px;color:var(--navy)}.rs td.cmb{display:none}
+.rs td.nm{font-weight:700}.rs td.j{font-weight:700;font-size:1.1rem;color:var(--navy)}
+.rs tr.q td{background:#fff3d1!important;border-bottom-color:#f7d98a}.rs tr.q td:first-child{box-shadow:inset 6px 0 0 var(--gold)}
+.badge{display:inline-block;margin-left:8px;background:var(--gold);color:#fff;font-size:.68rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;border-radius:999px;padding:2px 10px;vertical-align:middle;white-space:nowrap}
+.med{display:inline-grid;place-items:center;width:30px;height:30px;border-radius:50%;color:#fff;font-weight:700}
+.m1{background:#d4a017}.m2{background:#8e9aaf}.m3{background:#b87333}
+.np.ct{background:#1f2937;color:#fff}.np{display:inline-block;background:#fee2e2;color:#991b1b;border-radius:999px;font-size:.85rem;font-weight:700;padding:2px 12px}
+.empty{padding:36px;text-align:center;color:var(--mut)}
+.note{margin-top:14px;font-size:.92rem;color:var(--mut)}
+footer{margin:46px 0 26px;text-align:center;color:var(--mut);font-size:.92rem}
+@media(max-width:820px){.stats{grid-template-columns:repeat(2,1fr)}.hero{padding-bottom:76px}}
+@media(max-width:700px){
+ body{font-size:16px}.top-in{padding:8px 12px}.top nav{flex-wrap:nowrap;overflow-x:auto;width:100%}.top nav a{white-space:nowrap;padding:7px 12px;font-size:.9rem}.wrap{padding:0 12px}
+ table.rs{min-width:0}.rs thead{display:none}.rs tr{display:grid;grid-template-columns:44px 1fr auto;gap:2px 10px;padding:12px 10px;border-bottom:1px solid #edf1f7;background:#fff}
+ .rs td{border:0;padding:0;background:transparent!important}.rs td.rk{grid-row:1/3;align-self:center;width:auto}
+ .rs td.nm{grid-column:2}.rs td.j{grid-column:3;grid-row:1/3;align-self:center;text-align:right}
+ .rs td.m{grid-column:2;color:var(--mut);font-size:.9rem}.rs td.sub{grid-column:2;font-size:.88rem;color:#334155}
+ .rs tr.qq{grid-template-columns:1fr auto}.rs tr.qq td.fs{grid-column:1/-1;grid-row:auto;font-size:.8rem;color:#b45309;text-transform:uppercase;letter-spacing:.06em}.rs tr.qq td.nm,.rs tr.qq td.m,.rs tr.qq td.sub{grid-column:1}.rs tr.qq td.j{grid-column:2;grid-row:2/5}.rs td.dk,.rs th.dk{display:none}.rs td.cmb{display:block;grid-column:2}.rs td.cmb:before{content:none!important}.rs tr.q{background:#fff3d1;box-shadow:inset 6px 0 0 var(--gold)}.rs tr.q td:first-child{box-shadow:none}
+ .rs td.sub:before{content:attr(data-l)": ";color:var(--mut)}
+}
+.tabs button.hot{background:linear-gradient(135deg,#f59e0b,#dc2626);color:#fff}.tabs button.hot.on{box-shadow:0 0 0 3px #fde68a}
+.tth{margin-top:22px;display:flex;gap:16px;align-items:center}.tth>i{font-size:2.4rem;color:#b45309}.tth h2{font-size:1.8rem}.tth p{color:var(--mut)}
+.ttg{margin-top:16px;display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.ttc{position:relative;border-radius:20px;padding:18px 20px 16px;color:#fff;overflow:hidden;box-shadow:0 12px 28px -12px rgba(15,23,42,.5)}
+.ttc>i{position:absolute;right:14px;top:10px;font-size:3.4rem;opacity:.22}.ttc small{display:block;font-size:.78rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;opacity:.9}
+.ttc b{display:block;font-size:2.5rem;line-height:1.15;margin:4px 0}.ttc span{display:block;opacity:.95}.ttc em{display:inline-block;margin-top:10px;font-style:normal;font-weight:700;background:rgba(255,255,255,.22);border-radius:999px;padding:3px 14px}.ttc em u{text-decoration:none;opacity:.8}
+.ttc.g1{background:linear-gradient(135deg,#f59e0b,#dc2626)}.ttc.g2{background:linear-gradient(135deg,#7c3aed,#2563eb)}.ttc.g3{background:linear-gradient(135deg,#059669,#0ea5e9)}
+.tti{margin-top:12px;display:flex;gap:10px;flex-wrap:wrap}.tti span{border-radius:12px;padding:9px 14px;font-size:1rem}.tti .ok{background:#dcfce7;color:#14532d}.tti .bad{background:#fee2e2;color:#7f1d1d}
+.seg{margin-top:22px;display:inline-flex;background:#e9eef6;border-radius:12px;padding:4px;gap:2px;flex-wrap:wrap}.seg button{border:0;background:transparent;padding:9px 16px;border-radius:9px;font-size:1rem;font-weight:700;color:#475569;cursor:pointer}.seg button.on{background:#fff;color:var(--navy);box-shadow:0 1px 4px rgba(15,23,42,.15)}
+table.tt{min-width:640px}.rs.tt td small{color:var(--mut);font-size:.82rem}.bar{height:12px;background:#e5eaf3;border-radius:99px;overflow:hidden;min-width:110px}.bar i{display:block;height:100%;background:linear-gradient(90deg,#f59e0b,#16a34a);border-radius:99px}
+.chp{display:inline-block;margin:2px 3px 2px 0;padding:2px 8px;border-radius:8px;font-size:.78rem;font-weight:700;color:#1e293b}
+@media(max-width:820px){.ttg{grid-template-columns:1fr}.rs.tt thead{display:table-header-group}.rs.tt tr{display:table-row;padding:0}.rs.tt td,.rs.tt th{display:table-cell;padding:9px 10px;border-bottom:1px solid #edf1f7}.rs.tt td.dk{display:table-cell}.tth{flex-direction:row}.tth h2{font-size:1.4rem}}
+.svs3{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}.svs3 span{border-radius:999px;padding:8px 16px;font-weight:700;color:#fff}.svs3 b{font-size:1.15em}.svs3 .m1,.mdl.m1{background:linear-gradient(135deg,#f6d37a,#b8860b);color:#3a2800}.svs3 .m2,.mdl.m2{background:linear-gradient(135deg,#e5e9ef,#8a94a6);color:#1f2937}.svs3 .m3,.mdl.m3{background:linear-gradient(135deg,#e29a52,#a85f1a)}.svs3 .mt{background:var(--navy)}
+.mdl{display:inline-block;border-radius:999px;padding:6px 14px;font-weight:700;white-space:nowrap;color:#fff}.mdl.m1{color:#3a2800}.mdl.m2{color:#1f2937}
+.rs.sv td{vertical-align:middle}.svn{display:flex;align-items:center;gap:12px}.svn small{display:block;color:var(--mut);font-size:.88rem}.sph{width:58px;height:76px;object-fit:cover;border-radius:12px;border:2px solid #f0d58a;flex:none;background:#eef2f8}.sph.no{display:flex;align-items:center;justify-content:center;color:#94a3b8;font-size:1.6rem}
+.svf i{color:#b45309;margin-right:6px}.svb b{font-size:1.3rem;color:var(--navy)}.svb small{display:block;color:var(--mut);font-size:.82rem}
+@media(max-width:700px){.rs.sv tr{display:flex;flex-direction:column;gap:6px;padding:14px 12px}.rs.sv td{display:block;grid-column:auto}.rs.sv td.svf:before,.rs.sv td.svb:before,.rs.sv td.svu:before{content:attr(data-l)": ";color:var(--mut)}.rs.sv td.svb{display:flex;gap:8px;align-items:baseline;flex-wrap:wrap}.rs.sv td.svn{display:flex}}
+</style>  <!-- Testmakon Typography: Lexend + Manrope + Plus Jakarta Sans -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700;800&family=Manrope:wght@600;700;800;900&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <style id="testmakon-typography">
+    :root {
+      --font-sans: 'Lexend', 'Plus Jakarta Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      --font-heading: 'Manrope', 'Lexend', sans-serif;
+    }
+    body, p, span, a, div, li, td, th, input, button, select, textarea, label {
+      font-family: var(--font-sans) !important;
+    }
+    h1, h2, h3, h4, h5, h6, .brand, .nx-brand, .title, .heading {
+      font-family: var(--font-heading) !important;
+    }
+    .fa, .fas, .fa-solid {
+      font-family: 'Font Awesome 6 Free' !important;
+      font-weight: 900 !important;
+    }
+    .far, .fa-regular {
+      font-family: 'Font Awesome 6 Free' !important;
+      font-weight: 400 !important;
+    }
+    .fab, .fa-brands {
+      font-family: 'Font Awesome 6 Brands' !important;
+      font-weight: 400 !important;
+    }
+  </style>
+</head><body>
+<header class="top"><div class="top-in"><a class="brand" href="index.html"><b>Umrbek Mamatov</b><span>Boş mutaxassis · Taʼlim portali</span></a>
+<nav><a href="index.html"><i class="fa-solid fa-house"></i> Boş sahifa</a><a href="index.html#olimpiada"><i class="fa-solid fa-trophy"></i> Olimpiadalar</a><a href="hududiy-bosqich.html"><i class="fa-solid fa-calendar-days"></i> Hududiy bosqiç grafigi</a><a href="hududiy-natijalar.html" class="on vn"><i class="fa-solid fa-ranking-star"></i> Viloyat natijalari <b>YANGI</b></a><a href="jonli.html" target="_blank" rel="noopener"><i class="fa-solid fa-tower-broadcast"></i> Jonli efir</a></nav></div></header>
+<section class="hero"><div class="hero-in"><span class="kick"><i class="fa-solid fa-ranking-star"></i> 2026–2027-öquv yili</span>
+<h1>Hududiy bosqiç natijalari</h1>
+<p>Asosiy olimpiadaning uçinçi – hududiy bosqiçi: har bir fan va sinf böyiça rasmiy qarorlar. Qöşköpir tumani öquvçilari alohida belgilangan.</p></div></section>
+<main class="wrap">
+<div class="stats" id="stats"></div>
+<div class="tabs" id="tabs"><button data-v="fs" class="on"><i class="fa-solid fa-table-cells"></i> Fan va sinf böyiça</button><button data-v="qq"><i class="fa-solid fa-star"></i> Qöşköpir öquvçilari</button><button data-v="tt" class="hot"><i class="fa-solid fa-scale-balanced"></i> Taqqoslaş va reyting</button><button data-v="sv"><i class="fa-solid fa-trophy"></i> Sovrindorlar</button></div>
+<div id="view"></div>
+<p class="note" id="note"></p>
+</main>
+<footer>© 2026 · Qöşköpir tumani taʼlim bölimi · Manba: Xorazm viloyati Taʼlim va ilm-fan boşqarmasi qarorlari</footer>
+<script>
+(function(){
+var FANS=['Matematika','Fizika','Kimyo','Biologiya','Informatika','Tarix','Geografiya','Ona tili','Rus tili','Ingliz tili','Huquq','Nemis tili','Fransuz tili','Özbek tili'];
+var MON=['yanvar','fevral','mart','aprel','may','iyun','iyul','avgust','sentabr','oktabr','noyabr','dekabr'];
+var D=null,R=[],S={v:'fs',fan:null,sinf:null,q:'',only:false,m:'pos'};
+function $(i){return document.getElementById(i)}
+function esc(s){return String(s==null?'':s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})}
+function f1(x){if(x==null)return '—';var s=(Math.round(x*10)/10).toString().replace('.',',');return s}
+function isQ(r){return /Qöşköpir/i.test(r[2])}
+function dt(s){var a=s.split('-');return (+a[2])+'-'+MON[a[1]-1]+' '+a[0]+'-yil'}
+function prep(){
+ R=D.results.map(function(b){
+  var rows=b.rows.map(function(r){return r.slice()});
+  var part=rows.filter(function(r){return !r[6]}).sort(function(a,b){return b[5]-a[5]});
+  var rank=0,prev=null,i=0;
+  part.forEach(function(r){i++;if(r[5]!==prev){rank=i;prev=r[5]}r.rk=rank});
+  var np=rows.filter(function(r){return !!r[6]});
+  return {fan:b.fan,sinf:b.sinf,sana:b.sana,cols:b.cols||['Test','Yozma iş'],max:b.max,note:b.note,part:part,np:np,n:part.length}})}
+function find(f,s){for(var i=0;i<R.length;i++)if(R[i].fan===f&&R[i].sinf===s)return R[i];return null}
+function allFans(){var a=FANS.slice();R.forEach(function(b){if(a.indexOf(b.fan)<0)a.push(b.fan)});return a}
+function qAll(){var o=[];R.forEach(function(b){b.part.concat(b.np).forEach(function(r){if(isQ(r))o.push({b:b,r:r})})});return o}
+function stats(){
+ var q=qAll(),tot=0;R.forEach(function(b){tot+=b.n});
+ $('stats').innerHTML='<div class="st"><small>Eʼlon qilingan natijalar</small><b>'+R.length+'</b></div><div class="st"><small>Qatnaşçilar (jami)</small><b>'+tot+'</b></div><div class="st q"><small>Qöşköpir öquvçilari</small><b>'+q.length+'</b></div><div class="st"><small>Oxirgi yangilanış</small><b style="font-size:1.25rem;line-height:2.4rem">'+dt(D.updated)+'</b></div>'}
+function matrix(){
+ var h='<div class="card mx"><table><tr><th></th><th>9-sinf</th><th>10-sinf</th><th>11-sinf</th></tr>';
+ allFans().forEach(function(f){h+='<tr><td class="f">'+esc(f)+'</td>';[9,10,11].forEach(function(s){var b=find(f,s);
+  if(b){var q=b.part.concat(b.np).filter(isQ).length;h+='<td><button class="cell'+(S.fan===f&&S.sinf===s?' on':'')+'" data-f="'+esc(f)+'" data-s="'+s+'"><i class="fa-solid fa-circle-check"></i>'+b.n+(q?'<em>★'+q+'</em>':'')+'</button></td>'}
+  else h+='<td><button class="cell no" disabled>tez orada</button></td>'});h+='</tr>'});
+ return h+'</table></div>'}
+function sch(r){return /^\d+$/.test(r[3])?r[3]+'-maktab':r[3]}
+function brk(b,r){if(b.cols.length<=2)return b.cols.map(function(c,k){return c+': '+f1(r[4][k])}).join(' · ');return 'Topşiriqlar: '+r[4].map(f1).join(' / ')}
+function stb(r){return '<span class="np'+(r[6]==='Çetlatildi'?' ct':'')+'">'+esc(r[6])+'</span>'}
+function rowHtml(r,b){
+ var q=isQ(r),np=!!r[6];
+ var rk=np?'—':(r.rk<=3?'<span class="med m'+r.rk+'">'+r.rk+'</span>':r.rk);
+ return '<tr class="'+(q?'q':'')+'"><td class="rk">'+rk+'</td><td class="nm">'+esc(r[1])+(q?'<span class="badge"><i class="fa-solid fa-star"></i> Qöşköpir</span>':'')+'</td>'+
+ '<td class="m">'+esc(r[2])+' · '+esc(sch(r))+'</td>'+
+ (np?'<td class="dk" colspan="'+b.cols.length+'"></td><td class="j n">'+stb(r)+'</td>':
+ r[4].map(function(v){return '<td class="n dk">'+f1(v)+'</td>'}).join('')+'<td class="sub cmb">'+esc(brk(b,r))+'</td><td class="j n">'+f1(r[5])+'</td>')+'</tr>'}
+function fsView(){
+ var h=matrix();
+ var b=(S.fan&&find(S.fan,S.sinf))||null;
+ if(!b){return h+'<div class="card empty" style="margin-top:16px"><i class="fa-regular fa-hand-pointer"></i> Natijani körişh uçun yuqoridagi jadvaldan fan va sinfni tanlang.</div>'}
+ var qs=b.part.concat(b.np).filter(isQ);
+ var top=b.part.length?b.part[0][5]:null;
+ h+='<div class="hd"><div><h2>'+esc(b.fan)+' · '+b.sinf+'-sinf</h2><p>'+dt(b.sana)+' · qatnaşçilar: <b>'+b.n+'</b>'+(b.np.length?' · qatnaşmaganlar va çetlatilganlar: '+b.np.length:'')+' · eng yuqori ball: <b>'+f1(top)+(b.max?' / '+b.max:'')+'</b>'+(b.note?'<br>'+esc(b.note):'')+'</p></div></div>';
+ if(qs.length){h+='<div class="qs">'+qs.map(function(r){var np=!!r[6];return '<div class="qc"><span class="tag"><i class="fa-solid fa-star"></i> Qöşköpir</span><b>'+esc(r[1])+'</b><span>'+esc(sch(r))+'</span><div class="sc">'+(np?stb(r):'<strong>'+f1(r[5])+'</strong><span>ball</span><em>'+r.rk+'-örin / '+b.n+'</em>')+'</div></div>'}).join('')+'</div>'}
+ h+='<div class="ctl"><div class="search"><i class="fa-solid fa-magnifying-glass" style="color:#94a3b8"></i><input id="q" placeholder="Qidiriş (F.I.Sh., tuman, maktab)..." value="'+esc(S.q)+'"></div><button class="pill'+(S.only?' on':'')+'" id="only"><i class="fa-solid fa-star"></i> Faqat Qöşköpir</button></div>';
+ var q=S.q.toLowerCase(),all=b.part.concat(b.np).filter(function(r){return (!S.only||isQ(r))&&(!q||(r.slice(1,4).join(' ').toLowerCase().indexOf(q)>=0))});
+ h+='<div class="card tw"><table class="rs"><thead><tr><th>Reyting</th><th>F.I.Sh.</th><th>Tuman (şahar) · taʼlim muassasasi</th>'+b.cols.map(function(c){return '<th class="n dk">'+esc(c)+'</th>'}).join('')+'<th class="n">Jami ball</th></tr></thead><tbody id="tb">'+(all.length?all.map(function(r){return rowHtml(r,b)}).join(''):'<tr><td colspan="6" class="empty">Heç narsa topilmadi.</td></tr>')+'</tbody></table></div>';
+ return h}
+function qqView(){
+ var q=qAll();
+ if(!q.length)return '<div class="card empty" style="margin-top:16px">Hali Qöşköpir öquvçilari natijalari yöq.</div>';
+ q.sort(function(a,b){return (!!a.r[6])-(!!b.r[6])||a.b.fan.localeCompare(b.b.fan)||a.b.sinf-b.b.sinf});
+ var h='<div class="hd"><div><h2>Qöşköpir tumani öquvçilari</h2><p>Eʼlon qilingan barça natijalar böyiça · jami <b>'+q.length+'</b> ta</p></div></div><div class="card tw"><table class="rs"><thead><tr><th>Fan · sinf</th><th>F.I.Sh.</th><th>Maktab</th><th>Ballar</th><th class="n">Reyting</th><th class="n">Jami ball</th></tr></thead><tbody>';
+ q.forEach(function(o){var r=o.r,b=o.b,np=!!r[6];h+='<tr class="q qq"><td class="rk fs" style="width:auto;white-space:nowrap">'+esc(b.fan)+' · '+b.sinf+'</td><td class="nm">'+esc(r[1])+'</td><td class="m">'+esc(sch(r))+'</td>'+(np?'<td class="sub" style="display:none"></td><td class="n sub" style="display:none"></td><td class="j n">'+stb(r)+'</td>':'<td class="sub" data-l="Ballar">'+esc(brk(b,r))+'</td><td class="n sub" data-l="Reyting">'+r.rk+' / '+b.n+'</td><td class="j n">'+f1(r[5])+'</td>')+'</tr>'});
+ return h+'</tbody></table></div>'}
+function pc(x){return f1(x)+'%'}
+function cc(p){return p<=.25?'#bbf7d0':p<=.4?'#dcfce7':p<=.65?'#fef9c3':p<=.85?'#fee2e2':'#fecaca'}
+function sgn(x,u){var c=x>0?'#15803d':x<0?'#b91c1c':'#475569';return '<b style="color:'+c+'">'+(x>0?'+':x<0?'−':'')+f1(Math.abs(x))+(u||'')+'</b>'}
+function ordn(x){return x+'-örin'}
+function rankBy(arr,key){var o=arr.slice().sort(function(a,b){return key(a)<key(b)?-1:key(a)>key(b)?1:0}),res=[],prev=null,rk=0;o.forEach(function(t,i){var k=key(t);if(k!==prev){rk=i+1;prev=k}res.push({t:t,rk:rk})});return res}
+function TT(){
+ var T={};
+ function get(n){return T[n]||(T[n]={name:n,q:/Qöşköpir/i.test(n),part:0,med:[0,0,0],fr:[]})}
+ R.forEach(function(b){b.part.concat(b.np).forEach(function(r){get(r[2])});
+  if(!b.n)return;var by={};
+  b.part.forEach(function(r){var t=get(r[2]);t.part++;(by[r[2]]=by[r[2]]||[]).push(r[5]);if(r.rk<=3)t.med[r.rk-1]++});
+  var top=b.part[0][5],list=Object.keys(by).map(function(k){var v=by[k];return {n:k,avg:v.reduce(function(a,c){return a+c},0)/v.length,cnt:v.length}});
+  list.sort(function(a,c){return c.avg-a.avg});
+  var prev=null,rk=0;list.forEach(function(x,i){if(x.avg!==prev){rk=i+1;prev=x.avg}get(x.n).fr.push({b:b,avg:x.avg,pos:rk,of:list.length,pct:top?x.avg/top*100:0,cnt:x.cnt})})});
+ var arr=Object.keys(T).map(function(k){var t=T[k];t.mpos=t.fr.length?t.fr.reduce(function(a,x){return a+x.pos},0)/t.fr.length:99;t.mpct=t.fr.length?t.fr.reduce(function(a,x){return a+x.pct},0)/t.fr.length:0;t.tm=t.med[0]+t.med[1]+t.med[2];return t});
+ return arr}
+function qcards(arr){
+ var q=arr.filter(function(t){return t.q})[0];if(!q)return '';
+ var A=rankBy(arr,function(t){return Math.round(t.mpos*1000)}),B=rankBy(arr,function(t){return [-t.med[0],-t.med[1],-t.med[2]].map(function(v){return ('000'+(v+100)).slice(-3)}).join('')}),C=rankBy(arr,function(t){return -Math.round(t.mpct*1000)});
+ function rk(L){for(var i=0;i<L.length;i++)if(L[i].t===q)return L[i].rk;return 0}
+ var N=arr.length;
+ function card(ic,cl,lab,big,sub,rkv){return '<div class="ttc '+cl+'"><i class="fa-solid '+ic+'"></i><small>'+lab+'</small><b>'+big+'</b><span>'+sub+'</span><em>'+rkv+'-örin <u>/ '+N+'</u></em></div>'}
+ var best=q.fr.slice().sort(function(a,b){return a.pos/a.of-b.pos/b.of})[0],worst=q.fr.slice().sort(function(a,b){return b.pos/b.of-a.pos/a.of})[0];
+ var h='<div class="ttg">'+card('fa-trophy','g1','Umumiy reyting',ordn(rk(A)),'fanlar böyiça örtaça örin: '+f1(q.mpos),rk(A))+
+  card('fa-medal','g2','Sovrinli örinlar (1–3)',q.tm+' ta','🥇 '+q.med[0]+' · 🥈 '+q.med[1]+' · 🥉 '+q.med[2],rk(B))+
+  card('fa-chart-line','g3','Örtaça ball reytingi',pc(q.mpct),'yetakçi ballga nisbatan',rk(C))+'</div>';
+ if(best)h+='<div class="tti"><span class="ok"><i class="fa-solid fa-arrow-trend-up"></i> Eng kuçli natija: <b>'+esc(best.b.fan)+' '+best.b.sinf+'-sinf</b> — tumanlar orasida '+best.pos+'-örin</span><span class="bad"><i class="fa-solid fa-arrow-trend-down"></i> Eʼtibor kerak: <b>'+esc(worst.b.fan)+' '+worst.b.sinf+'-sinf</b> — '+worst.pos+'-örin</span></div>';
+ return h}
+function medal(i){return i<3?'<span class="med m'+(i+1)+'">'+(i+1)+'</span>':(i+1)}
+function ttTable(arr,mode){
+ var L,head,cell;
+ if(mode==='med'){L=rankBy(arr,function(t){return [-t.med[0],-t.med[1],-t.med[2]].map(function(v){return ('000'+(v+100)).slice(-3)}).join('')});
+  head='<th>Tuman (şahar)</th><th class="n">🥇</th><th class="n">🥈</th><th class="n">🥉</th><th class="n">Jami sovrin</th><th class="n">Qatnaşçi</th>';
+  cell=function(t){return '<td class="n">'+t.med[0]+'</td><td class="n">'+t.med[1]+'</td><td class="n">'+t.med[2]+'</td><td class="n j">'+t.tm+'</td><td class="n">'+t.part+'</td>'}}
+ else if(mode==='avg'){L=rankBy(arr,function(t){return -Math.round(t.mpct*1000)});
+  head='<th>Tuman (şahar)</th><th class="n">Örtaça ball (yetakçiga nisbatan)</th><th>Körsatkiç</th><th class="n">Qatnaşçi</th>';
+  cell=function(t){return '<td class="n j">'+pc(t.mpct)+'</td><td><div class="bar"><i style="width:'+Math.min(100,t.mpct)+'%"></i></div></td><td class="n">'+t.part+'</td>'}}
+ else{L=rankBy(arr,function(t){return Math.round(t.mpos*1000)});
+  head='<th>Tuman (şahar)</th><th class="n">Örtaça örin</th><th>Fanlar böyiça örinlar</th><th class="n">Qatnaşçi</th>';
+  cell=function(t){var fr=t.fr.slice().sort(function(a,b){return a.b.fan.localeCompare(b.b.fan)||a.b.sinf-b.b.sinf});return '<td class="n j">'+f1(t.mpos)+'</td><td>'+fr.map(function(x){return '<span class="chp" title="'+esc(x.b.fan+' '+x.b.sinf+'-sinf')+'" style="background:'+cc((x.pos-1)/Math.max(x.of-1,1))+'">'+esc(x.b.fan.slice(0,3))+x.b.sinf+': '+x.pos+'</span>'}).join('')+'</td><td class="n">'+t.part+'</td>'}}
+ var h='<div class="card tw"><table class="rs tt"><thead><tr><th>Örin</th>'+head+'</tr></thead><tbody>';
+ L.forEach(function(o,i){var t=o.t;h+='<tr class="'+(t.q?'q':'')+'"><td class="rk">'+(o.rk<=3?'<span class="med m'+o.rk+'">'+o.rk+'</span>':o.rk)+'</td><td class="nm">'+esc(t.name)+(t.q?'<span class="badge"><i class="fa-solid fa-star"></i> Qöşköpir</span>':'')+'</td>'+cell(t)+'</tr>'});
+ return h+'</tbody></table></div>'}
+function ttStud(arr){
+ var q=arr.filter(function(t){return t.q})[0];if(!q)return '';
+ var rows=[],SC={};
+ R.forEach(function(b){if(!b.n)return;var avg=b.part.reduce(function(a,r){return a+r[5]},0)/b.n,top=b.part[0][5];
+  b.part.forEach(function(r){if(!isQ(r))return;var below=b.part.filter(function(x){return x[5]<r[5]}).length,pct=below/b.n*100;
+   rows.push({b:b,r:r,pct:pct,d:r[5]-avg,lead:top?r[5]/top*100:0});var s=SC[sch_(r)]||(SC[sch_(r)]={n:0,p:0,best:999,names:[]});s.n++;s.p+=pct;s.best=Math.min(s.best,r.rk);s.names.push(r[1])});
+  b.np.forEach(function(r){if(isQ(r))rows.push({b:b,r:r,np:true})})});
+ function sch_(r){return sch2(r)}
+ rows.sort(function(a,b){return (!!a.np)-(!!b.np)||(b.pct||0)-(a.pct||0)});
+ var h='<div class="hd"><div><h2><i class="fa-solid fa-user-graduate"></i> Qöşköpir öquvçilari: özingizni solistiring</h2><p>Har bir öquvçi qatnaşçilarning qançasidan yuqori ekanini, viloyat örtaçasi va yetakçi natija bilan farqini körishi mümkin.</p></div></div><div class="card tw"><table class="rs tt"><thead><tr><th>Fan · sinf</th><th>F.I.Sh.</th><th>Maktab</th><th class="n">Ball</th><th class="n">Örin</th><th>Qatnaşçilarning yuqori qismi</th><th class="n">Viloyat örtaçasidan</th><th class="n">Yetakçiga nisbatan</th></tr></thead><tbody>';
+ rows.forEach(function(o){var r=o.r,b=o.b;
+  if(o.np){h+='<tr class="q"><td class="nm">'+esc(b.fan)+' · '+b.sinf+'</td><td class="nm">'+esc(r[1])+'</td><td class="m">'+esc(sch(r))+'</td><td colspan="5" class="n">'+stb(r)+'</td></tr>';return}
+  h+='<tr class="q"><td class="nm">'+esc(b.fan)+' · '+b.sinf+'</td><td class="nm">'+esc(r[1])+'</td><td class="m">'+esc(sch(r))+'</td><td class="n j">'+f1(r[5])+'</td><td class="n">'+(r.rk<=3?'<span class="med m'+r.rk+'">'+r.rk+'</span>':r.rk+' / '+b.n)+'</td><td><div class="bar"><i style="width:'+o.pct+'%"></i></div><small>'+f1(o.pct)+'% öquvçidan yuqori</small></td><td class="n">'+sgn(o.d)+'</td><td class="n">'+pc(o.lead)+'</td></tr>'});
+ h+='</tbody></table></div>';
+ var sk=Object.keys(SC).filter(function(k){return SC[k].n}).sort(function(a,b){return SC[b].p/SC[b].n-SC[a].p/SC[a].n});
+ h+='<div class="hd"><div><h2><i class="fa-solid fa-school"></i> Maktablar: qatnaşgan öquvçilar natijasi</h2><p>Direktorlar va fan öqituvçilari uçun: maktab öquvçilarining örtaça «yuqori qism» körsatkiçi.</p></div></div><div class="card tw"><table class="rs tt"><thead><tr><th>Örin</th><th>Maktab</th><th class="n">Natijali öquvçilar</th><th class="n">Eng yaxşi örin</th><th>Örtaça körsatkiç</th></tr></thead><tbody>';
+ sk.forEach(function(k,i){var s=SC[k],p=s.p/s.n;h+='<tr><td class="rk">'+(i+1)+'</td><td class="nm">'+esc(k)+'</td><td class="n">'+s.n+'</td><td class="n">'+s.best+'</td><td><div class="bar"><i style="width:'+p+'%"></i></div><small>'+f1(p)+'%</small></td></tr>'});
+ return h+'</tbody></table></div>'}
+function sch2(r){return /^\d+$/.test(r[3])?r[3]+'-maktab':r[3]}
+function ttMatrix(arr){
+ var labs=[];R.forEach(function(b){if(b.n)labs.push(b)});
+ var qq=arr.filter(function(t){return t.q})[0];if(!qq)return '';
+ var h='<div class="hd"><div><h2><i class="fa-solid fa-table-cells-large"></i> Fanlar böyiça: Qöşköpir va boşqa tumanlar</h2><p>Örtaça ball va tumanlar orasidagi örin. Yaşil — yuqori, qizil — past.</p></div></div><div class="card tw"><table class="rs tt"><thead><tr><th>Tuman</th>'+labs.map(function(b){return '<th class="n">'+esc(b.fan)+'<br>'+b.sinf+'-sinf</th>'}).join('')+'</tr></thead><tbody>';
+ arr.slice().sort(function(a,b){return a.mpos-b.mpos}).forEach(function(t){h+='<tr class="'+(t.q?'q':'')+'"><td class="nm">'+esc(t.name)+'</td>'+labs.map(function(b){var x=t.fr.filter(function(y){return y.b===b})[0];return x?'<td class="n" style="background:'+cc((x.pos-1)/Math.max(x.of-1,1))+'!important">'+f1(x.avg)+' <small>('+x.pos+')</small></td>':'<td class="n">—</td>'}).join('')+'</tr>'});
+ var row='<tr class="q"><td class="nm">Viloyat örtaçasi</td>'+labs.map(function(b){return '<td class="n">'+f1(b.part.reduce(function(a,r){return a+r[5]},0)/b.n)+'</td>'}).join('')+'</tr>';
+ return h+row+'</tbody></table></div>'}
+function ttView(){
+ var arr=TT();
+ var h='<div class="tth"><i class="fa-solid fa-scale-balanced"></i><div><h2>Taqqoslaş va tumanlar reytingi</h2><p>Qöşköpir tumani viloyat bosqiçida boşqa tumanlar (şaharlar) bilan solistirilmoqda. Barça eʼlon qilingan natijalar böyiça, '+R.length+' ta fan-sinf.</p></div></div>';
+ h+=qcards(arr);
+ h+='<div class="seg" id="seg"><button data-m="pos" class="'+(S.m==='pos'?'on':'')+'"><i class="fa-solid fa-ranking-star"></i> Umumiy reyting</button><button data-m="med" class="'+(S.m==='med'?'on':'')+'"><i class="fa-solid fa-medal"></i> Sovrinli örinlar</button><button data-m="avg" class="'+(S.m==='avg'?'on':'')+'"><i class="fa-solid fa-chart-line"></i> Örtaça ball</button></div>';
+ h+=ttTable(arr,S.m);
+ h+='<p class="note">Umumiy reyting — har bir fan va sinfda tumanning örtaça ball böyiça örni, shu örinlarning örtaçasi (kiçik bölsa yaxşi). Sovrinli örinlar — har bir fan va sinfda 1–3-örinlarni egallagan öquvçilar. Örtaça ball — tuman örtaça balining shu fan va sinfdagi eng yuqori ballga nisbati, fanlar böyiça örtaça.</p>';
+ h+=ttMatrix(arr)+ttStud(arr);
+ return h}
+
+var PH={},FIC={Matematika:'fa-square-root-variable',Fizika:'fa-atom',Kimyo:'fa-flask',Biologiya:'fa-dna',Informatika:'fa-laptop-code'};
+function pkey(n){n=n.toLowerCase().replace(/[ʼ'ʻ’]/g,'').replace(/ö/g,'o').replace(/ğ/g,'g').replace(/ş/g,'sh').replace(/ç/g,'ch');return (n.match(/[a-z]+/g)||[]).slice(0,2).join(' ')}
+function near(a,b){if(!a||!b||a.length!==b.length)return false;var d=0;for(var i=0;i<a.length;i++)if(a[i]!==b[i])d++;return d<=1}
+function pfind(n){var k=pkey(n);if(PH[k])return PH[k];var s=k.split(' '),c=Object.keys(PH).filter(function(x){var y=x.split(' ');return y[0]===s[0]&&near(y[1],s[1])});return c.length===1?PH[c[0]]:null}
+function svView(){
+ var W=[];R.forEach(function(b){b.part.forEach(function(r){if(isQ(r)&&r.rk<=3)W.push({b:b,r:r})})});
+ W.sort(function(a,c){return a.r.rk-c.r.rk||a.b.fan.localeCompare(c.b.fan)||a.b.sinf-c.b.sinf});
+ var cn=[0,0,0];W.forEach(function(x){cn[x.r.rk-1]++});
+ var h='<div class="tth"><i class="fa-solid fa-trophy"></i><div><h2>Qöşköpir sovrindorlari</h2><p>Viloyat bosqiçida 1–3-örinlarni egallağan öquvçilarimiz. Jadval yangi natijalar qöşilganda özi yangilanadi.</p></div></div>';
+ if(!W.length)return h+'<div class="card empty" style="margin-top:16px">Hozircha sovrinli örinlar yoq.</div>';
+ h+='<div class="svs3"><span class="m1"><i class="fa-solid fa-medal"></i> 1-örin: <b>'+cn[0]+'</b></span><span class="m2"><i class="fa-solid fa-medal"></i> 2-örin: <b>'+cn[1]+'</b></span><span class="m3"><i class="fa-solid fa-medal"></i> 3-örin: <b>'+cn[2]+'</b></span><span class="mt"><i class="fa-solid fa-award"></i> Jami: <b>'+W.length+'</b></span></div>';
+ h+='<div class="card" style="margin-top:14px;overflow:hidden"><div class="tw"><table class="rs sv"><thead><tr><th>Örin</th><th>Öquvçi</th><th>Fan va sinf</th><th>Ball</th><th>Ustoz</th></tr></thead><tbody>';
+ W.forEach(function(x){var r=x.r,b=x.b,p=pfind(r[1]),u=p&&p.u?p.u:'—',bl=String(r[5]).replace('.',',');
+  h+='<tr><td class="svr"><span class="mdl m'+r.rk+'"><i class="fa-solid fa-medal"></i> '+r.rk+'-örin</span></td>'+
+   '<td class="svn">'+(p?'<img class="sph" alt="" src="'+p.p+'">':'<span class="sph no"><i class="fa-solid fa-user-graduate"></i></span>')+'<span><b>'+esc(r[1])+'</b><small>'+esc(r[3])+'</small></span></td>'+
+   '<td class="svf" data-l="Fan"><i class="fa-solid '+(FIC[b.fan]||'fa-book-open')+'"></i> '+esc(b.fan)+' · '+b.sinf+'-sinf</td>'+
+   '<td class="svb" data-l="Ball"><b>'+bl+'</b><small>'+b.n+' nafar qatnaşçi orasida</small></td>'+
+   '<td class="svu" data-l="Ustoz">'+esc(u)+'</td></tr>'});
+ return h+'</tbody></table></div></div>'}
+function draw(){
+ $('view').innerHTML=S.v==='fs'?fsView():S.v==='tt'?ttView():S.v==='sv'?svView():qqView();
+ [].forEach.call(document.querySelectorAll('#seg button'),function(b){b.onclick=function(){S.m=b.getAttribute('data-m');draw()}});
+ [].forEach.call(document.querySelectorAll('.cell:not(.no)'),function(b){b.onclick=function(){S.fan=b.getAttribute('data-f');S.sinf=+b.getAttribute('data-s');S.q='';S.only=false;try{history.replaceState(null,'','#'+encodeURIComponent(S.fan)+'/'+S.sinf)}catch(e){}draw();var h=document.querySelector('.hd');if(h)h.scrollIntoView({behavior:'smooth',block:'start'})}});
+ var qi=$('q');if(qi)qi.oninput=function(){S.q=qi.value;var pos=qi.selectionStart;draw();var n=$('q');n.focus();try{n.setSelectionRange(pos,pos)}catch(e){}};
+ var on=$('only');if(on)on.onclick=function(){S.only=!S.only;draw()};
+ $('note').innerHTML=S.v==='tt'?'★ — Qöşköpir tumani. Reyting eʼlon qilingan natijalar böyiça hisoblangan va yangi natijalar qöşilganda yangilanadi.':S.v==='fs'&&S.fan?'Reyting jami ball böyiça hisoblangan (teng ballarda örin bir xil). Rasmiy «Egallagan örni» ustuni qarorda töldirilganda yangilanadi. ★ — Qöşköpir tumani öquvçisi.':'★ — Qöşköpir tumani öquvçisi. Yangi natijalar eʼlon qilinganda sahifa yangilanib boradi.'}
+[].forEach.call(document.querySelectorAll('#tabs button'),function(b){b.onclick=function(){S.v=b.getAttribute('data-v');[].forEach.call(document.querySelectorAll('#tabs button'),function(x){x.classList.toggle('on',x===b)});draw()}});
+fetch('hududiy-rasmlar.json?v='+Date.now()).then(function(r){return r.json()}).then(function(p){PH=p;if(D&&S.v==='sv')draw()}).catch(function(){});
+fetch('hududiy-natijalar.json?v='+Date.now(),{cache:'no-store'}).then(function(r){return r.json()}).then(function(j){D=j;prep();stats();
+ var m=decodeURIComponent(location.hash.slice(1)).split('/');if(m[0]==='sovrindorlar'){S.v='sv';[].forEach.call(document.querySelectorAll('#tabs button'),function(x){x.classList.toggle('on',x.getAttribute('data-v')==='sv')})}if(m[0]==='taqqoslas'){S.v='tt';[].forEach.call(document.querySelectorAll('#tabs button'),function(x){x.classList.toggle('on',x.getAttribute('data-v')==='tt')})}if(m.length===2&&find(m[0],+m[1])){S.fan=m[0];S.sinf=+m[1]}
+ else if(R.length){S.fan=R[R.length-1].fan;S.sinf=R[R.length-1].sinf}
+ draw()}).catch(function(){$('view').innerHTML='<div class="card empty" style="margin-top:16px">Maʼlumotni yuklab bölmadi. Sahifani yangilang.</div>'});
+})();
+</script></body></html>

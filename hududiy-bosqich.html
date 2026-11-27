@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="uz"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Hududiy bosqiç reja-grafigi | Umrbek Mamatov</title>
+<meta name="description" content="Asosiy olimpiadaning uçinçi – hududiy bosqiçi, xalqaro olimpiadalarga saralaş va boşqa olimpiadalar reja-grafigi (24-noyabr – 5-dekabr).">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}html{scroll-behavior:smooth}
+body{font-family:'Lexend', 'Plus Jakarta Sans', system-ui, sans-serif;background:#f8fafc;color:#0f172a;line-height:1.5;font-size:17px}
+a{color:inherit;text-decoration:none}button,input{font-family:inherit}
+.top{position:sticky;top:0;z-index:50;background:#fff;border-bottom:1px solid #e2e8f0;box-shadow:0 1px 8px rgba(15,23,42,.05)}
+.top-in{max-width:1180px;margin:0 auto;padding:12px 20px;display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap}
+.brand b{display:block;font-size:1.2rem;color:#0f172a}.brand span{font-size:.72rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#b45309}
+.top nav{display:flex;gap:8px;flex-wrap:wrap}.top nav a{font-size:.95rem;font-weight:700;padding:8px 14px;border-radius:999px;color:#334155;background:#f1f5f9}
+.top nav a:hover{background:#e2e8f0}.top nav a.on{background:#0f2a5c;color:#fff}
+.top nav a.vn{background:linear-gradient(135deg,#f59e0b,#dc2626);color:#fff;box-shadow:0 4px 14px rgba(220,38,38,.4);position:relative;animation:vnp 1.8s infinite}.top nav a.vn:hover{filter:brightness(1.08)}.top nav a.vn.on{outline:3px solid #fde68a}.top nav a.vn b{background:#fde68a;color:#7c2d12;font-size:.62rem;padding:2px 6px;border-radius:999px;margin-left:5px;letter-spacing:.04em}@keyframes vnp{0%,100%{box-shadow:0 4px 14px rgba(220,38,38,.4)}50%{box-shadow:0 4px 22px rgba(245,158,11,.85)}}
+.hero{background:radial-gradient(1200px 500px at 85% -10%,rgba(56,120,255,.35),transparent 60%),linear-gradient(135deg,#0a2150 0%,#0f2a5c 55%,#12408c 100%);color:#fff;padding:40px 20px 86px}
+.hero-in{max-width:1180px;margin:0 auto}
+.hero .kick{display:inline-block;font-size:.8rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.25);padding:6px 14px;border-radius:999px;margin-bottom:14px}
+.hero h1{font-size:clamp(1.9rem,4.6vw,3rem);line-height:1.12;margin-bottom:10px}
+.hero p{max-width:780px;opacity:.92;font-size:1.1rem}
+.range{display:inline-flex;gap:10px;align-items:center;margin-top:16px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.22);padding:8px 14px;border-radius:12px;font-size:1rem}
+.range b{color:#fcd34d}
+.wrap{max-width:1180px;margin:0 auto;padding:0 20px}
+.next{margin-top:-58px;position:relative;background:#fff;border-radius:18px;box-shadow:0 12px 34px rgba(15,23,42,.14);padding:18px 22px;display:flex;align-items:center;justify-content:space-between;gap:18px;flex-wrap:wrap}
+.next .ic{width:48px;height:48px;border-radius:14px;background:#eef2ff;color:#0f2a5c;display:grid;place-items:center;font-size:1.3rem;flex:none}
+.next .nl{display:flex;gap:16px;align-items:center;min-width:260px;flex:1}
+.next small{display:block;font-size:.74rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#64748b}
+.next .t{font-size:1.3rem;font-weight:700;line-height:1.2;margin:2px 0}
+.next .m{font-size:.95rem;color:#475569}
+.cd{display:flex;gap:8px}.cd div{min-width:62px;text-align:center;background:#0f2a5c;color:#fff;border-radius:12px;padding:8px 6px}
+.cd b{display:block;font-size:1.7rem;line-height:1.1}.cd span{font-size:.62rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;opacity:.8}
+.done{font-size:1.1rem;font-weight:700;color:#166534}
+.ctl{margin-top:22px;display:grid;gap:12px}
+.row{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+.tabs{display:inline-flex;background:#e9eef6;border-radius:12px;padding:4px;gap:2px}
+.tabs button{border:0;background:transparent;padding:8px 16px;border-radius:9px;font-size:1rem;font-weight:700;color:#475569;cursor:pointer}
+.tabs button.on{background:#fff;color:#0f2a5c;box-shadow:0 1px 4px rgba(15,23,42,.15)}
+.search{flex:1;min-width:220px;display:flex;align-items:center;gap:8px;background:#fff;border:1px solid #d8e0ec;border-radius:12px;padding:0 12px}
+.search input{border:0;outline:0;background:transparent;padding:10px 0;width:100%;font-size:1rem}
+.lab{font-size:.74rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#64748b;margin-right:4px}
+.pill{border:1px solid #d8e0ec;background:#fff;border-radius:999px;padding:6px 14px;font-size:.95rem;font-weight:700;color:#1e293b;cursor:pointer;display:inline-flex;align-items:center;gap:7px}
+.pill.on{background:#0f2a5c;border-color:#0f2a5c;color:#fff}
+.pill i{width:9px;height:9px;border-radius:50%;display:inline-block}
+.days{display:flex;gap:8px;overflow-x:auto;padding:16px 2px 6px}
+.dchip{flex:none;width:58px;text-align:center;background:#fff;border:1px solid #e2e8f0;border-radius:14px;padding:7px 4px;cursor:pointer;box-shadow:0 1px 4px rgba(15,23,42,.05)}
+.dchip small{display:block;font-size:.68rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:#64748b}
+.dchip b{display:block;font-size:1.5rem;line-height:1.1}.dchip em{display:block;font-style:normal;font-size:.7rem;color:#64748b}
+.dchip .dots{display:flex;justify-content:center;gap:3px;margin-top:3px;min-height:7px}.dchip .dots i{width:6px;height:6px;border-radius:50%}
+.dchip.today{border-color:#dc2626;box-shadow:0 0 0 2px rgba(220,38,38,.18)}
+.dchip.off{opacity:.35}
+.daysec{margin-top:24px}.daysec h3{font-size:1.5rem;display:flex;gap:10px;align-items:baseline;flex-wrap:wrap}.daysec h3 small{font-size:1rem;color:#64748b;font-weight:700}
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:14px;margin-top:10px}
+.card{background:#fff;border:1px solid #e2e8f0;border-left:5px solid var(--c);border-radius:14px;padding:12px 14px;box-shadow:0 2px 10px rgba(15,23,42,.05)}
+.card .h{display:flex;justify-content:space-between;align-items:flex-start;gap:8px}
+.card .tm{font-size:1.35rem;font-weight:700}
+.card .gr{font-size:.82rem;font-weight:700;background:#eef2f7;border-radius:8px;padding:2px 9px;white-space:nowrap}
+.card .pg{font-size:.72rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--c);margin:1px 0 7px}
+.chips{display:flex;flex-wrap:wrap;gap:6px}.chips span{background:#eef2f7;border:1px solid #dde4ee;border-radius:8px;padding:3px 9px;font-size:.95rem;font-weight:700}
+.card .ty{margin-top:8px;color:#334155;font-size:.98rem}
+.card .dt{font-size:.85rem;color:#b45309;font-weight:700;margin-top:4px}
+.gridwrap{margin-top:22px;overflow:auto;max-height:calc(100vh - 150px);border-radius:16px;box-shadow:0 4px 18px rgba(15,23,42,.08);background:#fff}
+table.grid{border-collapse:separate;border-spacing:0;width:100%;min-width:1500px}
+.grid th{background:#0f2a5c;color:#fff;padding:9px 6px;font-size:.98rem;position:sticky;top:0;z-index:3}
+.grid th small{display:block;font-size:.74rem;font-weight:400;opacity:.8}
+.grid th.cl,.grid td.cl{position:sticky;left:0;z-index:2}
+.grid th.cl{background:#0f2a5c;text-align:left;padding-left:12px;min-width:96px}
+.grid td.cl{background:#fff;font-weight:700;font-size:1.05rem;padding:10px 12px;border-right:1px solid #e2e8f0;vertical-align:top}
+.grid td{border-top:1px solid #e8edf4;border-left:1px solid #eef2f7;vertical-align:top;padding:7px;min-width:132px}
+.ev{border-left:4px solid var(--c);background:color-mix(in srgb,var(--c) 9%,#fff);border-radius:8px;padding:6px 8px;margin-bottom:6px;font-size:.88rem;line-height:1.3}
+.ev .tm{font-size:.8rem;font-weight:700;color:#475569}.ev b{display:block;font-size:.95rem}.ev span{color:#475569}
+.tasks{margin-top:22px;overflow:auto;max-height:calc(100vh - 150px);background:#fff;border-radius:16px;box-shadow:0 4px 18px rgba(15,23,42,.08)}
+table.tk{border-collapse:collapse;width:100%;min-width:900px}
+.tk th{background:#0f2a5c;color:#fff;text-align:left;padding:11px 14px;font-size:.95rem}
+.tk td{padding:12px 14px;border-top:1px solid #e8edf4;vertical-align:top;white-space:pre-line}
+.tk td:first-child{font-weight:700}.tk tr:nth-child(even) td{background:#f8fafc}
+.tk .gp{background:#eef2ff!important;font-weight:700;color:#0f2a5c;font-size:.95rem}
+.legend{margin-top:22px;background:#fff;border:1px solid #e2e8f0;border-radius:14px;padding:12px 16px;display:flex;flex-wrap:wrap;gap:8px 20px;font-size:.92rem;color:#334155}
+.legend span{display:inline-flex;gap:8px;align-items:flex-start}.legend i{width:10px;height:10px;border-radius:50%;margin-top:6px;flex:none}
+.sel{border:1px solid #d8e0ec;background:#fff;border-radius:10px;padding:8px 12px;font-size:1rem;font-family:inherit;color:#1e293b}.warn{color:#b91c1c;font-weight:700}.tk .nm{font-weight:700}.tk .mk{white-space:nowrap}.cnt{margin:14px 0 4px;color:#475569}
+.cfbox{margin-top:18px;background:#fef2f2;border:1px solid #fecaca;border-radius:14px;padding:14px 18px}.cfbox ul{margin:8px 0 0 20px}.cfbox p{margin-top:4px}
+.empty{padding:40px;text-align:center;color:#64748b}
+.src{margin:18px 0 40px;font-size:.92rem;color:#64748b}
+footer{background:#0f2a5c;color:#dbe5fb;text-align:center;padding:20px;font-size:.95rem}
+@media(max-width:700px){.hero{padding-bottom:80px}.next{padding:14px}.cd div{min-width:54px}.cd b{font-size:1.4rem}}
+.grid th.cl{z-index:5}.tk th{position:sticky;top:0;z-index:2}.gridwrap,.tasks{-webkit-overflow-scrolling:touch}
+@media(max-width:700px){.top-in{padding:8px 12px}.top nav{flex-wrap:nowrap;overflow-x:auto;width:100%}.top nav a{white-space:nowrap;padding:7px 12px;font-size:.9rem}.wrap{padding:0 12px}.gridwrap,.tasks{max-height:calc(100vh - 120px)}.tasks.sw{max-height:none;overflow:visible;background:none;box-shadow:none}.tk.stu{min-width:0}.tk.stu thead{display:none}.tk.stu tr{display:block;background:#fff;border:1px solid #e2e8f0;border-radius:12px;margin:0 0 10px;padding:10px 12px}.tk.stu td{display:block;border:0;padding:1px 0;background:none!important}.tk.stu td:first-child{display:none}.tk.stu td[data-l]:before{content:attr(data-l) ": ";color:#64748b;font-size:.85rem}.tk.stu .nm{font-size:1.05rem}.cd div{min-width:50px}}
+html.shot .gridwrap,html.shot .tasks{max-height:none}
+html.shot .top,html.shot .ctl,html.shot .days,html.shot .next,html.shot .daybn{display:none}html.shot .hero{padding-bottom:30px}html.shot .gridwrap,html.shot .tasks{margin-top:26px;overflow:visible}html.shot .wrap{max-width:1840px}html.shot table.grid{min-width:0}
+.daybn{display:flex;align-items:center;gap:18px;margin:18px 0 6px;padding:18px 24px;border-radius:22px;background:linear-gradient(120deg,#1b2a4e,#312e81 55%,#7c3aed);color:#fff;box-shadow:0 18px 38px -20px rgba(49,46,129,.9);text-decoration:none;position:relative;overflow:hidden}
+.daybn:before{content:"";position:absolute;inset:0;background:linear-gradient(110deg,transparent 30%,rgba(255,255,255,.16) 50%,transparent 70%);transform:translateX(-100%);animation:bsh 3.4s ease-in-out infinite}
+@keyframes bsh{60%,100%{transform:translateX(100%)}}
+.daybn .bi{flex:none;width:58px;height:58px;border-radius:18px;background:#fde68a;color:#92400e;display:grid;place-items:center;font-size:1.6rem}
+.daybn .bt{flex:1;min-width:0}.daybn small{display:block;font-size:.74rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#fde68a}
+.daybn small u{display:inline-block;width:9px;height:9px;border-radius:50%;background:#f59e0b;margin-right:7px;animation:bpl 1.2s infinite}@keyframes bpl{50%{opacity:.25;transform:scale(1.5)}}
+.daybn b{display:block;font-size:1.3rem;line-height:1.2;margin:2px 0}.daybn .bt>span{font-size:.98rem;opacity:.9}
+.daybn em{flex:none;font-style:normal;font-weight:700;background:#fde68a;color:#78350f;border-radius:14px;padding:10px 18px;white-space:nowrap}
+@media(max-width:640px){.daybn{flex-direction:column;text-align:center;gap:10px;padding:18px 16px}.daybn em{width:100%}}
+.adr{margin:0 0 18px;background:#fff;border:1px solid #e2e8f0;border-radius:16px;padding:16px 18px;box-shadow:0 2px 10px rgba(15,23,42,.05)}
+.adr h2{font-size:1.15rem;color:#0f2a5c;margin-bottom:10px}
+.adr .rule{background:#fef3c7;border:1px solid #fcd34d;color:#78350f;border-radius:12px;padding:10px 14px;font-size:.98rem;margin-bottom:12px;font-weight:700}
+.adr .g{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.adr .c{border:1px solid #e2e8f0;border-radius:12px;padding:12px 14px;background:#f8fafc}
+.adr .c b{display:block;color:#0f2a5c;margin-bottom:4px}
+.adr .c p{font-size:.98rem;margin-bottom:8px}
+.adr .c a{display:inline-block;font-weight:700;font-size:.92rem;padding:7px 14px;border-radius:999px;background:#0f2a5c;color:#fff}
+.adr .c a:hover{background:#1e40af}
+@media(max-width:700px){.adr .g{grid-template-columns:1fr}}
+</style><style id="yz-prog-css">.yz-prog{position:fixed;top:0;left:0;right:0;height:4px;z-index:99999;background:rgba(15,23,42,.08);pointer-events:none}.yz-prog>i{display:block;height:100%;width:100%;background:linear-gradient(90deg,#b45309,#d97706);transform-origin:0 50%;transform:scaleX(0);border-radius:0 3px 3px 0;will-change:transform}</style>
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="48x48" href="/favicon-48x48.png">
+<link rel="icon" type="image/png" sizes="192x192" href="/icon-192.png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700;800&family=Manrope:wght@600;700;800;900&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <!-- Testmakon Typography: Lexend + Manrope + Plus Jakarta Sans -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700;800&family=Manrope:wght@600;700;800;900&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <style id="testmakon-typography">
+    :root {
+      --font-sans: 'Lexend', 'Plus Jakarta Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      --font-heading: 'Manrope', 'Lexend', sans-serif;
+    }
+    body, p, span, a, div, li, td, th, input, button, select, textarea, label {
+      font-family: var(--font-sans) !important;
+    }
+    h1, h2, h3, h4, h5, h6, .brand, .nx-brand, .title, .heading {
+      font-family: var(--font-heading) !important;
+    }
+    .fa, .fas, .fa-solid {
+      font-family: 'Font Awesome 6 Free' !important;
+      font-weight: 900 !important;
+    }
+    .far, .fa-regular {
+      font-family: 'Font Awesome 6 Free' !important;
+      font-weight: 400 !important;
+    }
+    .fab, .fa-brands {
+      font-family: 'Font Awesome 6 Brands' !important;
+      font-weight: 400 !important;
+    }
+  </style>
+</head><body>
+<div class="yz-prog" id="yzProg" aria-hidden="true"><i></i></div>
+<header class="top"><div class="top-in"><a class="brand" href="index.html"><b>Umrbek Mamatov</b><span>Boş mutaxassis · Taʼlim portali</span></a>
+<nav><a href="index.html"><i class="fa-solid fa-house"></i> Boş sahifa</a><a href="index.html#olimpiada"><i class="fa-solid fa-trophy"></i> Olimpiadalar</a><a href="hududiy-bosqich.html" class="on"><i class="fa-solid fa-calendar-days"></i> Hududiy bosqiç grafigi</a><a href="hududiy-natijalar.html" class="vn"><i class="fa-solid fa-ranking-star"></i> Viloyat natijalari <b>YANGI</b></a><a href="jonli.html" target="_blank" rel="noopener"><i class="fa-solid fa-tower-broadcast"></i> Jonli efir</a></nav></div></header>
+<section class="hero"><div class="hero-in"><span class="kick"><i class="fa-solid fa-medal"></i> 2026–2027-öquv yili</span>
+<h1>Hududiy bosqiç reja-grafigi</h1>
+<p>Asosiy olimpiadaning uçinçi – hududiy bosqiçi, xalqaro olimpiadalarga saralaş va boşqa olimpiadalar.</p>
+<div class="range"><i class="fa-regular fa-calendar"></i><b>24-noyabr – 5-dekabr</b> · 34 ta sinov</div></div></section>
+<main class="wrap">
+<div class="next" id="next"></div>
+<a class="daybn" href="kunlik-elon.html"><span class="bi"><i class="fa-solid fa-bullhorn"></i></span><span class="bt"><small><u></u>Bugun · jonli</small><b>Bugungi sinovlar — kunlik eʼlon</b><span>Sana, boşlaniş va tugaş vaqti, raqamli soat</span></span><em>Ochiş <i class="fa-solid fa-arrow-right"></i></em></a>
+<section class="adr" id="manzil">
+<h2><i class="fa-solid fa-location-dot"></i> Olimpiada ötkaziladigan manzillar</h2>
+<div class="rule"><i class="fa-solid fa-circle-exclamation"></i> Olimpiada iştirokçilari özlari bilan şaxsini tasdiqlovçi hujjati, beydjik va ruçka olib kelişlari talab etiladi. Keçikib kelganlar kiritilmaydi.</div>
+<div class="g">
+<div class="c"><b><i class="fa-solid fa-laptop"></i> Faqat Informatika fani</b><p>Urganç şahardagi 15-sonli maktab (Urganç şahar, Özbekiston ovozi köçasi, 27/7-uy)da kompyuterda onlayn ötkaziladi.</p><a href="https://maps.app.goo.gl/s2o7CmybZpJMU5a38" target="_blank" rel="noopener"><i class="fa-solid fa-map-location-dot"></i> Xaritada köriş</a></div>
+<div class="c"><b><i class="fa-solid fa-book"></i> Qolgan barça fanlar</b><p>Urganç şahardagi 17-sonli maktab (Urganç şahar, 4-Yuqori boğ MFY, Maxtumquli köçasi, 229-a-uy)da ötkaziladi.</p><a href="https://goo.gl/maps/V5cFN5Js9mBWoSHa7" target="_blank" rel="noopener"><i class="fa-solid fa-map-location-dot"></i> Xaritada köriş</a></div>
+</div>
+</section>
+<div class="ctl">
+ <div class="row"><div class="tabs" id="tabs"><button data-v="days" class="on">Kunlar böyiça</button><button data-v="grid">Jadval</button><button data-v="tasks">Topşiriq turlari</button><button data-v="stud">Öquvçilar</button></div>
+ <label class="search"><i class="fa-solid fa-magnifying-glass" style="color:#94a3b8"></i><input id="q" type="search" placeholder="Qidiriş (fan, öquvçi, maktab)..."></label></div>
+ <div class="row" id="gradeRow"><span class="lab">Sinf</span><span id="grades"></span></div>
+ <div class="row" id="progRow"><span class="lab">Yönaliş</span><span id="progs" class="row"></span></div>
+</div>
+<div class="days" id="dayStrip"></div>
+<div id="view"></div>
+<div class="legend" id="legend"></div>
+<p class="src" id="src"></p>
+</main>
+<footer>© 2026 · Qöşköpir tumani taʼlim bölimi · Manba: Fan olimpiadalari markazi</footer>
+<script>
+const DATA={"updated": "2026-11-18T21:43:00+05:00", "programs": {"h1": {"name": "Asosiy olimpiadaning uçinçi – hududiy bosqiçi (1-guruh fanlari)", "short": "Hududiy bosqiç · 1-guruh", "color": "#0B4F99"}, "h2": {"name": "Asosiy olimpiadaning uçinçi – hududiy bosqiçi (2-guruh fanlari)", "short": "Hududiy bosqiç · 2-guruh", "color": "#1A9FC4"}, "xs": {"name": "Nufuzli xalqaro olimpiadalarga saralaşning 1-bosqiçi", "short": "Xalqaro saralaş", "color": "#C9A227"}, "egoi": {"name": "Xalqaro Yevropa qizlar informatika olimpiadasida iştirok etuvçi terma jamoaga nomzodlarni saralaşning birinçi bosqiçi", "short": "EGOI saralaş", "color": "#7B4FC9"}, "egmo": {"name": "Xalqaro Yevropa qizlar matematika olimpiadasida iştirok etuvçi terma jamoaga nomzodlarni saralaşning birinçi bosqiçi", "short": "EGMO saralaş", "color": "#C2185B"}, "kor": {"name": "IV Respublika koreys tili olimpiadasining hududiy bosqiçi", "short": "Koreys tili olimpiadasi", "color": "#D9534F"}, "ixt": {"name": "«Ixtiroçilikka qadam» tanlovining ikkinçi – tuman (şahar) bosqiçi", "short": "Ixtiroçilikka qadam", "color": "#2E9E5B"}}, "events": [{"date": "2026-11-24", "start": "10:00", "end": "13:00", "program": "h1", "title": "Matematika", "type": "Yozma iş", "grades": [10], "id": 1}, {"date": "2026-11-24", "start": "10:00", "end": "14:00", "program": "h1", "title": "Informatika", "type": "Dasturlaş", "grades": [11], "id": 2}, {"date": "2026-11-25", "start": "10:00", "end": "13:00", "program": "h1", "title": "Matematika, Fizika, Kimyo", "type": "Yozma iş", "grades": [9], "id": 3}, {"date": "2026-11-25", "start": "10:00", "end": "14:00", "program": "h1", "title": "Informatika", "type": "Dasturlaş", "grades": [10], "id": 4}, {"date": "2026-11-25", "start": "10:00", "end": "11:30", "program": "h1", "title": "Matematika", "type": "Test", "grades": [10], "id": 5}, {"date": "2026-11-25", "start": "10:00", "end": "13:00", "program": "h1", "title": "Biologiya", "type": "Yozma iş", "grades": [11], "id": 6}, {"date": "2026-11-26", "start": "10:00", "end": "11:30", "program": "h1", "title": "Matematika, Fizika, Kimyo", "type": "Test", "grades": [9], "id": 7}, {"date": "2026-11-26", "start": "10:00", "end": "11:30", "program": "h1", "title": "Biologiya", "type": "Test", "grades": [11], "id": 8}, {"date": "2026-11-26", "start": "10:00", "end": "13:00", "program": "h1", "title": "Matematika", "type": "Yozma iş", "grades": [11], "id": 9}, {"date": "2026-11-27", "start": "10:00", "end": "13:00", "program": "h1", "title": "Biologiya", "type": "Yozma iş", "grades": [9], "id": 10}, {"date": "2026-11-27", "start": "10:00", "end": "14:00", "program": "h1", "title": "Informatika", "type": "Dasturlaş", "grades": [9], "id": 11}, {"date": "2026-11-27", "start": "10:00", "end": "13:00", "program": "h1", "title": "Fizika, Kimyo", "type": "Yozma iş", "grades": [10], "id": 12}, {"date": "2026-11-27", "start": "10:00", "end": "11:30", "program": "h1", "title": "Matematika", "type": "Test", "grades": [11], "id": 13}, {"date": "2026-11-28", "start": "10:00", "end": "11:30", "program": "h1", "title": "Biologiya", "type": "Test", "grades": [9], "id": 14}, {"date": "2026-11-28", "start": "10:00", "end": "11:30", "program": "h1", "title": "Fizika, Kimyo", "type": "Test", "grades": [10], "id": 15}, {"date": "2026-11-28", "start": "13:00", "end": "15:00", "program": "egoi", "title": "Informatika va axborot texnologiyalari", "type": "Dasturlaş", "grades": [9, 10, 11], "id": 16}, {"date": "2026-11-29", "start": "10:00", "end": "13:00", "program": "h1", "title": "Biologiya", "type": "Yozma iş", "grades": [10], "id": 17}, {"date": "2026-11-29", "start": "10:00", "end": "13:00", "program": "h1", "title": "Fizika, Kimyo", "type": "Yozma iş", "grades": [11], "id": 18}, {"date": "2026-11-29", "start": "15:00", "end": "18:00", "program": "kor", "title": "Koreys tili", "type": "Könikmalar (tinglab va öqib tuşuniş, test)", "grades": [9, 10, 11], "id": 19}, {"date": "2026-11-30", "start": "10:00", "end": "11:30", "program": "h1", "title": "Biologiya", "type": "Test", "grades": [10], "id": 20}, {"date": "2026-11-30", "start": "10:00", "end": "11:30", "program": "h1", "title": "Fizika, Kimyo", "type": "Test", "grades": [11], "id": 21}, {"date": "2026-12-01", "start": "10:00", "end": "14:00", "program": "xs", "title": "Matematika, Fizika, Kimyo, Biologiya", "type": "Xalqaro olimpiadalarga nomzodlarni saralaş", "grades": [9, 10, 11], "id": 22}, {"date": "2026-12-01", "start": "10:00", "end": "15:00", "program": "xs", "title": "Informatika", "type": "Xalqaro olimpiadalarga nomzodlarni saralaş", "grades": [9, 10, 11], "id": 23}, {"date": "2026-12-02", "start": "10:00", "end": "12:00", "program": "h2", "title": "Ona tili va adabiyot, Özbek tili (davlat tili), Qoraqalpoq tili va adabiyoti, Rus tili va adabiyoti, Tojik tili va adabiyoti, Qozoq tili va adabiyoti", "type": "Esse (berilgan mavzu böyiça) va test – 30 ta", "grades": [9], "id": 24}, {"date": "2026-12-02", "start": "10:00", "end": "13:00", "program": "h2", "title": "Xorijiy tillar (ingliz, nemis, fransuz)", "type": "Tinglab va öqib tuşuniş; leksik-grammatik test – 30 ta (20 ta yopiq, 10 ta oçiq)", "grades": [9], "id": 25}, {"date": "2026-12-02", "start": "10:00", "end": "11:20", "program": "h2", "title": "Tarix, Davlat va huquq asoslari, Geografiya", "type": "Test – 40 ta", "grades": [9], "id": 26}, {"date": "2026-12-03", "start": "10:00", "end": "12:00", "program": "h2", "title": "Ona tili va adabiyot, Özbek tili (davlat tili), Qoraqalpoq tili va adabiyoti, Rus tili va adabiyoti, Tojik tili va adabiyoti, Qozoq tili va adabiyoti", "type": "Esse (berilgan mavzu böyiça) va test – 30 ta", "grades": [10], "id": 27}, {"date": "2026-12-03", "start": "10:00", "end": "13:00", "program": "h2", "title": "Xorijiy tillar (ingliz, nemis, fransuz)", "type": "Tinglab va öqib tuşuniş; leksik-grammatik test – 30 ta (20 ta yopiq, 10 ta oçiq)", "grades": [10], "id": 28}, {"date": "2026-12-03", "start": "10:00", "end": "11:20", "program": "h2", "title": "Tarix, Davlat va huquq asoslari, Geografiya", "type": "Test – 40 ta", "grades": [10], "id": 29}, {"date": "2026-12-04", "start": "10:00", "end": "12:00", "program": "h2", "title": "Ona tili va adabiyot, Özbek tili (davlat tili), Qoraqalpoq tili va adabiyoti, Rus tili va adabiyoti, Tojik tili va adabiyoti, Qozoq tili va adabiyoti", "type": "Esse (berilgan mavzu böyiça) va test – 30 ta", "grades": [11], "id": 30}, {"date": "2026-12-04", "start": "10:00", "end": "13:00", "program": "h2", "title": "Xorijiy tillar (ingliz, nemis, fransuz)", "type": "Tinglab va öqib tuşuniş; leksik-grammatik test – 30 ta (20 ta yopiq, 10 ta oçiq)", "grades": [11], "id": 31}, {"date": "2026-12-04", "start": "10:00", "end": "11:20", "program": "h2", "title": "Tarix, Davlat va huquq asoslari, Geografiya", "type": "Test – 40 ta", "grades": [11], "id": 32}, {"date": "2026-12-04", "start": "10:00", "end": "17:00", "program": "ixt", "title": "Loyihalar himoyasi va baholaş", "type": "Tanlov", "grades": [5, 6, 7, 8, 9, 10, 11], "endDate": "2026-12-05", "id": 33}, {"date": "2026-12-05", "start": "10:00", "end": "13:00", "program": "egmo", "title": "Matematika", "type": "Yozma iş", "grades": [9, 10, 11], "id": 34}], "tasks": [{"subjects": "Matematika, Kimyo, Biologiya, Fizika", "task": "1-tur. Yozma iş – 5 ta masala\n2-tur. Test – 30 ta (20 ta yopiq, 10 ta oçiq)", "points": "1-tur. 50 ball\n2-tur. 50 ball", "total": "100 ball", "time": "1-tur. 180 daqiqa\n2-tur. 90 daqiqa", "group": "Asosiy olimpiadaning uçinçi – hududiy bosqiçi"}, {"subjects": "Informatika", "task": "Dasturlaş – 5 ta masala (topşiriq)", "points": "50 ball", "total": "50 ball", "time": "240 daqiqa", "group": "Asosiy olimpiadaning uçinçi – hududiy bosqiçi"}, {"subjects": "Tarix, Davlat va huquq asoslari, Geografiya", "task": "Test – 40 ta", "points": "100 ball", "total": "100 ball", "time": "80 daqiqa", "group": "Asosiy olimpiadaning uçinçi – hududiy bosqiçi"}, {"subjects": "Ona tili va adabiyot, Özbek tili, Rus tili va adabiyoti, Qozoq tili, Tojik tili, Qoraqalpoq tili va adabiyoti", "task": "Esse (berilgan mavzu böyiça)\nTest – 30 ta", "points": "1-qism. 50 ball\n2-qism. 50 ball", "total": "100 ball", "time": "120 daqiqa", "group": "Asosiy olimpiadaning uçinçi – hududiy bosqiçi"}, {"subjects": "Ingliz tili, Nemis tili, Fransuz tili", "task": "Tinglab va öqib tuşuniş\nLeksik-grammatik test – 30 tadan (20 ta yopiq, 10 ta oçiq)", "points": "1-qism. 60 ball\n2-qism. 40 ball", "total": "100 ball", "time": "180 daqiqa", "group": "Asosiy olimpiadaning uçinçi – hududiy bosqiçi"}, {"subjects": "Matematika", "task": "Yozma iş – 5 ta masala", "points": "35 ball", "total": "35 ball", "time": "240 daqiqa", "group": "Xalqaro olimpiadalarga saralaşning birinçi bosqiçi"}, {"subjects": "Kimyo, Biologiya, Fizika", "task": "Yozma iş – 5 ta masala", "points": "50 ball", "total": "50 ball", "time": "240 daqiqa", "group": "Xalqaro olimpiadalarga saralaşning birinçi bosqiçi"}, {"subjects": "Informatika", "task": "Dasturlaş – 5 ta masala (topşiriq)", "points": "70 ball", "total": "70 ball", "time": "240 daqiqa", "group": "Xalqaro olimpiadalarga saralaşning birinçi bosqiçi"}, {"subjects": "Iqtisod fani", "task": "Test – 30 ta", "points": "50 ball", "total": "50 ball", "time": "90 daqiqa", "group": "Iqtisod fani olimpiadasining hududiy bosqiçi"}, {"subjects": "Matematika", "task": "Yozma iş – 5 ta masala", "points": "50 ball", "total": "50 ball", "time": "180 daqiqa", "group": "Xalqaro Yevropa qizlar olimpiadasining birinçi bosqiçi"}, {"subjects": "Informatika", "task": "Dasturlaş – 5 ta masala (topşiriq)", "points": "50 ball", "total": "50 ball", "time": "120 daqiqa", "group": "Xalqaro Yevropa qizlar olimpiadasining birinçi bosqiçi"}, {"subjects": "Koreys tili", "task": "Tinglab tuşuniş test – 40 ta\nÖqib tuşuniş test – 40 ta", "points": "1-qism. 50 ball\n2-qism. 50 ball", "total": "100 ball", "time": "110 daqiqa", "group": "Koreys tili olimpiadasining hududiy bosqiçi"}]};
+const MONTHS=['yanvar','fevral','mart','aprel','may','iyun','iyul','avgust','sentabr','oktabr','noyabr','dekabr'];
+const WD=['Yakşanba','Duşanba','Seşanba','Çorşanba','Payşanba','Juma','Şanba'],WDS=['Yak','Duş','Seş','Çor','Pay','Jum','Şan'];
+const P=DATA.programs,E=DATA.events.slice().sort((a,b)=>(a.date+a.start).localeCompare(b.date+b.start));
+const st={view:'days',grade:0,prog:'all',q:''};
+const $=id=>document.getElementById(id);
+const pd=s=>{const [y,m,d]=s.split('-').map(Number);return {y,m,d,wd:new Date(Date.UTC(y,m-1,d)).getUTCDay()}};
+const dl=s=>{const o=pd(s);return o.d+'-'+MONTHS[o.m-1]};
+const wdn=s=>WD[pd(s).wd];
+const ts=(date,t)=>new Date(date+'T'+t+':00+05:00').getTime();
+const gl=g=>g.length===7?'5–11-sinf':g.length===3?'9–11-sinf':g[0]+'-sinf';
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+function splitSubjects(t){const a=[];let d=0,c='';for(const ch of t){if(ch==='(')d++;if(ch===')')d--;if(ch===','&&d===0){a.push(c.trim());c=''}else c+=ch}a.push(c.trim());return a}
+const dates=[...new Set(E.flatMap(e=>{const r=[e.date];if(e.endDate){let d=pd(e.date),n=pd(e.endDate);for(let x=d.d+1;x<=n.d&&n.m===d.m;x++)r.push(e.date.slice(0,8)+String(x).padStart(2,'0'))}return r}))].sort();
+const onDate=(e,d)=>e.date===d||(e.endDate&&d>e.date&&d<=e.endDate);
+const vis=e=>(st.grade===0||e.grades.includes(st.grade))&&(st.prog==='all'||e.program===st.prog)&&(!st.q||(e.title+' '+e.type+' '+P[e.program].short).toLowerCase().includes(st.q));
+function nextBox(){const now=Date.now(),n=E.find(e=>ts(e.date,e.start)>now);const box=$('next');
+ if(!n){box.innerHTML='<div class="nl"><div class="ic"><i class="fa-solid fa-flag-checkered"></i></div><div><small>Reja-grafik</small><div class="t done">Barça sinovlar yakunlandi</div></div></div>';return}
+ const same=E.filter(e=>e.date===n.date&&e.start===n.start&&e.title===n.title&&e.program===n.program);const gs=[...new Set(same.flatMap(e=>e.grades))].sort((a,b)=>a-b);
+ const gtxt=gs.length===7?'5–11-sinf':gs.length>1&&gs.length<7&&gs.length===3?'9–11-sinf':gs.map(g=>g+'-sinf').join(', ');
+ box.innerHTML='<div class="nl"><div class="ic"><i class="fa-regular fa-clock"></i></div><div><small>Keyingi sinov</small><div class="t">'+esc(n.title)+' — '+gtxt+'</div><div class="m">'+dl(n.date)+', '+wdn(n.date).toLowerCase()+' · '+n.start+'–'+n.end+' · '+esc(P[n.program].short)+'</div></div></div><div class="cd" id="cd"></div>';
+ const tgt=ts(n.date,n.start);const tick=()=>{let s=Math.max(0,Math.floor((tgt-Date.now())/1000));const d=Math.floor(s/86400);s-=d*86400;const h=Math.floor(s/3600);s-=h*3600;const m=Math.floor(s/60);s-=m*60;
+  $('cd').innerHTML=[[d,'kun'],[h,'soat'],[m,'daqiqa'],[s,'soniya']].map(x=>'<div><b>'+String(x[0]).padStart(2,'0')+'</b><span>'+x[1]+'</span></div>').join('')};tick();clearInterval(window.__cd);window.__cd=setInterval(tick,1000)}
+function dayStrip(){const today=new Date(Date.now()+5*3600e3).toISOString().slice(0,10);
+ $('dayStrip').innerHTML=dates.map(d=>{const o=pd(d);const evs=E.filter(e=>onDate(e,d));const on=evs.some(vis);const cols=[...new Set(evs.filter(vis).map(e=>P[e.program].color))];
+  return '<div class="dchip'+(d===today?' today':'')+(on?'':' off')+'" data-d="'+d+'"><small>'+WDS[o.wd]+'</small><b>'+o.d+'</b><em>'+MONTHS[o.m-1]+'</em><div class="dots">'+cols.map(c=>'<i style="background:'+c+'"></i>').join('')+'</div></div>'}).join('');
+ $('dayStrip').querySelectorAll('.dchip').forEach(c=>c.onclick=()=>{const d=c.dataset.d;const t=document.getElementById((st.view==='grid'?'col-':'day-')+d);if(t)t.scrollIntoView({behavior:'smooth',block:'nearest',inline:'center'})})}
+function viewDays(){let h='';for(const d of dates){const evs=E.filter(e=>onDate(e,d)&&vis(e));if(!evs.length)continue;
+  h+='<section class="daysec" id="day-'+d+'"><h3>'+dl(d)+' <small>'+wdn(d)+'</small></h3><div class="cards">'+evs.map(e=>{const p=P[e.program];
+   return '<div class="card" style="--c:'+p.color+'"><div class="h"><span class="tm">'+e.start+' – '+e.end+'</span><span class="gr">'+gl(e.grades)+'</span></div><div class="pg">'+esc(p.short)+'</div><div class="chips">'+splitSubjects(e.title).map(s=>'<span>'+esc(s)+'</span>').join('')+'</div><div class="ty">'+esc(e.type)+'</div>'+(e.endDate?'<div class="dt">'+dl(e.date)+' – '+dl(e.endDate)+'</div>':'')+'</div>'}).join('')+'</div></section>'}
+ return h||'<div class="empty">Tanlangan filtr böyiça sinov topilmadi.</div>'}
+function viewGrid(){const rows=[['5–11-sinf',e=>e.grades.length===7],['9-sinf',e=>e.grades.length===1&&e.grades[0]===9],['9–11-sinf',e=>e.grades.length===3],['10-sinf',e=>e.grades.length===1&&e.grades[0]===10],['11-sinf',e=>e.grades.length===1&&e.grades[0]===11]];
+ let h='<div class="gridwrap"><table class="grid"><thead><tr><th class="cl">Sinf / sana</th>'+dates.map(d=>'<th id="col-'+d+'">'+dl(d)+'<small>'+wdn(d)+'</small></th>').join('')+'</tr></thead><tbody>';let any=false;
+ for(const [name,f] of rows){const evs=E.filter(e=>f(e)&&vis(e));if(!evs.length)continue;any=true;
+  h+='<tr><td class="cl">'+name+'</td>'+dates.map(d=>'<td>'+evs.filter(e=>onDate(e,d)).map(e=>{const p=P[e.program];return '<div class="ev" style="--c:'+p.color+'"><div class="tm">'+e.start+'–'+e.end+'</div><b>'+esc(e.title)+'</b><span>'+esc(e.type)+'</span></div>'}).join('')+'</td>').join('')+'</tr>'}
+ return any?h+'</tbody></table></div>':'<div class="empty">Tanlangan filtr böyiça sinov topilmadi.</div>'}
+function viewTasks(){const q=st.q;const T=DATA.tasks.filter(t=>!q||(t.subjects+' '+t.task).toLowerCase().includes(q));
+ const grp=i=>DATA.tasks[i].group||'';let last='',h='<div class="tasks"><table class="tk"><thead><tr><th>Fanlar</th><th>Topşiriq turi</th><th>Ball taqsimoti</th><th>Jami ball</th><th>Vaqt</th></tr></thead><tbody>';
+ DATA.tasks.forEach((t,i)=>{if(!T.includes(t))return;const g=grp(i);if(g!==last){h+='<tr><td class="gp" colspan="5">'+g+'</td></tr>';last=g}h+='<tr><td>'+esc(t.subjects)+'</td><td>'+esc(t.task)+'</td><td>'+esc(t.points)+'</td><td>'+esc(t.total)+'</td><td>'+esc(t.time)+'</td></tr>'});
+ return T.length?h+'</tbody></table></div>':'<div class="empty">Hiç narsa topilmadi.</div>'}
+function render(){dayStrip();$('view').innerHTML=st.view==='days'?viewDays():st.view==='grid'?viewGrid():st.view==='stud'?viewStud():viewTasks();if(st.view==='stud')bindStud();
+ const t=st.view==='tasks'||st.view==='stud';$('dayStrip').style.display=t?'none':'';$('gradeRow').style.display=t?'none':'';$('progRow').style.display=t?'none':'';
+ document.querySelectorAll('#tabs button').forEach(b=>b.classList.toggle('on',b.dataset.v===st.view))}
+$('grades').innerHTML=[0,9,10,11].map(g=>'<button class="pill'+(g===0?' on':'')+'" data-g="'+g+'">'+(g?g+'-sinf':'Barçasi')+'</button>').join(' ');
+$('progs').innerHTML='<button class="pill on" data-p="all">Barçasi</button>'+Object.entries(P).map(([k,p])=>'<button class="pill" data-p="'+k+'"><i style="background:'+p.color+'"></i>'+esc(p.short)+'</button>').join('');
+$('legend').innerHTML=Object.values(P).map(p=>'<span><i style="background:'+p.color+'"></i>'+esc(p.name)+'</span>').join('');
+const u=new Date(DATA.updated);$('src').textContent='Manba: Fan olimpiadalari markazi. Reja-grafik yangilangan: '+u.getDate()+'-'+MONTHS[u.getMonth()]+' '+u.getFullYear()+', '+String(u.getHours()).padStart(2,'0')+':'+String(u.getMinutes()).padStart(2,'0')+'.';
+document.querySelectorAll('#tabs button').forEach(b=>b.onclick=()=>{st.view=b.dataset.v;render()});
+document.querySelectorAll('#grades button').forEach(b=>b.onclick=()=>{st.grade=+b.dataset.g;document.querySelectorAll('#grades button').forEach(x=>x.classList.toggle('on',x===b));render()});
+document.querySelectorAll('#progs button').forEach(b=>b.onclick=()=>{st.prog=b.dataset.p;document.querySelectorAll('#progs button').forEach(x=>x.classList.toggle('on',x===b));render()});
+$('q').oninput=e=>{st.q=e.target.value.toLowerCase().trim();render()};
+const qp=new URLSearchParams(location.search);if(qp.get('shot'))document.documentElement.classList.add('shot');if(['days','grid','tasks'].includes(qp.get('view')))st.view=qp.get('view');
+let STU=[];const st2={school:'',date:''};
+const sk=s=>{const m=s.match(/^(\d+)/);return m?[0,+m[1],s]:[1,0,s]};
+const cmpS=(a,b)=>{const x=sk(a),y=sk(b);return x[0]-y[0]||x[1]-y[1]||x[2].localeCompare(y[2])};
+function conflictSet(){const by={};STU.forEach(r=>(by[r.name]=by[r.name]||[]).push(r));const bad=new Set();
+ Object.values(by).forEach(l=>{for(let i=0;i<l.length;i++)for(let j=i+1;j<l.length;j++)for(const a of l[i].slots)for(const b of l[j].slots)if(a[0]===b[0]&&a[1]<b[2]&&b[1]<a[2]){bad.add(l[i]);bad.add(l[j])}});return bad}
+function viewStud(){if(!STU.length)return '<div class="empty">Yuklanmoqda...</div>';
+ const bad=conflictSet();const schools=[...new Set(STU.map(r=>r.school))].sort(cmpS);const ds=[...new Set(STU.flatMap(r=>r.slots.map(s=>s[0])))].sort();
+ let rows=STU.filter(r=>(!st2.school||r.school===st2.school)&&(!st.q||(r.name+' '+r.school+' '+r.fan+' '+r.teacher).toLowerCase().includes(st.q))&&(!st2.date||r.slots.some(s=>s[0]===st2.date)));
+ const f=r=>st2.date?r.slots.filter(s=>s[0]===st2.date):r.slots;
+ rows.sort((a,b)=>st2.date?(f(a)[0][1].localeCompare(f(b)[0][1])||cmpS(a.school,b.school)||a.fan.localeCompare(b.fan)):(cmpS(a.school,b.school)||a.fan.localeCompare(b.fan)||a.sinf-b.sinf||a.name.localeCompare(b.name)));
+ let h='<div class="row" style="margin-top:22px"><select class="sel" id="fs"><option value="">Barça maktablar</option>'+schools.map(s=>'<option'+(s===st2.school?' selected':'')+'>'+esc(s)+'</option>').join('')+'</select><select class="sel" id="fd"><option value="">Barça sanalar</option>'+ds.map(d=>'<option value="'+d+'"'+(d===st2.date?' selected':'')+'>'+dl(d)+', '+wdn(d).toLowerCase()+'</option>').join('')+'</select></div>';
+ h+='<div class="cnt">Jami: <b>'+rows.length+'</b> ta qatnaşuv · <b>'+new Set(rows.map(r=>r.name)).size+'</b> ta öquvçi</div>';
+ h+='<div class="tasks sw"><table class="tk stu"><thead><tr><th>№</th><th>Öquvçi</th><th>Maktab</th><th>Fan</th><th>Sinf</th><th>Ustoz</th><th>Sana va vaqt</th></tr></thead><tbody>';
+ rows.forEach((r,i)=>{h+='<tr><td>'+(i+1)+'</td><td class="nm">'+esc(r.name)+(bad.has(r)?' <span class="warn" title="Boşqa fan bilan vaqti ustma-ust">⚠</span>':'')+'</td><td class="mk" data-l="Maktab">'+esc(r.school)+'</td><td data-l="Fan">'+esc(r.fan)+'</td><td data-l="Sinf">'+r.sinf+'</td><td data-l="Ustoz">'+(esc(r.teacher)||'—')+'</td><td data-l="Vaqt">'+f(r).map(s=>dl(s[0])+' · '+s[1]+'–'+s[2]+' · '+esc(s[3].split(' – ')[0])).join('\n')+'</td></tr>'});
+ return h+'</tbody></table></div>'+cfBox(bad)}
+function cfBox(bad){const by={};bad.forEach(r=>(by[r.name]=by[r.name]||[]).push(r));const L=Object.entries(by);if(!L.length)return '';
+ return '<div class="cfbox"><b>⚠ Vaqti ustma-ust tuşgan öquvçilar</b><p>Quyidagi öquvçilarning ikki fani bir vaqtga töğri keladi. Ularga özi uçun eng foydali (yutuq ehtimoli yuqori) fanni tanlab, şu fanga borişi tavsiya etiladi.</p><ul>'+L.map(([n,l])=>'<li><b>'+esc(n)+'</b> — '+esc(l[0].school)+': '+l.map(r=>esc(r.fan)+' ('+r.sinf+'-sinf, '+dl(r.slots[0][0])+')').join(' va ')+'</li>').join('')+'</ul></div>'}
+function bindStud(){const a=$('fs'),b=$('fd');if(a)a.onchange=e=>{st2.school=e.target.value;render()};if(b)b.onchange=e=>{st2.date=e.target.value;render()}}
+fetch('hududiy-oquvchilar.json',{cache:'no-store'}).then(r=>r.json()).then(j=>{STU=j.students.map(a=>({name:a[0],school:a[1],fan:a[2],sinf:a[3],slots:j.sets[a[4]],teacher:a[5]||''}));if(st.view==='stud')render()}).catch(()=>{});
+if(qp.get('view')==='stud')st.view='stud';
+nextBox();render();
+</script><script>
+/* yz-prog: oʻqish chizigʻi */
+(function(){var b=document.querySelector('#yzProg>i');if(!b)return;var t=false;
+function u(){t=false;var d=document.documentElement,h=d.scrollHeight-window.innerHeight,y=window.pageYOffset||d.scrollTop||0;var r=h>0?Math.min(1,Math.max(0,y/h)):0;b.style.transform='scaleX('+r+')';}
+function q(){if(!t){t=true;requestAnimationFrame(u);}}
+window.addEventListener('scroll',q,{passive:true});window.addEventListener('resize',q);window.addEventListener('load',q);u();})();
+</script>
+<style id="yz-top-css">.totop{position:fixed;right:16px;bottom:20px;width:48px;height:48px;border:0;border-radius:14px;background:linear-gradient(135deg,#1e3a8a,#3556b0);color:#fff;display:flex;align-items:center;justify-content:center;cursor:pointer;z-index:890;box-shadow:0 8px 20px rgba(30,58,138,.38);opacity:0;transform:translateY(14px);pointer-events:none;transition:opacity .3s,transform .3s,background .2s}.totop.show{opacity:1;transform:none;pointer-events:auto}.totop:hover{background:linear-gradient(135deg,#17306f,#2c4a9c)}.totop.above{bottom:88px}.totop svg{width:22px;height:22px;display:block}@media print{.totop{display:none}}</style>
+<button type="button" class="totop" id="yzTop" aria-label="Yuqoriga"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 19V5M5 12l7-7 7 7"/></svg></button>
+<script>
+/* yz-top: yuqoriga qaytiş tugmasi */
+(function(){var b=document.getElementById('yzTop');if(!b)return;if(document.getElementById('tgFab'))b.classList.add('above');
+function u(){b.classList.toggle('show',(window.pageYOffset||document.documentElement.scrollTop)>350)}
+window.addEventListener('scroll',u,{passive:true});u();
+b.addEventListener('click',function(){var r=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;window.scrollTo({top:0,behavior:r?'auto':'smooth'})});})();
+</script>
+<script data-goatcounter="https://umamatov.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
+</body></html>

@@ -1,0 +1,1317 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Asosiy Fan Olimpiadasi Natijalari — Qoʻshkoʻpir Tumani 2026/2027</title>
+  <meta name="description" content="Qoʻshkoʻpir tumani umumiy oʻrta taʼlim maktablari oʻquvchilari oʻrtasidagi asosiy fan olimpiadasi tuman bosqichi toʻliq rasmiy natijalari, gʻoliblar va maktablar reytingi.">
+  <link rel="icon" href="/favicon.ico">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700;800;900&family=Manrope:wght@600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <script src="olimpiada_data.js"></script>
+
+  <style>
+    :root {
+      --primary: #2563eb;
+      --primary-dark: #1d4ed8;
+      --primary-light: #eff6ff;
+      --accent: #f59e0b;
+      --text-main: #0f172a;
+      --text-muted: #64748b;
+      --bg-page: #f8fafc;
+      --card-bg: #ffffff;
+      --border-color: #e2e8f0;
+      --font-main: 'Lexend', system-ui, -apple-system, sans-serif;
+      --font-heading: 'Manrope', 'Lexend', sans-serif;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: var(--font-main);
+      background-color: var(--bg-page);
+      color: var(--text-main);
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      font-family: var(--font-heading);
+      letter-spacing: -0.02em;
+    }
+
+    /* TOP NAVBAR */
+    .top-nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(255, 255, 255, 0.94);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border-color);
+      padding: 12px 24px;
+    }
+    .nav-container {
+      max-width: 1280px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+    }
+    .brand-group {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+      color: inherit;
+    }
+    .brand-logo {
+      width: 40px;
+      height: 40px;
+      border-radius: 10px;
+      background: linear-gradient(135deg, #1e3a8a, #2563eb);
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 900;
+      font-size: 1.1rem;
+      box-shadow: 0 4px 10px rgba(37,99,235,0.25);
+    }
+    .brand-text h1 {
+      font-size: 1.05rem;
+      font-weight: 800;
+      color: var(--text-main);
+      line-height: 1.2;
+    }
+    .brand-text span {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      font-weight: 600;
+    }
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .nav-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 16px;
+      border-radius: 10px;
+      font-size: 0.88rem;
+      font-weight: 700;
+      text-decoration: none;
+      transition: all 0.2s ease;
+      cursor: pointer;
+      border: 1px solid transparent;
+    }
+    .nav-btn-home {
+      background: #f1f5f9;
+      color: #334155;
+    }
+    .nav-btn-home:hover {
+      background: #e2e8f0;
+      color: #0f172a;
+    }
+    .nav-btn-print {
+      background: #fff;
+      border-color: #cbd5e1;
+      color: #334155;
+    }
+    .nav-btn-print:hover {
+      background: #f8fafc;
+      border-color: #94a3b8;
+    }
+    .nav-btn-tg {
+      background: linear-gradient(135deg, #0088cc, #00a2e8);
+      color: #fff;
+      box-shadow: 0 3px 10px rgba(0, 136, 204, 0.25);
+    }
+    .nav-btn-tg:hover {
+      opacity: 0.92;
+      transform: translateY(-1px);
+    }
+
+    /* MAIN CONTAINER */
+    .page-container {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 30px 20px 80px;
+    }
+
+    /* HERO BANNER */
+    .hero-card {
+      background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 60%, #1d4ed8 100%);
+      border-radius: 24px;
+      padding: 40px;
+      color: #ffffff;
+      position: relative;
+      overflow: hidden;
+      margin-bottom: 30px;
+      box-shadow: 0 16px 36px rgba(15, 23, 42, 0.15);
+    }
+    .hero-card::before {
+      content: '';
+      position: absolute;
+      top: -60px;
+      right: -60px;
+      width: 260px;
+      height: 260px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(245, 158, 11, 0.25) 0%, rgba(245, 158, 11, 0) 70%);
+      pointer-events: none;
+    }
+    .hero-kicker {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(255, 255, 255, 0.12);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      padding: 6px 14px;
+      border-radius: 9999px;
+      font-size: 0.82rem;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      margin-bottom: 16px;
+      text-transform: uppercase;
+    }
+    .hero-title {
+      font-size: clamp(2rem, 4vw, 2.8rem);
+      font-weight: 900;
+      line-height: 1.15;
+      margin-bottom: 8px;
+    }
+    .hero-subtitle {
+      font-size: 1.15rem;
+      color: #cbd5e1;
+      margin-bottom: 16px;
+      font-weight: 500;
+    }
+    .hero-desc {
+      font-size: 0.95rem;
+      color: #94a3b8;
+      max-width: 820px;
+      line-height: 1.6;
+      margin-bottom: 24px;
+    }
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    .hero-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 20px;
+      border-radius: 12px;
+      font-size: 0.92rem;
+      font-weight: 700;
+      text-decoration: none;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      border: none;
+    }
+    .hero-btn-accent {
+      background: linear-gradient(135deg, #f59e0b, #d97706);
+      color: #fff;
+      box-shadow: 0 4px 14px rgba(245, 158, 11, 0.35);
+    }
+    .hero-btn-accent:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 18px rgba(245, 158, 11, 0.45);
+    }
+    .hero-btn-outline {
+      background: rgba(255, 255, 255, 0.12);
+      border: 1px solid rgba(255, 255, 255, 0.25);
+      color: #fff;
+    }
+    .hero-btn-outline:hover {
+      background: rgba(255, 255, 255, 0.2);
+    }
+
+    /* KPI STATS CARDS */
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 16px;
+      margin-bottom: 30px;
+    }
+    .stat-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 18px;
+      padding: 20px 24px;
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      box-shadow: 0 4px 12px rgba(15, 23, 42, 0.03);
+      transition: all 0.2s ease;
+    }
+    .stat-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(15, 23, 42, 0.06);
+      border-color: #cbd5e1;
+    }
+    .stat-icon {
+      width: 52px;
+      height: 52px;
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.4rem;
+      flex-shrink: 0;
+    }
+    .stat-info .stat-num {
+      font-size: 1.7rem;
+      font-weight: 900;
+      line-height: 1.1;
+      font-family: var(--font-heading);
+      color: var(--text-main);
+    }
+    .stat-info .stat-label {
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: var(--text-muted);
+      margin-top: 3px;
+    }
+
+    /* SEARCH SECTION */
+    .search-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 20px;
+      padding: 24px;
+      margin-bottom: 24px;
+      box-shadow: 0 4px 12px rgba(15, 23, 42, 0.03);
+    }
+    .search-header {
+      font-size: 1rem;
+      font-weight: 800;
+      color: var(--text-main);
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .search-input-wrapper {
+      position: relative;
+    }
+    .search-input {
+      width: 100%;
+      padding: 14px 44px 14px 46px;
+      border-radius: 12px;
+      border: 1.5px solid var(--border-color);
+      font-size: 0.98rem;
+      font-family: var(--font-main);
+      color: var(--text-main);
+      background: #f8fafc;
+      transition: all 0.2s ease;
+    }
+    .search-input:focus {
+      outline: none;
+      background: #ffffff;
+      border-color: var(--primary);
+      box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.12);
+    }
+    .search-icon {
+      position: absolute;
+      left: 16px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--text-muted);
+      font-size: 1rem;
+      pointer-events: none;
+    }
+    .search-clear {
+      position: absolute;
+      right: 14px;
+      top: 50%;
+      transform: translateY(-50%);
+      background: none;
+      border: none;
+      color: var(--text-muted);
+      cursor: pointer;
+      padding: 4px;
+      font-size: 0.95rem;
+      display: none;
+    }
+    .search-results-box {
+      margin-top: 10px;
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      background: #fff;
+      max-height: 380px;
+      overflow-y: auto;
+      display: none;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+    }
+    .sr-item {
+      padding: 12px 16px;
+      border-bottom: 1px solid #f1f5f9;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      cursor: pointer;
+      transition: background 0.15s;
+    }
+    .sr-item:last-child { border-bottom: none; }
+    .sr-item:hover { background: #f8fafc; }
+
+    /* TAB NAVIGATION */
+    .tab-nav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 24px;
+    }
+    .tab-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 11px 20px;
+      border-radius: 14px;
+      font-size: 0.92rem;
+      font-weight: 700;
+      color: #475569;
+      background: #ffffff;
+      border: 1px solid var(--border-color);
+      cursor: pointer;
+      transition: all 0.2s ease;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.02);
+    }
+    .tab-btn:hover {
+      background: #f1f5f9;
+      color: var(--text-main);
+    }
+    .tab-btn.active {
+      background: #0f172a;
+      color: #ffffff;
+      border-color: #0f172a;
+      box-shadow: 0 4px 12px rgba(15, 23, 42, 0.18);
+    }
+
+    /* TAB PANELS */
+    .tab-panel {
+      display: none;
+    }
+    .tab-panel.active {
+      display: block;
+      animation: fadeIn 0.2s ease;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(4px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* FANLAR GRID */
+    .fanlar-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
+      gap: 18px;
+    }
+    .fan-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 18px;
+      padding: 22px;
+      box-shadow: 0 4px 12px rgba(15, 23, 42, 0.03);
+      transition: all 0.2s ease;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .fan-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(15, 23, 42, 0.08);
+      border-color: #cbd5e1;
+    }
+    .fc-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 12px;
+    }
+    .fc-emoji {
+      width: 44px;
+      height: 44px;
+      border-radius: 12px;
+      background: #f1f5f9;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.4rem;
+    }
+    .fc-date {
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: var(--text-muted);
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      padding: 4px 10px;
+      border-radius: 8px;
+    }
+    .fc-name {
+      font-size: 1.15rem;
+      font-weight: 800;
+      color: var(--text-main);
+      margin-bottom: 14px;
+    }
+    .fc-counts {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+      background: #f8fafc;
+      padding: 10px 12px;
+      border-radius: 12px;
+      margin-bottom: 16px;
+      text-align: center;
+    }
+    .fc-count-item b {
+      display: block;
+      font-size: 1.05rem;
+      color: var(--text-main);
+    }
+    .fc-count-item small {
+      font-size: 0.72rem;
+      color: var(--text-muted);
+      font-weight: 600;
+    }
+    .fc-actions {
+      display: flex;
+      gap: 8px;
+    }
+    .fc-btn {
+      flex: 1;
+      padding: 9px 12px;
+      border-radius: 10px;
+      font-size: 0.84rem;
+      font-weight: 700;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      text-decoration: none;
+      cursor: pointer;
+      border: none;
+      transition: all 0.15s ease;
+    }
+    .fc-btn-view {
+      background: #eff6ff;
+      color: var(--primary);
+    }
+    .fc-btn-view:hover {
+      background: #dbeafe;
+    }
+    .fc-btn-tg {
+      background: #0088cc;
+      color: #fff;
+      max-width: 90px;
+    }
+    .fc-btn-tg:hover {
+      opacity: 0.9;
+    }
+
+    /* TABLES & FILTERS */
+    .table-box {
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 20px;
+      padding: 24px;
+      box-shadow: 0 4px 12px rgba(15, 23, 42, 0.03);
+    }
+    .filter-toolbar {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 20px;
+    }
+    .filter-group {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+    .filter-select {
+      padding: 9px 14px;
+      border-radius: 10px;
+      border: 1.5px solid var(--border-color);
+      font-size: 0.9rem;
+      font-weight: 600;
+      font-family: var(--font-main);
+      background: #ffffff;
+      color: var(--text-main);
+      cursor: pointer;
+    }
+    .filter-select:focus {
+      outline: none;
+      border-color: var(--primary);
+    }
+    .sinf-pills {
+      display: inline-flex;
+      background: #f1f5f9;
+      padding: 4px;
+      border-radius: 10px;
+      gap: 4px;
+    }
+    .sinf-pill {
+      border: none;
+      background: transparent;
+      padding: 6px 12px;
+      border-radius: 8px;
+      font-size: 0.84rem;
+      font-weight: 700;
+      color: #64748b;
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+    .sinf-pill.active {
+      background: #ffffff;
+      color: var(--text-main);
+      box-shadow: 0 2px 4px rgba(0,0,0,0.06);
+    }
+
+    .table-responsive {
+      overflow-x: auto;
+      border-radius: 14px;
+      border: 1px solid #f1f5f9;
+    }
+    .data-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.88rem;
+      text-align: left;
+    }
+    .data-table thead th {
+      background: #f8fafc;
+      color: #475569;
+      font-weight: 800;
+      text-transform: uppercase;
+      font-size: 0.74rem;
+      letter-spacing: 0.05em;
+      padding: 14px 16px;
+      border-bottom: 2px solid var(--border-color);
+      white-space: nowrap;
+    }
+    .data-table tbody td {
+      padding: 13px 16px;
+      border-bottom: 1px solid #f1f5f9;
+      color: #1e293b;
+      vertical-align: middle;
+    }
+    .data-table tbody tr:hover {
+      background: #f8fafc;
+    }
+
+    /* MEDAL RANK BADGES (FIXED: NO OVERFLOW) */
+    .ol-rank-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 5px;
+      min-width: 44px;
+      padding: 4px 10px;
+      border-radius: 50px;
+      font-weight: 800;
+      font-size: 0.85rem;
+      line-height: 1;
+      white-space: nowrap;
+    }
+    .ol-rank-1 {
+      background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+      color: #92400e;
+      border: 1.5px solid #f59e0b;
+      box-shadow: 0 2px 6px rgba(245, 158, 11, 0.25);
+    }
+    .ol-rank-2 {
+      background: linear-gradient(135deg, #f1f5f9 0%, #e2e8f0 100%);
+      color: #334155;
+      border: 1.5px solid #94a3b8;
+      box-shadow: 0 2px 6px rgba(148, 163, 184, 0.2);
+    }
+    .ol-rank-3 {
+      background: linear-gradient(135deg, #ffedd5 0%, #fed7aa 100%);
+      color: #9a3412;
+      border: 1.5px solid #ea580c;
+      box-shadow: 0 2px 6px rgba(234, 88, 12, 0.2);
+    }
+    .ol-rank-def {
+      background: #f8fafc;
+      color: #64748b;
+      border: 1px solid #e2e8f0;
+      min-width: 32px;
+      padding: 3px 8px;
+    }
+
+    .ol-score-pill {
+      display: inline-block;
+      padding: 4px 10px;
+      border-radius: 8px;
+      background: #eff6ff;
+      color: #1d4ed8;
+      font-weight: 800;
+      font-size: 0.88rem;
+      white-space: nowrap;
+    }
+
+    /* PAGINATION */
+    .pagination-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 18px;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    .page-btn {
+      padding: 7px 14px;
+      border-radius: 8px;
+      border: 1px solid var(--border-color);
+      background: #fff;
+      font-size: 0.86rem;
+      font-weight: 700;
+      color: #334155;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.15s;
+    }
+    .page-btn:hover:not(:disabled) {
+      background: #f1f5f9;
+      border-color: #cbd5e1;
+    }
+    .page-btn:disabled {
+      opacity: 0.4;
+      cursor: not-allowed;
+    }
+
+    /* FOOTER */
+    .page-footer {
+      border-top: 1px solid var(--border-color);
+      padding: 30px 20px;
+      text-align: center;
+      color: var(--text-muted);
+      font-size: 0.86rem;
+      margin-top: 50px;
+    }
+
+    /* PRINT STYLES */
+    @media print {
+      .top-nav, .search-card, .tab-nav, .pagination-bar, .hero-actions, .fc-actions, .nav-btn, .page-footer {
+        display: none !important;
+      }
+      .page-container {
+        padding: 0;
+        max-width: 100%;
+      }
+      .hero-card {
+        background: none !important;
+        color: #000 !important;
+        border: 2px solid #000 !important;
+        padding: 15px !important;
+        border-radius: 0 !important;
+        box-shadow: none !important;
+      }
+      .hero-title, .hero-subtitle, .hero-kicker {
+        color: #000 !important;
+      }
+      .tab-panel {
+        display: block !important;
+        page-break-after: always;
+      }
+      .table-box {
+        border: none !important;
+        padding: 0 !important;
+        box-shadow: none !important;
+      }
+      .data-table thead th {
+        background: #eee !important;
+        color: #000 !important;
+        border-bottom: 2px solid #000 !important;
+      }
+      .data-table tbody td {
+        border-bottom: 1px solid #ccc !important;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .hero-card { padding: 24px 20px; }
+      .brand-text span { display: none; }
+      .nav-btn span { display: none; }
+      .nav-btn { padding: 8px 10px; }
+      .fc-counts { grid-template-columns: 1fr; gap: 4px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- TOP NAVBAR -->
+  <header class="top-nav">
+    <div class="nav-container">
+      <a href="index.html" class="brand-group">
+        <div class="brand-logo"><i class="fa-solid fa-graduation-cap"></i></div>
+        <div class="brand-text">
+          <h1>Umrbek Mamatov</h1>
+          <span>Bosh Mutaxassis · Taʼlim Portali</span>
+        </div>
+      </a>
+      <div class="nav-actions">
+        <a href="index.html" class="nav-btn nav-btn-home">
+          <i class="fa-solid fa-arrow-left"></i> <span>Bosh sahifa</span>
+        </a>
+        <a href="haqimda.html" class="nav-btn nav-btn-home" style="color:#2563eb;font-weight:800;">
+          <i class="fa-solid fa-user-tie"></i> <span>Men haqimda</span>
+        </a>
+        <button type="button" onclick="window.print()" class="nav-btn nav-btn-print" title="Hujjatni chop etish yoki PDF ga saqlash">
+          <i class="fa-solid fa-print"></i> <span>Chop etish (PDF)</span>
+        </button>
+        <a href="https://t.me/qoshkopir_talim" target="_blank" rel="noopener" class="nav-btn nav-btn-tg">
+          <i class="fa-brands fa-telegram"></i> <span>Telegram kanal</span>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <main class="page-container">
+
+    <!-- HERO CARD -->
+    <div class="hero-card">
+      <div class="hero-kicker"><i class="fa-solid fa-award" style="color:#f59e0b;"></i> Rasmiy yakuniy natijalar</div>
+      <h2 class="hero-title">🏅 Asosiy fan olimpiadasi</h2>
+      <div class="hero-subtitle">Qoʻshkoʻpir tuman bosqichi · 2026/2027-oʻquv yili</div>
+      <p class="hero-desc">
+        Qoʻshkoʻpir tumani umumiy oʻrta taʼlim maktablarining 9-, 10- va 11-sinf oʻquvchilari oʻrtasida oʻtkazilgan asosiy fan olimpiadasining toʻliq natijalari, fanlar kesimidagi ballar, gʻolib oʻquvchilar va ularning ustozlari hamda tuman maktablari reytingi.
+      </p>
+      <div class="hero-actions">
+        <button type="button" class="hero-btn hero-btn-accent" onclick="olSwitchTab('goliblar')">
+          <i class="fa-solid fa-trophy"></i> Gʻoliblarni koʻrish (124 nafar)
+        </button>
+        <button type="button" class="hero-btn hero-btn-outline" onclick="olSwitchTab('natijalar')">
+          <i class="fa-solid fa-table-list"></i> Barcha 2 723 ta natija
+        </button>
+        <button type="button" class="hero-btn hero-btn-outline" onclick="olSwitchTab('maktablar')">
+          <i class="fa-solid fa-school"></i> Maktablar reytingi (60 ta)
+        </button>
+      </div>
+    </div>
+
+    <!-- STATS CARDS -->
+    <div class="stats-grid">
+      <div class="stat-card">
+        <div class="stat-icon" style="background:#eff6ff;color:#2563eb;">
+          <i class="fa-solid fa-book-open"></i>
+        </div>
+        <div class="stat-info">
+          <div class="stat-num" id="olStatSubjects">14 ta</div>
+          <div class="stat-label">Fanlar (42 yoʻnalish)</div>
+        </div>
+      </div>
+
+      <div class="stat-card">
+        <div class="stat-icon" style="background:#f0fdf4;color:#16a34a;">
+          <i class="fa-solid fa-users"></i>
+        </div>
+        <div class="stat-info">
+          <div class="stat-num" id="olStatParticipants">2 723</div>
+          <div class="stat-label">Ishtirokchilar soni</div>
+        </div>
+      </div>
+
+      <div class="stat-card">
+        <div class="stat-icon" style="background:#fef3c7;color:#d97706;">
+          <i class="fa-solid fa-trophy"></i>
+        </div>
+        <div class="stat-info">
+          <div class="stat-num" id="olStatWinners">124 nafar</div>
+          <div class="stat-label">1-2-3-oʻrin sohiblari</div>
+        </div>
+      </div>
+
+      <div class="stat-card">
+        <div class="stat-icon" style="background:#faf5ff;color:#9333ea;">
+          <i class="fa-solid fa-school"></i>
+        </div>
+        <div class="stat-info">
+          <div class="stat-num" id="olStatSchools">60 ta</div>
+          <div class="stat-label">Maktablar qamrovi</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SEARCH BAR -->
+    <div class="search-card">
+      <div class="search-header">
+        <i class="fa-solid fa-magnifying-glass" style="color:var(--primary);"></i>
+        <span>Ishtirokchi, maktab yoki oʻqituvchini tezkor qidirish</span>
+      </div>
+      <div class="search-input-wrapper">
+        <i class="fa-solid fa-search search-icon"></i>
+        <input type="text" id="olSearchInput" class="search-input" placeholder="Familiya, ism, maktab raqami yoki fan nomini yozing (kamida 3 harf)..." oninput="olHandleSearch(this.value)">
+        <button type="button" id="olSearchClear" class="search-clear" onclick="olClearSearch()" title="Tozalash"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+      <div id="olSearchResults" class="search-results-box"></div>
+    </div>
+
+    <!-- TABS NAVIGATION -->
+    <div class="tab-nav">
+      <button type="button" class="tab-btn active" id="olTabBtn_fanlar" onclick="olSwitchTab('fanlar')">
+        <i class="fa-solid fa-layer-group"></i> <span>Fanlar (14)</span>
+      </button>
+      <button type="button" class="tab-btn" id="olTabBtn_natijalar" onclick="olSwitchTab('natijalar')">
+        <i class="fa-solid fa-list-check"></i> <span>Natijalar (42 yoʻnalish)</span>
+      </button>
+      <button type="button" class="tab-btn" id="olTabBtn_goliblar" onclick="olSwitchTab('goliblar')">
+        <i class="fa-solid fa-medal"></i> <span>Gʻoliblar (124)</span>
+      </button>
+      <button type="button" class="tab-btn" id="olTabBtn_maktablar" onclick="olSwitchTab('maktablar')">
+        <i class="fa-solid fa-ranking-star"></i> <span>Maktablar reytingi (60)</span>
+      </button>
+    </div>
+
+    <!-- TAB 1: FANLAR -->
+    <div class="tab-panel active" id="olTab_fanlar">
+      <div class="fanlar-grid" id="olFanlarGrid"></div>
+    </div>
+
+    <!-- TAB 2: NATIJALAR -->
+    <div class="tab-panel" id="olTab_natijalar">
+      <div class="table-box">
+        <div class="filter-toolbar">
+          <div class="filter-group">
+            <select id="olFilterFan" class="filter-select" onchange="olApplyFilters(true)">
+              <option value="">Barcha fanlar</option>
+            </select>
+            <div class="sinf-pills" id="olSinfPills">
+              <button type="button" class="sinf-pill active" onclick="olSetSinf(0, this)">Barchasi</button>
+              <button type="button" class="sinf-pill" onclick="olSetSinf(9, this)">9-sinf</button>
+              <button type="button" class="sinf-pill" onclick="olSetSinf(10, this)">10-sinf</button>
+              <button type="button" class="sinf-pill" onclick="olSetSinf(11, this)">11-sinf</button>
+            </div>
+          </div>
+          <div style="font-size:0.88rem;color:#64748b;font-weight:700;" id="olTableSummary">Yuklanmoqda...</div>
+        </div>
+
+        <div class="table-responsive">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th style="width:75px">Oʻrin</th>
+                <th>F.I.SH. (Ishtirokchi)</th>
+                <th>Taʼlim muassasasi</th>
+                <th>Fan & Sinf</th>
+                <th style="text-align:center" title="1-10 savollar bali">1-10</th>
+                <th style="text-align:center" title="11-20 savollar bali">11-20</th>
+                <th style="text-align:center" title="21-30 savollar bali">21-30</th>
+                <th style="text-align:center">Jami ball</th>
+                <th>Oʻqituvchi</th>
+              </tr>
+            </thead>
+            <tbody id="olTableBody">
+              <!-- JS orqali to'ldiriladi -->
+            </tbody>
+          </table>
+        </div>
+
+        <div class="pagination-bar">
+          <button type="button" class="page-btn" id="olPrevBtn" onclick="olChangePage(-1)"><i class="fa-solid fa-chevron-left"></i> Oldingi</button>
+          <span style="font-size:0.86rem;font-weight:700;color:#64748b;" id="olPageInfo">Sahifa 1</span>
+          <button type="button" class="page-btn" id="olNextBtn" onclick="olChangePage(1)">Keyingi <i class="fa-solid fa-chevron-right"></i></button>
+        </div>
+      </div>
+    </div>
+
+    <!-- TAB 3: G'OLIBLAR -->
+    <div class="tab-panel" id="olTab_goliblar">
+      <div class="table-box">
+        <div class="filter-toolbar">
+          <div class="filter-group">
+            <select id="olFilterGolibFan" class="filter-select" onchange="olRenderGoliblar()">
+              <option value="">Barcha fanlar</option>
+            </select>
+          </div>
+          <div style="font-size:0.88rem;color:#64748b;font-weight:700;" id="olGolibSummary">124 nafar sovrindor</div>
+        </div>
+
+        <div class="table-responsive">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th style="width:110px">Oʻrin</th>
+                <th>Gʻolib oʻquvchi</th>
+                <th>Taʼlim muassasasi</th>
+                <th>Fan & Sinf</th>
+                <th style="text-align:center" title="1-10 savollar bali">1-10</th>
+                <th style="text-align:center" title="11-20 savollar bali">11-20</th>
+                <th style="text-align:center" title="21-30 savollar bali">21-30</th>
+                <th style="text-align:center">Jami ball</th>
+                <th>Ustoz (Oʻqituvchi)</th>
+              </tr>
+            </thead>
+            <tbody id="olGolibTableBody">
+              <!-- JS orqali to'ldiriladi -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- TAB 4: MAKTABLAR REYTINGI -->
+    <div class="tab-panel" id="olTab_maktablar">
+      <div class="table-box">
+        <div class="filter-toolbar">
+          <h3 style="font-size:1.15rem;font-weight:800;color:var(--text-main);">Qoʻshkoʻpir tumani maktablari umumiy reytingi</h3>
+          <span style="font-size:0.86rem;color:#64748b;font-weight:700;">60 ta taʼlim muassasasi</span>
+        </div>
+
+        <div class="table-responsive">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th style="width:70px;text-align:center;">#</th>
+                <th>Taʼlim muassasasi</th>
+                <th style="text-align:center;">Ishtirokchilar</th>
+                <th style="text-align:center;">1-oʻrin</th>
+                <th style="text-align:center;">2-oʻrin</th>
+                <th style="text-align:center;">3-oʻrin</th>
+                <th style="text-align:center;">Jami gʻoliblar</th>
+              </tr>
+            </thead>
+            <tbody id="olMaktabTableBody">
+              <!-- JS orqali to'ldiriladi -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <footer class="page-footer">
+    <div style="max-width:1280px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;">
+      <div>&copy; 2026 Umrbek Mamatov — Qoʻshkoʻpir tumani taʼlim tizimi tahlili va olimpiada natijalari portali.</div>
+      <div>Barcha huquqlar himoyalangan.</div>
+    </div>
+  </footer>
+
+  <!-- SCRIPT -->
+  <script>
+  (function(){
+    var rawData = window.OLIMPIADA_DATA || { sozlama: {}, fanlar: [], maktablar: [], goliblar: [], natijalar: [] };
+    var currentSinf = 0;
+    var currentPage = 1;
+    var pageSize = 25;
+    var filteredNatijalar = [];
+
+    function initOlimpiada() {
+      if ((!window.OLIMPIADA_DATA || !window.OLIMPIADA_DATA.natijalar) && typeof fetch !== 'undefined') {
+        fetch('olimpiada_data.json').then(function(r){ return r.json(); }).then(function(d){
+          window.OLIMPIADA_DATA = d;
+          rawData = d;
+          setupUI();
+        }).catch(function(){ setupUI(); });
+      } else {
+        rawData = window.OLIMPIADA_DATA;
+        setupUI();
+      }
+    }
+
+    function setupUI() {
+      if (!rawData) return;
+
+      var stP = document.getElementById('olStatParticipants');
+      if (stP && rawData.natijalar) stP.textContent = rawData.natijalar.length.toLocaleString('uz-UZ');
+
+      var stW = document.getElementById('olStatWinners');
+      if (stW) {
+        var wCount = (rawData.goliblar && rawData.goliblar.length) || 124;
+        stW.textContent = wCount + ' nafar';
+      }
+
+      var selFan = document.getElementById('olFilterFan');
+      var selGolibFan = document.getElementById('olFilterGolibFan');
+      if (selFan && rawData.fanlar) {
+        selFan.innerHTML = '<option value="">Barcha fanlar</option>';
+        if (selGolibFan) selGolibFan.innerHTML = '<option value="">Barcha fanlar</option>';
+
+        rawData.fanlar.forEach(function(f){
+          var opt = document.createElement('option');
+          opt.value = f.name;
+          opt.textContent = (f.emoji || '📚') + ' ' + f.name;
+          selFan.appendChild(opt);
+
+          if (selGolibFan) {
+            var opt2 = opt.cloneNode(true);
+            selGolibFan.appendChild(opt2);
+          }
+        });
+      }
+
+      renderFanlarGrid();
+      olApplyFilters(true);
+      renderGoliblar();
+      renderMaktablar();
+    }
+
+    function renderFanlarGrid() {
+      var grid = document.getElementById('olFanlarGrid');
+      if (!grid || !rawData.fanlar) return;
+      var html = '';
+      rawData.fanlar.forEach(function(f){
+        html += '<div class="fan-card">';
+        html += '  <div class="fc-header">';
+        html += '    <div class="fc-emoji">' + (f.emoji || '📚') + '</div>';
+        html += '    <span class="fc-date"><i class="fa-regular fa-calendar"></i> ' + (f.date || '2026') + '</span>';
+        html += '  </div>';
+        html += '  <div class="fc-name">' + f.name + '</div>';
+        html += '  <div class="fc-counts">';
+        html += '    <div class="fc-count-item"><b>' + (f.c9 || 0) + '</b><small>9-sinf</small></div>';
+        html += '    <div class="fc-count-item"><b>' + (f.c10 || 0) + '</b><small>10-sinf</small></div>';
+        html += '    <div class="fc-count-item"><b>' + (f.c11 || 0) + '</b><small>11-sinf</small></div>';
+        html += '  </div>';
+        html += '  <div class="fc-actions">';
+        html += '    <button type="button" class="fc-btn fc-btn-view" onclick="olFilterByFan(\'' + f.name.replace(/'/g, "\\'") + '\')"><i class="fa-solid fa-list"></i> Natijalar</button>';
+        if (f.tg9 || f.tg10 || f.tg11) {
+          var tgLink = f.tg9 || f.tg10 || f.tg11;
+          html += '    <a href="' + tgLink + '" target="_blank" rel="noopener" class="fc-btn fc-btn-tg"><i class="fa-brands fa-telegram"></i> Guruh</a>';
+        }
+        html += '  </div>';
+        html += '</div>';
+      });
+      grid.innerHTML = html;
+    }
+
+    window.olSwitchTab = function(tabName) {
+      document.querySelectorAll('.tab-btn').forEach(function(b){ b.classList.remove('active'); });
+      document.querySelectorAll('.tab-panel').forEach(function(p){ p.classList.remove('active'); });
+      var btn = document.getElementById('olTabBtn_' + tabName);
+      var panel = document.getElementById('olTab_' + tabName);
+      if (btn) btn.classList.add('active');
+      if (panel) panel.classList.add('active');
+
+      if (tabName === 'natijalar') renderTable();
+      else if (tabName === 'goliblar') renderGoliblar();
+      else if (tabName === 'maktablar') renderMaktablar();
+      else if (tabName === 'fanlar') renderFanlarGrid();
+    };
+
+    window.olSetSinf = function(sinf, btn) {
+      currentSinf = sinf;
+      document.querySelectorAll('#olSinfPills .sinf-pill').forEach(function(b){ b.classList.remove('active'); });
+      if (btn) btn.classList.add('active');
+      olApplyFilters(true);
+    };
+
+    window.olFilterByFan = function(fanName) {
+      var sel = document.getElementById('olFilterFan');
+      if (sel) sel.value = fanName;
+      olSwitchTab('natijalar');
+      olApplyFilters(true);
+    };
+
+    window.olApplyFilters = function(resetPage) {
+      if (resetPage) currentPage = 1;
+      var selFan = document.getElementById('olFilterFan');
+      var fanVal = selFan ? selFan.value : '';
+
+      filteredNatijalar = (rawData.natijalar || []).filter(function(r){
+        var matchFan = !fanVal || r.f === fanVal;
+        var matchSinf = !currentSinf || r.s === currentSinf;
+        return matchFan && matchSinf;
+      });
+
+      renderTable();
+    };
+
+    function renderTable() {
+      var tb = document.getElementById('olTableBody');
+      var info = document.getElementById('olPageInfo');
+      var sum = document.getElementById('olTableSummary');
+      var prev = document.getElementById('olPrevBtn');
+      var next = document.getElementById('olNextBtn');
+      if (!tb) return;
+
+      var total = filteredNatijalar.length;
+      var totalPages = Math.ceil(total / pageSize) || 1;
+      if (currentPage > totalPages) currentPage = totalPages;
+      if (currentPage < 1) currentPage = 1;
+
+      var start = (currentPage - 1) * pageSize;
+      var end = start + pageSize;
+      var pageItems = filteredNatijalar.slice(start, end);
+
+      var html = '';
+      pageItems.forEach(function(r){
+        var badgeCls = 'ol-rank-def';
+        var badgeText = r.p || '-';
+        if (r.p === 1) { badgeCls = 'ol-rank-1'; badgeText = '🥇 1'; }
+        else if (r.p === 2) { badgeCls = 'ol-rank-2'; badgeText = '🥈 2'; }
+        else if (r.p === 3) { badgeCls = 'ol-rank-3'; badgeText = '🥉 3'; }
+
+        html += '<tr>';
+        html += '  <td><span class="ol-rank-badge ' + badgeCls + '">' + badgeText + '</span></td>';
+        html += '  <td><b>' + (r.n || '-') + '</b></td>';
+        html += '  <td><span style="color:#475569">' + (r.m || '-') + '</span></td>';
+        html += '  <td><span style="font-weight:700">' + (r.f || '-') + '</span> <small style="color:#64748b">(' + (r.s || '-') + '-sinf)</small></td>';
+        html += '  <td style="text-align:center;">' + (r.b1 || '-') + '</td>';
+        html += '  <td style="text-align:center;">' + (r.b2 || '-') + '</td>';
+        html += '  <td style="text-align:center;">' + (r.b3 || '-') + '</td>';
+        html += '  <td style="text-align:center;"><span class="ol-score-pill">' + (r.b != null ? String(r.b).replace('.', ',') : '-') + '</span></td>';
+        html += '  <td><small style="color:#475569">' + (r.t || '-') + '</small></td>';
+        html += '</tr>';
+      });
+
+      tb.innerHTML = html || '<tr><td colspan="9" style="text-align:center;padding:30px;color:#94a3b8">Hech qanday maʼlumot topilmadi</td></tr>';
+      if (sum) sum.textContent = 'Jami natijalar: ' + total + ' ta';
+      if (info) info.textContent = 'Sahifa ' + currentPage + ' / ' + totalPages + ' (jami ' + total + ')';
+      if (prev) prev.disabled = currentPage <= 1;
+      if (next) next.disabled = currentPage >= totalPages;
+    }
+
+    window.olChangePage = function(delta) {
+      currentPage += delta;
+      renderTable();
+    };
+
+    function renderGoliblar() {
+      var sel = document.getElementById('olFilterGolibFan');
+      var fanVal = sel ? sel.value : '';
+      var tb = document.getElementById('olGolibTableBody');
+      var sum = document.getElementById('olGolibSummary');
+      if (!tb) return;
+
+      var list = (rawData.goliblar && rawData.goliblar.length) 
+                 ? rawData.goliblar 
+                 : (rawData.natijalar || []).filter(function(r){ return r.p >= 1 && r.p <= 3; });
+
+      if (fanVal) {
+        list = list.filter(function(r){ return r.f === fanVal; });
+      }
+
+      var html = '';
+      list.forEach(function(r){
+        var badgeCls = 'ol-rank-1', badgeText = '🥇 1-oʻrin';
+        if (r.p === 2) { badgeCls = 'ol-rank-2'; badgeText = '🥈 2-oʻrin'; }
+        else if (r.p === 3) { badgeCls = 'ol-rank-3'; badgeText = '🥉 3-oʻrin'; }
+
+        html += '<tr>';
+        html += '  <td><span class="ol-rank-badge ' + badgeCls + '">' + badgeText + '</span></td>';
+        html += '  <td><b>' + (r.n || '-') + '</b></td>';
+        html += '  <td><span style="color:#475569">' + (r.m || '-') + '</span></td>';
+        html += '  <td><b>' + (r.f || '-') + '</b> · ' + (r.s || '-') + '-sinf</td>';
+        html += '  <td style="text-align:center;">' + (r.b1 || '-') + '</td>';
+        html += '  <td style="text-align:center;">' + (r.b2 || '-') + '</td>';
+        html += '  <td style="text-align:center;">' + (r.b3 || '-') + '</td>';
+        html += '  <td style="text-align:center;"><span class="ol-score-pill" style="font-weight:800;">' + (r.b != null ? String(r.b).replace('.', ',') : '-') + '</span></td>';
+        html += '  <td><small style="color:#475569;">' + (r.t || '-') + '</small></td>';
+        html += '</tr>';
+      });
+
+      tb.innerHTML = html || '<tr><td colspan="9" style="text-align:center;padding:30px;color:#94a3b8">Gʻoliblar topilmadi</td></tr>';
+      if (sum) sum.textContent = list.length + ' nafar gʻolib';
+    }
+    window.olRenderGoliblar = renderGoliblar;
+
+    function renderMaktablar() {
+      var tb = document.getElementById('olMaktabTableBody');
+      if (!tb) return;
+
+      var list = rawData.maktablar || [];
+      if (!list || list.length === 0) {
+        tb.innerHTML = '<tr><td colspan="7" style="text-align:center;padding:30px;color:#94a3b8">Maʼlumot topilmadi</td></tr>';
+        return;
+      }
+
+      var html = '';
+      list.forEach(function(item, idx){
+        var rankBadge = (idx + 1);
+        if (idx === 0) rankBadge = '<span class="ol-rank-badge ol-rank-1">🥇 1</span>';
+        else if (idx === 1) rankBadge = '<span class="ol-rank-badge ol-rank-2">🥈 2</span>';
+        else if (idx === 2) rankBadge = '<span class="ol-rank-badge ol-rank-3">🥉 3</span>';
+
+        html += '<tr>';
+        html += '  <td style="text-align:center;font-weight:800;color:#64748b;">' + rankBadge + '</td>';
+        html += '  <td><b>' + (item.short || item.full) + '</b>' + (item.full && item.full !== item.short ? '<small style="display:block;color:#64748b;font-size:0.8rem;">' + item.full + '</small>' : '') + '</td>';
+        html += '  <td style="text-align:center;font-weight:700;">' + (item.participants || 0) + '</td>';
+        html += '  <td style="text-align:center;"><span style="color:#b45309;font-weight:800;">' + (item.w1 ? item.w1 + ' ta' : '-') + '</span></td>';
+        html += '  <td style="text-align:center;"><span style="color:#475569;font-weight:800;">' + (item.w2 ? item.w2 + ' ta' : '-') + '</span></td>';
+        html += '  <td style="text-align:center;"><span style="color:#c2410c;font-weight:800;">' + (item.w3 ? item.w3 + ' ta' : '-') + '</span></td>';
+        html += '  <td style="text-align:center;"><span class="ol-score-pill" style="background:#fef3c7;color:#b45309;font-weight:800;">' + (item.totalW ? item.totalW + ' ta' : '0') + '</span></td>';
+        html += '</tr>';
+      });
+
+      tb.innerHTML = html;
+    }
+    window.olRenderMaktablar = renderMaktablar;
+
+    window.olHandleSearch = function(val) {
+      var q = (val || '').toLowerCase().trim();
+      var box = document.getElementById('olSearchResults');
+      var clear = document.getElementById('olSearchClear');
+      if (!box || !clear) return;
+
+      clear.style.display = q.length > 0 ? 'block' : 'none';
+
+      if (q.length < 3) {
+        box.style.display = 'none';
+        return;
+      }
+
+      var matches = (rawData.natijalar || []).filter(function(r){
+        return (r.n && r.n.toLowerCase().indexOf(q) > -1) ||
+               (r.m && r.m.toLowerCase().indexOf(q) > -1) ||
+               (r.t && r.t.toLowerCase().indexOf(q) > -1);
+      }).slice(0, 15);
+
+      if (matches.length === 0) {
+        box.innerHTML = '<div style="padding:14px;color:#94a3b8;text-align:center;">Hech narsa topilmadi</div>';
+        box.style.display = 'block';
+        return;
+      }
+
+      var html = '';
+      matches.forEach(function(r){
+        var rankBadge = '';
+        if (r.p === 1) rankBadge = '🥇 1-oʻrin';
+        else if (r.p === 2) rankBadge = '🥈 2-oʻrin';
+        else if (r.p === 3) rankBadge = '🥉 3-oʻrin';
+        else if (r.p) rankBadge = r.p + '-oʻrin';
+
+        html += '<div class="sr-item" onclick="olFilterByFan(\'' + (r.f || '').replace(/'/g, "\\'") + '\')">';
+        html += '  <div>';
+        html += '    <b style="color:#0f172a;font-size:0.96rem;">' + r.n + '</b>';
+        html += '    <div style="font-size:0.82rem;color:#64748b;">' + r.m + ' · ' + r.f + ' (' + r.s + '-sinf)</div>';
+        html += '  </div>';
+        html += '  <div style="text-align:right">';
+        html += '    <span class="ol-score-pill">' + (r.b != null ? String(r.b).replace('.', ',') : '-') + ' ball</span>';
+        if (rankBadge) html += '    <div style="font-size:0.75rem;color:#b45309;font-weight:700;">' + rankBadge + '</div>';
+        html += '  </div>';
+        html += '</div>';
+      });
+
+      box.innerHTML = html;
+      box.style.display = 'block';
+    };
+
+    window.olClearSearch = function() {
+      var inp = document.getElementById('olSearchInput');
+      if (inp) { inp.value = ''; olHandleSearch(''); }
+    };
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', initOlimpiada);
+    } else {
+      initOlimpiada();
+    }
+  })();
+  </script>
+</body>
+</html>
