@@ -90,6 +90,7 @@ table.tt{min-width:640px}.rs.tt td small{color:var(--mut);font-size:.82rem}.bar{
 .rs.sv td{vertical-align:middle}.svn{display:flex;align-items:center;gap:12px}.svn small{display:block;color:var(--mut);font-size:.88rem}.sph{width:58px;height:76px;object-fit:cover;border-radius:12px;border:2px solid #f0d58a;flex:none;background:#eef2f8}.sph.no{display:flex;align-items:center;justify-content:center;color:#94a3b8;font-size:1.6rem}
 .svf i{color:#b45309;margin-right:6px}.svb b{font-size:1.3rem;color:var(--navy)}.svb small{display:block;color:var(--mut);font-size:.82rem}
 @media(max-width:700px){.rs.sv tr{display:flex;flex-direction:column;gap:6px;padding:14px 12px}.rs.sv td{display:block;grid-column:auto}.rs.sv td.svf:before,.rs.sv td.svb:before,.rs.sv td.svu:before{content:attr(data-l)": ";color:var(--mut)}.rs.sv td.svb{display:flex;gap:8px;align-items:baseline;flex-wrap:wrap}.rs.sv td.svn{display:flex}}
+.nw{background:#15803d;color:#fff;border-radius:6px;padding:1px 7px;font-size:.78rem;font-weight:700;margin-left:4px}.dsel{font:inherit;font-size:1rem;padding:9px 14px;border:1px solid #cbd5e1;border-radius:10px;background:#fff;color:#0f2a5c;font-weight:700}
 </style>  <!-- Testmakon Typography: Lexend + Manrope + Plus Jakarta Sans -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -135,7 +136,7 @@ table.tt{min-width:640px}.rs.tt td small{color:var(--mut);font-size:.82rem}.bar{
 (function(){
 var FANS=['Matematika','Fizika','Kimyo','Biologiya','Informatika','Tarix','Geografiya','Ona tili','Rus tili','Ingliz tili','Huquq','Nemis tili','Fransuz tili','Özbek tili'];
 var MON=['yanvar','fevral','mart','aprel','may','iyun','iyul','avgust','sentabr','oktabr','noyabr','dekabr'];
-var D=null,R=[],S={v:'fs',fan:null,sinf:null,q:'',only:false,m:'pos'};
+var D=null,R=[],S={v:'fs',fan:null,sinf:null,q:'',only:false,m:'pos',d:''};
 function $(i){return document.getElementById(i)}
 function esc(s){return String(s==null?'':s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})}
 function f1(x){if(x==null)return '—';var s=(Math.round(x*10)/10).toString().replace('.',',');return s}
@@ -148,7 +149,7 @@ function prep(){
   var rank=0,prev=null,i=0;
   part.forEach(function(r){i++;if(r[5]!==prev){rank=i;prev=r[5]}r.rk=rank});
   var np=rows.filter(function(r){return !!r[6]});
-  return {fan:b.fan,sinf:b.sinf,sana:b.sana,cols:b.cols||['Test','Yozma iş'],max:b.max,note:b.note,part:part,np:np,n:part.length}})}
+  return {fan:b.fan,sinf:b.sinf,sana:b.sana,cols:b.cols||['Test','Yozma iş'],max:b.max,note:b.note,holat:b.holat,part:part,np:np,n:part.length}})}
 function find(f,s){for(var i=0;i<R.length;i++)if(R[i].fan===f&&R[i].sinf===s)return R[i];return null}
 function allFans(){var a=FANS.slice();R.forEach(function(b){if(a.indexOf(b.fan)<0)a.push(b.fan)});return a}
 function qAll(){var o=[];R.forEach(function(b){b.part.concat(b.np).forEach(function(r){if(isQ(r))o.push({b:b,r:r})})});return o}
@@ -183,12 +184,19 @@ function fsView(){
  var q=S.q.toLowerCase(),all=b.part.concat(b.np).filter(function(r){return (!S.only||isQ(r))&&(!q||(r.slice(1,4).join(' ').toLowerCase().indexOf(q)>=0))});
  h+='<div class="card tw"><table class="rs"><thead><tr><th>Reyting</th><th>F.I.Sh.</th><th>Tuman (şahar) · taʼlim muassasasi</th>'+b.cols.map(function(c){return '<th class="n dk">'+esc(c)+'</th>'}).join('')+'<th class="n">Jami ball</th></tr></thead><tbody id="tb">'+(all.length?all.map(function(r){return rowHtml(r,b)}).join(''):'<tr><td colspan="6" class="empty">Heç narsa topilmadi.</td></tr>')+'</tbody></table></div>';
  return h}
+function tdy(){return new Date(Date.now()+5*36e5).toISOString().slice(0,10)}
+function sd(s){var a=s.split('-');return (+a[2])+'-'+MON[a[1]-1]}
 function qqView(){
  var q=qAll();
  if(!q.length)return '<div class="card empty" style="margin-top:16px">Hali Qöşköpir öquvçilari natijalari yöq.</div>';
- q.sort(function(a,b){return (!!a.r[6])-(!!b.r[6])||a.b.fan.localeCompare(b.b.fan)||a.b.sinf-b.b.sinf});
- var h='<div class="hd"><div><h2>Qöşköpir tumani öquvçilari</h2><p>Eʼlon qilingan barça natijalar böyiça · jami <b>'+q.length+'</b> ta</p></div></div><div class="card tw"><table class="rs"><thead><tr><th>Fan · sinf</th><th>F.I.Sh.</th><th>Maktab</th><th>Ballar</th><th class="n">Reyting</th><th class="n">Jami ball</th></tr></thead><tbody>';
- q.forEach(function(o){var r=o.r,b=o.b,np=!!r[6];h+='<tr class="q qq"><td class="rk fs" style="width:auto;white-space:nowrap">'+esc(b.fan)+' · '+b.sinf+'</td><td class="nm">'+esc(r[1])+'</td><td class="m">'+esc(sch(r))+'</td>'+(np?'<td class="sub" style="display:none"></td><td class="n sub" style="display:none"></td><td class="j n">'+stb(r)+'</td>':'<td class="sub" data-l="Ballar">'+esc(brk(b,r))+'</td><td class="n sub" data-l="Reyting">'+r.rk+' / '+b.n+'</td><td class="j n">'+f1(r[5])+'</td>')+'</tr>'});
+ var days=[];q.forEach(function(o){if(days.indexOf(o.b.sana)<0)days.push(o.b.sana)});days.sort().reverse();
+ if(S.d&&days.indexOf(S.d)<0)S.d='';
+ var all=q.length,t=tdy();
+ if(S.d)q=q.filter(function(o){return o.b.sana===S.d});
+ q.sort(function(a,b){return a.b.sana<b.b.sana?1:a.b.sana>b.b.sana?-1:(!!a.r[6])-(!!b.r[6])||a.b.fan.localeCompare(b.b.fan)||a.b.sinf-b.b.sinf});
+ var sel='<select id="dsel" class="dsel"><option value="">Barça künlar</option>'+days.map(function(d){return '<option value="'+d+'"'+(d===S.d?' selected':'')+'>'+sd(d)+(d===t?' (bugun)':'')+'</option>'}).join('')+'</select>';
+ var h='<div class="hd"><div><h2>Qöşköpir tumani öquvçilari</h2><p>Eʼlon qilingan barça natijalar böyiça · jami <b>'+all+'</b> ta'+(S.d?' · tanlangan kün: <b>'+q.length+'</b> ta':'')+'</p></div><div>'+sel+'</div></div><div class="card tw"><table class="rs"><thead><tr><th>Fan · sinf</th><th>Sana</th><th>F.I.Sh.</th><th>Maktab</th><th>Ballar</th><th class="n">Reyting</th><th class="n">Jami ball</th></tr></thead><tbody>';
+ q.forEach(function(o){var r=o.r,b=o.b,np=!!r[6];h+='<tr class="q qq"><td class="rk fs" style="width:auto;white-space:nowrap">'+esc(b.fan)+' · '+b.sinf+'</td><td data-l="Sana" style="white-space:nowrap">'+sd(b.sana)+(b.sana===t?' <span class="nw">Bugun</span>':'')+(b.holat?'<br><small style="color:#64748b">'+esc(b.holat)+'</small>':'')+'</td><td class="nm">'+esc(r[1])+'</td><td class="m">'+esc(sch(r))+'</td>'+(np?'<td class="sub" style="display:none"></td><td class="n sub" style="display:none"></td><td class="j n">'+stb(r)+'</td>':'<td class="sub" data-l="Ballar">'+esc(brk(b,r))+'</td><td class="n sub" data-l="Reyting">'+r.rk+' / '+b.n+'</td><td class="j n">'+f1(r[5])+'</td>')+'</tr>'});
  return h+'</tbody></table></div>'}
 function pc(x){return f1(x)+'%'}
 function cc(p){return p<=.25?'#bbf7d0':p<=.4?'#dcfce7':p<=.65?'#fef9c3':p<=.85?'#fee2e2':'#fecaca'}
@@ -293,6 +301,7 @@ function draw(){
  [].forEach.call(document.querySelectorAll('#seg button'),function(b){b.onclick=function(){S.m=b.getAttribute('data-m');draw()}});
  [].forEach.call(document.querySelectorAll('.cell:not(.no)'),function(b){b.onclick=function(){S.fan=b.getAttribute('data-f');S.sinf=+b.getAttribute('data-s');S.q='';S.only=false;try{history.replaceState(null,'','#'+encodeURIComponent(S.fan)+'/'+S.sinf)}catch(e){}draw();var h=document.querySelector('.hd');if(h)h.scrollIntoView({behavior:'smooth',block:'start'})}});
  var qi=$('q');if(qi)qi.oninput=function(){S.q=qi.value;var pos=qi.selectionStart;draw();var n=$('q');n.focus();try{n.setSelectionRange(pos,pos)}catch(e){}};
+ var ds=$('dsel');if(ds)ds.onchange=function(){S.d=ds.value;draw()};
  var on=$('only');if(on)on.onclick=function(){S.only=!S.only;draw()};
  $('note').innerHTML=S.v==='tt'?'★ — Qöşköpir tumani. Reyting eʼlon qilingan natijalar böyiça hisoblangan va yangi natijalar qöşilganda yangilanadi.':S.v==='fs'&&S.fan?'Reyting jami ball böyiça hisoblangan (teng ballarda örin bir xil). Rasmiy «Egallagan örni» ustuni qarorda töldirilganda yangilanadi. ★ — Qöşköpir tumani öquvçisi.':'★ — Qöşköpir tumani öquvçisi. Yangi natijalar eʼlon qilinganda sahifa yangilanib boradi.'}
 [].forEach.call(document.querySelectorAll('#tabs button'),function(b){b.onclick=function(){S.v=b.getAttribute('data-v');[].forEach.call(document.querySelectorAll('#tabs button'),function(x){x.classList.toggle('on',x===b)});draw()}});
