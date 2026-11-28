@@ -122,154 +122,214 @@ table.tt{min-width:640px}.rs.tt td small{color:var(--mut);font-size:.82rem}.bar{
 
 <style id="mobile-card-styles">
 @media (max-width: 768px) {
-  /* Har bir o'quvchi alohida, chiroyli kartochka bo'ladi */
+  /* Har bir o'quvchi kartochkasi - Mukammal, chiroyli dizayn */
   table.rs tbody tr.qq {
     display: flex !important;
     flex-direction: column !important;
-    gap: 8px !important;
-    margin-bottom: 16px !important;
-    border-radius: 16px !important;
+    gap: 6px !important;
+    margin-bottom: 20px !important;
+    border-radius: 20px !important;
     background: #ffffff !important;
     border: 1px solid #cbd5e1 !important;
     border-left: 6px solid #f59e0b !important;
-    box-shadow: 0 6px 18px rgba(15, 23, 42, 0.08) !important;
-    padding: 14px 16px !important;
+    box-shadow: 0 8px 24px rgba(15, 23, 42, 0.08), 0 2px 6px rgba(15, 23, 42, 0.04) !important;
+    padding: 16px 18px !important;
     position: relative !important;
+    overflow: hidden !important;
   }
 
-  /* Tartib raqami (T/r) № 1, № 2 ko'rinishida */
+  /* Eski sariq fonlarni butunlay tozalash */
+  table.rs tbody tr.qq,
+  table.rs tbody tr.qq td {
+    background: transparent !important;
+    box-shadow: none !important;
+    border: none !important;
+    padding: 0 !important;
+  }
+
+  /* 1. Tartib raqami (№ 1, № 2 ...) */
   table.rs tbody tr.qq td.dk {
+    order: 1 !important;
     display: inline-flex !important;
     align-items: center !important;
     justify-content: center !important;
     min-width: 34px !important;
-    height: 30px !important;
-    padding: 0 8px !important;
-    border-radius: 8px !important;
-    background: #0f2a5c !important;
+    height: 28px !important;
+    padding: 0 10px !important;
+    border-radius: 20px !important;
+    background: #0f172a !important;
     color: #ffffff !important;
-    font-size: 14px !important;
+    font-size: 13px !important;
     font-weight: 800 !important;
     width: fit-content !important;
+    margin-right: 6px !important;
   }
   table.rs tbody tr.qq td.dk::before {
     content: "№ " !important;
     font-size: 11px !important;
-    opacity: 0.85 !important;
+    opacity: 0.8 !important;
     margin-right: 2px !important;
   }
 
-  /* Fan va sinf */
+  /* 2. Fan va sinf yorlig'i */
   table.rs tbody tr.qq td.fs {
-    display: flex !important;
+    order: 2 !important;
+    display: inline-flex !important;
     align-items: center !important;
-    gap: 8px !important;
-    font-size: 13px !important;
+    gap: 6px !important;
+    background: #fffbeb !important;
+    border: 1px solid #fde68a !important;
+    padding: 4px 12px !important;
+    border-radius: 8px !important;
+    font-size: 12px !important;
     font-weight: 800 !important;
     color: #b45309 !important;
     letter-spacing: 0.5px !important;
     text-transform: uppercase !important;
+    width: fit-content !important;
+    margin-top: -2px !important;
+    margin-bottom: 4px !important;
+  }
+
+  /* 3. Jami ball nishoni - yuqori o'ng burchakda chiroyli quti */
+  table.rs tbody tr.qq td.j {
+    order: 3 !important;
+    position: absolute !important;
+    top: 14px !important;
+    right: 16px !important;
+    background: #eff6ff !important;
+    border: 1.5px solid #bfdbfe !important;
+    border-radius: 14px !important;
+    padding: 6px 14px !important;
+    text-align: center !important;
+    box-shadow: 0 2px 8px rgba(37, 99, 235, 0.12) !important;
+  }
+  table.rs tbody tr.qq td.j,
+  table.rs tbody tr.qq td.j strong {
+    font-size: 1.45rem !important;
+    font-weight: 900 !important;
+    color: #1d4ed8 !important;
+    line-height: 1 !important;
+  }
+  table.rs tbody tr.qq td.j::after {
+    content: "ball" !important;
+    font-size: 10px !important;
+    font-weight: 800 !important;
+    color: #3b82f6 !important;
+    text-transform: uppercase !important;
+    display: block !important;
+    letter-spacing: 0.5px !important;
     margin-top: 2px !important;
   }
 
-  /* O'quvchi F.I.Sh. */
+  /* 4. O'quvchi F.I.Sh. */
   table.rs tbody tr.qq td.nm {
+    order: 4 !important;
     display: block !important;
-    font-size: 16px !important;
-    font-weight: 700 !important;
+    font-size: 16.5px !important;
+    font-weight: 800 !important;
     color: #0f172a !important;
     line-height: 1.35 !important;
-    padding-right: 60px !important; /* ball ustiga chiqmasligi uchun */
+    padding-right: 85px !important; /* ball ustiga chiqib ketmasligi uchun */
+    margin: 4px 0 2px 0 !important;
   }
 
-  /* Maktab */
+  /* 5. Maktab nishoni */
   table.rs tbody tr.qq td.m {
-    display: inline-block !important;
+    order: 5 !important;
+    display: inline-flex !important;
+    align-items: center !important;
     font-size: 13px !important;
-    font-weight: 600 !important;
+    font-weight: 700 !important;
     color: #2563eb !important;
     background: #eff6ff !important;
+    border: 1px solid #dbeafe !important;
     padding: 4px 10px !important;
-    border-radius: 6px !important;
+    border-radius: 8px !important;
     width: fit-content !important;
-    margin: 2px 0 !important;
+    margin-bottom: 6px !important;
   }
 
-  /* Jami ball - kartaning o'ng tepasida katta va chiroyli */
-  table.rs tbody tr.qq td.j {
-    position: absolute !important;
-    top: 16px !important;
-    right: 18px !important;
-    background: #eff6ff;
-    padding: 4px 10px;
-    border-radius: 10px;
-    border: 1px solid #bfdbfe;
-    font-size: 1.5rem !important;
-    font-weight: 800 !important;
-    color: #1e3a8a !important;
-    text-align: right !important;
-  }
-  table.rs tbody tr.qq td.j::after {
-    content: " ball" !important;
-    font-size: 11px !important;
-    font-weight: 700 !important;
-    color: #64748b !important;
-    display: block !important;
-    margin-top: -3px !important;
-  }
-
-  /* Ballar tafsiloti */
+  /* 6. Ballar tafsiloti ramkasi */
   table.rs tbody tr.qq td.sub[data-l="Ballar"] {
+    order: 6 !important;
     display: block !important;
     background: #f8fafc !important;
     border: 1px solid #e2e8f0 !important;
-    border-radius: 8px !important;
-    padding: 7px 10px !important;
+    border-radius: 10px !important;
+    padding: 8px 12px !important;
     font-size: 13px !important;
     color: #334155 !important;
-    margin: 4px 0 !important;
+    line-height: 1.4 !important;
+    margin: 2px 0 6px 0 !important;
   }
   table.rs tbody tr.qq td.sub[data-l="Ballar"]::before {
-    content: "Ballar: " !important;
-    font-weight: 700 !important;
+    content: "Topşiriq ballari: " !important;
+    font-weight: 800 !important;
     color: #475569 !important;
   }
 
-  /* Reyting va Tumanda ko'rsatkichlari */
-  table.rs tbody tr.qq td.sub[data-l="Tumanda"],
-  table.rs tbody tr.qq td.sub[data-l="Reyting"] {
-    display: inline-block !important;
+  /* 7. Reyting va Tumanda ko'rsatkichlari */
+  table.rs tbody tr.qq td.sub[data-l="Tumanda"] {
+    order: 7 !important;
+    display: inline-flex !important;
+    align-items: center !important;
     background: #fffbeb !important;
-    border: 1px solid #fde68a !important;
-    border-radius: 8px !important;
-    padding: 5px 10px !important;
-    font-size: 13px !important;
+    border: 1.5px solid #fde68a !important;
+    border-radius: 10px !important;
+    padding: 6px 12px !important;
+    font-size: 13.5px !important;
     color: #92400e !important;
-    font-weight: 700 !important;
-    margin-right: 6px !important;
-    margin-top: 4px !important;
+    font-weight: 800 !important;
+    margin-right: 8px !important;
+    margin-bottom: 4px !important;
     width: fit-content !important;
   }
   table.rs tbody tr.qq td.sub[data-l="Tumanda"]::before {
     content: "Tumanda: " !important;
-    font-weight: 600 !important;
+    font-weight: 700 !important;
     color: #b45309 !important;
+    margin-right: 4px !important;
+  }
+
+  table.rs tbody tr.qq td.sub[data-l="Reyting"] {
+    order: 8 !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    background: #f0fdf4 !important;
+    border: 1.5px solid #bbf7d0 !important;
+    border-radius: 10px !important;
+    padding: 6px 12px !important;
+    font-size: 13.5px !important;
+    color: #166534 !important;
+    font-weight: 800 !important;
+    margin-bottom: 4px !important;
+    width: fit-content !important;
   }
   table.rs tbody tr.qq td.sub[data-l="Reyting"]::before {
     content: "Viloyat reytingi: " !important;
-    font-weight: 600 !important;
-    color: #b45309 !important;
+    font-weight: 700 !important;
+    color: #15803d !important;
+    margin-right: 4px !important;
   }
 
-  /* Sana */
+  /* 8. Sana va holat pastki qismi */
   table.rs tbody tr.qq td[data-l="Sana"] {
-    display: block !important;
-    font-size: 12px !important;
+    order: 9 !important;
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    font-size: 12.5px !important;
     color: #64748b !important;
+    font-weight: 700 !important;
+    margin-top: 6px !important;
+    border-top: 1px dashed #cbd5e1 !important;
+    padding-top: 8px !important;
+  }
+  table.rs tbody tr.qq td[data-l="Sana"]::before {
+    content: "Sinov sanasi:" !important;
     font-weight: 600 !important;
-    margin-top: 4px !important;
-    border-top: 1px dashed #e2e8f0 !important;
-    padding-top: 6px !important;
+    color: #94a3b8 !important;
   }
 }
 </style>
