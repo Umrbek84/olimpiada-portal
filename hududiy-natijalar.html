@@ -91,6 +91,79 @@ table.tt{min-width:640px}.rs.tt td small{color:var(--mut);font-size:.82rem}.bar{
 .svf i{color:#b45309;margin-right:6px}.svb b{font-size:1.3rem;color:var(--navy)}.svb small{display:block;color:var(--mut);font-size:.82rem}
 @media(max-width:700px){.rs.sv tr{display:flex;flex-direction:column;gap:6px;padding:14px 12px}.rs.sv td{display:block;grid-column:auto}.rs.sv td.svf:before,.rs.sv td.svb:before,.rs.sv td.svu:before{content:attr(data-l)": ";color:var(--mut)}.rs.sv td.svb{display:flex;gap:8px;align-items:baseline;flex-wrap:wrap}.rs.sv td.svn{display:flex}}
 .nw{background:#15803d;color:#fff;border-radius:6px;padding:1px 7px;font-size:.78rem;font-weight:700;margin-left:4px}.dsel{font:inherit;font-size:1rem;padding:9px 14px;border:1px solid #cbd5e1;border-radius:10px;background:#fff;color:#0f2a5c;font-weight:700}
+
+/* Qo'shko'pir o'quvchilari filtrlari */
+.qq-flts {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+.flt-sel {
+  font: inherit;
+  font-size: 0.92rem;
+  padding: 8px 12px;
+  border: 1.5px solid #cbd5e1;
+  border-radius: 10px;
+  background: #ffffff;
+  color: #0f2a5c;
+  font-weight: 700;
+  cursor: pointer;
+  outline: none;
+  transition: all 0.2s ease;
+  box-shadow: 0 1px 3px rgba(15, 23, 42, 0.05);
+  max-width: 190px;
+}
+.flt-sel:focus, .flt-sel:hover {
+  border-color: #2563eb;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.12);
+}
+.flt-rst {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font: inherit;
+  font-size: 0.88rem;
+  font-weight: 700;
+  padding: 8px 14px;
+  background: #fee2e2;
+  color: #dc2626;
+  border: 1.5px solid #fca5a5;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+.flt-rst:hover {
+  background: #fecaca;
+  color: #b91c1c;
+}
+@media (max-width: 768px) {
+  .hd {
+    flex-direction: column !important;
+    align-items: stretch !important;
+    gap: 12px !important;
+  }
+  .qq-flts {
+    display: grid !important;
+    grid-template-columns: 1fr 1fr !important;
+    gap: 8px !important;
+    width: 100% !important;
+  }
+  .flt-sel {
+    width: 100% !important;
+    max-width: 100% !important;
+    font-size: 0.88rem !important;
+    padding: 8px 10px !important;
+    box-sizing: border-box !important;
+  }
+  .flt-rst {
+    grid-column: 1 / -1 !important;
+    justify-content: center !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+  }
+}
 </style>  <!-- Testmakon Typography: Lexend + Manrope + Plus Jakarta Sans -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -493,7 +566,7 @@ table.tt{min-width:640px}.rs.tt td small{color:var(--mut);font-size:.82rem}.bar{
 (function(){
 var FANS=['Matematika','Fizika','Kimyo','Biologiya','Informatika','Tarix','Geografiya','Ona tili','Rus tili','Ingliz tili','Huquq','Nemis tili','Fransuz tili','Özbek tili'];
 var MON=['yanvar','fevral','mart','aprel','may','iyun','iyul','avgust','sentabr','oktabr','noyabr','dekabr'];
-var D=null,R=[],S={v:'fs',fan:null,sinf:null,q:'',only:false,m:'pos',d:''};
+var D=null,R=[],S={v:'fs',fan:null,sinf:null,q:'',only:false,m:'pos',d:'',qm:'',qf:'',qs:''};
 function $(i){return document.getElementById(i)}
 function esc(s){return String(s==null?'':s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})}
 function f1(x){if(x==null)return '—';var s=(Math.round(x*10)/10).toString().replace('.',',');return s}
@@ -544,18 +617,63 @@ function fsView(){
 function tdy(){return new Date(Date.now()+5*36e5).toISOString().slice(0,10)}
 function sd(s){var a=s.split('-');return (+a[2])+'-'+MON[a[1]-1]}
 function qqView(){
- var q=qAll();
- q.forEach(function(o){if(o.r[6])return;var c=0,m=0;q.forEach(function(p){if(p.b===o.b&&!p.r[6]){m++;if(p.r[5]>o.r[5])c++}});o.tr=c+1;o.tn=m});
- if(!q.length)return '<div class="card empty" style="margin-top:16px">Hali Qöşköpir öquvçilari natijalari yöq.</div>';
- var days=[];q.forEach(function(o){if(days.indexOf(o.b.sana)<0)days.push(o.b.sana)});days.sort().reverse();
- if(S.d&&days.indexOf(S.d)<0)S.d='';
- var all=q.length,t=tdy();
- if(S.d)q=q.filter(function(o){return o.b.sana===S.d});
+ var allQ=qAll();
+ allQ.forEach(function(o){if(o.r[6])return;var c=0,m=0;allQ.forEach(function(p){if(p.b===o.b&&!p.r[6]){m++;if(p.r[5]>o.r[5])c++}});o.tr=c+1;o.tn=m});
+ if(!allQ.length)return '<div class="card empty" style="margin-top:16px">Hali Qöşköpir öquvçilari natijalari yöq.</div>';
+
+ var schools=[], fans=[], sinfs=[], days=[];
+ allQ.forEach(function(o){
+   var sc=sch(o.r);
+   if(schools.indexOf(sc)<0) schools.push(sc);
+   if(fans.indexOf(o.b.fan)<0) fans.push(o.b.fan);
+   if(sinfs.indexOf(o.b.sinf)<0) sinfs.push(o.b.sinf);
+   if(days.indexOf(o.b.sana)<0) days.push(o.b.sana);
+ });
+
+ schools.sort(function(a,b){
+   var na=parseInt(a),nb=parseInt(b);
+   if(!isNaN(na)&&!isNaN(nb)) return na-nb;
+   if(!isNaN(na)) return -1;
+   if(!isNaN(nb)) return 1;
+   return a.localeCompare(b);
+ });
+ fans.sort(function(a,b){return a.localeCompare(b)});
+ sinfs.sort(function(a,b){return a-b});
+ days.sort().reverse();
+
+ if(S.qm&&schools.indexOf(S.qm)<0) S.qm='';
+ if(S.qf&&fans.indexOf(S.qf)<0) S.qf='';
+ if(S.qs&&sinfs.indexOf(+S.qs)<0) S.qs='';
+ if(S.d&&days.indexOf(S.d)<0) S.d='';
+
+ var q=allQ.slice();
+ if(S.qm) q=q.filter(function(o){return sch(o.r)===S.qm});
+ if(S.qf) q=q.filter(function(o){return o.b.fan===S.qf});
+ if(S.qs) q=q.filter(function(o){return String(o.b.sinf)===String(S.qs)});
+ if(S.d)  q=q.filter(function(o){return o.b.sana===S.d});
+
  q.sort(function(a,b){return a.b.sana<b.b.sana?1:a.b.sana>b.b.sana?-1:(!!a.r[6])-(!!b.r[6])||a.b.fan.localeCompare(b.b.fan)||a.b.sinf-b.b.sinf});
- var sel='<select id="dsel" class="dsel"><option value="">Barça künlar</option>'+days.map(function(d){return '<option value="'+d+'"'+(d===S.d?' selected':'')+'>'+sd(d)+(d===t?' (bugun)':'')+'</option>'}).join('')+'</select>';
- var h='<div class="hd"><div><h2>Qöşköpir tumani öquvçilari</h2><p>Eʼlon qilingan barça natijalar böyiça · jami <b>'+all+'</b> ta'+(S.d?' · tanlangan kün: <b>'+q.length+'</b> ta':'')+'</p></div><div>'+sel+'</div></div><div class="card tw"><table class="rs"><thead><tr><th class="dk" style="min-width:45px;text-align:center;font-weight:700;color:#ffffff !important;background:var(--navy);">T/r</th><th>Fan · sinf</th><th>F.I.Sh.</th><th>Maktab</th><th>Ballar</th><th class="n" style="min-width:85px;text-align:center;font-weight:700;color:#ffffff !important; background:var(--navy);">Tumanda</th><th class="n">Reyting</th><th class="n">Jami ball</th><th>Sana</th></tr></thead><tbody>';
+
+ var t=tdy();
+ var isFiltered=!!(S.qm||S.qf||S.qs||S.d);
+
+ var msel='<select id="msel" class="flt-sel" title="Maktab bo‘yicha filtr"><option value="">Barça maktablar</option>'+schools.map(function(s){return '<option value="'+esc(s)+'"'+(s===S.qm?' selected':'')+'>'+esc(s)+'</option>'}).join('')+'</select>';
+ var fsel='<select id="fsel" class="flt-sel" title="Fan bo‘yicha filtr"><option value="">Barça fanlar</option>'+fans.map(function(f){return '<option value="'+esc(f)+'"'+(f===S.qf?' selected':'')+'>'+esc(f)+'</option>'}).join('')+'</select>';
+ var ssel='<select id="ssel" class="flt-sel" title="Sinf bo‘yicha filtr"><option value="">Barça sinflar</option>'+sinfs.map(function(s){return '<option value="'+s+'"'+(String(s)===String(S.qs)?' selected':'')+'>'+s+'-sinf</option>'}).join('')+'</select>';
+ var dsel='<select id="dsel" class="flt-sel" title="Sana bo‘yicha filtr"><option value="">Barça künlar</option>'+days.map(function(d){return '<option value="'+d+'"'+(d===S.d?' selected':'')+'>'+sd(d)+(d===t?' (bugun)':'')+'</option>'}).join('')+'</select>';
+ var rstBtn=isFiltered?'<button id="qflt-rst" class="flt-rst" title="Filtrlarni tozalash"><i class="fa-solid fa-rotate-left"></i> Tozalash</button>':'';
+
+ var h='<div class="hd"><div><h2>Qöşköpir tumani öquvçilari</h2><p>Eʼlon qilingan barça natijalar böyiça · jami <b>'+allQ.length+'</b> ta'+(isFiltered?' · saralangan: <b style="color:var(--gold)">'+q.length+'</b> ta':'')+'</p></div><div class="qq-flts">'+msel+fsel+ssel+dsel+rstBtn+'</div></div>';
+
+ if(!q.length){
+   return h+'<div class="card empty" style="margin-top:16px;padding:32px 16px;text-align:center;"><p style="font-size:1.05rem;font-weight:700;color:#64748b;margin-bottom:12px;">Tanlangan filtrlar bo‘yicha o‘quvchilar topilmadi.</p><button id="qflt-rst-empty" class="flt-rst" style="margin:0 auto;display:inline-flex;"><i class="fa-solid fa-rotate-left"></i> Filtrlarni tozalash</button></div>';
+ }
+
+ h+='<div class="card tw"><table class="rs"><thead><tr><th class="dk" style="min-width:45px;text-align:center;font-weight:700;color:#ffffff !important;background:var(--navy);">T/r</th><th>Fan · sinf</th><th>F.I.Sh.</th><th>Maktab</th><th>Ballar</th><th class="n" style="min-width:85px;text-align:center;font-weight:700;color:#ffffff !important; background:var(--navy);">Tumanda</th><th class="n">Reyting</th><th class="n">Jami ball</th><th>Sana</th></tr></thead><tbody>';
+
  q.forEach(function(o,ix){var r=o.r,b=o.b,np=!!r[6];h+='<tr class="q qq"><td class="dk" style="font-weight:700;color:var(--navy)">'+(ix+1)+'</td><td class="rk fs" style="width:auto;white-space:nowrap">'+esc(b.fan)+' · '+b.sinf+'</td><td class="nm">'+esc(r[1])+'</td><td class="m">'+esc(sch(r))+'</td>'+(np?'<td class="sub" style="display:none"></td><td class="n sub" style="display:none"></td><td class="n sub" style="display:none"></td><td class="j n">'+stb(r)+'</td>':'<td class="sub" data-l="Ballar">'+esc(brk(b,r))+'</td><td class="n sub" data-l="Tumanda" style="min-width:85px;text-align:center;"><b>'+o.tr+'</b> / '+o.tn+'</td><td class="n sub" data-l="Reyting">'+r.rk+' / '+b.n+'</td><td class="j n">'+f1(r[5])+'</td>')+'<td data-l="Sana" style="white-space:nowrap;font-weight:600;color:var(--navy)">'+sd(b.sana)+(b.sana===t?' <span class="nw">Bugun</span>':'')+(b.holat?'<br><small style="color:#64748b">'+esc(b.holat)+'</small>':'')+'</td></tr>'});
- return h+'</tbody></table></div>'}
+ return h+'</tbody></table></div>';
+}
 function pc(x){return f1(x)+'%'}
 function cc(p){return p<=.25?'#bbf7d0':p<=.4?'#dcfce7':p<=.65?'#fef9c3':p<=.85?'#fee2e2':'#fecaca'}
 function sgn(x,u){var c=x>0?'#15803d':x<0?'#b91c1c':'#475569';return '<b style="color:'+c+'">'+(x>0?'+':x<0?'−':'')+f1(Math.abs(x))+(u||'')+'</b>'}
@@ -659,7 +777,12 @@ function draw(){
  [].forEach.call(document.querySelectorAll('#seg button'),function(b){b.onclick=function(){S.m=b.getAttribute('data-m');draw()}});
  [].forEach.call(document.querySelectorAll('.cell:not(.no)'),function(b){b.onclick=function(){S.fan=b.getAttribute('data-f');S.sinf=+b.getAttribute('data-s');S.q='';S.only=false;try{history.replaceState(null,'','#'+encodeURIComponent(S.fan)+'/'+S.sinf)}catch(e){}draw();var h=document.querySelector('.hd');if(h)h.scrollIntoView({behavior:'smooth',block:'start'})}});
  var qi=$('q');if(qi)qi.oninput=function(){S.q=qi.value;var pos=qi.selectionStart;draw();var n=$('q');n.focus();try{n.setSelectionRange(pos,pos)}catch(e){}};
+ var ms=$('msel');if(ms)ms.onchange=function(){S.qm=ms.value;draw()};
+ var fs=$('fsel');if(fs)fs.onchange=function(){S.qf=fs.value;draw()};
+ var ss=$('ssel');if(ss)ss.onchange=function(){S.qs=ss.value;draw()};
  var ds=$('dsel');if(ds)ds.onchange=function(){S.d=ds.value;draw()};
+ var r1=$('qflt-rst');if(r1)r1.onclick=function(){S.qm='';S.qf='';S.qs='';S.d='';draw()};
+ var r2=$('qflt-rst-empty');if(r2)r2.onclick=function(){S.qm='';S.qf='';S.qs='';S.d='';draw()};
  var on=$('only');if(on)on.onclick=function(){S.only=!S.only;draw()};
  $('note').innerHTML=S.v==='tt'?'★ — Qöşköpir tumani. Reyting eʼlon qilingan natijalar böyiça hisoblangan va yangi natijalar qöşilganda yangilanadi.':S.v==='fs'&&S.fan?'Reyting jami ball böyiça hisoblangan (teng ballarda örin bir xil). Rasmiy «Egallagan örni» ustuni qarorda töldirilganda yangilanadi. ★ — Qöşköpir tumani öquvçisi.':'★ — Qöşköpir tumani öquvçisi. Yangi natijalar eʼlon qilinganda sahifa yangilanib boradi.'}
 [].forEach.call(document.querySelectorAll('#tabs button'),function(b){b.onclick=function(){S.v=b.getAttribute('data-v');[].forEach.call(document.querySelectorAll('#tabs button'),function(x){x.classList.toggle('on',x===b)});draw()}});
