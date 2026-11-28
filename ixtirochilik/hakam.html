@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Hakamlar Baholash Tizimi - "Ixtirochilikka qadam"</title>
+  <title>Hakamlar Baholaş Tizimi - "Ixtirochilikka qadam"</title>
   <link rel="stylesheet" href="style.css?v=20261120_1710">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 </head>
@@ -15,20 +15,20 @@
       <div style="font-size: 48px; color: var(--primary); margin-bottom: 12px;">
         <i class="fa-solid fa-user-lock"></i>
       </div>
-      <h2>Hakamlar Baholash Portali</h2>
+      <h2>Hakamlar Baholaş Portali</h2>
       <p style="color: #64748b; font-size: 14px; margin-top: 6px;">
-        “Ixtirochilikka qadam” tanlovi 2-bosqichi hakamlar hay'ati a'zosi PIN kodini kiriting
+        “Ixtirochilikka qadam” tanlovi 2-bosqiçi hakamlar hay'ati a'zosi PIN kodini kiriting
       </p>
 
       <input type="password" id="pinInput" class="pin-input" maxlength="4" placeholder="••••" autofocus onkeyup="if(event.key==='Enter') loginJudge()">
       
       <button onclick="loginJudge()" class="btn btn-primary" style="width: 100%; justify-content: center; padding: 14px; font-size: 16px;">
-        <i class="fa-solid fa-right-to-bracket"></i> Tizimga kirish
+        <i class="fa-solid fa-right-to-bracket"></i> Tizimga kiriş
       </button>
 
       <div style="margin-top: 14px;">
         <a href="index.html" style="font-size: 13px; color: var(--primary); text-decoration: none;">
-          ← Umumiy natijalarga qaytish
+          ← Umumiy natijalarga qaytiş
         </a>
       </div>
     </div>
@@ -39,12 +39,12 @@
       <p style="color:#64748b; font-size:14px;">PIN kod tasdiqlandi</p>
       <h2 id="welcomeName" style="margin: 8px 0 4px;"></h2>
       <p id="welcomeRole" style="color:#475569; font-size:14px; margin-bottom: 8px;"></p>
-      <p style="color:#64748b; font-size:13px;">Siz “Ixtirochilikka qadam” tanlovi hakamlar hay'ati a'zosi sifatida kabinetga kirmoqdasiz. Barcha baholaringiz shaxsiy hisoblanadi.</p>
+      <p style="color:#64748b; font-size:13px;">Siz “Ixtirochilikka qadam” tanlovi hakamlar hay'ati a'zosi sifatida kabinetga kirmoqdasiz. Barça baholaringiz şaxsiy hisoblanadi.</p>
       <button onclick="enterCabinet()" class="btn btn-primary" style="width:100%; justify-content:center; padding:14px; font-size:16px; margin-top:20px;">
-        <i class="fa-solid fa-door-open"></i> Kabinetga kirish
+        <i class="fa-solid fa-door-open"></i> Kabinetga kiriş
       </button>
       <button onclick="cancelWelcome()" class="btn btn-outline" style="width:100%; justify-content:center; margin-top:10px;">
-        Bekor qilish (boshqa PIN)
+        Bekor qiliş (boshqa PIN)
       </button>
     </div>
 
@@ -61,7 +61,7 @@
           <div class="judge-profile-info">
             <span class="judge-role-tag">Hakamlar hay'ati a'zosi</span>
             <div class="judge-fish-title" id="activeJudgeName">Abdullayev Rustam Alisherovich</div>
-            <div class="judge-detail-sub" id="activeJudgeRole">1-Hakam · Informatika fani o‘qituvchisi</div>
+            <div class="judge-detail-sub" id="activeJudgeRole">1-Hakam · Informatika fani öqituvçisi</div>
           </div>
         </div>
 
@@ -94,7 +94,7 @@
       <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; margin-bottom: 20px;">
         <div class="status-filter-bar" style="margin-bottom: 0;">
           <button id="filterBtn_ALL" class="filter-pill active" onclick="setCabinetFilter('ALL')">
-            <i class="fa-solid fa-list-ul"></i> Barcha o‘quvchilar (<span id="countAll">13</span>)
+            <i class="fa-solid fa-list-ul"></i> Barça öquvçilar (<span id="countAll">13</span>)
           </button>
           <button id="filterBtn_UNRATED" class="filter-pill pill-red" onclick="setCabinetFilter('UNRATED')">
             <i class="fa-solid fa-circle-exclamation" style="color: #ef4444;"></i> Baholanmaganlar (<span id="countUnrated">13</span> ta qoldi)
@@ -189,7 +189,7 @@
       document.body.style.overflow = "hidden";
     }
 
-    function openCenterConfirm({ title, desc, type = "warning", confirmText = "Ha, tasdiqlayman", cancelText = "Bekor qilish", onConfirm, onCancel }) {
+    function openCenterConfirm({ title, desc, type = "warning", confirmText = "Ha, tasdiqlayman", cancelText = "Bekor qiliş", onConfirm, onCancel }) {
       const overlay = document.getElementById("centerModalOverlay");
       const icon = document.getElementById("centerModalIcon");
       const titleEl = document.getElementById("centerModalTitle");
@@ -260,7 +260,7 @@
       if (actionsEl) {
         actionsEl.innerHTML = `
           <button class="btn btn-outline" style="padding: 12px 22px; font-size: 14.5px; font-weight: 700;" onclick="closeCenterModal(); if(typeof window._modalCancelCb==='function'){window._modalCancelCb();}">
-            Bekor qilish
+            Bekor qiliş
           </button>
           <button class="btn btn-primary" style="padding: 12px 24px; font-size: 14.5px; font-weight: 700;" onclick="submitCenterPrompt()">
             <i class="fa-solid fa-key"></i> Qulfni ochish
@@ -420,7 +420,7 @@
           syncBadge.innerHTML = '<i class="fa-solid fa-circle-check" style="color: #10b981;"></i> Google Sheet ulangan';
         }
       } catch (err) {
-        console.warn("Orqa fonda yuklashda xatolik:", err);
+        console.warn("Orqa fonda yuklaşda xatolik:", err);
         if (syncBadge) {
           syncBadge.innerHTML = '<i class="fa-solid fa-wifi"></i> Mahalliy rejim';
         }
@@ -498,7 +498,7 @@
           <div style="background: white; border-radius: 16px; border: 1px dashed var(--border); padding: 40px 20px; text-align: center; color: #64748b;">
             <div style="font-size: 42px; color: #10b981; margin-bottom: 10px;"><i class="fa-solid fa-circle-check"></i></div>
             <h3 style="font-size: 18px; color: var(--dark); font-weight: 700;">Ushbu toifada loyihalar mavjud emas</h3>
-            <p style="font-size: 14px; margin-top: 6px;">Barcha loyihalarni ko‘rish uchun yuqoridagi <strong>«Barcha o‘quvchilar»</strong> tugmasini bosing.</p>
+            <p style="font-size: 14px; margin-top: 6px;">Barça loyihalarni ko‘rish uçun yuqoridagi <strong>«Barça öquvçilar»</strong> tugmasini bosing.</p>
           </div>
         `;
         return;
@@ -561,7 +561,7 @@
                 <i class="fa-solid fa-shield-halved"></i> Baho to‘liq saqlangan va o‘zgartirishdan himoyalangan
               </span>
               <button class="btn" style="background:#f59e0b; color:white; font-weight:700; padding:10px 18px; border-radius:10px;" onclick="unlockProject(${proj.id})">
-                <i class="fa-solid fa-lock-open"></i> O‘zgartirish uchun qulfni ochish (Mas'ul PIN)
+                <i class="fa-solid fa-lock-open"></i> O‘zgartirish uçun qulfni ochish (Mas'ul PIN)
               </button>
             </div>
           `;
@@ -569,10 +569,10 @@
           bottomActionHtml = `
             <div style="display:flex; justify-content:space-between; align-items:center; gap:12px; flex-wrap:wrap; margin-top:14px; padding-top:14px; border-top:1px dashed #fcd34d;">
               <span id="savedMark_${proj.id}" style="font-size:13.5px; font-weight:700; color:#b45309;">
-                <i class="fa-solid fa-pen-to-square"></i> Baholarni to‘g‘rilang va qayta qulflash uchun saqlang
+                <i class="fa-solid fa-pen-to-square"></i> Baholarni to‘g‘rilang va qayta qulflash uçun saqlang
               </span>
               <button class="btn btn-success" id="saveBtn_${proj.id}" style="font-weight:700; padding:12px 22px; font-size:15px; border-radius:10px;" onclick="saveOne(${proj.id})">
-                <i class="fa-solid fa-floppy-disk"></i> Yangi bahoni saqlash va qayta qulflash
+                <i class="fa-solid fa-floppy-disk"></i> Yangi bahoni saqlaş va qayta qulflash
               </button>
             </div>
           `;
@@ -642,7 +642,7 @@
               <span>2. Loyiha taqdimoti (prezentatsiya sifatli, infografika, savollarga javob, reglament)</span>
               <span style="color: var(--primary); font-weight: 700;">Maksimal: 25 ball</span>
             </div>
-            <div class="criteria-desc">Vaqt reglamentiga (10-15 daqiqa) rioya qilish, slayd 12 betdan oshmasligi, texnik savollarga to‘liq javob.</div>
+            <div class="criteria-desc">Vaqt reglamentiga (10-15 daqiqa) rioya qiliş, slayd 12 betdan oşmasligi, texnik savollarga to‘liq javob.</div>
             
             <details style="margin: 4px 0 10px 0; font-size: 12px; color: #475569;">
               <summary style="cursor: pointer; color: var(--primary); font-weight: 600; user-select: none;">
@@ -650,7 +650,7 @@
               </summary>
               <div style="margin-top: 6px; padding: 8px 12px; background: white; border-radius: 8px; border: 1px solid #e2e8f0; line-height: 1.5;">
                 • <strong>1-6 ball:</strong> Talab darajasida emas, texnik sust, vaqt reglamentiga rioya qilinmagan.<br>
-                • <strong>7-12 ball:</strong> Sodda va tushunarli, ammo savollarga to‘liq javob berilmagan.<br>
+                • <strong>7-12 ball:</strong> Sodda va tuşunarli, ammo savollarga to‘liq javob berilmagan.<br>
                 • <strong>13-18 ball:</strong> Mantiqiy to‘g‘ri, mazmunli, reglamentga rioya qilingan, ayrim xatoliklar bor.<br>
                 • <strong>19-25 ball:</strong> Talab asosida, infografikali, savollarga to‘liq va aniq javob, reglamentga rioya qilingan. (Vaqt: 10-15 daqiqa, slayd: max 12 bet).
               </div>
@@ -671,7 +671,7 @@
               <span>3. Loyihaning texnik sifati va amaliy ishlanmasi (model, maket, dasturiy ishlanma)</span>
               <span style="color: #166534; font-weight: 800;">Maksimal: 25 ball (1-ustunlik)</span>
             </div>
-            <div class="criteria-desc">Tayyor holatdagi ishchi ishlanmalarga, amaliy prototiplarga yuqori ball beriladi. (Tenglikda 1-ustunlik).</div>
+            <div class="criteria-desc">Tayyor holatdagi işçi ishlanmalarga, amaliy prototiplarga yuqori ball beriladi. (Tenglikda 1-ustunlik).</div>
             
             <details style="margin: 4px 0 10px 0; font-size: 12px; color: #475569;">
               <summary style="cursor: pointer; color: var(--primary); font-weight: 600; user-select: none;">
@@ -680,8 +680,8 @@
               <div style="margin-top: 6px; padding: 8px 12px; background: white; border-radius: 8px; border: 1px solid #e2e8f0; line-height: 1.5;">
                 • <strong>1-6 ball:</strong> Texnik jihatdan sust yoki amaliy ishlanma mavjud emas.<br>
                 • <strong>7-12 ball:</strong> Qisman yoki yarim tayyor holatda, texnik kamchiliklar mavjud.<br>
-                • <strong>13-18 ball:</strong> Deyarli tayyor, ishchi holatda, ammo ba'zi kamchiliklar bor.<br>
-                • <strong>19-25 ball:</strong> To‘liq tayyor, ishchi model, barcha elementlar puxta ishlab chiqilgan.
+                • <strong>13-18 ball:</strong> Deyarli tayyor, işçi holatda, ammo ba'zi kamchiliklar bor.<br>
+                • <strong>19-25 ball:</strong> To‘liq tayyor, işçi model, barça elementlar puxta ishlab chiqilgan.
               </div>
             </details>
 
@@ -689,7 +689,7 @@
               <input type="number" min="0" max="25" class="score-num-input" id="c3_${proj.id}" value="${c3Val}" placeholder="0-25" ${disabledAttr} style="${inputStyle}" oninput="handleInputChange(${proj.id})">
               <button class="chip-btn" ${disabledAttr} style="${chipStyle}" onclick="setScore(${proj.id}, 'c3', 6)">1-6 (Maket yo‘q)</button>
               <button class="chip-btn" ${disabledAttr} style="${chipStyle}" onclick="setScore(${proj.id}, 'c3', 12)">7-12 (Yarim tayyor)</button>
-              <button class="chip-btn" ${disabledAttr} style="${chipStyle}" onclick="setScore(${proj.id}, 'c3', 18)">13-18 (Ishchi model)</button>
+              <button class="chip-btn" ${disabledAttr} style="${chipStyle}" onclick="setScore(${proj.id}, 'c3', 18)">13-18 (İşçi model)</button>
               <button class="chip-btn" ${disabledAttr} style="${chipStyle}" onclick="setScore(${proj.id}, 'c3', 25)">19-25 (To‘liq tayyor)</button>
             </div>
           </div>
@@ -710,7 +710,7 @@
                 • <strong>1-5 ball:</strong> Ijodiy yondashuv yo‘q, odatiy usul, yangilik mavjud emas.<br>
                 • <strong>6-10 ball:</strong> Qisman ijodiy, yangi texnologiyalar yetarli emas, to‘liq javob berolmagan.<br>
                 • <strong>11-15 ball:</strong> Ijodiy va innovatsion, yangicha g‘oya bor, ammo savollarga to‘liq javob berolmagan.<br>
-                • <strong>16-20 ball:</strong> Yangicha g‘oya, innovatsion yechimlar, barcha savollarga aniq va to‘liq javob.
+                • <strong>16-20 ball:</strong> Yangicha g‘oya, innovatsion yechimlar, barça savollarga aniq va to‘liq javob.
               </div>
             </details>
 
@@ -729,7 +729,7 @@
               <span>5. Amalga oshirishda kutilayotgan natijalar va analoglardan afzalligi</span>
               <span style="color: var(--primary); font-weight: 700;">Maksimal: 20 ball</span>
             </div>
-            <div class="criteria-desc">Real muammolarni hal qilish, texnik va iqtisodiy asoslanganlik, o‘xshash analoglaridan ustunligi.</div>
+            <div class="criteria-desc">Real muammolarni hal qiliş, texnik va iqtisodiy asoslanganlik, o‘xshash analoglaridan ustunligi.</div>
             
             <details style="margin: 4px 0 10px 0; font-size: 12px; color: #475569;">
               <summary style="cursor: pointer; color: var(--primary); font-weight: 600; user-select: none;">
@@ -972,14 +972,14 @@
       <div class="modal-header">
         <h3>
           <i class="fa-solid fa-book-open" style="color: var(--primary);"></i>
-          1-ILOVA: Rasmiy Baholash Mezonlari (Jami 100 ball)
+          1-ILOVA: Rasmiy Baholaş Mezonlari (Jami 100 ball)
         </h3>
         <button class="modal-close-btn" onclick="closeCriteriaModal()">&times;</button>
       </div>
       <div class="modal-body">
         <div style="background: #e0f2fe; border: 1px solid #bae6fd; border-radius: 12px; padding: 14px 18px; margin-bottom: 20px; font-size: 13px; color: #0369a1;">
           <i class="fa-solid fa-circle-info" style="font-size: 16px;"></i> <strong>Eslatma:</strong> Har bir loyiha 5 ta rasmiy mezon bo‘yicha 100 ballik shkalada baholanadi. 
-          Vaqt reglamenti: <strong>10–15 daqiqa</strong>, taqdimot slaydi <strong>12 betdan oshmasligi</strong> shart.
+          Vaqt reglamenti: <strong>10–15 daqiqa</strong>, taqdimot slaydi <strong>12 betdan oşmasligi</strong> şart.
         </div>
 
         <!-- 1-Mezon -->
@@ -1005,7 +1005,7 @@
           <p style="font-size: 13px; color: #475569; margin-bottom: 8px;">Sifatli prezentatsiya, infografika, savollarga to‘liq javob va reglamentga rioya.</p>
           <ul style="font-size: 12.5px; color: #334155; padding-left: 20px; line-height: 1.6;">
             <li><strong>1-6 ball:</strong> Talab darajasida emas, texnik sust, vaqt reglamentiga rioya qilinmagan.</li>
-            <li><strong>7-12 ball:</strong> Sodda va tushunarli, ammo savollarga to‘liq javob berilmagan.</li>
+            <li><strong>7-12 ball:</strong> Sodda va tuşunarli, ammo savollarga to‘liq javob berilmagan.</li>
             <li><strong>13-18 ball:</strong> Mantiqiy to‘g‘ri, mazmunli, reglamentga rioya qilingan, ayrim xatoliklar bor.</li>
             <li><strong>19-25 ball:</strong> Talab asosida, infografikali, savollarga to‘liq va aniq javob, reglamentga rioya qilingan.</li>
           </ul>
@@ -1017,12 +1017,12 @@
             <strong style="color: #166534; font-size: 15px;">3. Loyihaning texnik sifati va modeli (maket/dastur/prototip)</strong>
             <span class="badge" style="background: #dcfce7; color: #166534; font-size: 12px; font-weight: 800;">Maksimal: 25 ball (1-ustunlik)</span>
           </div>
-          <p style="font-size: 13px; color: #15803d; margin-bottom: 8px;">Tayyor amaliy ishlanma, ishchi model yoki dasturiy yechimning puxtaligi.</p>
+          <p style="font-size: 13px; color: #15803d; margin-bottom: 8px;">Tayyor amaliy ishlanma, işçi model yoki dasturiy yechimning puxtaligi.</p>
           <ul style="font-size: 12.5px; color: #166534; padding-left: 20px; line-height: 1.6;">
             <li><strong>1-6 ball:</strong> Texnik jihatdan sust yoki amaliy ishlanma mavjud emas.</li>
             <li><strong>7-12 ball:</strong> Qisman yoki yarim tayyor holatda, texnik kamchiliklar mavjud.</li>
-            <li><strong>13-18 ball:</strong> Deyarli tayyor, ishchi holatda, ammo ba'zi kamchiliklar bor.</li>
-            <li><strong>19-25 ball:</strong> To‘liq tayyor, ishchi model, barcha elementlar puxta ishlab chiqilgan.</li>
+            <li><strong>13-18 ball:</strong> Deyarli tayyor, işçi holatda, ammo ba'zi kamchiliklar bor.</li>
+            <li><strong>19-25 ball:</strong> To‘liq tayyor, işçi model, barça elementlar puxta ishlab chiqilgan.</li>
           </ul>
         </div>
 
@@ -1037,7 +1037,7 @@
             <li><strong>1-5 ball:</strong> Ijodiy yondashuv yo‘q, odatiy usul, yangilik mavjud emas.</li>
             <li><strong>6-10 ball:</strong> Qisman ijodiy, yangi texnologiyalar yetarli emas, to‘liq javob berolmagan.</li>
             <li><strong>11-15 ball:</strong> Ijodiy va innovatsion, yangicha g‘oya bor, ammo savollarga to‘liq javob berolmagan.</li>
-            <li><strong>16-20 ball:</strong> Yangicha g‘oya, innovatsion yechimlar, barcha savollarga aniq va to‘liq javob.</li>
+            <li><strong>16-20 ball:</strong> Yangicha g‘oya, innovatsion yechimlar, barça savollarga aniq va to‘liq javob.</li>
           </ul>
         </div>
 
@@ -1047,7 +1047,7 @@
             <strong style="color: var(--dark); font-size: 15px;">5. Kutilayotgan natijalar va analoglardan afzalligi</strong>
             <span class="badge" style="background: #e0f2fe; color: #0369a1; font-size: 12px;">Maksimal: 20 ball</span>
           </div>
-          <p style="font-size: 13px; color: #475569; margin-bottom: 8px;">Real muammolarni hal qilish, texnik va iqtisodiy asoslanganlik, afzalliklari.</p>
+          <p style="font-size: 13px; color: #475569; margin-bottom: 8px;">Real muammolarni hal qiliş, texnik va iqtisodiy asoslanganlik, afzalliklari.</p>
           <ul style="font-size: 12.5px; color: #334155; padding-left: 20px; line-height: 1.6;">
             <li><strong>1-5 ball:</strong> Real muammolarni hal qilishga qaratilmagan yoki natijalar mavhum.</li>
             <li><strong>6-10 ball:</strong> Qisman hal qiladi, ammo tatbiq etish imkoni mavjud emas.</li>
@@ -1064,13 +1064,13 @@
           3) <strong>4-mezon (Innovatsionlik)</strong> bali;<br>
           4) <strong>5-mezon (Kutilayotgan natijalar)</strong> bali;<br>
           5) <strong>1-mezon (Yo‘nalishga moslik)</strong> bali;<br>
-          6) <strong>Individual ishtirokchi</strong> (jamoaga nisbatan);<br>
-          7) <strong>Yoshi yoshroq</strong> ishtirokchi.
+          6) <strong>Individual iştirokçi</strong> (jamoaga nisbatan);<br>
+          7) <strong>Yoshi yoshroq</strong> iştirokçi.
         </div>
       </div>
       <div class="modal-footer">
         <button class="btn btn-primary" style="padding: 12px 24px; font-size: 14px;" onclick="closeCriteriaModal()">
-          <i class="fa-solid fa-check"></i> Tushundim, baholashga qaytish
+          <i class="fa-solid fa-check"></i> Tushundim, baholaşga qaytiş
         </button>
       </div>
     </div>

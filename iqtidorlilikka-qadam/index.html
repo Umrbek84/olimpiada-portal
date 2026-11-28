@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>"Iqtidorlilikka qadam" tanlovi - Onlayn Baholash Tizimi</title>
+  <title>"Iqtidorlilikka qadam" tanlovi - Onlayn Baholaş Tizimi</title>
   <link rel="stylesheet" href="style.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 </head>
@@ -14,20 +14,20 @@
     <div class="header-box">
       <div class="header-info">
         <h1><i class="fa-solid fa-award" style="color: #f59e0b; margin-right: 8px;"></i> "Iqtidorlilikka qadam" tanlovi</h1>
-        <p>1-bosqich yakuniy baholash va reyting tizimi (Jonli svod jadvali)</p>
+        <p>1-bosqiç yakuniy baholaş va reyting tizimi (Jonli svod jadvali)</p>
       </div>
       <div class="header-actions">
         <a href="hakam.html" class="btn btn-primary">
-          <i class="fa-solid fa-key"></i> Hakam sifatida baholash (PIN)
+          <i class="fa-solid fa-key"></i> Hakam sifatida baholaş (PIN)
         </a>
         <a href="bayonnoma.html" class="btn btn-success">
           <i class="fa-solid fa-print"></i> Rasmiy Bayonnoma (PDF / Pechat)
         </a>
         <button onclick="openAddStudentModal()" class="btn btn-outline">
-          <i class="fa-solid fa-user-plus"></i> O‘quvchi qo‘shish
+          <i class="fa-solid fa-user-plus"></i> Öquvçi qo‘shish
         </button>
         <button onclick="exportToCsv()" class="btn btn-outline">
-          <i class="fa-solid fa-file-excel"></i> Excelga yuklash
+          <i class="fa-solid fa-file-excel"></i> Excelga yuklaş
         </button>
       </div>
     </div>
@@ -38,7 +38,7 @@
         <div class="stat-icon blue"><i class="fa-solid fa-users"></i></div>
         <div class="stat-content">
           <h3 id="statTotalStudents">0</h3>
-          <p>Jami o‘quvchilar</p>
+          <p>Jami öquvçilar</p>
         </div>
       </div>
       <div class="stat-card">
@@ -68,7 +68,7 @@
     <div class="table-card">
       <div class="table-header">
         <div>
-          <h2><i class="fa-solid fa-table-list" style="color: var(--primary);"></i> Umumiy Baholash Svod Jadvali</h2>
+          <h2><i class="fa-solid fa-table-list" style="color: var(--primary);"></i> Umumiy Baholaş Svod Jadvali</h2>
           <span style="font-size: 13px; color: #64748b;">(Ballar avtomatik hisoblanadi, 0 qiymatlar bo‘sh qoldiriladi)</span>
         </div>
         <div style="display: flex; gap: 10px; align-items: center;">
@@ -85,7 +85,7 @@
           <thead>
             <tr>
               <th style="width: 50px; text-align: center;">T/r</th>
-              <th>O‘quvchi F.I.SH</th>
+              <th>Öquvçi F.I.SH</th>
               <th>Ta'lim muassasasi</th>
               <th style="width: 80px; text-align: center;">Sinf</th>
               <th style="text-align: center;">1-Hakam</th>
@@ -110,13 +110,13 @@
     <div class="table-card" style="border-left: 6px solid #10b981;">
       <h3 style="margin-bottom: 10px;"><i class="fa-brands fa-google-drive" style="color: #10b981;"></i> Google Sheetga Avtomatik Sinxronlash</h3>
       <p style="color: #64748b; font-size: 14px; margin-bottom: 14px;">
-        Google Sheet orqali barcha 6 ta hakamning baholari va natijalarni jonli ravishda Google Jadvalga tushirib borish mumkin.
+        Google Sheet orqali barça 6 ta hakamning baholari va natijalarni jonli ravishda Google Jadvalga tuşirib borish mumkin.
       </p>
       <div style="display: flex; gap: 10px; flex-wrap: wrap;">
         <input type="text" id="sheetsApiUrl" placeholder="Google Apps Script Web App URL manzilini kiriting..." 
                style="flex: 1; min-width: 300px; padding: 10px 14px; border: 1px solid var(--border); border-radius: 8px;">
         <button onclick="saveSheetsUrl()" class="btn btn-success">
-          <i class="fa-solid fa-cloud-arrow-up"></i> Ulanishni saqlash
+          <i class="fa-solid fa-cloud-arrow-up"></i> Ulanishni saqlaş
         </button>
       </div>
     </div>
@@ -235,7 +235,7 @@
       alert("Google Sheets ulanish manzili saqlandi!");
     }
 
-    // Boshlang'ich yuklash
+    // Boshlang'ich yuklaş
     renderDashboard();
     const savedUrl = localStorage.getItem("iqtidor_sheets_url");
     if (savedUrl) document.getElementById("sheetsApiUrl").value = savedUrl;
