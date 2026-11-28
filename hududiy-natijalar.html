@@ -119,6 +119,157 @@ table.tt{min-width:640px}.rs.tt td small{color:var(--mut);font-size:.82rem}.bar{
       font-weight: 400 !important;
     }
   </style>
+
+<style id="mobile-card-styles">
+@media (max-width: 768px) {
+  /* Har bir o'quvchi alohida, chiroyli kartochka bo'ladi */
+  table.rs tbody tr.qq {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 8px !important;
+    margin-bottom: 16px !important;
+    border-radius: 16px !important;
+    background: #ffffff !important;
+    border: 1px solid #cbd5e1 !important;
+    border-left: 6px solid #f59e0b !important;
+    box-shadow: 0 6px 18px rgba(15, 23, 42, 0.08) !important;
+    padding: 14px 16px !important;
+    position: relative !important;
+  }
+
+  /* Tartib raqami (T/r) № 1, № 2 ko'rinishida */
+  table.rs tbody tr.qq td.dk {
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    min-width: 34px !important;
+    height: 30px !important;
+    padding: 0 8px !important;
+    border-radius: 8px !important;
+    background: #0f2a5c !important;
+    color: #ffffff !important;
+    font-size: 14px !important;
+    font-weight: 800 !important;
+    width: fit-content !important;
+  }
+  table.rs tbody tr.qq td.dk::before {
+    content: "№ " !important;
+    font-size: 11px !important;
+    opacity: 0.85 !important;
+    margin-right: 2px !important;
+  }
+
+  /* Fan va sinf */
+  table.rs tbody tr.qq td.fs {
+    display: flex !important;
+    align-items: center !important;
+    gap: 8px !important;
+    font-size: 13px !important;
+    font-weight: 800 !important;
+    color: #b45309 !important;
+    letter-spacing: 0.5px !important;
+    text-transform: uppercase !important;
+    margin-top: 2px !important;
+  }
+
+  /* O'quvchi F.I.Sh. */
+  table.rs tbody tr.qq td.nm {
+    display: block !important;
+    font-size: 16px !important;
+    font-weight: 700 !important;
+    color: #0f172a !important;
+    line-height: 1.35 !important;
+    padding-right: 60px !important; /* ball ustiga chiqmasligi uchun */
+  }
+
+  /* Maktab */
+  table.rs tbody tr.qq td.m {
+    display: inline-block !important;
+    font-size: 13px !important;
+    font-weight: 600 !important;
+    color: #2563eb !important;
+    background: #eff6ff !important;
+    padding: 4px 10px !important;
+    border-radius: 6px !important;
+    width: fit-content !important;
+    margin: 2px 0 !important;
+  }
+
+  /* Jami ball - kartaning o'ng tepasida katta va chiroyli */
+  table.rs tbody tr.qq td.j {
+    position: absolute !important;
+    top: 14px !important;
+    right: 16px !important;
+    font-size: 1.5rem !important;
+    font-weight: 800 !important;
+    color: #1e3a8a !important;
+    text-align: right !important;
+  }
+  table.rs tbody tr.qq td.j::after {
+    content: " ball" !important;
+    font-size: 11px !important;
+    font-weight: 700 !important;
+    color: #64748b !important;
+    display: block !important;
+    margin-top: -3px !important;
+  }
+
+  /* Ballar tafsiloti */
+  table.rs tbody tr.qq td.sub[data-l="Ballar"] {
+    display: block !important;
+    background: #f8fafc !important;
+    border: 1px solid #e2e8f0 !important;
+    border-radius: 8px !important;
+    padding: 7px 10px !important;
+    font-size: 13px !important;
+    color: #334155 !important;
+    margin: 4px 0 !important;
+  }
+  table.rs tbody tr.qq td.sub[data-l="Ballar"]::before {
+    content: "Ballar: " !important;
+    font-weight: 700 !important;
+    color: #475569 !important;
+  }
+
+  /* Reyting va Tumanda ko'rsatkichlari */
+  table.rs tbody tr.qq td.sub[data-l="Tumanda"],
+  table.rs tbody tr.qq td.sub[data-l="Reyting"] {
+    display: inline-block !important;
+    background: #fffbeb !important;
+    border: 1px solid #fde68a !important;
+    border-radius: 8px !important;
+    padding: 5px 10px !important;
+    font-size: 13px !important;
+    color: #92400e !important;
+    font-weight: 700 !important;
+    margin-right: 6px !important;
+    margin-top: 4px !important;
+    width: fit-content !important;
+  }
+  table.rs tbody tr.qq td.sub[data-l="Tumanda"]::before {
+    content: "Tumanda: " !important;
+    font-weight: 600 !important;
+    color: #b45309 !important;
+  }
+  table.rs tbody tr.qq td.sub[data-l="Reyting"]::before {
+    content: "Viloyat reytingi: " !important;
+    font-weight: 600 !important;
+    color: #b45309 !important;
+  }
+
+  /* Sana */
+  table.rs tbody tr.qq td[data-l="Sana"] {
+    display: block !important;
+    font-size: 12px !important;
+    color: #64748b !important;
+    font-weight: 600 !important;
+    margin-top: 4px !important;
+    border-top: 1px dashed #e2e8f0 !important;
+    padding-top: 6px !important;
+  }
+}
+</style>
+
 </head><body>
 <header class="top"><div class="top-in">
   <a class="brand" href="https://umamatov.uz/"><b>Umrbek Mamatov</b><span>Boş mutaxassis · Taʼlim portali</span></a>
