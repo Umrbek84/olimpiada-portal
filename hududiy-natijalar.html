@@ -742,6 +742,31 @@ table.tt{min-width:640px}.rs.tt td small{color:var(--mut);font-size:.82rem}.bar{
 }
 </style>
 
+<style id="sv-cards">
+.svg{display:grid;grid-template-columns:repeat(auto-fill,minmax(310px,1fr));gap:16px;margin-top:16px}
+.svc{display:flex;flex-direction:column;gap:9px;background:#fff;border:1px solid #e2e8f0;border-left:6px solid #d4a017;border-radius:18px;padding:14px;box-shadow:0 4px 16px rgba(15,23,42,.07);box-sizing:border-box;min-width:0}
+.svc.r2{border-left-color:#8a94a6}.svc.r3{border-left-color:#c27a2c}
+.svc-t{display:flex;align-items:center;gap:8px}
+.svc-no{background:#0f172a;color:#fff;border-radius:8px;padding:4px 9px;font-size:12px;font-weight:800}
+.svc-bl{margin-left:auto;display:inline-flex;flex-direction:column;align-items:center;background:linear-gradient(135deg,#fef3c7,#fde68a);border:1px solid #fcd34d;border-radius:10px;padding:4px 11px;line-height:1}
+.svc-bl b{font-size:18px;font-weight:900;color:#78350f}.svc-bl small{font-size:9px;font-weight:800;color:#92400e;text-transform:uppercase;letter-spacing:.4px;margin-top:2px}
+.svc-fan{align-self:flex-start;background:#fffbeb;border:1px solid #fde68a;color:#b45309;border-radius:8px;padding:4px 10px;font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:.3px}
+.svc-fan i{margin-right:6px}
+.svc-p{display:flex;align-items:center;gap:12px;background:#f8fafc;border:1px solid #e2e8f0;border-radius:12px;padding:8px}
+.svc-ph{width:72px;height:94px;object-fit:cover;border-radius:10px;border:2px solid #f0d58a;flex:none;background:#eef2f8}
+.svc-ph.no{display:flex;align-items:center;justify-content:center;color:#94a3b8;font-size:1.8rem}
+.svc-nm{font-size:16px;font-weight:800;color:#0f172a;line-height:1.3;overflow-wrap:anywhere}
+.svc-sc{align-self:flex-start;background:#eff6ff;border:1px solid #bfdbfe;color:#1d4ed8;border-radius:8px;padding:5px 10px;font-size:13px;font-weight:700}
+.svc-sc .l{color:#60a5fa;font-size:11px;font-weight:600;text-transform:uppercase}
+.svc-bx,.svc-us,.svc-dt{background:#f8fafc;border:1px solid #e2e8f0;border-radius:8px;padding:7px 11px;font-size:13px;color:#334155;line-height:1.4}
+.svc .l{font-weight:700;color:#64748b}
+.svc-us b{color:#0f172a}
+.svc-rk{display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap}
+.svc-rk span{border-radius:8px;padding:6px 11px;font-size:12.5px;font-weight:700;white-space:nowrap}
+.svc-rk .a{background:#fffbeb;border:1.5px solid #fde68a;color:#92400e}
+.svc-rk .b{background:#f0fdf4;border:1.5px solid #bbf7d0;color:#166534}
+.svc-dt .nw{background:#fef2f2;color:#dc2626;border:1px solid #fecaca;border-radius:6px;padding:2px 7px;font-size:10px;font-weight:800;margin-left:8px}
+</style>
 </head><body>
 <header class="top"><div class="top-in">
   <a class="brand" href="https://umamatov.uz/"><b>Umrbek Mamatov</b><span>Boş mutaxassis · Taʼlim portali</span></a>
@@ -1078,17 +1103,25 @@ function svView(){
  var W=[];R.forEach(function(b){b.part.forEach(function(r){if(isQ(r)&&r.rk<=3)W.push({b:b,r:r})})});
  W.sort(function(a,c){return a.r.rk-c.r.rk||a.b.fan.localeCompare(c.b.fan)||a.b.sinf-c.b.sinf});
  var cn=[0,0,0];W.forEach(function(x){cn[x.r.rk-1]++});
- var h='<div class="tth"><i class="fa-solid fa-trophy"></i><div><h2>Qöşköpir sovrindorlari</h2><p>Viloyat bosqiçida 1–3-örinlarni egallağan öquvçilarimiz. Jadval yangi natijalar qöşilganda özi yangilanadi.</p></div></div>';
+ var h='<div class="tth"><i class="fa-solid fa-trophy"></i><div><h2>Qöşköpir sovrindorlari</h2><p>Viloyat bosqiçida 1–3-örinlarni egallağan öquvçilarimiz. Ro‘yxat yangi natijalar qöşilganda özi yangilanadi.</p></div></div>';
  if(!W.length)return h+'<div class="card empty" style="margin-top:16px">Hozircha sovrinli örinlar yoq.</div>';
  h+='<div class="svs3"><span class="m1"><i class="fa-solid fa-medal"></i> 1-örin: <b>'+cn[0]+'</b></span><span class="m2"><i class="fa-solid fa-medal"></i> 2-örin: <b>'+cn[1]+'</b></span><span class="m3"><i class="fa-solid fa-medal"></i> 3-örin: <b>'+cn[2]+'</b></span><span class="mt"><i class="fa-solid fa-award"></i> Jami: <b>'+W.length+'</b></span></div>';
- h+='<div class="card" style="margin-top:14px;overflow:hidden"><div class="tw"><table class="rs sv"><thead><tr><th>Örin</th><th>Öquvçi</th><th>Fan va sinf</th><th>Ball</th><th>Ustoz</th></tr></thead><tbody>';
- W.forEach(function(x){var r=x.r,b=x.b,p=pfind(r[1]),u=(b.ust&&b.ust[r[1]])||(p&&p.u?p.u:'—'),bl=String(r[5]).replace('.',',');
-  h+='<tr><td class="svr"><span class="mdl m'+r.rk+'"><i class="fa-solid fa-medal"></i> '+r.rk+'-örin</span></td>'+
-   '<td class="svn">'+(p?'<img class="sph" alt="" src="'+p.p+'">':'<span class="sph no"><i class="fa-solid fa-user-graduate"></i></span>')+'<span><b>'+esc(r[1])+'</b><small>'+esc(r[3])+'</small></span></td>'+
-   '<td class="svf" data-l="Fan"><i class="fa-solid '+(FIC[b.fan]||'fa-book-open')+'"></i> '+esc(b.fan)+' · '+b.sinf+'-sinf</td>'+
-   '<td class="svb" data-l="Ball"><b>'+bl+'</b><small>'+b.n+' nafar qatnaşçi orasida</small></td>'+
-   '<td class="svu" data-l="Ustoz">'+esc(u)+'</td></tr>'});
- return h+'</tbody></table></div></div>'}
+ var t=tdy();
+ h+='<div class="svg">';
+ W.forEach(function(x,ix){var r=x.r,b=x.b,p=pfind(r[1]),u=(b.ust&&b.ust[r[1]])||(p&&p.u?p.u:'—'),bl=String(r[5]).replace('.',',');
+  var tr=1,tn=0;b.part.forEach(function(o){if(isQ(o)){tn++;if(o[5]>r[5])tr++}});
+  h+='<div class="svc r'+r.rk+'">'+
+   '<div class="svc-t"><span class="svc-no">№ '+(ix+1)+'</span><span class="mdl m'+r.rk+'"><i class="fa-solid fa-medal"></i> '+r.rk+'-örin</span><span class="svc-bl"><b>'+bl+'</b><small>ball</small></span></div>'+
+   '<div class="svc-fan"><i class="fa-solid '+(FIC[b.fan]||'fa-book-open')+'"></i> '+esc(b.fan)+' · '+b.sinf+'-sinf</div>'+
+   '<div class="svc-p">'+(p?'<img class="svc-ph" alt="" src="'+p.p+'">':'<span class="svc-ph no"><i class="fa-solid fa-user-graduate"></i></span>')+
+   '<div class="svc-nm">'+esc(r[1])+'</div></div>'+
+   '<div class="svc-sc"><span class="l">Maktab:</span> <b>'+esc(sch(r))+'</b></div>'+
+   '<div class="svc-bx"><span class="l">Topşiriq ballari:</span> '+esc(brk(b,r))+'</div>'+
+   '<div class="svc-us"><span class="l">Ustoz:</span> <b>'+esc(u)+'</b></div>'+
+   '<div class="svc-rk"><span class="a">Tumanda: <b>'+tr+' / '+tn+'</b></span><span class="b">Viloyatda: <b>'+r.rk+' / '+b.n+'</b></span></div>'+
+   '<div class="svc-dt"><span class="l">Sinov sanasi:</span> <b>'+sd(b.sana)+'</b>'+(b.sana===t?'<span class="nw">Bugun</span>':'')+'</div>'+
+   '</div>'});
+ return h+'</div>'}
 function draw(){
  $('view').innerHTML=S.v==='fs'?fsView():S.v==='tt'?ttView():S.v==='sv'?svView():qqView();
  [].forEach.call(document.querySelectorAll('#seg button'),function(b){b.onclick=function(){S.m=b.getAttribute('data-m');draw()}});
