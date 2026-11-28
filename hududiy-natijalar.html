@@ -164,6 +164,50 @@ table.tt{min-width:640px}.rs.tt td small{color:var(--mut);font-size:.82rem}.bar{
     box-sizing: border-box !important;
   }
 }
+
+/* Jadvaldagi rejalashtirilgan sinovlar dizayni */
+.cell.no {
+  background: #f8fafc !important;
+  color: #64748b !important;
+  border: 1.5px dashed #cbd5e1 !important;
+  border-radius: 12px !important;
+  padding: 6px 4px !important;
+  cursor: default !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 2px !important;
+  min-height: 46px !important;
+  box-sizing: border-box !important;
+}
+.cell.no .c-dt {
+  font-size: 0.8rem !important;
+  font-weight: 800 !important;
+  color: #1e293b !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 4px !important;
+  line-height: 1.1 !important;
+  white-space: nowrap !important;
+}
+.cell.no .c-dt i {
+  font-size: 0.72rem !important;
+  color: #2563eb !important;
+  margin: 0 !important;
+}
+.cell.no .c-tp {
+  font-size: 0.7rem !important;
+  font-weight: 600 !important;
+  color: #64748b !important;
+  line-height: 1.1 !important;
+  white-space: nowrap !important;
+  letter-spacing: -0.2px !important;
+}
+@media (max-width: 768px) {
+  .cell.no .c-dt { font-size: 0.72rem !important; }
+  .cell.no .c-tp { font-size: 0.64rem !important; }
+}
 </style>  <!-- Testmakon Typography: Lexend + Manrope + Plus Jakarta Sans -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -584,12 +628,42 @@ function qAll(){var o=[];R.forEach(function(b){b.part.concat(b.np).forEach(funct
 function stats(){
  var q=qAll(),tot=0;R.forEach(function(b){tot+=b.n});
  $('stats').innerHTML='<div class="st"><small>Eʼlon qilingan natijalar</small><b>'+R.length+'</b></div><div class="st"><small>Qatnaşçilar (jami)</small><b>'+tot+'</b></div><div class="st q"><small>Qöşköpir öquvçilari</small><b>'+q.length+'</b></div><div class="st"><small>Oxirgi yangilanış</small><b style="font-size:1.25rem;line-height:2.4rem">'+dt(D.updated)+'</b></div>'}
+var SCHEDULE={
+ 'Fizika':{10:{d:'27–28-noyabr',t:'Yozma iş · Test'},11:{d:'29–30-noyabr',t:'Yozma iş · Test'}},
+ 'Kimyo':{10:{d:'27–28-noyabr',t:'Yozma iş · Test'},11:{d:'29–30-noyabr',t:'Yozma iş · Test'}},
+ 'Biologiya':{9:{d:'27–28-noyabr',t:'Yozma iş · Test'},10:{d:'29–30-noyabr',t:'Yozma iş · Test'}},
+ 'Tarix':{9:{d:'2-dekabr',t:'Test (40 ta)'},10:{d:'3-dekabr',t:'Test (40 ta)'},11:{d:'4-dekabr',t:'Test (40 ta)'}},
+ 'Geografiya':{9:{d:'2-dekabr',t:'Test (40 ta)'},10:{d:'3-dekabr',t:'Test (40 ta)'},11:{d:'4-dekabr',t:'Test (40 ta)'}},
+ 'Huquq':{9:{d:'2-dekabr',t:'Test (40 ta)'},10:{d:'3-dekabr',t:'Test (40 ta)'},11:{d:'4-dekabr',t:'Test (40 ta)'}},
+ 'Ona tili':{9:{d:'2-dekabr',t:'Esse · Test'},10:{d:'3-dekabr',t:'Esse · Test'},11:{d:'4-dekabr',t:'Esse · Test'}},
+ 'Özbek tili':{9:{d:'2-dekabr',t:'Esse · Test'},10:{d:'3-dekabr',t:'Esse · Test'},11:{d:'4-dekabr',t:'Esse · Test'}},
+ 'Rus tili':{9:{d:'2-dekabr',t:'Esse · Test'},10:{d:'3-dekabr',t:'Esse · Test'},11:{d:'4-dekabr',t:'Esse · Test'}},
+ 'Ingliz tili':{9:{d:'2-dekabr',t:'Tinglab · Test'},10:{d:'3-dekabr',t:'Tinglab · Test'},11:{d:'4-dekabr',t:'Tinglab · Test'}},
+ 'Nemis tili':{9:{d:'2-dekabr',t:'Tinglab · Test'},10:{d:'3-dekabr',t:'Tinglab · Test'},11:{d:'4-dekabr',t:'Tinglab · Test'}},
+ 'Fransuz tili':{9:{d:'2-dekabr',t:'Tinglab · Test'},10:{d:'3-dekabr',t:'Tinglab · Test'},11:{d:'4-dekabr',t:'Tinglab · Test'}}
+};
 function matrix(){
  var h='<div class="card mx"><table><tr><th></th><th>9-sinf</th><th>10-sinf</th><th>11-sinf</th></tr>';
- allFans().forEach(function(f){h+='<tr><td class="f">'+esc(f)+'</td>';[9,10,11].forEach(function(s){var b=find(f,s);
-  if(b){var q=b.part.concat(b.np).filter(isQ).length;h+='<td><button class="cell'+(S.fan===f&&S.sinf===s?' on':'')+'" data-f="'+esc(f)+'" data-s="'+s+'"><i class="fa-solid fa-circle-check"></i>'+b.n+(q?'<em>★'+q+'</em>':'')+'</button></td>'}
-  else h+='<td><button class="cell no" disabled>tez orada</button></td>'});h+='</tr>'});
- return h+'</table></div>'}
+ allFans().forEach(function(f){
+  h+='<tr><td class="f">'+esc(f)+'</td>';
+  [9,10,11].forEach(function(s){
+   var b=find(f,s);
+   if(b){
+    var q=b.part.concat(b.np).filter(isQ).length;
+    h+='<td><button class="cell'+(S.fan===f&&S.sinf===s?' on':'')+'" data-f="'+esc(f)+'" data-s="'+s+'"><i class="fa-solid fa-circle-check"></i>'+b.n+(q?'<em>★'+q+'</em>':'')+'</button></td>';
+   } else {
+    var sc=(SCHEDULE[f]&&SCHEDULE[f][s])||null;
+    if(sc){
+     h+='<td><button class="cell no" disabled title="'+esc(f)+' · '+s+'-sinf: '+esc(sc.d)+' ('+esc(sc.t)+')"><span class="c-dt"><i class="fa-regular fa-calendar"></i> '+esc(sc.d)+'</span><span class="c-tp">'+esc(sc.t)+'</span></button></td>';
+    } else {
+     h+='<td><button class="cell no" disabled><span class="c-dt">tez orada</span></button></td>';
+    }
+   }
+  });
+  h+='</tr>';
+ });
+ return h+'</table></div>';
+}
 function sch(r){return /^\d+$/.test(r[3])?r[3]+'-maktab':r[3]}
 function brk(b,r){if(b.cols.length<=2)return b.cols.map(function(c,k){return c+': '+f1(r[4][k])}).join(' · ');return 'Topşiriqlar: '+r[4].map(f1).join(' / ')}
 function stb(r){return '<span class="np'+(r[6]==='Çetlatildi'?' ct':'')+'">'+esc(r[6])+'</span>'}
