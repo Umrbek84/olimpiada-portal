@@ -122,20 +122,38 @@ table.tt{min-width:640px}.rs.tt td small{color:var(--mut);font-size:.82rem}.bar{
 
 <style id="mobile-card-styles">
 @media (max-width: 768px) {
+  /* Ekran chegarasidan chiqib ketishni oldini olish */
+  html, body {
+    overflow-x: hidden !important;
+    max-width: 100% !important;
+  }
+  .wrap {
+    padding: 0 10px !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+  }
+
   /* Butun jadval va o'rab turuvchi konteynerni tozalash */
   .card.tw {
     background: transparent !important;
     border: none !important;
     box-shadow: none !important;
     padding: 0 !important;
+    margin: 10px 0 !important;
     overflow: visible !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
   }
   table.rs {
     display: block !important;
     width: 100% !important;
+    max-width: 100% !important;
     min-width: 0 !important;
     border: none !important;
     background: transparent !important;
+    box-sizing: border-box !important;
+    margin: 0 !important;
   }
   table.rs thead {
     display: none !important;
@@ -143,6 +161,8 @@ table.tt{min-width:640px}.rs.tt td small{color:var(--mut);font-size:.82rem}.bar{
   table.rs tbody {
     display: block !important;
     width: 100% !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
   }
 
   /* Eski sariq fonlar va soyalarni butunlay tozalash */
@@ -175,11 +195,12 @@ table.tt{min-width:640px}.rs.tt td small{color:var(--mut);font-size:.82rem}.bar{
     border: 1px solid #e2e8f0 !important;
     border-left: 5px solid #2563eb !important;
     box-shadow: 0 4px 16px rgba(15, 23, 42, 0.06), 0 1px 3px rgba(15, 23, 42, 0.04) !important;
-    padding: 14px 15px !important;
+    padding: 12px 14px !important;
     box-sizing: border-box !important;
     position: relative !important;
     overflow: hidden !important;
     width: 100% !important;
+    max-width: 100% !important;
   }
 
   /* 1-QATOR: TARTIB RAQAMI (№ 1) */
@@ -189,9 +210,9 @@ table.tt{min-width:640px}.rs.tt td small{color:var(--mut);font-size:.82rem}.bar{
     display: inline-flex !important;
     align-items: center !important;
     justify-content: center !important;
-    min-width: 30px !important;
+    min-width: 28px !important;
     height: 26px !important;
-    padding: 0 8px !important;
+    padding: 0 7px !important;
     border-radius: 8px !important;
     background: #0f172a !important;
     color: #ffffff !important;
@@ -237,28 +258,29 @@ table.tt{min-width:640px}.rs.tt td small{color:var(--mut);font-size:.82rem}.bar{
     grid-row: 1 !important;
     display: inline-flex !important;
     flex-direction: column !important;
-    align-items: flex-end !important;
+    align-items: center !important;
     justify-content: center !important;
     background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%) !important;
     border: 1px solid #fcd34d !important;
     border-radius: 10px !important;
-    padding: 3px 10px !important;
+    padding: 3px 9px !important;
     justify-self: end !important;
     align-self: center !important;
     box-shadow: 0 2px 5px rgba(245, 158, 11, 0.15) !important;
     margin: 0 !important;
     line-height: 1 !important;
+    box-sizing: border-box !important;
   }
   table.rs tbody tr.qq td.j,
   table.rs tbody tr.qq td.j strong {
-    font-size: 16px !important;
+    font-size: 15.5px !important;
     font-weight: 900 !important;
     color: #78350f !important;
     line-height: 1 !important;
   }
   table.rs tbody tr.qq td.j::after {
     content: "ball" !important;
-    font-size: 9px !important;
+    font-size: 8.5px !important;
     font-weight: 800 !important;
     color: #92400e !important;
     text-transform: uppercase !important;
@@ -286,6 +308,8 @@ table.tt{min-width:640px}.rs.tt td small{color:var(--mut);font-size:.82rem}.bar{
     word-break: break-word !important;
     overflow-wrap: break-word !important;
     box-sizing: border-box !important;
+    width: 100% !important;
+    max-width: 100% !important;
   }
 
   /* 3-QATOR: MAKTAB NISHONI */
@@ -332,6 +356,8 @@ table.tt{min-width:640px}.rs.tt td small{color:var(--mut);font-size:.82rem}.bar{
     line-height: 1.4 !important;
     box-sizing: border-box !important;
     word-break: break-word !important;
+    width: 100% !important;
+    max-width: 100% !important;
   }
   table.rs tbody tr.qq td.sub[data-l="Ballar"]::before {
     content: "Topşiriq ballari: " !important;
@@ -340,23 +366,29 @@ table.tt{min-width:640px}.rs.tt td small{color:var(--mut);font-size:.82rem}.bar{
     margin-right: 4px !important;
   }
 
-  /* 5-QATOR: TUMANDA VA VILOYATDA REYTINGLARI */
-  table.rs tbody tr.qq td.sub[data-l="Tumanda"] {
-    grid-column: 1 / 3 !important;
+  /* 5-QATOR: TUMANDA VA VILOYATDA REYTINGLARI (BIR XIL BALANDLIKDA, HECH QACHON SIKILMAYDI) */
+  table.rs tbody tr.qq td.sub[data-l="Tumanda"],
+  table.rs tbody tr.qq td.sub[data-l="Reyting"] {
     grid-row: 5 !important;
     display: inline-flex !important;
     align-items: center !important;
+    white-space: nowrap !important;
+    height: 30px !important;
+    border-radius: 8px !important;
+    padding: 0 10px !important;
+    font-size: 11.5px !important;
+    font-weight: 800 !important;
+    box-sizing: border-box !important;
+    line-height: 1 !important;
+    width: fit-content !important;
+  }
+
+  table.rs tbody tr.qq td.sub[data-l="Tumanda"] {
+    grid-column: 1 / 3 !important;
     background: #fffbeb !important;
     border: 1.5px solid #fde68a !important;
-    border-radius: 8px !important;
-    padding: 5px 10px !important;
-    font-size: 12px !important;
-    font-weight: 800 !important;
     color: #92400e !important;
-    width: fit-content !important;
-    white-space: nowrap !important;
     justify-self: start !important;
-    box-sizing: border-box !important;
   }
   table.rs tbody tr.qq td.sub[data-l="Tumanda"]::before {
     content: "Tumanda: " !important;
@@ -366,21 +398,11 @@ table.tt{min-width:640px}.rs.tt td small{color:var(--mut);font-size:.82rem}.bar{
   }
 
   table.rs tbody tr.qq td.sub[data-l="Reyting"] {
-    grid-column: 3 / -1 !important;
-    grid-row: 5 !important;
-    display: inline-flex !important;
-    align-items: center !important;
+    grid-column: 2 / -1 !important;
     background: #f0fdf4 !important;
     border: 1.5px solid #bbf7d0 !important;
-    border-radius: 8px !important;
-    padding: 5px 10px !important;
-    font-size: 12px !important;
-    font-weight: 800 !important;
     color: #166534 !important;
-    width: fit-content !important;
-    white-space: nowrap !important;
     justify-self: end !important;
-    box-sizing: border-box !important;
   }
   table.rs tbody tr.qq td.sub[data-l="Reyting"]::before {
     content: "Viloyatda: " !important;
@@ -400,10 +422,12 @@ table.tt{min-width:640px}.rs.tt td small{color:var(--mut);font-size:.82rem}.bar{
     border: 1px solid #e2e8f0 !important;
     border-radius: 8px !important;
     padding: 6px 10px !important;
-    font-size: 12px !important;
+    font-size: 11.5px !important;
     font-weight: 700 !important;
     color: #475569 !important;
     box-sizing: border-box !important;
+    width: 100% !important;
+    max-width: 100% !important;
     margin-top: 2px !important;
   }
   table.rs tbody tr.qq td[data-l="Sana"] br {
@@ -413,7 +437,7 @@ table.tt{min-width:640px}.rs.tt td small{color:var(--mut);font-size:.82rem}.bar{
     content: "Sinov sanasi: " !important;
     font-weight: 600 !important;
     color: #94a3b8 !important;
-    font-size: 11.5px !important;
+    font-size: 11px !important;
     margin-right: 4px !important;
   }
   table.rs tbody tr.qq td[data-l="Sana"] small {
@@ -424,10 +448,11 @@ table.tt{min-width:640px}.rs.tt td small{color:var(--mut);font-size:.82rem}.bar{
     border: 1px solid #bae6fd !important;
     border-radius: 6px !important;
     padding: 2px 7px !important;
-    font-size: 10.5px !important;
+    font-size: 10px !important;
     font-weight: 800 !important;
     text-transform: uppercase !important;
     letter-spacing: 0.3px !important;
+    white-space: nowrap !important;
   }
   table.rs tbody tr.qq td[data-l="Sana"] span.nw {
     background: #fef2f2 !important;
@@ -435,9 +460,10 @@ table.tt{min-width:640px}.rs.tt td small{color:var(--mut);font-size:.82rem}.bar{
     border: 1px solid #fecaca !important;
     border-radius: 6px !important;
     padding: 2px 6px !important;
-    font-size: 10.5px !important;
+    font-size: 10px !important;
     font-weight: 800 !important;
     margin-left: 6px !important;
+    white-space: nowrap !important;
   }
 }
 </style>
