@@ -120,8 +120,16 @@ table.tt{min-width:640px}.rs.tt td small{color:var(--mut);font-size:.82rem}.bar{
     }
   </style>
 </head><body>
-<header class="top"><div class="top-in"><a class="brand" href="index.html"><b>Umrbek Mamatov</b><span>Boş mutaxassis · Taʼlim portali</span></a>
-<a class="back" href="index.html" style="display:inline-flex; align-items:center; gap:8px; padding:8px 18px; border-radius:50px; background:#f1f5f9; border:1px solid #cbd5e1; color:#0f172a; font-weight:700; font-size:0.92rem; text-decoration:none; transition:all .2s;"><i class="fa-solid fa-arrow-left"></i> Asosiy portalga qaytiş</a></div></header>
+<header class="top"><div class="top-in">
+  <a class="brand" href="https://umamatov.uz/"><b>Umrbek Mamatov</b><span>Boş mutaxassis · Taʼlim portali</span></a>
+  <nav style="display:flex;gap:6px;align-items:center;flex-wrap:wrap;">
+    <a href="https://umamatov.uz/"><i class="fa-solid fa-house"></i> Boş sahifa</a>
+    <a href="index.html"><i class="fa-solid fa-trophy"></i> Olimpiadalar</a>
+    <a href="hududiy-bosqich.html"><i class="fa-solid fa-calendar-days"></i> Hududiy bosqiç grafigi</a>
+    <a href="hududiy-natijalar.html" class="on vn" style="background:linear-gradient(135deg,#f59e0b,#ea580c);color:#fff;font-weight:700;"><i class="fa-solid fa-ranking-star"></i> Viloyat natijalari <b style="background:#fff;color:#ea580c;padding:1px 5px;border-radius:4px;font-size:10px;margin-left:4px;">YANGI</b></a>
+    <a href="https://umamatov.uz/jonli.html" target="_blank" rel="noopener"><i class="fa-solid fa-tower-broadcast"></i> Jonli efir</a>
+  </nav>
+</div></header>
 <section class="hero"><div class="hero-in"><span class="kick"><i class="fa-solid fa-ranking-star"></i> 2026–2027-öquv yili</span>
 <h1>Hududiy bosqiç natijalari</h1>
 <p>Asosiy olimpiadaning uçinçi – hududiy bosqiçi: har bir fan va sinf böyiça rasmiy qarorlar. Qöşköpir tumani öquvçilari alohida belgilangan.</p></div></section>
@@ -196,8 +204,8 @@ function qqView(){
  if(S.d)q=q.filter(function(o){return o.b.sana===S.d});
  q.sort(function(a,b){return a.b.sana<b.b.sana?1:a.b.sana>b.b.sana?-1:(!!a.r[6])-(!!b.r[6])||a.b.fan.localeCompare(b.b.fan)||a.b.sinf-b.b.sinf});
  var sel='<select id="dsel" class="dsel"><option value="">Barça künlar</option>'+days.map(function(d){return '<option value="'+d+'"'+(d===S.d?' selected':'')+'>'+sd(d)+(d===t?' (bugun)':'')+'</option>'}).join('')+'</select>';
- var h='<div class="hd"><div><h2>Qöşköpir tumani öquvçilari</h2><p>Eʼlon qilingan barça natijalar böyiça · jami <b>'+all+'</b> ta'+(S.d?' · tanlangan kün: <b>'+q.length+'</b> ta':'')+'</p></div><div>'+sel+'</div></div><div class="card tw"><table class="rs"><thead><tr><th class="dk">T/r</th><th>Fan · sinf</th><th>F.I.Sh.</th><th>Maktab</th><th>Ballar</th><th class="n">Tumanda</th><th class="n">Reyting</th><th class="n">Jami ball</th><th>Sana</th></tr></thead><tbody>';
- q.forEach(function(o,ix){var r=o.r,b=o.b,np=!!r[6];h+='<tr class="q qq"><td class="dk" style="font-weight:700;color:var(--navy)">'+(ix+1)+'</td><td class="rk fs" style="width:auto;white-space:nowrap">'+esc(b.fan)+' · '+b.sinf+'</td><td class="nm">'+esc(r[1])+'</td><td class="m">'+esc(sch(r))+'</td>'+(np?'<td class="sub" style="display:none"></td><td class="n sub" style="display:none"></td><td class="n sub" style="display:none"></td><td class="j n">'+stb(r)+'</td>':'<td class="sub" data-l="Ballar">'+esc(brk(b,r))+'</td><td class="n sub" data-l="Tumanda"><b>'+o.tr+'</b> / '+o.tn+'</td><td class="n sub" data-l="Reyting">'+r.rk+' / '+b.n+'</td><td class="j n">'+f1(r[5])+'</td>')+'<td data-l="Sana" style="white-space:nowrap;font-weight:600;color:var(--navy)">'+sd(b.sana)+(b.sana===t?' <span class="nw">Bugun</span>':'')+(b.holat?'<br><small style="color:#64748b">'+esc(b.holat)+'</small>':'')+'</td></tr>'});
+ var h='<div class="hd"><div><h2>Qöşköpir tumani öquvçilari</h2><p>Eʼlon qilingan barça natijalar böyiça · jami <b>'+all+'</b> ta'+(S.d?' · tanlangan kün: <b>'+q.length+'</b> ta':'')+'</p></div><div>'+sel+'</div></div><div class="card tw"><table class="rs"><thead><tr><th class="dk">T/r</th><th>Fan · sinf</th><th>F.I.Sh.</th><th>Maktab</th><th>Ballar</th><th class="n" style="min-width:85px;text-align:center;font-weight:700;color:var(--navy)">Tumanda</th><th class="n">Reyting</th><th class="n">Jami ball</th><th>Sana</th></tr></thead><tbody>';
+ q.forEach(function(o,ix){var r=o.r,b=o.b,np=!!r[6];h+='<tr class="q qq"><td class="dk" style="font-weight:700;color:var(--navy)">'+(ix+1)+'</td><td class="rk fs" style="width:auto;white-space:nowrap">'+esc(b.fan)+' · '+b.sinf+'</td><td class="nm">'+esc(r[1])+'</td><td class="m">'+esc(sch(r))+'</td>'+(np?'<td class="sub" style="display:none"></td><td class="n sub" style="display:none"></td><td class="n sub" style="display:none"></td><td class="j n">'+stb(r)+'</td>':'<td class="sub" data-l="Ballar">'+esc(brk(b,r))+'</td><td class="n sub" data-l="Tumanda" style="min-width:85px;text-align:center;"><b>'+o.tr+'</b> / '+o.tn+'</td><td class="n sub" data-l="Reyting">'+r.rk+' / '+b.n+'</td><td class="j n">'+f1(r[5])+'</td>')+'<td data-l="Sana" style="white-space:nowrap;font-weight:600;color:var(--navy)">'+sd(b.sana)+(b.sana===t?' <span class="nw">Bugun</span>':'')+(b.holat?'<br><small style="color:#64748b">'+esc(b.holat)+'</small>':'')+'</td></tr>'});
  return h+'</tbody></table></div>'}
 function pc(x){return f1(x)+'%'}
 function cc(p){return p<=.25?'#bbf7d0':p<=.4?'#dcfce7':p<=.65?'#fef9c3':p<=.85?'#fee2e2':'#fecaca'}
