@@ -218,11 +218,10 @@ table.tt{min-width:640px}.rs.tt td small{color:var(--mut);font-size:.82rem}.bar{
   border: 1.5px solid #fdba74;
   border-left: 5px solid #ea580c;
   border-radius: 14px;
-  padding: 10px 16px;
+  padding: 10px 14px;
   margin-top: 16px;
   margin-bottom: 4px;
-  box-shadow: 0 4px 16px rgba(234, 88, 12, 0.12);
-  flex-wrap: wrap;
+  box-shadow: 0 4px 16px rgba(234, 88, 12, 0.1);
 }
 .today-banner .tb-badge {
   display: inline-flex;
@@ -233,10 +232,12 @@ table.tt{min-width:640px}.rs.tt td small{color:var(--mut);font-size:.82rem}.bar{
   font-size: 0.78rem;
   font-weight: 900;
   letter-spacing: 0.5px;
-  padding: 4px 10px;
+  padding: 5px 10px;
   border-radius: 20px;
   text-transform: uppercase;
+  white-space: nowrap;
   box-shadow: 0 2px 6px rgba(234, 88, 12, 0.3);
+  flex-shrink: 0;
 }
 .today-banner .tb-dot {
   width: 7px;
@@ -246,17 +247,37 @@ table.tt{min-width:640px}.rs.tt td small{color:var(--mut);font-size:.82rem}.bar{
   animation: pulseDot 1.2s infinite ease-in-out;
 }
 .today-banner .tb-info {
-  font-size: 0.9rem;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  font-size: 0.88rem;
   color: #7c2d12;
-  font-weight: 600;
-  line-height: 1.35;
 }
-.today-banner .tb-info b {
+.today-banner .tb-lead {
+  font-weight: 600;
+}
+.today-banner .tb-chips {
+  display: inline-flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+.today-banner .tb-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  background: #ffffff;
   color: #9a3412;
-  background: rgba(255, 255, 255, 0.7);
-  padding: 2px 6px;
-  border-radius: 6px;
+  font-weight: 700;
+  font-size: 0.82rem;
+  padding: 3px 9px;
+  border-radius: 8px;
   border: 1px solid #fed7aa;
+  box-shadow: 0 1px 3px rgba(234, 88, 12, 0.08);
+  white-space: nowrap;
+}
+.today-banner .tb-chip b {
+  color: #ea580c;
 }
 
 /* JADVALDAGI BUGUNGI KATAKCHA */
@@ -309,6 +330,40 @@ table.tt{min-width:640px}.rs.tt td small{color:var(--mut);font-size:.82rem}.bar{
   color: #9a3412 !important;
   line-height: 1.1 !important;
   white-space: nowrap !important;
+}
+
+@media (max-width: 768px) {
+  .today-banner {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+    padding: 10px 12px;
+  }
+  .today-banner .tb-info {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 6px;
+  }
+  .mx {
+    padding: 6px 4px !important;
+  }
+  .mx table {
+    border-spacing: 4px !important;
+  }
+  .mx td.f {
+    font-size: 0.78rem !important;
+    padding: 4px 6px !important;
+  }
+  .cell {
+    min-width: 0 !important;
+    padding: 5px 3px !important;
+  }
+  .cell.no .c-dt, .cell.today .c-live {
+    font-size: 0.72rem !important;
+  }
+  .cell.no .c-tp, .cell.today .c-tp-live {
+    font-size: 0.66rem !important;
+  }
 }
 </style>  <!-- Testmakon Typography: Lexend + Manrope + Plus Jakarta Sans -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -811,7 +866,10 @@ function matrix(){
 
  var banner='';
  if(todayExams.length){
-  banner='<div class="today-banner"><span class="tb-badge"><span class="tb-dot"></span> BUGUN ('+sd(t)+')</span><span class="tb-info">Viloyatda ayni paytda sinov topshirilayotgan fanlar: <b>'+todayExams.map(function(x){return x.fan+' ('+x.sinf+'-sinf) — '+x.type}).join(', ')+'</b></span></div>';
+  var chips = todayExams.map(function(x){
+   return '<span class="tb-chip"><b>'+esc(x.fan)+'</b> ('+x.sinf+'-sinf) · '+esc(x.type)+'</span>';
+  }).join(' ');
+  banner='<div class="today-banner"><div class="tb-badge"><span class="tb-dot"></span> BUGUN ('+sd(t)+')</div><div class="tb-info"><span class="tb-lead">Viloyatda ayni paytda sinov topshirilayotgan fanlar:</span> <div class="tb-chips">'+chips+'</div></div></div>';
  }
 
  var h=banner+'<div class="card mx"><table><tr><th></th><th>9-sinf</th><th>10-sinf</th><th>11-sinf</th></tr>';
