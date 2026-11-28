@@ -778,7 +778,7 @@ function prep(){
   var rank=0,prev=null,i=0;
   part.forEach(function(r){i++;if(r[5]!==prev){rank=i;prev=r[5]}r.rk=rank});
   var np=rows.filter(function(r){return !!r[6]});
-  return {fan:b.fan,sinf:b.sinf,sana:b.sana,cols:b.cols||['Test','Yozma iş'],max:b.max,note:b.note,holat:b.holat,part:part,np:np,n:part.length}})}
+  return {fan:b.fan,sinf:b.sinf,sana:b.sana,cols:b.cols||['Test','Yozma iş'],max:b.max,note:b.note,holat:b.holat,ust:b.ustoz||{},part:part,np:np,n:part.length}})}
 function find(f,s){for(var i=0;i<R.length;i++)if(R[i].fan===f&&R[i].sinf===s)return R[i];return null}
 function allFans(){var a=FANS.slice();R.forEach(function(b){if(a.indexOf(b.fan)<0)a.push(b.fan)});return a}
 function qAll(){var o=[];R.forEach(function(b){b.part.concat(b.np).forEach(function(r){if(isQ(r))o.push({b:b,r:r})})});return o}
@@ -1082,7 +1082,7 @@ function svView(){
  if(!W.length)return h+'<div class="card empty" style="margin-top:16px">Hozircha sovrinli örinlar yoq.</div>';
  h+='<div class="svs3"><span class="m1"><i class="fa-solid fa-medal"></i> 1-örin: <b>'+cn[0]+'</b></span><span class="m2"><i class="fa-solid fa-medal"></i> 2-örin: <b>'+cn[1]+'</b></span><span class="m3"><i class="fa-solid fa-medal"></i> 3-örin: <b>'+cn[2]+'</b></span><span class="mt"><i class="fa-solid fa-award"></i> Jami: <b>'+W.length+'</b></span></div>';
  h+='<div class="card" style="margin-top:14px;overflow:hidden"><div class="tw"><table class="rs sv"><thead><tr><th>Örin</th><th>Öquvçi</th><th>Fan va sinf</th><th>Ball</th><th>Ustoz</th></tr></thead><tbody>';
- W.forEach(function(x){var r=x.r,b=x.b,p=pfind(r[1]),u=p&&p.u?p.u:'—',bl=String(r[5]).replace('.',',');
+ W.forEach(function(x){var r=x.r,b=x.b,p=pfind(r[1]),u=(b.ust&&b.ust[r[1]])||(p&&p.u?p.u:'—'),bl=String(r[5]).replace('.',',');
   h+='<tr><td class="svr"><span class="mdl m'+r.rk+'"><i class="fa-solid fa-medal"></i> '+r.rk+'-örin</span></td>'+
    '<td class="svn">'+(p?'<img class="sph" alt="" src="'+p.p+'">':'<span class="sph no"><i class="fa-solid fa-user-graduate"></i></span>')+'<span><b>'+esc(r[1])+'</b><small>'+esc(r[3])+'</small></span></td>'+
    '<td class="svf" data-l="Fan"><i class="fa-solid '+(FIC[b.fan]||'fa-book-open')+'"></i> '+esc(b.fan)+' · '+b.sinf+'-sinf</td>'+
