@@ -753,8 +753,8 @@ function ordn(x){return x+'-örin'}
 function rankBy(arr,key){var o=arr.slice().sort(function(a,b){return key(a)<key(b)?-1:key(a)>key(b)?1:0}),res=[],prev=null,rk=0;o.forEach(function(t,i){var k=key(t);if(k!==prev){rk=i+1;prev=k}res.push({t:t,rk:rk})});return res}
 function TT(){
  var T={};
- function get(n){return T[n]||(T[n]={name:n,q:/Qöşköpir/i.test(n),part:0,med:[0,0,0],fr:[]})}
- R.forEach(function(b){b.part.concat(b.np).forEach(function(r){get(r[2])});
+ function get(n){return T[n]||(T[n]={name:n,q:/Qöşköpir/i.test(n),part:0,total:0,med:[0,0,0],fr:[]})}
+ R.forEach(function(b){b.part.concat(b.np).forEach(function(r){get(r[2]).total++});
   if(!b.n)return;var by={};
   b.part.forEach(function(r){var t=get(r[2]);t.part++;(by[r[2]]=by[r[2]]||[]).push(r[5]);if(r.rk<=3)t.med[r.rk-1]++});
   var top=b.part[0][5],list=Object.keys(by).map(function(k){var v=by[k];return {n:k,avg:v.reduce(function(a,c){return a+c},0)/v.length,cnt:v.length}});
@@ -777,15 +777,21 @@ function qcards(arr){
 function medal(i){return i<3?'<span class="med m'+(i+1)+'">'+(i+1)+'</span>':(i+1)}
 function ttTable(arr,mode){
  var L,head,cell;
+ function pTd(t){
+   if(t.total>t.part){
+     return '<td class="n" style="white-space:nowrap" title="Sinovda amalda qatnaşgan: '+t.part+' nafar, jami röyxatda: '+t.total+' nafar (qatnaşmagan: '+(t.total-t.part)+')"><b>'+t.part+'</b> <small style="color:#64748b;font-weight:600;font-size:0.82rem;">(jami '+t.total+')</small></td>';
+   }
+   return '<td class="n">'+t.part+'</td>';
+ }
  if(mode==='med'){L=rankBy(arr,function(t){return [-t.med[0],-t.med[1],-t.med[2]].map(function(v){return ('000'+(v+100)).slice(-3)}).join('')});
-  head='<th>Tuman (şahar)</th><th class="n">🥇</th><th class="n">🥈</th><th class="n">🥉</th><th class="n">Jami sovrin</th><th class="n">Qatnaşçi</th>';
-  cell=function(t){return '<td class="n">'+t.med[0]+'</td><td class="n">'+t.med[1]+'</td><td class="n">'+t.med[2]+'</td><td class="n j">'+t.tm+'</td><td class="n">'+t.part+'</td>'}}
+  head='<th>Tuman (şahar)</th><th class="n">🥇</th><th class="n">🥈</th><th class="n">🥉</th><th class="n">Jami sovrin</th><th class="n" title="Sinovda amalda qatnaşganlar (va qavs içida jami röyxatdagi o‘quvçilar)">Qatnaşçi (jami)</th>';
+  cell=function(t){return '<td class="n">'+t.med[0]+'</td><td class="n">'+t.med[1]+'</td><td class="n">'+t.med[2]+'</td><td class="n j">'+t.tm+'</td>'+pTd(t)}}
  else if(mode==='avg'){L=rankBy(arr,function(t){return -Math.round(t.mpct*1000)});
-  head='<th>Tuman (şahar)</th><th class="n">Örtaça ball (yetakçiga nisbatan)</th><th>Körsatkiç</th><th class="n">Qatnaşçi</th>';
-  cell=function(t){return '<td class="n j">'+pc(t.mpct)+'</td><td><div class="bar"><i style="width:'+Math.min(100,t.mpct)+'%"></i></div></td><td class="n">'+t.part+'</td>'}}
+  head='<th>Tuman (şahar)</th><th class="n">Örtaça ball (yetakçiga nisbatan)</th><th>Körsatkiç</th><th class="n" title="Sinovda amalda qatnaşganlar (va qavs içida jami röyxatdagi o‘quvçilar)">Qatnaşçi (jami)</th>';
+  cell=function(t){return '<td class="n j">'+pc(t.mpct)+'</td><td><div class="bar"><i style="width:'+Math.min(100,t.mpct)+'%"></i></div></td>'+pTd(t)}}
  else{L=rankBy(arr,function(t){return Math.round(t.mpos*1000)});
-  head='<th>Tuman (şahar)</th><th class="n">Örtaça örin</th><th>Fanlar böyiça örinlar</th><th class="n">Qatnaşçi</th>';
-  cell=function(t){var fr=t.fr.slice().sort(function(a,b){return a.b.fan.localeCompare(b.b.fan)||a.b.sinf-b.b.sinf});return '<td class="n j">'+f1(t.mpos)+'</td><td>'+fr.map(function(x){return '<span class="chp" title="'+esc(x.b.fan+' '+x.b.sinf+'-sinf')+'" style="background:'+cc((x.pos-1)/Math.max(x.of-1,1))+'">'+esc(x.b.fan.slice(0,3))+x.b.sinf+': '+x.pos+'</span>'}).join('')+'</td><td class="n">'+t.part+'</td>'}}
+  head='<th>Tuman (şahar)</th><th class="n">Örtaça örin</th><th>Fanlar böyiça örinlar</th><th class="n" title="Sinovda amalda qatnaşganlar (va qavs içida jami röyxatdagi o‘quvçilar)">Qatnaşçi (jami)</th>';
+  cell=function(t){var fr=t.fr.slice().sort(function(a,b){return a.b.fan.localeCompare(b.b.fan)||a.b.sinf-b.b.sinf});return '<td class="n j">'+f1(t.mpos)+'</td><td>'+fr.map(function(x){return '<span class="chp" title="'+esc(x.b.fan+' '+x.b.sinf+'-sinf')+'" style="background:'+cc((x.pos-1)/Math.max(x.of-1,1))+'">'+esc(x.b.fan.slice(0,3))+x.b.sinf+': '+x.pos+'</span>'}).join('')+'</td>'+pTd(t)}}
  var h='<div class="card tw"><table class="rs tt"><thead><tr><th>Örin</th>'+head+'</tr></thead><tbody>';
  L.forEach(function(o,i){var t=o.t;h+='<tr class="'+(t.q?'q':'')+'"><td class="rk">'+(o.rk<=3?'<span class="med m'+o.rk+'">'+o.rk+'</span>':o.rk)+'</td><td class="nm">'+esc(t.name)+(t.q?'<span class="badge"><i class="fa-solid fa-star"></i> Qöşköpir</span>':'')+'</td>'+cell(t)+'</tr>'});
  return h+'</tbody></table></div>'}
